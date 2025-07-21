@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 import com.jfranco.aimercado.mercadoai.service.INecesidadesService;
-
+//cambio no se 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
