@@ -4,7 +4,7 @@ package com.jfranco.aimercado.mercadoai.dto;
 import java.util.List;
 
 import com.jfranco.aimercado.mercadoai.model.Role;
-
+//dto form
 public class RegistroRequest {
     private String username;
     private String email;
