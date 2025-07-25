@@ -1,0 +1,125 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow">
+        <div class="card-header text-center">
+          <h2>Crear Cuenta</h2>
+          <p class="text-muted">Únete a la plataforma de IA más grande</p>
+        </div>
+        <div class="card-body">
+          <!-- Datos generales del usuario -->
+          <form id="userForm" (ngSubmit)="onsubmit(userForm)" #userForm="ngForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre completo</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" #name="ngModel" [(ngModel)]="registroRequest.nombre"  required>
+              </div>
+              <div class="col-md-6">
+                <label for="username" class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control" id="username" name="username" [(ngModel)]="registroRequest.username" #username="ngModel" required>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="registroRequest.email"  #email="ngModel" required>
+              </div>
+              <div class="col-md-6">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="registroRequest.password" #password="ngModel" required>
+              </div>
+            </div>
+          </form>
+
+          <!-- Tabs para rol específico -->
+          <ul class="nav nav-tabs mb-4" id="registerTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="company-tab" data-bs-toggle="tab" data-bs-target="#company"
+                type="button" role="tab" (click)="registroRequest.userType = 0">Empresa</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="developer-tab" data-bs-toggle="tab" data-bs-target="#developer"
+                type="button" role="tab" (click)="registroRequest.userType = 1">Desarrollador</button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="registerTabsContent">
+            <!-- Empresa -->
+            <div class="tab-pane fade show active" id="company" role="tabpanel">
+              <form>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="company-name" class="form-label">Nombre de la empresa</label>
+                    <input type="text" class="form-control" id="company-name" name="nombreCompañia" [(ngModel)]="registroRequest.nombreCompania" #nombreCompania="ngModel" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="sector" class="form-label">Sector</label>
+                    <select class="form-select" id="sector" name="industria" [(ngModel)]="registroRequest.industria" #industria="ngModel" #required>
+                      <option selected disabled>Selecciona un sector</option>
+                      <option value="tech">Tecnología</option>
+                      <option value="finance">Finanzas</option>
+                      <option value="healthcare">Salud</option>
+                      <option value="retail">Retail</option>
+                      <option value="manufacturing">Manufactura</option>
+                      <option value="other">Otro</option>
+                    </select>
+                  </div>
+                </div>
+
+                
+
+                <div class="mb-3">
+                  <label for="company-description" class="form-label">Descripción</label>
+                  <textarea class="form-control" id="company-description" rows="3"
+                    placeholder="Describe tu empresa..." name="descripcion" [(ngModel)]="registroRequest.descripcion" #descripcion="ngModel"></textarea>
+                </div>
+
+                
+
+                <button type="submit" class="btn btn-primary w-100">Crear Cuenta de Empresa</button>
+              </form>
+            </div>
+
+            <!-- Desarrollador -->
+            <div class="tab-pane fade" id="developer" role="tabpanel">
+              <form>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="dev-skills" class="form-label">Habilidades principales</label>
+                    <input type="text" class="form-control" id="dev-skills"
+                      placeholder="Machine Learning, NLP, TensorFlow..."  name="habilidades" [(ngModel)]="registroRequest.habilidades" #habilidades="ngModel" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="experience" class="form-label">Experiencia</label>
+                    <select class="form-select" id="experience" name="experiencia" [(ngModel)]="registroRequest.experiencia" #experiencia="ngModel" required>
+                      <option selected disabled>Años de experiencia</option>
+                      <option value="0-1">0-1 años</option>
+                      <option value="2-3">2-3 años</option>
+                      <option value="4-5">4-5 años</option>
+                      <option value="6-10">6-10 años</option>
+                      <option value="10+">Más de 10 años</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="portfolio" class="form-label">Portafolio / GitHub</label>
+                  <input type="url" class="form-control" id="portfolio" name="portafolioURL" [(ngModel)]="registroRequest.portafolioURL" #portafolioURL="ngModel"  placeholder="https://github.com/usuario">
+                </div>
+
+                
+
+                <button type="submit" class="btn btn-primary w-100">Crear Cuenta de Desarrollador</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <p class="text-muted">¿Ya tienes cuenta? <a routerLink="/auth" class="text-primary">Inicia sesión aquí</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
