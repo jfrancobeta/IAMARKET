@@ -2,7 +2,7 @@ export class RegistroRequest {
     username!: string;
     email!: string;
     password!: string;
-    userType!: number; // 0: Compañía, 1: Desarrollador
+    userType: number = 0; // 0: Compañía, 1: Desarrollador
     nombre!: string;
     descripcion!: string;
     roles!: Role[];

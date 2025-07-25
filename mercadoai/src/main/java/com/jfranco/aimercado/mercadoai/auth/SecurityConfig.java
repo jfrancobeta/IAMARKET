@@ -45,6 +45,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests(auth ->
         auth
+        .requestMatchers(HttpMethod.POST, "/usuarios/create-user").permitAll() // Permitir acceso a login sin autenticación
         .requestMatchers(HttpMethod.GET, "/api/mercadoai/necesidades").hasAnyRole("USER", "ADMIN") // Permitir acceso a GET necesidades sin autenticación
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) // Configurar CORS

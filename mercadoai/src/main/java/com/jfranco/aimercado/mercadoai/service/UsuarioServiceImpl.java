@@ -1,6 +1,7 @@
 package com.jfranco.aimercado.mercadoai.service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.jfranco.aimercado.mercadoai.dto.RegistroRequest;
 import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
 import com.jfranco.aimercado.mercadoai.model.PerfilDesarrollador;
+import com.jfranco.aimercado.mercadoai.model.Role;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.repository.CompaniaRepository;
 import com.jfranco.aimercado.mercadoai.repository.DesarrolladorRepository;
@@ -46,7 +48,7 @@ public class UsuarioServiceImpl implements IUsuarioService{
         usuario.setUserType(registroRequest.getUserType());
         usuario.setNombre(registroRequest.getNombre());
         usuario.setDescripcion(registroRequest.getDescripcion());
-        usuario.setRoles(registroRequest.getRoles());
+        usuario.setRoles(Arrays.asList(new Role(1L,"ROLE_USER")));
         usuario.setFechaCreacion(LocalDateTime.now());
         usuario.setEstado(true);
 
@@ -63,7 +65,7 @@ public class UsuarioServiceImpl implements IUsuarioService{
         } else if (registroRequest.getUserType() == 0) { // Compañía
             PerfilCompania compania = new PerfilCompania();
             compania.setUsuario(usuario);
-            compania.setNombreCompañia(registroRequest.getNombreCompañia());
+            compania.setNombreCompania(registroRequest.getNombreCompania());
             compania.setIndustria(registroRequest.getIndustria());
             compania.setUbicacion(registroRequest.getUbicacion());
             compania.setWebsite(registroRequest.getWebsite());

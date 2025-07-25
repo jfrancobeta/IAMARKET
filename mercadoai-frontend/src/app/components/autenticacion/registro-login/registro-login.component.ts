@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { RegistroRequest } from '../../../models/RegistroRequest';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-login',
@@ -15,7 +16,7 @@ export class RegistroLoginComponent implements OnInit {
   
   registroRequest: RegistroRequest;
 
-  constructor(private service: UsuariosService){
+  constructor(private service: UsuariosService, private router: Router) {
     this.registroRequest = new RegistroRequest();
   }
   ngOnInit(): void {
@@ -26,12 +27,22 @@ export class RegistroLoginComponent implements OnInit {
     if(userForm.valid) {
       this.service.registrarUsuario(this.registroRequest).subscribe({
         next: (response) => {
-          console.log('Registro exitoso', response);
-          // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
+          Swal.fire({
+            icon: 'success',
+            title: '¡Registro exitoso!',
+            text: 'Tu cuenta ha sido creada correctamente.',
+            confirmButtonText: 'Ir al login'
+          }).then(() => {
+            this.router.navigate(['/auth']);
+          });
         },
         error: (error) => {
-          console.error('Error en el registro', error);
-          // Aquí podrías mostrar un mensaje de error al usuario
+          Swal.fire({
+            icon: 'error',
+            title: 'Error en el registro',
+            text: error.error || 'Ocurrió un error al registrar el usuario.'
+          });
+          console.error('Error al registrar usuario:', error);
         }
       });
     }

@@ -1,6 +1,10 @@
 package com.jfranco.aimercado.mercadoai.controllers;
 
+import java.util.Collections;
+
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,11 +35,12 @@ public class UsuariosController {
         return ResponseEntity.ok(usuarioService.getUsuarioById(id));
     }
 
-    @PostMapping("/usuario")
+    @PostMapping("/create-user")
     public ResponseEntity<?> save(@RequestBody RegistroRequest registroRequest) {
         try{
             usuarioService.saveUsuario(registroRequest);
-            return ResponseEntity.ok("Usuario registrado exitosamente");
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                Collections.singletonMap("message", "Usuario registrado exitosamente"));
         }catch(Exception e){
             return ResponseEntity.badRequest().body("Error al registrar el usuario: " + e.getMessage());
         }

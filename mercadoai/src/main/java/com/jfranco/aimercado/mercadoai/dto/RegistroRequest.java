@@ -20,7 +20,7 @@ public class RegistroRequest {
     private String portafolioURL;
 
     // Campos específicos para compañía
-    private String nombreCompañia;
+    private String nombreCompania;
     private String industria;
     private String website;
     private String ubicacion;
@@ -105,12 +105,12 @@ public class RegistroRequest {
         this.portafolioURL = portafolioURL;
     }
 
-    public String getNombreCompañia() {
-        return nombreCompañia;
+    public String getNombreCompania() {
+        return nombreCompania;
     }
 
-    public void setNombreCompañia(String nombreCompañia) {
-        this.nombreCompañia = nombreCompañia;
+    public void setNombreCompania(String nombreCompania) {
+        this.nombreCompania = nombreCompania;
     }
 
     public String getIndustria() {
