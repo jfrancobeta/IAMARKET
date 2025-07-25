@@ -7,7 +7,7 @@ import com.jfranco.aimercado.mercadoai.model.Solucion;
 import com.jfranco.aimercado.mercadoai.service.ISolucionesService;
 
 import java.util.Optional;
-
+//probando una cosa cambio en el main
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
