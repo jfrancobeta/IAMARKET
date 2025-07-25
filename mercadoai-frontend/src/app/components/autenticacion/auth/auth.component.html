@@ -1,0 +1,40 @@
+<!-- Dentro del <body> -->
+    <div class="min-vh-100 d-flex align-items-center justify-content-center bg-gradient p-4" style="background: linear-gradient(to bottom right, #ebf4ff, #c3dafe);">
+        <div class="card w-100" style="max-width: 400px;">
+          <div class="card-header text-center">
+            <div class="d-flex justify-content-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-brain" width="40" height="40" fill="#2563eb" viewBox="0 0 24 24">
+                <path d="M14.01 2.749a3.252 3.252 0 0 1 3.24 3.046A3.501 3.501 0 0 1 22 9.25c0 .91-.339 1.74-.894 2.375A3.502 3.502 0 0 1 19 18.5h-1a3.498 3.498 0 0 1-1.582-.38 3.505 3.505 0 0 1-3.408 2.63H13a3.5 3.5 0 0 1-3.5-3.5v-13A3.25 3.25 0 0 1 14.01 2.75z"/>
+              </svg>
+            </div>
+            <h5 class="card-title">AI Marketplace</h5>
+            <p class="card-text text-muted">Conectando empresas con desarrolladores de IA</p>
+          </div>
+          <div class="card-body">
+            
+      
+            <form (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="username" class="form-label">Usuario</label>
+                <input type="text" name="username"  class="form-control" id="username" placeholder="Username" required [(ngModel)]="user.username">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" class="form-control" id="password" required [(ngModel)]="user.password">
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+            </form>
+      
+            <div class="text-center mt-4">
+              <a [routerLink]="['/forgot-password']" routerLinkActive="router-link-active"  class="d-block small text-primary text-decoration-none mb-2">
+                ¿Olvidaste tu contraseña?
+              </a>
+              <p class="small text-muted">
+                ¿No tienes cuenta?
+                <a [routerLink]="['/registro-login']" routerLinkActive="router-link-active"  class="text-primary text-decoration-none">Regístrate aquí</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      

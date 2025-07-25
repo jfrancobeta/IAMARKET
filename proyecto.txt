@@ -1,0 +1,145 @@
+
+### **Requisitos Funcionales**
+
+#### **1. Gestión de Usuarios**
+- **Registro de Usuarios**:
+  - Las empresas y los desarrolladores deben poder registrarse en la plataforma.
+  - Campos requeridos:
+    - Para empresas: Nombre de la empresa, sector, correo electrónico, contraseña.
+    - Para desarrolladores: Nombre, habilidades, correo electrónico, contraseña.
+- **Inicio de Sesión**:
+  - Los usuarios deben poder iniciar sesión con su correo electrónico y contraseña.
+- **Roles de Usuario**:
+  - La plataforma debe diferenciar entre dos tipos de usuarios:
+    - Empresas.
+    - Desarrolladores.
+- **Gestión de Perfiles**:
+  - Los usuarios deben poder editar su perfil:
+    - Empresas: Información de contacto, descripción, proyectos publicados.
+    - Desarrolladores: Portafolio, habilidades, experiencia, tarifas.
+
+---
+
+#### **2. Publicación de Necesidades (Empresas)**
+- **Crear Publicaciones**:
+  - Las empresas deben poder publicar sus necesidades relacionadas con IA.
+  - Campos requeridos:
+    - Título del proyecto.
+    - Descripción detallada del problema.
+    - Categoría (por ejemplo, visión por computadora, procesamiento de lenguaje natural, etc.).
+    - Presupuesto estimado.
+    - Plazo de entrega.
+- **Gestión de Publicaciones**:
+  - Las empresas deben poder ver, editar o eliminar sus publicaciones.
+- **Historial de Publicaciones**:
+  - Las empresas deben tener acceso a un historial de proyectos publicados.
+
+---
+
+#### **3. Publicación de Soluciones (Desarrolladores)**
+- **Crear Soluciones**:
+  - Los desarrolladores deben poder publicar las soluciones que pueden ofrecer.
+  - Campos requeridos:
+    - Título de la solución.
+    - Descripción detallada.
+    - Categoría (por ejemplo, modelos preentrenados, consultoría, desarrollo personalizado).
+    - Precio estimado.
+    - Tiempo de entrega promedio.
+- **Gestión de Soluciones**:
+  - Los desarrolladores deben poder ver, editar o eliminar sus soluciones publicadas.
+- **Historial de Soluciones**:
+  - Los desarrolladores deben tener acceso a un historial de soluciones ofrecidas.
+
+---
+
+#### **4. Sistema de Propuestas**
+- **Enviar Propuestas**:
+  - Los desarrolladores deben poder enviar propuestas a las necesidades publicadas por las empresas.
+  - Campos requeridos:
+    - Mensaje personalizado.
+    - Presupuesto propuesto.
+    - Tiempo estimado de entrega.
+- **Gestión de Propuestas**:
+  - Las empresas deben poder revisar, aceptar o rechazar las propuestas recibidas.
+  - Los desarrolladores deben poder ver el estado de sus propuestas enviadas (pendiente, aceptada, rechazada).
+- **Notificaciones**:
+  - Las empresas y desarrolladores deben recibir notificaciones cuando se envíen, acepten o rechacen propuestas.
+
+---
+
+#### **5. Comunicación entre Usuarios**
+- **Mensajería Interna**:
+  - Las empresas y los desarrolladores deben poder comunicarse a través de un sistema de mensajería interna.
+  - Funcionalidades:
+    - Enviar y recibir mensajes.
+    - Historial de conversaciones.
+    - Notificaciones en tiempo real.
+
+---
+
+#### **6. Gestión de Proyectos**
+- **Creación de Contratos**:
+  - Cuando una empresa acepta una propuesta, se debe generar un contrato entre la empresa y el desarrollador.
+  - El contrato debe incluir:
+    - Detalles del proyecto.
+    - Presupuesto acordado.
+    - Plazo de entrega.
+- **Seguimiento del Proyecto**:
+  - Las empresas y desarrolladores deben poder ver el estado del proyecto (en progreso, completado).
+- **Finalización del Proyecto**:
+  - Las empresas deben poder marcar un proyecto como completado.
+  - Los desarrolladores deben confirmar la finalización.
+
+---
+
+#### **7. Sistema de Reputación**
+- **Calificaciones y Comentarios**:
+  - Las empresas deben poder calificar y dejar comentarios sobre los desarrolladores al finalizar un proyecto.
+  - Los desarrolladores deben poder calificar y dejar comentarios sobre las empresas.
+- **Promedio de Calificaciones**:
+  - Mostrar el promedio de calificaciones en los perfiles de los usuarios.
+
+---
+
+#### **8. Búsqueda y Filtros**
+- **Búsqueda Avanzada**:
+  - Las empresas deben poder buscar desarrolladores según habilidades, calificaciones, o categorías.
+  - Los desarrolladores deben poder buscar necesidades publicadas según categorías, presupuesto, o plazo.
+- **Filtros**:
+  - Filtros por:
+    - Categorías (visión por computadora, NLP, etc.).
+    - Presupuesto.
+    - Tiempo de entrega.
+
+---
+
+#### **9. Sistema de Pagos**
+- **Gestión de Pagos**:
+  - Las empresas deben poder realizar pagos a los desarrolladores a través de la plataforma.
+- **Pasarela de Pagos**:
+  - Integrar servicios como **Stripe** o **PayPal** para procesar pagos.
+- **Historial de Transacciones**:
+  - Las empresas y desarrolladores deben poder ver un historial de pagos realizados y recibidos.
+
+---
+
+#### **10. Seguridad**
+- **Autenticación y Autorización**:
+  - Implementar autenticación segura (por ejemplo, JWT).
+  - Asegurar que los usuarios solo puedan acceder a los recursos que les corresponden.
+- **Protección de Datos**:
+  - Cifrar datos sensibles como contraseñas.
+  - Cumplir con normativas de protección de datos (por ejemplo, GDPR).
+
+---
+
+#### **11. Panel de Administración**
+- **Gestión de Usuarios**:
+  - Los administradores deben poder gestionar usuarios (empresas y desarrolladores).
+- **Gestión de Publicaciones**:
+  - Los administradores deben poder revisar y eliminar publicaciones inapropiadas.
+- **Estadísticas**:
+  - Mostrar estadísticas sobre el uso de la plataforma (número de usuarios, proyectos publicados, transacciones realizadas, etc.).
+
+---
+
