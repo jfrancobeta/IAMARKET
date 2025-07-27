@@ -4,11 +4,13 @@ import { Router, RouterOutlet } from '@angular/router';
 import { SharingDataService } from './services/sharing-data.service';
 import { AuthService } from './services/auth.service';
 import Swal from 'sweetalert2';
+import { HeaderComponent } from "./components/layout/header/header.component";
+import { MainLayoutComponent } from "./components/layout/main-layout/main-layout.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, MainLayoutComponent],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
@@ -37,9 +39,8 @@ export class AppComponent {
           }
           this.serviceAuth.token = token  
           this.serviceAuth.user = login;
-          
-          //navegar al inicio
-          //this.router.navigate(['/']);
+
+          this.router.navigate(['/dashboard']);
           console.log(token)
           Swal.fire("Login exitoso", `Bienvenido ${user.username}`, "success");
         },

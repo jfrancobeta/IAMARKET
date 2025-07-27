@@ -1,0 +1,183 @@
+<app-main-layout>
+<div class="container py-4">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h1 class="h2 fw-bold mb-1">Mi Perfil</h1>
+      <p class="text-muted mb-0">Gestiona tu información personal y profesional</p>
+    </div>
+    <button class="btn btn-primary">
+      <i class="bi bi-pencil me-2"></i>
+      Editar
+    </button>
+  </div>
+
+  <div class="row g-4">
+    <!-- Profile Card -->
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-header text-center">
+          <img src="/placeholder.svg?height=96&width=96" alt="Profile" class="rounded-circle mb-2" width="96" height="96">
+          <h5 class="card-title mb-0">Juan Desarrollador</h5>
+          <p class="card-text text-muted mb-2">Especialista en Machine Learning</p>
+          <div class="d-flex justify-content-center align-items-center gap-1 mb-2">
+            <i class="bi bi-star-fill text-warning"></i>
+            <span class="fw-medium">4.9</span>
+            <span class="text-muted small">(127 reseñas)</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="d-flex align-items-center gap-2 text-muted mb-2">
+            <i class="bi bi-geo-alt"></i>
+            Madrid, España
+          </div>
+          <div class="d-flex align-items-center gap-2 text-muted mb-2">
+            <i class="bi bi-calendar"></i>
+            Miembro desde Enero 2023
+          </div>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-globe"></i></a>
+            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-github"></i></a>
+            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="col-md-8">
+      <div class="card h-100">
+        <div class="card-header pb-0">
+          <ul class="nav nav-tabs card-header-tabs" id="profileTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab">Personal</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="professional-tab" data-bs-toggle="tab" data-bs-target="#professional" type="button" role="tab">Profesional</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="portfolio-tab" data-bs-toggle="tab" data-bs-target="#portfolio" type="button" role="tab">Portafolio</button>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab-content">
+          <!-- Personal Tab -->
+          <div class="tab-pane fade show active" id="personal" role="tabpanel">
+            <form>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="name" class="form-label">Nombre completo</label>
+                  <input type="text" class="form-control" id="name" value="Juan Desarrollador" disabled>
+                </div>
+                <div class="col">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" value="juan@email.com" disabled>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="phone" class="form-label">Teléfono</label>
+                  <input type="text" class="form-control" id="phone" value="+34 600 123 456" disabled>
+                </div>
+                <div class="col">
+                  <label for="location" class="form-label">Ubicación</label>
+                  <input type="text" class="form-control" id="location" value="Madrid, España" disabled>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="bio" class="form-label">Biografía</label>
+                <textarea class="form-control" id="bio" rows="4" disabled>Desarrollador especializado en Machine Learning con más de 5 años de experiencia. Apasionado por crear soluciones innovadoras que resuelvan problemas reales del negocio.</textarea>
+              </div>
+            </form>
+          </div>
+          <!-- Professional Tab -->
+          <div class="tab-pane fade" id="professional" role="tabpanel">
+            <form>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="experience" class="form-label">Años de experiencia</label>
+                  <select class="form-select" id="experience" disabled>
+                    <option>0-1 años</option>
+                    <option>2-3 años</option>
+                    <option selected>4-5 años</option>
+                    <option>6-10 años</option>
+                    <option>Más de 10 años</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="rate" class="form-label">Tarifa por hora</label>
+                  <input type="text" class="form-control" id="rate" value="€75/hora" disabled>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Habilidades principales</label>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge bg-secondary">Machine Learning</span>
+                  <span class="badge bg-secondary">Python</span>
+                  <span class="badge bg-secondary">TensorFlow</span>
+                  <span class="badge bg-secondary">PyTorch</span>
+                  <span class="badge bg-secondary">NLP</span>
+                  <span class="badge bg-secondary">Computer Vision</span>
+                  <span class="badge bg-secondary">Deep Learning</span>
+                  <span class="badge bg-secondary">Data Science</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="specialization" class="form-label">Especialización</label>
+                <textarea class="form-control" id="specialization" rows="4" disabled>Me especializo en el desarrollo de sistemas de Machine Learning para análisis predictivo, procesamiento de lenguaje natural y visión por computadora. Tengo experiencia trabajando con grandes volúmenes de datos y desplegando modelos en producción.</textarea>
+              </div>
+            </form>
+          </div>
+          <!-- Portfolio Tab -->
+          <div class="tab-pane fade" id="portfolio" role="tabpanel">
+            <form>
+              <div class="mb-3">
+                <label for="portfolio-url" class="form-label">URL del Portafolio</label>
+                <input type="text" class="form-control" id="portfolio-url" value="https://juandev.portfolio.com" disabled>
+              </div>
+              <div class="mb-3">
+                <label for="github" class="form-label">GitHub</label>
+                <input type="text" class="form-control" id="github" value="https://github.com/juandev" disabled>
+              </div>
+              <div class="mb-3">
+                <label for="linkedin" class="form-label">LinkedIn</label>
+                <input type="text" class="form-control" id="linkedin" value="https://linkedin.com/in/juandev" disabled>
+              </div>
+            </form>
+            <h5 class="mt-4">Proyectos Destacados</h5>
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h6 class="card-title">Sistema de Recomendaciones E-commerce</h6>
+                    <p class="card-text text-muted">Desarrollo de un sistema de recomendaciones usando collaborative filtering para una plataforma de e-commerce con más de 100k usuarios.</p>
+                    <div class="d-flex flex-wrap gap-1">
+                      <span class="badge bg-light text-dark border">Python</span>
+                      <span class="badge bg-light text-dark border">TensorFlow</span>
+                      <span class="badge bg-light text-dark border">AWS</span>
+                      <span class="badge bg-light text-dark border">Docker</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h6 class="card-title">Chatbot Inteligente para Atención al Cliente</h6>
+                    <p class="card-text text-muted">Implementación de un chatbot con NLP capaz de resolver el 80% de las consultas de atención al cliente automáticamente.</p>
+                    <div class="d-flex flex-wrap gap-1">
+                      <span class="badge bg-light text-dark border">NLP</span>
+                      <span class="badge bg-light text-dark border">BERT</span>
+                      <span class="badge bg-light text-dark border">FastAPI</span>
+                      <span class="badge bg-light text-dark border">React</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</app-main-layout>

@@ -1,0 +1,184 @@
+<app-main-layout>
+<div class="container py-4">
+  <div class="mb-4">
+    <h1 class="h2 fw-bold mb-1">Gestión de Publicaciones</h1>
+    <p class="text-muted">Administra necesidades y soluciones de la plataforma</p>
+  </div>
+  <!-- Stats Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <div class="fw-medium">Total Publicaciones</div>
+            <div class="fs-4 fw-bold">4</div>
+            <div class="text-muted small">+8% desde el mes pasado</div>
+          </div>
+          <i class="bi bi-file-earmark-text text-secondary fs-4"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <div class="fw-medium">Necesidades</div>
+            <div class="fs-4 fw-bold">2</div>
+            <div class="text-muted small">Proyectos solicitados</div>
+          </div>
+          <i class="bi bi-file-earmark-text text-secondary fs-4"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <div class="fw-medium">Soluciones</div>
+            <div class="fs-4 fw-bold">2</div>
+            <div class="text-muted small">Servicios ofrecidos</div>
+          </div>
+          <i class="bi bi-code-slash text-secondary fs-4"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <div class="fw-medium">Pendientes</div>
+            <div class="fs-4 fw-bold">1</div>
+            <div class="text-muted small">Esperando aprobación</div>
+          </div>
+          <i class="bi bi-check-circle text-secondary fs-4"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <form class="row g-3 align-items-center">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" placeholder="Buscar publicaciones...">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <select class="form-select">
+            <option selected>Todos los tipos</option>
+            <option value="need">Necesidades</option>
+            <option value="solution">Soluciones</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class="form-select">
+            <option selected>Todos los estados</option>
+            <option value="active">Activas</option>
+            <option value="suspended">Suspendidas</option>
+            <option value="pending">Pendientes</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-outline-secondary w-100"><i class="bi bi-funnel me-2"></i>Filtros</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Posts Table -->
+  <div class="card">
+    <div class="card-header fw-bold">Publicaciones (4)</div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Título</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Categoría</th>
+              <th>Autor</th>
+              <th>Presupuesto/Precio</th>
+              <th>Propuestas/Pedidos</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="TechCorp Solutions"></td>
+              <td class="fw-semibold">Sistema de Análisis Predictivo para Ventas</td>
+              <td><span class="badge bg-primary">Necesidad</span></td>
+              <td><span class="badge bg-success">Activa</span></td>
+              <td><span class="badge bg-light text-dark border">Machine Learning</span></td>
+              <td>TechCorp Solutions</td>
+              <td>$5,000 - $8,000</td>
+              <td>12 propuestas</td>
+              <td>15/01/2024</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-outline-secondary btn-sm" title="Ver Detalles"><i class="bi bi-eye"></i></button>
+                  <button class="btn btn-outline-danger btn-sm" title="Suspender"><i class="bi bi-ban"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Ana García"></td>
+              <td class="fw-semibold">Sistema de Recomendaciones E-commerce</td>
+              <td><span class="badge bg-secondary">Solución</span></td>
+              <td><span class="badge bg-success">Activa</span></td>
+              <td><span class="badge bg-light text-dark border">Machine Learning</span></td>
+              <td>Ana García</td>
+              <td>$3,500</td>
+              <td>8 pedidos</td>
+              <td>10/01/2024</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-outline-secondary btn-sm" title="Ver Detalles"><i class="bi bi-eye"></i></button>
+                  <button class="btn btn-outline-danger btn-sm" title="Suspender"><i class="bi bi-ban"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="RetailPlus"></td>
+              <td class="fw-semibold">Chatbot con NLP para Atención al Cliente</td>
+              <td><span class="badge bg-primary">Necesidad</span></td>
+              <td><span class="badge bg-danger">Suspendida</span></td>
+              <td><span class="badge bg-light text-dark border">NLP</span></td>
+              <td>RetailPlus</td>
+              <td>$3,000 - $5,000</td>
+              <td>8 propuestas</td>
+              <td>08/01/2024</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-outline-secondary btn-sm" title="Ver Detalles"><i class="bi bi-eye"></i></button>
+                  <button class="btn btn-outline-success btn-sm" title="Aprobar"><i class="bi bi-check-circle"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Carlos Rodríguez"></td>
+              <td class="fw-semibold">API de Computer Vision</td>
+              <td><span class="badge bg-secondary">Solución</span></td>
+              <td><span class="badge bg-secondary">Pendiente</span></td>
+              <td><span class="badge bg-light text-dark border">Computer Vision</span></td>
+              <td>Carlos Rodríguez</td>
+              <td>$4,200</td>
+              <td>0 pedidos</td>
+              <td>25/01/2024</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-outline-secondary btn-sm" title="Ver Detalles"><i class="bi bi-eye"></i></button>
+                  <button class="btn btn-outline-success btn-sm" title="Aprobar"><i class="bi bi-check-circle"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</app-main-layout>

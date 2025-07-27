@@ -1,0 +1,184 @@
+<app-main-layout>
+<div class="container py-4">
+  <div class="mb-4">
+    <a href="/solutions" class="btn btn-outline-secondary btn-sm">
+      <i class="bi bi-arrow-left me-2"></i>Volver
+    </a>
+  </div>
+  <div class="row g-4">
+    <!-- Profile Card -->
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <img src="/placeholder.svg?height=96&width=96" alt="Profile" class="rounded-circle mb-3" width="96" height="96">
+          <h4 class="card-title mb-1">Ana García</h4>
+          <p class="card-text text-muted mb-2">Especialista en Machine Learning</p>
+          <div class="d-flex justify-content-center align-items-center gap-1 mb-2">
+            <i class="bi bi-star-fill text-warning"></i>
+            <span class="fw-medium">4.9</span>
+            <span class="text-muted">(127 reseñas)</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-center gap-2 text-muted mb-2">
+            <i class="bi bi-geo-alt"></i> Madrid, España
+          </div>
+          <div class="d-flex align-items-center justify-content-center gap-2 text-muted mb-2">
+            <i class="bi bi-calendar"></i> Miembro desde 15/01/2023
+          </div>
+          <div class="mb-2">
+            <div class="d-flex justify-content-between">
+              <span class="text-muted">Proyectos completados:</span>
+              <span class="fw-medium">45</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span class="text-muted">Tiempo de respuesta:</span>
+              <span class="fw-medium">2 horas</span>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center gap-2 mb-3">
+            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-globe"></i></a>
+            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-github"></i></a>
+            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-linkedin"></i></a>
+          </div>
+          <a href="#" class="btn btn-primary w-100"><i class="bi bi-chat-left-text me-2"></i>Contactar</a>
+        </div>
+      </div>
+    </div>
+    <!-- Profile Details -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header p-0 border-bottom-0">
+          <ul class="nav nav-tabs nav-justified" id="profileTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">Acerca de</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="portfolio-tab" data-bs-toggle="tab" data-bs-target="#portfolio" type="button" role="tab">Portafolio</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Reseñas</button>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab-content" id="profileTabsContent">
+          <!-- Acerca de -->
+          <div class="tab-pane fade show active" id="about" role="tabpanel">
+            <h5 class="fw-semibold mb-2">Biografía</h5>
+            <p class="text-muted">Desarrolladora especializada en Machine Learning con más de 5 años de experiencia. Apasionada por crear soluciones innovadoras que resuelvan problemas reales del negocio.</p>
+            <h5 class="fw-semibold mb-2">Habilidades principales</h5>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge bg-secondary">Machine Learning</span>
+              <span class="badge bg-secondary">Python</span>
+              <span class="badge bg-secondary">TensorFlow</span>
+              <span class="badge bg-secondary">PyTorch</span>
+              <span class="badge bg-secondary">NLP</span>
+              <span class="badge bg-secondary">Computer Vision</span>
+              <span class="badge bg-secondary">Deep Learning</span>
+              <span class="badge bg-secondary">Data Science</span>
+            </div>
+            <h5 class="fw-semibold mb-2">Especialización</h5>
+            <p class="text-muted">Me especializo en el desarrollo de sistemas de Machine Learning para análisis predictivo, procesamiento de lenguaje natural y visión por computadora. Tengo experiencia trabajando con grandes volúmenes de datos y desplegando modelos en producción.</p>
+          </div>
+          <!-- Portafolio -->
+          <div class="tab-pane fade" id="portfolio" role="tabpanel">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="card mb-2">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="/placeholder.svg?height=200&width=300" class="img-fluid rounded-start" alt="Sistema de Recomendaciones E-commerce">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">Sistema de Recomendaciones E-commerce</h5>
+                        <p class="card-text text-muted">Desarrollo de un sistema de recomendaciones usando collaborative filtering para una plataforma de e-commerce con más de 100k usuarios.</p>
+                        <div class="d-flex flex-wrap gap-1">
+                          <span class="badge bg-light text-dark border">Python</span>
+                          <span class="badge bg-light text-dark border">TensorFlow</span>
+                          <span class="badge bg-light text-dark border">AWS</span>
+                          <span class="badge bg-light text-dark border">Docker</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card mb-2">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="/placeholder.svg?height=200&width=300" class="img-fluid rounded-start" alt="Chatbot Inteligente para Atención al Cliente">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">Chatbot Inteligente para Atención al Cliente</h5>
+                        <p class="card-text text-muted">Implementación de un chatbot con NLP capaz de resolver el 80% de las consultas de atención al cliente automáticamente.</p>
+                        <div class="d-flex flex-wrap gap-1">
+                          <span class="badge bg-light text-dark border">NLP</span>
+                          <span class="badge bg-light text-dark border">BERT</span>
+                          <span class="badge bg-light text-dark border">FastAPI</span>
+                          <span class="badge bg-light text-dark border">React</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Reseñas -->
+          <div class="tab-pane fade" id="reviews" role="tabpanel">
+            <div class="card mb-2">
+              <div class="card-body">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="avatar bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;">T</div>
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between mb-1">
+                      <div>
+                        <h6 class="fw-semibold mb-0">TechCorp Solutions</h6>
+                        <small class="text-muted">Sistema de Análisis Predictivo</small>
+                      </div>
+                      <div class="text-end">
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <div class="text-muted small">25/01/2024</div>
+                      </div>
+                    </div>
+                    <p class="text-muted mb-0">Excelente trabajo! Ana superó nuestras expectativas. El sistema funciona perfectamente y la documentación es muy completa.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-2">
+              <div class="card-body">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="avatar bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;">R</div>
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between mb-1">
+                      <div>
+                        <h6 class="fw-semibold mb-0">RetailPlus</h6>
+                        <small class="text-muted">Chatbot NLP</small>
+                      </div>
+                      <div class="text-end">
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                        <span class="text-secondary"><i class="bi bi-star-fill"></i></span>
+                        <div class="text-muted small">22/01/2024</div>
+                      </div>
+                    </div>
+                    <p class="text-muted mb-0">Muy buen trabajo en general. El chatbot funciona bien aunque hubo algunos retrasos en la entrega.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</app-main-layout>
