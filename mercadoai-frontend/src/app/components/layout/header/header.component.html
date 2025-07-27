@@ -1,0 +1,42 @@
+
+<header class="navbar navbar-expand-lg bg-light border-bottom px-3 py-2">
+    <div class="container-fluid">
+
+      <!-- Search bar -->
+      <form class="d-flex flex-grow-1 me-3" role="search">
+        <div class="position-relative w-100" style="max-width: 400px;">
+          <svg xmlns="http://www.w3.org/2000/svg" class="position-absolute top-50 translate-middle-y start-2 text-muted" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M21 21l-4.35-4.35M11 18a7 7 0 1 1 0-14a7 7 0 0 1 0 14z" stroke="currentColor" stroke-width="2" fill="none" />
+          </svg>
+          <input type="search" class="form-control ps-4" placeholder="Buscar necesidades, soluciones, desarrolladores...">
+        </div>
+      </form>
+
+      <!-- Bell with badge -->
+      <button type="button" class="btn btn-outline-secondary position-relative me-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 24 24">
+          <path d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2zM18 16V11a6 6 0 0 0-5-5.91V5a1 1 0 0 0-2 0v.09A6 6 0 0 0 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor" />
+        </svg>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          3
+          <span class="visually-hidden">unread notifications</span>
+        </span>
+      </button>
+
+      <!-- User dropdown -->
+      <div class="dropdown">
+        <button class="btn btn-secondary rounded-circle d-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 40px; height: 40px;">
+          <i class="bi bi-person-circle"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><h6 class="dropdown-header">Mi Cuenta</h6></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Perfil</a></li>
+          <li><a class="dropdown-item" href="#">Configuración</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+        </ul>
+      </div>
+
+    </div>
+</header>

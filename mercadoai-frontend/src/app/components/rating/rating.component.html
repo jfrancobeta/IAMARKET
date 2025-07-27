@@ -1,0 +1,222 @@
+<app-main-layout>
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h2 fw-bold mb-1">Calificaciones</h1>
+      <p class="text-muted">Gestiona las calificaciones y reseñas de tus proyectos</p>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calificarModal">
+      <i class="bi bi-plus me-2"></i>
+      Calificar Proyecto
+    </button>
+  <!-- Modal Bootstrap -->
+  <div class="modal fade" id="calificarModal" tabindex="-1" aria-labelledby="calificarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="calificarModalLabel">Calificar Proyecto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="proyecto" class="form-label">Proyecto</label>
+              <select class="form-select" id="proyecto">
+                <option selected>Selecciona un proyecto</option>
+                <option>Sistema de Computer Vision</option>
+                <option>Análisis de Datos Avanzado</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Calificación</label>
+              <div>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star text-warning"></i>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="comentario" class="form-label">Comentario</label>
+              <textarea class="form-control" id="comentario" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Enviar Calificación</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="text-sm fw-medium">Calificación Promedio</span>
+          <i class="bi bi-star text-muted"></i>
+        </div>
+        <div class="card-body">
+          <div class="h4 fw-bold">4.7</div>
+          <div class="d-flex align-items-center gap-1 mt-1">
+            <!-- Estrellas -->
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star text-warning"></i>
+            <span class="text-sm text-muted ms-2">(3 reseñas)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="text-sm fw-medium">Reseñas Positivas</span>
+          <i class="bi bi-hand-thumbs-up text-muted"></i>
+        </div>
+        <div class="card-body">
+          <div class="h4 fw-bold">3</div>
+          <p class="text-xs text-muted">100% positivas</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="text-sm fw-medium">Pendientes</span>
+          <i class="bi bi-chat-dots text-muted"></i>
+        </div>
+        <div class="card-body">
+          <div class="h4 fw-bold">2</div>
+          <p class="text-xs text-muted">Por calificar</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="text-sm fw-medium">Tendencia</span>
+          <i class="bi bi-graph-up text-muted"></i>
+        </div>
+        <div class="card-body">
+          <div class="h4 fw-bold text-success">+0.2</div>
+          <p class="text-xs text-muted">Último mes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-3" id="ratingsTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="received-tab" data-bs-toggle="tab" data-bs-target="#received" type="button" role="tab">Recibidas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="given-tab" data-bs-toggle="tab" data-bs-target="#given" type="button" role="tab">Enviadas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab">Pendientes</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="ratingsTabsContent">
+    <!-- Recibidas -->
+    <div class="tab-pane fade show active" id="received" role="tabpanel">
+      <!-- Card de reseña recibida -->
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-4">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="TechCorp Solutions">
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between mb-2">
+              <div>
+                <h4 class="fw-semibold mb-0">TechCorp Solutions</h4>
+                <p class="text-sm text-muted mb-0">Sistema de Análisis Predictivo</p>
+              </div>
+              <div class="text-end">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <p class="text-sm text-muted mt-1">25/01/2024</p>
+              </div>
+            </div>
+            <p class="text-muted mb-3">
+              Excelente trabajo! Ana superó nuestras expectativas. El sistema funciona perfectamente y la documentación es muy completa. Definitivamente trabajaremos con ella en futuros proyectos.
+            </p>
+            <div class="d-flex gap-4 text-sm text-muted">
+              <button class="btn btn-link p-0 text-decoration-none"><i class="bi bi-hand-thumbs-up me-1"></i>12 útiles</button>
+              <button class="btn btn-link p-0 text-decoration-none"><i class="bi bi-chat-dots me-1"></i>Responder</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Repite para más reseñas recibidas... -->
+    </div>
+    <!-- Enviadas -->
+    <div class="tab-pane fade" id="given" role="tabpanel">
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-4">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Carlos Rodríguez">
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between mb-2">
+              <div>
+                <h4 class="fw-semibold mb-0">Carlos Rodríguez</h4>
+                <p class="text-sm text-muted mb-0">Optimización de Base de Datos</p>
+              </div>
+              <div class="text-end">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <p class="text-sm text-muted mt-1">18/01/2024</p>
+              </div>
+            </div>
+            <p class="text-muted">
+              Carlos hizo un trabajo excepcional optimizando nuestra base de datos. Redujo los tiempos de consulta en un 60%. Muy recomendado.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Repite para más reseñas enviadas... -->
+    </div>
+    <!-- Pendientes -->
+    <div class="tab-pane fade" id="pending" role="tabpanel">
+      <div class="card mb-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-4">
+            <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Juan Pérez">
+            <div>
+              <h4 class="fw-semibold mb-0">Sistema de Computer Vision</h4>
+              <p class="text-sm text-muted mb-0">Juan Pérez</p>
+              <div class="d-flex gap-4 text-sm text-muted mt-1">
+                <span><i class="bi bi-calendar me-1"></i>Completado: 30/01/2024</span>
+                <span>Valor: $7,200</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary">
+            <i class="bi bi-star me-2"></i>
+            Calificar
+          </button>
+        </div>
+      </div>
+       <!-- Si no hay pendientes -->
+      <div class="card">
+        <div class="card-body text-center py-5">
+          <i class="bi bi-star text-muted mb-3" style="font-size:2rem;"></i>
+          <h3 class="h5 fw-semibold mb-2">No hay calificaciones pendientes</h3>
+          <p class="text-muted">Todas tus calificaciones están al día.</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+</app-main-layout>

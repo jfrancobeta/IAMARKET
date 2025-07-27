@@ -1,0 +1,205 @@
+<app-main-layout>
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h2 fw-bold mb-1">Notificaciones</h1>
+      <p class="text-muted">Mantente al día con todas las actividades de tu cuenta <span class="badge bg-primary ms-2">2 nuevas</span></p>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-secondary"><i class="bi bi-check2-all me-2"></i>Marcar todas como leídas</button>
+      <button class="btn btn-outline-secondary"><i class="bi bi-gear me-2"></i>Configurar</button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-3" id="notificationsTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab">Todas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="unread-tab" data-bs-toggle="tab" data-bs-target="#unread" type="button" role="tab">No leídas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="proposal-tab" data-bs-toggle="tab" data-bs-target="#proposal" type="button" role="tab">Propuestas</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab">Pagos</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="message-tab" data-bs-toggle="tab" data-bs-target="#message" type="button" role="tab">Mensajes</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="system-tab" data-bs-toggle="tab" data-bs-target="#system" type="button" role="tab">Sistema</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="notificationsTabsContent">
+    <!-- Todas -->
+    <div class="tab-pane fade show active" id="all" role="tabpanel">
+      <div class="card mb-3 border-start border-primary">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Ana García">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Nueva propuesta recibida</h5>
+            <p class="mb-0 text-muted">Ana García envió una propuesta para tu proyecto 'Sistema de Análisis Predictivo'</p>
+            <span class="text-xs text-muted">Hace 2 horas</span>
+          </div>
+          <button class="btn btn-outline-success btn-sm"><i class="bi bi-check2"></i></button>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="card mb-3 border-start border-primary">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="TechCorp">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Pago recibido</h5>
+            <p class="mb-0 text-muted">Has recibido $6,500 por el proyecto completado con TechCorp</p>
+            <span class="text-xs text-muted">Hace 4 horas</span>
+          </div>
+          <button class="btn btn-outline-success btn-sm"><i class="bi bi-check2"></i></button>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="RetailPlus">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Nueva calificación</h5>
+            <p class="mb-0 text-muted">RetailPlus te calificó con 5 estrellas por el proyecto de Chatbot</p>
+            <span class="text-xs text-muted">Hace 1 día</span>
+          </div>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Carlos Rodríguez">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Nuevo mensaje</h5>
+            <p class="mb-0 text-muted">Carlos Rodríguez: 'Tengo una pregunta sobre los requisitos del proyecto'</p>
+            <span class="text-xs text-muted">Hace 1 día</span>
+          </div>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Sistema">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Proyecto completado</h5>
+            <p class="mb-0 text-muted">El proyecto 'Sistema de Recomendaciones' ha sido marcado como completado</p>
+            <span class="text-xs text-muted">Hace 2 días</span>
+          </div>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Alerta">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Plazo próximo a vencer</h5>
+            <p class="mb-0 text-muted">El proyecto 'Chatbot NLP' vence en 2 días</p>
+            <span class="text-xs text-muted">Hace 3 días</span>
+          </div>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    </div>
+    <!-- No leídas -->
+    <div class="tab-pane fade" id="unread" role="tabpanel">
+      <div class="card mb-3 border-start border-primary">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Ana García">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Nueva propuesta recibida</h5>
+            <p class="mb-0 text-muted">Ana García envió una propuesta para tu proyecto 'Sistema de Análisis Predictivo'</p>
+            <span class="text-xs text-muted">Hace 2 horas</span>
+          </div>
+          <button class="btn btn-outline-success btn-sm"><i class="bi bi-check2"></i></button>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="card mb-3 border-start border-primary">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="TechCorp">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Pago recibido</h5>
+            <p class="mb-0 text-muted">Has recibido $6,500 por el proyecto completado con TechCorp</p>
+            <span class="text-xs text-muted">Hace 4 horas</span>
+          </div>
+          <button class="btn btn-outline-success btn-sm"><i class="bi bi-check2"></i></button>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    </div>
+    <!-- Propuestas -->
+    <div class="tab-pane fade" id="proposal" role="tabpanel">
+      <div class="card mb-3 border-start border-primary">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Ana García">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Nueva propuesta recibida</h5>
+            <p class="mb-0 text-muted">Ana García envió una propuesta para tu proyecto 'Sistema de Análisis Predictivo'</p>
+            <span class="text-xs text-muted">Hace 2 horas</span>
+          </div>
+          <button class="btn btn-outline-success btn-sm"><i class="bi bi-check2"></i></button>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    </div>
+    <!-- Pagos -->
+    <div class="tab-pane fade" id="payment" role="tabpanel">
+      <div class="card mb-3 border-start border-primary">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="TechCorp">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Pago recibido</h5>
+            <p class="mb-0 text-muted">Has recibido $6,500 por el proyecto completado con TechCorp</p>
+            <span class="text-xs text-muted">Hace 4 horas</span>
+          </div>
+          <button class="btn btn-outline-success btn-sm"><i class="bi bi-check2"></i></button>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    </div>
+    <!-- Mensajes -->
+    <div class="tab-pane fade" id="message" role="tabpanel">
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Carlos Rodríguez">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Nuevo mensaje</h5>
+            <p class="mb-0 text-muted">Carlos Rodríguez: 'Tengo una pregunta sobre los requisitos del proyecto'</p>
+            <span class="text-xs text-muted">Hace 1 día</span>
+          </div>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    </div>
+    <!-- Sistema -->
+    <div class="tab-pane fade" id="system" role="tabpanel">
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Sistema">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Proyecto completado</h5>
+            <p class="mb-0 text-muted">El proyecto 'Sistema de Recomendaciones' ha sido marcado como completado</p>
+            <span class="text-xs text-muted">Hace 2 días</span>
+          </div>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body d-flex gap-3 align-items-center">
+          <img src="/placeholder.svg?height=40&width=40" class="rounded-circle" width="40" height="40" alt="Alerta">
+          <div class="flex-grow-1">
+            <h5 class="fw-semibold mb-1">Plazo próximo a vencer</h5>
+            <p class="mb-0 text-muted">El proyecto 'Chatbot NLP' vence en 2 días</p>
+            <span class="text-xs text-muted">Hace 3 días</span>
+          </div>
+          <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</app-main-layout>

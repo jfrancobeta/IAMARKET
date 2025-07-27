@@ -4,11 +4,12 @@ import { SharingDataService } from '../../../services/sharing-data.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MainLayoutComponent } from "../../layout/main-layout/main-layout.component";
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [FormsModule,RouterModule],
+  imports: [FormsModule, RouterModule, MainLayoutComponent],
   templateUrl: './auth.component.html'
 })
 export class AuthComponent {

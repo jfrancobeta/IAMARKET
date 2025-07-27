@@ -1,0 +1,175 @@
+<app-main-layout>
+<div class="container-fluid py-4">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h1 class="h2 fw-bold mb-1">Dashboard</h1>
+      <p class="text-muted mb-0">Bienvenido de vuelta. Aquí tienes un resumen de tu actividad.</p>
+    </div>
+    <button class="btn btn-primary">
+      <i class="bi bi-plus-lg me-2"></i>
+      Nueva Publicación
+    </button>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center pb-2">
+          <span class="fw-medium">Proyectos Activos</span>
+          <i class="bi bi-file-earmark-text text-muted"></i>
+        </div>
+        <div class="card-body">
+          <div class="fs-3 fw-bold">12</div>
+          <p class="text-xs text-muted mb-0">+2 desde el mes pasado</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center pb-2">
+          <span class="fw-medium">Propuestas Recibidas</span>
+          <i class="bi bi-people text-muted"></i>
+        </div>
+        <div class="card-body">
+          <div class="fs-3 fw-bold">45</div>
+          <p class="text-xs text-muted mb-0">+12% desde la semana pasada</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center pb-2">
+          <span class="fw-medium">Ingresos del Mes</span>
+          <i class="bi bi-currency-dollar text-muted"></i>
+        </div>
+        <div class="card-body">
+          <div class="fs-3 fw-bold">$12,450</div>
+          <p class="text-xs text-muted mb-0">+8% desde el mes pasado</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center pb-2">
+          <span class="fw-medium">Calificación Promedio</span>
+          <i class="bi bi-graph-up-arrow text-muted"></i>
+        </div>
+        <div class="card-body">
+          <div class="fs-3 fw-bold">4.8</div>
+          <p class="text-xs text-muted mb-0">Basado en 24 reseñas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Proyectos Recientes -->
+    <div class="col-lg-7">
+      <div class="card h-100">
+        <div class="card-header">
+          <span class="fw-bold">Proyectos Recientes</span>
+          <span class="text-muted d-block small">Tus proyectos más recientes y su estado actual</span>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="flex-grow-1">
+                <div class="fw-medium">Sistema de Recomendaciones con ML</div>
+                <div class="text-muted small">TechCorp</div>
+                <div class="progress my-2" style="height: 6px;">
+                  <div class="progress-bar" style="width: 75%"></div>
+                </div>
+                <span class="text-xs text-muted">75%</span>
+              </div>
+              <div class="text-end ms-3">
+                <span class="badge bg-secondary">En progreso</span>
+                <div class="text-xs text-muted mt-1">
+                  <i class="bi bi-clock me-1"></i>15 días
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <div class="flex-grow-1">
+                <div class="fw-medium">Chatbot con NLP para Atención al Cliente</div>
+                <div class="text-muted small">RetailPlus</div>
+                <div class="progress my-2" style="height: 6px;">
+                  <div class="progress-bar bg-warning" style="width: 90%"></div>
+                </div>
+                <span class="text-xs text-muted">90%</span>
+              </div>
+              <div class="text-end ms-3">
+                <span class="badge bg-outline">Revisión</span>
+                <div class="text-xs text-muted mt-1">
+                  <i class="bi bi-clock me-1"></i>5 días
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <div class="flex-grow-1">
+                <div class="fw-medium">Análisis Predictivo de Ventas</div>
+                <div class="text-muted small">SalesForce Inc</div>
+                <div class="progress my-2" style="height: 6px;">
+                  <div class="progress-bar bg-success" style="width: 100%"></div>
+                </div>
+                <span class="text-xs text-muted">100%</span>
+              </div>
+              <div class="text-end ms-3">
+                <span class="badge bg-primary">Completado</span>
+                <div class="text-xs text-muted mt-1">
+                  <i class="bi bi-clock me-1"></i>Entregado
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Actividad Reciente -->
+    <div class="col-lg-5">
+      <div class="card h-100">
+        <div class="card-header">
+          <span class="fw-bold">Actividad Reciente</span>
+          <span class="text-muted d-block small">Últimas acciones en tu cuenta</span>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <div class="d-flex align-items-start mb-3">
+              <i class="bi bi-exclamation-circle text-primary me-3 fs-5"></i>
+              <div>
+                <div class="fw-medium">Nueva propuesta recibida</div>
+                <div class="text-muted small">Sistema de Computer Vision</div>
+                <div class="text-xs text-muted">Hace 2 horas</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-start mb-3">
+              <i class="bi bi-check-circle text-success me-3 fs-5"></i>
+              <div>
+                <div class="fw-medium">Proyecto completado</div>
+                <div class="text-muted small">Chatbot para e-commerce</div>
+                <div class="text-xs text-muted">Hace 1 día</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-start mb-3">
+              <i class="bi bi-currency-dollar text-success me-3 fs-5"></i>
+              <div>
+                <div class="fw-medium">Pago recibido</div>
+                <div class="text-muted small">$2,500 por análisis de datos</div>
+                <div class="text-xs text-muted">Hace 2 días</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-start mb-3">
+              <i class="bi bi-star text-warning me-3 fs-5"></i>
+              <div>
+                <div class="fw-medium">Nueva calificación</div>
+                <div class="text-muted small">5 estrellas de TechStart</div>
+                <div class="text-xs text-muted">Hace 3 días</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</app-main-layout>

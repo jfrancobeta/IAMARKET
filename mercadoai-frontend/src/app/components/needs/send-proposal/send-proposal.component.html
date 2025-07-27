@@ -1,0 +1,163 @@
+<app-main-layout>
+<div class="container py-4">
+  <div class="d-flex align-items-center gap-4 mb-4">
+    <a href="/needs/123" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
+      <i class="bi bi-arrow-left me-2"></i>
+      Volver al Proyecto
+    </a>
+    <div>
+      <h1 class="h2 fw-bold mb-1">Enviar Propuesta</h1>
+      <p class="text-muted">Presenta tu propuesta para este proyecto</p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Formulario de Propuesta -->
+    <div class="col-lg-8">
+      <form class="mb-4">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">Detalles de tu Propuesta</h5>
+            <p class="text-muted mb-0">Proporciona información detallada sobre tu enfoque</p>
+          </div>
+          <div class="card-body">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <label for="price" class="form-label">Tu Precio *</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                  <input type="number" id="price" class="form-control" required>
+                </div>
+                <small class="text-muted">Presupuesto del cliente: $5,000 - $8,000</small>
+              </div>
+              <div class="col-md-6">
+                <label for="timeline" class="form-label">Tiempo de Entrega *</label>
+                <select id="timeline" class="form-select" required>
+                  <option value="" disabled selected>Selecciona tiempo</option>
+                  <option>3 semanas</option>
+                  <option>4 semanas</option>
+                  <option>5 semanas</option>
+                  <option>6 semanas</option>
+                  <option>7 semanas</option>
+                  <option>8 semanas</option>
+                </select>
+                <small class="text-muted">Plazo del cliente: 6 semanas</small>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label for="description" class="form-label">Descripción de tu Propuesta *</label>
+              <textarea id="description" class="form-control" rows="4" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">Enfoque Técnico</h5>
+            <p class="text-muted mb-0">Explica tu metodología y experiencia</p>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="approach" class="form-label">Enfoque y Metodología *</label>
+              <textarea id="approach" class="form-control" rows="6" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="experience" class="form-label">Experiencia Relevante</label>
+              <textarea id="experience" class="form-control" rows="4"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">Entregables y Cronograma</h5>
+            <p class="text-muted mb-0">Define qué entregarás y cuándo</p>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="deliverables" class="form-label">Entregables *</label>
+              <textarea id="deliverables" class="form-control" rows="6" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="milestones" class="form-label">Hitos del Proyecto</label>
+              <textarea id="milestones" class="form-control" rows="5"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <a href="/needs/123" class="btn btn-outline-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-send me-2"></i>
+            Enviar Propuesta
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sidebar con info del proyecto -->
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Información del Proyecto</h5>
+        </div>
+        <div class="card-body">
+          <h4 class="fw-semibold mb-2">Sistema de Análisis Predictivo para Ventas</h4>
+          <p class="text-muted">Necesitamos desarrollar un sistema que pueda predecir las ventas futuras basándose en datos históricos y tendencias del mercado.</p>
+          <div class="mb-2 d-flex justify-content-between">
+            <span class="text-muted">Empresa:</span>
+            <span class="fw-medium">TechCorp Solutions</span>
+          </div>
+          <div class="mb-2 d-flex justify-content-between">
+            <span class="text-muted">Presupuesto:</span>
+            <span class="fw-medium">$5,000 - $8,000</span>
+          </div>
+          <div class="mb-2 d-flex justify-content-between">
+            <span class="text-muted">Plazo:</span>
+            <span class="fw-medium">6 semanas</span>
+          </div>
+          <div class="mb-2 d-flex justify-content-between">
+            <span class="text-muted">Categoría:</span>
+            <span class="badge bg-secondary">Machine Learning</span>
+          </div>
+          <div>
+            <h6 class="fw-medium mb-2">Habilidades Requeridas</h6>
+            <div class="d-flex flex-wrap gap-1">
+              <span class="badge bg-secondary">Python</span>
+              <span class="badge bg-secondary">TensorFlow</span>
+              <span class="badge bg-secondary">Scikit-learn</span>
+              <span class="badge bg-secondary">Pandas</span>
+              <span class="badge bg-secondary">AWS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Consejos para tu Propuesta</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex align-items-start gap-2 mb-2">
+              <span class="badge bg-primary rounded-circle" style="width: 10px; height: 10px;"></span>
+              Sé específico sobre tu enfoque técnico
+            </li>
+            <li class="d-flex align-items-start gap-2 mb-2">
+              <span class="badge bg-primary rounded-circle" style="width: 10px; height: 10px;"></span>
+              Menciona proyectos similares que hayas completado
+            </li>
+            <li class="d-flex align-items-start gap-2 mb-2">
+              <span class="badge bg-primary rounded-circle" style="width: 10px; height: 10px;"></span>
+              Proporciona un cronograma realista
+            </li>
+            <li class="d-flex align-items-start gap-2 mb-2">
+              <span class="badge bg-primary rounded-circle" style="width: 10px; height: 10px;"></span>
+              Incluye ejemplos de tu trabajo anterior
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</app-main-layout>

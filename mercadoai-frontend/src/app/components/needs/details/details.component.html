@@ -1,0 +1,239 @@
+<app-main-layout>
+<div class="container py-4">
+  <a href="/needs" class="btn btn-outline-secondary btn-sm mb-4">
+    <i class="bi bi-arrow-left me-2"></i>
+    Volver a Necesidades
+  </a>
+
+  <div class="row g-4">
+    <!-- Main Content -->
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="badge bg-primary">Activa</span>
+                <span class="badge bg-light text-dark border">Machine Learning</span>
+              </div>
+              <h2 class="fw-bold fs-4 mb-1">Sistema de Análisis Predictivo para Ventas</h2>
+              <div class="d-flex gap-4 text-muted small">
+                <span><i class="bi bi-calendar me-1"></i>Publicado el 15/01/2024</span>
+                <span><i class="bi bi-people me-1"></i>12 propuestas</span>
+              </div>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-pencil me-2"></i>Editar</button>
+              <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash me-2"></i>Eliminar</button>
+              <a [routerLink]="['/needs' ,1, 'send-proposal']" class="btn btn-primary d-flex align-items-center">
+                <i class="bi bi-send me-2"></i>
+                Enviar Propuesta
+              </a>
+                          
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="fw-semibold mb-2">Descripción del Proyecto</h5>
+          <p class="text-muted mb-4">
+            Necesitamos desarrollar un sistema que pueda predecir las ventas futuras basándose en datos históricos y tendencias del mercado. El sistema debe ser capaz de procesar grandes volúmenes de datos y proporcionar predicciones precisas que ayuden a nuestro equipo de ventas a tomar decisiones informadas.
+          </p>
+          <hr>
+          <div class="row g-4 mb-4">
+            <div class="col-md-4 d-flex align-items-center gap-2">
+              <i class="bi bi-currency-dollar text-success fs-5"></i>
+              <div>
+                <div class="fw-medium">$5,000 - $8,000</div>
+                <div class="text-muted small">Presupuesto</div>
+              </div>
+            </div>
+            <div class="col-md-4 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-primary fs-5"></i>
+              <div>
+                <div class="fw-medium">6 semanas</div>
+                <div class="text-muted small">Plazo</div>
+              </div>
+            </div>
+            <div class="col-md-4 d-flex align-items-center gap-2">
+              <i class="bi bi-people text-purple fs-5"></i>
+              <div>
+                <div class="fw-medium">12 propuestas</div>
+                <div class="text-muted small">Recibidas</div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h5 class="fw-semibold mb-2">Habilidades Requeridas</h5>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <span class="badge bg-secondary">Python</span>
+            <span class="badge bg-secondary">TensorFlow</span>
+            <span class="badge bg-secondary">Scikit-learn</span>
+            <span class="badge bg-secondary">Pandas</span>
+            <span class="badge bg-secondary">AWS</span>
+          </div>
+          <h5 class="fw-semibold mb-2">Requisitos Específicos</h5>
+          <p class="text-muted mb-4">
+            El sistema debe integrarse con nuestro CRM existente (Salesforce) y ser capaz de manejar datos en tiempo real. Necesitamos una interfaz web simple para visualizar las predicciones.
+          </p>
+          <h5 class="fw-semibold mb-2">Entregables</h5>
+          <p class="text-muted mb-4">
+            Código fuente completo, modelo entrenado, documentación técnica, guía de usuario y 3 meses de soporte post-entrega.
+          </p>
+        </div>
+      </div>
+
+      <!-- Propuestas -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Propuestas Recibidas (2)</h5>
+          <p class="text-muted mb-0">Revisa las propuestas de desarrolladores interesados en tu proyecto</p>
+        </div>
+        <div class="card-body">
+          <!-- Propuesta 1 -->
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="d-flex justify-content-between mb-3">
+                <div class="d-flex align-items-center gap-3">
+                  <img src="/placeholder.svg?height=40&width=40" alt="Ana García" class="rounded-circle" width="40" height="40">
+                  <div>
+                    <h6 class="fw-semibold mb-0">Ana García</h6>
+                    <div class="d-flex align-items-center gap-2 text-muted small">
+                      <i class="bi bi-star-fill text-warning"></i>
+                      <span>4.9</span>
+                      <span>•</span>
+                      <span>45 proyectos</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-end">
+                  <div class="fw-bold fs-5">$6,500</div>
+                  <div class="text-muted small">5 semanas</div>
+                </div>
+              </div>
+              <p class="text-muted mb-3">
+                Tengo amplia experiencia desarrollando sistemas de ML para predicción de ventas. Propongo usar un enfoque híbrido con LSTM y Random Forest...
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted small">Hace 2 días</span>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
+                  <button class="btn btn-primary btn-sm">Aceptar Propuesta</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Propuesta 2 -->
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="d-flex justify-content-between mb-3">
+                <div class="d-flex align-items-center gap-3">
+                  <img src="/placeholder.svg?height=40&width=40" alt="Carlos Rodríguez" class="rounded-circle" width="40" height="40">
+                  <div>
+                    <h6 class="fw-semibold mb-0">Carlos Rodríguez</h6>
+                    <div class="d-flex align-items-center gap-2 text-muted small">
+                      <i class="bi bi-star-fill text-warning"></i>
+                      <span>4.7</span>
+                      <span>•</span>
+                      <span>32 proyectos</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-end">
+                  <div class="fw-bold fs-5">$7,200</div>
+                  <div class="text-muted small">6 semanas</div>
+                </div>
+              </div>
+              <p class="text-muted mb-3">
+                Mi propuesta incluye un análisis completo de los datos existentes y la implementación de múltiples algoritmos para comparar rendimiento...
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted small">Hace 1 día</span>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
+                  <button class="btn btn-primary btn-sm">Aceptar Propuesta</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <!-- Información de la Empresa -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Información de la Empresa</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="/placeholder.svg?height=40&width=40" alt="TechCorp Solutions" class="rounded-circle" width="40" height="40">
+            <div>
+              <h6 class="fw-semibold mb-0">TechCorp Solutions</h6>
+              <div class="d-flex align-items-center gap-2 text-muted small">
+                <i class="bi bi-star-fill text-warning"></i>
+                <span>4.8</span>
+                <span>•</span>
+                <span>23 proyectos</span>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-outline-secondary w-100">
+            <i class="bi bi-chat-dots me-2"></i>
+            Contactar Empresa
+          </a>
+        </div>
+      </div>
+      <!-- Estadísticas del Proyecto -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Estadísticas del Proyecto</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-sm">Propuestas recibidas</span>
+            <span class="fw-medium">12</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-sm">Tiempo restante</span>
+            <span class="fw-medium">5 días</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-sm">Presupuesto promedio</span>
+            <span class="fw-medium">$6,850</span>
+          </div>
+          <hr>
+          <div class="mb-2 d-flex justify-content-between">
+            <span class="text-sm">Progreso de selección</span>
+            <span class="text-sm">60%</span>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar" style="width: 60%"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Acciones Rápidas -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Acciones Rápidas</h5>
+        </div>
+        <div class="card-body d-grid gap-2">
+          <button class="btn btn-outline-secondary w-100">
+            <i class="bi bi-send me-2"></i>
+            Invitar Desarrolladores
+          </button>
+          <button class="btn btn-outline-secondary w-100">
+            <i class="bi bi-pencil me-2"></i>
+            Editar Proyecto
+          </button>
+          <button class="btn btn-outline-secondary w-100">
+            <i class="bi bi-people me-2"></i>
+            Ver Todos los Candidatos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</app-main-layout>

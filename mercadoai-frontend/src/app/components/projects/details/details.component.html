@@ -1,0 +1,294 @@
+<app-main-layout>
+<div class="container py-4">
+  <a href="/projects" class="btn btn-outline-secondary btn-sm mb-4">
+    <i class="bi bi-arrow-left me-2"></i>
+    Volver a Proyectos
+  </a>
+  <div class="row g-4">
+    <!-- Main Content -->
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="badge bg-secondary">En progreso</span>
+                <span class="badge bg-light text-dark border">Machine Learning</span>
+              </div>
+              <h2 class="fw-bold fs-4 mb-1">Sistema de Análisis Predictivo para Ventas</h2>
+              <span class="text-muted small">Desarrollo de sistema de ML para predicción de ventas usando algoritmos avanzados de machine learning.</span>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
+              <button class="btn btn-primary btn-sm"><i class="bi bi-check-circle me-2"></i>Marcar Completado</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <div class="d-flex justify-content-between text-sm mb-2">
+              <span>Progreso del proyecto</span>
+              <span class="fw-medium">75%</span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar" style="width: 75%"></div>
+            </div>
+          </div>
+          <hr>
+          <div class="row g-3 text-sm mb-3">
+            <div class="col-md-3 d-flex align-items-center gap-2">
+              <i class="bi bi-currency-dollar text-success"></i>
+              <div>
+                <span class="fw-medium">$6,500</span>
+                <span class="text-muted small d-block">Presupuesto</span>
+              </div>
+            </div>
+            <div class="col-md-3 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-primary"></i>
+              <div>
+                <span class="fw-medium">15 días</span>
+                <span class="text-muted small d-block">Restantes</span>
+              </div>
+            </div>
+            <div class="col-md-3 d-flex align-items-center gap-2">
+              <i class="bi bi-calendar text-purple"></i>
+              <div>
+                <span class="fw-medium">20/01/2024</span>
+                <span class="text-muted small d-block">Inicio</span>
+              </div>
+            </div>
+            <div class="col-md-3 d-flex align-items-center gap-2">
+              <i class="bi bi-calendar text-danger"></i>
+              <div>
+                <span class="fw-medium">15/02/2024</span>
+                <span class="text-muted small d-block">Entrega</span>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h5 class="fw-semibold mb-2">Tecnologías</h5>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <span class="badge bg-secondary">Python</span>
+            <span class="badge bg-secondary">TensorFlow</span>
+            <span class="badge bg-secondary">Scikit-learn</span>
+            <span class="badge bg-secondary">AWS</span>
+            <span class="badge bg-secondary">Docker</span>
+          </div>
+        </div>
+      </div>
+      <!-- Tabs -->
+      <ul class="nav nav-tabs mb-4" id="projectTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Resumen</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="milestones-tab" data-bs-toggle="tab" data-bs-target="#milestones" type="button" role="tab">Hitos</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="deliverables-tab" data-bs-toggle="tab" data-bs-target="#deliverables" type="button" role="tab">Entregables</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">Archivos</button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <!-- Resumen -->
+        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-1">Detalles del Proyecto</h5>
+            </div>
+            <div class="card-body">
+              <h6 class="fw-semibold mb-2">Descripción Completa</h6>
+              <p class="text-muted mb-3">Desarrollo de sistema de ML para predicción de ventas usando algoritmos avanzados de machine learning. Este proyecto incluye el análisis completo de datos históricos de ventas, la implementación de múltiples algoritmos de machine learning para comparar rendimiento, y la creación de una interfaz web para visualizar las predicciones en tiempo real.</p>
+              <hr>
+              <h6 class="fw-semibold mb-2">Objetivos</h6>
+              <ul class="list-disc ps-3 text-muted mb-0">
+                <li>Desarrollar un modelo predictivo con precisión superior al 85%</li>
+                <li>Integrar el sistema con el CRM existente (Salesforce)</li>
+                <li>Crear dashboard interactivo para visualización de predicciones</li>
+                <li>Proporcionar documentación completa y capacitación al equipo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Hitos -->
+        <div class="tab-pane fade" id="milestones" role="tabpanel">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-1">Hitos del Proyecto</h5>
+              <span class="text-muted small">Seguimiento del progreso por fases</span>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="d-flex align-items-center gap-4 mb-2">
+                  <span class="w-8 h-8 rounded-circle bg-success d-flex align-items-center justify-content-center text-white">1</span>
+                  <div>
+                    <span class="fw-medium text-success">Análisis de requisitos</span>
+                    <span class="text-muted small d-block">Completado: 22/01/2024</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-4 mb-2">
+                  <span class="w-8 h-8 rounded-circle bg-success d-flex align-items-center justify-content-center text-white">2</span>
+                  <div>
+                    <span class="fw-medium text-success">Preparación de datos</span>
+                    <span class="text-muted small d-block">Completado: 28/01/2024</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-4 mb-2">
+                  <span class="w-8 h-8 rounded-circle bg-success d-flex align-items-center justify-content-center text-white">3</span>
+                  <div>
+                    <span class="fw-medium text-success">Desarrollo del modelo</span>
+                    <span class="text-muted small d-block">Completado: 05/02/2024</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-4 mb-2">
+                  <span class="w-8 h-8 rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white">4</span>
+                  <div>
+                    <span class="fw-medium">Entrenamiento y validación</span>
+                    <span class="text-muted small d-block">Fecha estimada: 10/02/2024</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-4 mb-2">
+                  <span class="w-8 h-8 rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white">5</span>
+                  <div>
+                    <span class="fw-medium">Implementación y testing</span>
+                    <span class="text-muted small d-block">Fecha estimada: 15/02/2024</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Entregables -->
+        <div class="tab-pane fade" id="deliverables" role="tabpanel">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-1">Entregables</h5>
+              <span class="text-muted small">Estado de los entregables del proyecto</span>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
+                  <span class="fw-medium">Código fuente completo</span>
+                  <span class="badge bg-secondary">Pendiente</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
+                  <span class="fw-medium">Modelo entrenado</span>
+                  <span class="badge bg-secondary">En progreso</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
+                  <span class="fw-medium">Documentación técnica</span>
+                  <span class="badge bg-success">Completado</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
+                  <span class="fw-medium">Manual de usuario</span>
+                  <span class="badge bg-secondary">Pendiente</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Archivos -->
+        <div class="tab-pane fade" id="files" role="tabpanel">
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="mb-1">Archivos del Proyecto</h5>
+                <span class="text-muted small">Documentos y archivos compartidos</span>
+              </div>
+              <button class="btn btn-primary btn-sm"><i class="bi bi-upload me-2"></i>Subir Archivo</button>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
+                  <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-file-earmark-text text-muted"></i>
+                    <div>
+                      <span class="fw-medium">requirements.pdf</span>
+                      <span class="text-muted small d-block">2.3 MB • Subido por Cliente • 20/01/2024</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download"></i></button>
+                </div>
+                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
+                  <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-file-earmark-text text-muted"></i>
+                    <div>
+                      <span class="fw-medium">data_schema.sql</span>
+                      <span class="text-muted small d-block">15 KB • Subido por Ana García • 25/01/2024</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download"></i></button>
+                </div>
+                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
+                  <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-file-earmark-text text-muted"></i>
+                    <div>
+                      <span class="fw-medium">progress_report.pdf</span>
+                      <span class="text-muted small d-block">1.8 MB • Subido por Ana García • 01/02/2024</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <!-- Cliente -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-1">Cliente</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="/placeholder.svg?height=40&width=40" alt="TechCorp Solutions" class="rounded-circle" width="40" height="40">
+            <div>
+              <span class="fw-semibold">TechCorp Solutions</span>
+              <div class="d-flex align-items-center gap-2 text-muted small">
+                <i class="bi bi-star-fill text-warning"></i>
+                <span>4.8</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-outline-secondary w-100"><i class="bi bi-chat-dots me-2"></i>Contactar Cliente</button>
+        </div>
+      </div>
+      <!-- Desarrollador -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-1">Desarrollador</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="/placeholder.svg?height=40&width=40" alt="Ana García" class="rounded-circle" width="40" height="40">
+            <div>
+              <span class="fw-semibold">Ana García</span>
+              <div class="d-flex align-items-center gap-2 text-muted small">
+                <i class="bi bi-star-fill text-warning"></i>
+                <span>4.9</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-outline-secondary w-100"><i class="bi bi-chat-dots me-2"></i>Contactar Desarrollador</button>
+        </div>
+      </div>
+      <!-- Acciones -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-1">Acciones</h5>
+        </div>
+        <div class="card-body d-grid gap-2">
+          <button class="btn btn-outline-secondary w-100"><i class="bi bi-file-earmark-text me-2"></i>Generar Reporte</button>
+          <button class="btn btn-outline-secondary w-100"><i class="bi bi-calendar me-2"></i>Programar Reunión</button>
+          <button class="btn btn-outline-secondary w-100"><i class="bi bi-star me-2"></i>Calificar Proyecto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</app-main-layout>

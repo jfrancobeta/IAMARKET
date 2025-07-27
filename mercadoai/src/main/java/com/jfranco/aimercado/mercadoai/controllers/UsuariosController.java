@@ -2,7 +2,6 @@ package com.jfranco.aimercado.mercadoai.controllers;
 
 import java.util.Collections;
 
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
