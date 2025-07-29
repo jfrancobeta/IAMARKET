@@ -1,0 +1,36 @@
+<div class="container py-5 d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="card shadow w-100" style="max-width: 420px;">
+    <div class="card-body p-4">
+      <div class="text-center mb-4">
+        <i class="bi bi-shield-lock text-primary" style="font-size: 2.5rem;"></i>
+        <h3 class="mt-2 mb-1">Verificar Código</h3>
+        <p class="text-muted mb-0">Hemos enviado un código de 6 dígitos a<br><strong>tu correo electrónico</strong></p>
+      </div>
+      <form (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="mb-3">
+          <label class="form-label text-center w-100">Código de verificación</label>
+          <div class="d-flex gap-2 justify-content-center">
+            <input type="text" maxlength="1" class="form-control text-center fs-5 fw-bold" style="width: 48px;" [(ngModel)]="codeDigits[0]" [ngModelOptions]="{standalone: true}" name="digit0" (input)="onInput($event, 0)">
+            <input type="text" maxlength="1" class="form-control text-center fs-5 fw-bold" style="width: 48px;" [(ngModel)]="codeDigits[1]" [ngModelOptions]="{standalone: true}" name="digit1" (input)="onInput($event, 1)">
+            <input type="text" maxlength="1" class="form-control text-center fs-5 fw-bold" style="width: 48px;" [(ngModel)]="codeDigits[2]" [ngModelOptions]="{standalone: true}" name="digit2" (input)="onInput($event, 2)">
+            <input type="text" maxlength="1" class="form-control text-center fs-5 fw-bold" style="width: 48px;" [(ngModel)]="codeDigits[3]" [ngModelOptions]="{standalone: true}" name="digit3" (input)="onInput($event, 3)">
+            <input type="text" maxlength="1" class="form-control text-center fs-5 fw-bold" style="width: 48px;" [(ngModel)]="codeDigits[4]" [ngModelOptions]="{standalone: true}" name="digit4" (input)="onInput($event, 4)">
+            <input type="text" maxlength="1" class="form-control text-center fs-5 fw-bold" style="width: 48px;" [(ngModel)]="codeDigits[5]" [ngModelOptions]="{standalone: true}" name="digit5" (input)="onInput($event, 5)">
+          </div>
+        </div>
+        <div class="text-center text-muted small mb-2">
+          <span>El código expira en <span class="fw-semibold">05:00</span></span>
+        </div>
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-primary">Verificar Código</button>
+        </div>
+        <div class="text-center mb-2">
+          <button type="button" class="btn btn-link p-0 small">Reenviar código</button>
+        </div>
+        <div class="text-center">
+          <a href="/auth/forgot-password" class="text-decoration-none small"><i class="bi bi-arrow-left"></i> Cambiar correo electrónico</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

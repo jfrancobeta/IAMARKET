@@ -46,6 +46,9 @@ public class SecurityConfig {
         return http.authorizeHttpRequests(auth ->
         auth
         .requestMatchers(HttpMethod.POST, "/usuarios/create-user").permitAll() // Permitir acceso a login sin autenticación
+        .requestMatchers(HttpMethod.POST, "/usuarios/send-reset-code").permitAll() // Permitir acceso a enviar código de recuperación sin autenticación
+        .requestMatchers(HttpMethod.POST, "/usuarios/verify-reset-code").permitAll() // Permitir acceso a verificar código de recuperación sin autenticación
+        .requestMatchers(HttpMethod.POST, "/usuarios/reset-password").permitAll() // Permitir
         .requestMatchers(HttpMethod.GET, "/api/mercadoai/necesidades").hasAnyRole("USER", "ADMIN") // Permitir acceso a GET necesidades sin autenticación
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) // Configurar CORS
