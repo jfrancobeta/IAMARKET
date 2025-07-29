@@ -2,7 +2,11 @@ package com.jfranco.aimercado.mercadoai.service;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,9 +17,11 @@ import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
 import com.jfranco.aimercado.mercadoai.model.PerfilDesarrollador;
 import com.jfranco.aimercado.mercadoai.model.Role;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
+import com.jfranco.aimercado.mercadoai.model.Notification.Notification;
 import com.jfranco.aimercado.mercadoai.repository.CompaniaRepository;
 import com.jfranco.aimercado.mercadoai.repository.DesarrolladorRepository;
 import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.service.notifications.INotificationService;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService{
@@ -32,6 +38,9 @@ public class UsuarioServiceImpl implements IUsuarioService{
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private INotificationService notificationService;
 
      
     @Override
@@ -83,6 +92,51 @@ public class UsuarioServiceImpl implements IUsuarioService{
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
         usuario.setEstado(false); // Cambiar el estado a inactivo en lugar de eliminar
         usuarioRepository.save(usuario);
+    }
+
+    
+
+    // --- Recuperación de contraseña con código de 6 dígitos (en memoria) ---
+    private Map<String, String> resetCodes = new HashMap<>();
+
+    @Override
+    public boolean sendResetCode(String email) {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if (!usuario.isPresent()) {
+            return false;
+        }
+        // Generar código de 6 dígitos
+        String code = String.format("%06d", new Random().nextInt(999999));
+        resetCodes.put(email, code);
+
+        Notification notification = new Notification();
+        notification.setEmail(email);
+        notification.setTitle("Código de recuperación de contraseña");
+        notification.setMessage("Tu código de recuperación es: " + code);
+        notificationService.createNotification(notification);
+
+        return true;
+    }
+
+    @Override
+    public boolean verifyResetCode(String email, String code) {
+        String storedCode = resetCodes.get(email);
+        return storedCode != null && storedCode.equals(code);
+    }
+
+    @Override
+    public boolean resetPassword(String email, String code, String newPassword) {
+        if (!verifyResetCode(email, code)) {
+            return false;
+        }
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if (!usuario.isPresent()) {
+            return false;
+        }
+        usuario.get().setPassword(passwordEncoder.encode(newPassword));
+        usuarioRepository.save(usuario.get());
+        resetCodes.remove(email); 
+        return true;
     }
     
 }

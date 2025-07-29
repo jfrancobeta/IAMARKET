@@ -15,6 +15,13 @@ public interface IUsuarioService {
 
     void eliminarUsuario(Long id);
 
+    boolean sendResetCode(String email);
+
+    boolean verifyResetCode(String email, String code);
+
+    boolean resetPassword(String email, String code, String newPassword);
+
+
     
 
     

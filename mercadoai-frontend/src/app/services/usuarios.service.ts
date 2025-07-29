@@ -3,6 +3,7 @@ import { RegistroRequest } from '../models/RegistroRequest';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
+import { ResetCodeRequest, ResetPasswordRequest, VerifyCodeRequest } from '../models/auth-reset.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,20 @@ export class UsuariosService {
 
   registrarUsuario(usuario: RegistroRequest): Observable<any> {
     return this.http.post<any>(this.url + '/create-user', usuario);
+  }
+
+  sendResetCode(data: ResetCodeRequest): Observable<boolean> {
+    return this.http.post<any>(`${this.url}/send-reset-code`, data);
+  }
+
+  // Verificar código de recuperación
+  verifyResetCode(data: VerifyCodeRequest): Observable<boolean> {
+    return this.http.post<any>(`${this.url}/verify-reset-code`, data);
+  }
+
+  // Resetear contraseña
+  resetPassword(data: ResetPasswordRequest): Observable<boolean> {
+    return this.http.post<any>(`${this.url}/reset-password`, data);
   }
 
 

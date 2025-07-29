@@ -24,6 +24,8 @@ import { DetailsUserComponent } from './components/profile/details-user/details-
 import { PostsComponent } from './components/admin/posts/posts.component';
 import { StatsComponent } from './components/admin/stats/stats.component';
 import { UsersComponent } from './components/admin/users/users.component';
+import { ResetPasswordComponent } from './components/autenticacion/reset-password/reset-password.component';
+import { VerifyCodeComponent } from './components/autenticacion/verify-code/verify-code.component';
 export const routes: Routes = [
     {
         path: '',
@@ -126,5 +128,13 @@ export const routes: Routes = [
     {
         path: 'admin/users',
         component: UsersComponent
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent
+    },
+    {
+        path: 'verify-code',
+        component: VerifyCodeComponent
     }
 ];
