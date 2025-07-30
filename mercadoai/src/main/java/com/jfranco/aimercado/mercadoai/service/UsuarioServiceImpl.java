@@ -96,8 +96,16 @@ public class UsuarioServiceImpl implements IUsuarioService{
 
     
 
-    // --- Recuperación de contraseña con código de 6 dígitos (en memoria) ---
-    private Map<String, String> resetCodes = new HashMap<>();
+    
+    private static class ResetCodeInfo {
+        String code;
+        long expiresAt;
+        ResetCodeInfo(String code, long expiresAt) {
+            this.code = code;
+            this.expiresAt = expiresAt;
+        }
+    }
+    private Map<String, ResetCodeInfo> resetCodes = new HashMap<>();
 
     @Override
     public boolean sendResetCode(String email) {
@@ -107,12 +115,13 @@ public class UsuarioServiceImpl implements IUsuarioService{
         }
         // Generar código de 6 dígitos
         String code = String.format("%06d", new Random().nextInt(999999));
-        resetCodes.put(email, code);
+        long expiresAt = System.currentTimeMillis() + 10 * 60 * 1000; // 10 minutos
+        resetCodes.put(email, new ResetCodeInfo(code, expiresAt));
 
         Notification notification = new Notification();
         notification.setEmail(email);
         notification.setTitle("Código de recuperación de contraseña");
-        notification.setMessage("Tu código de recuperación es: " + code);
+        notification.setMessage("Tu código de recuperación es: " + code + "\nEste código expirará en 10 minutos.");
         notificationService.createNotification(notification);
 
         return true;
@@ -120,8 +129,14 @@ public class UsuarioServiceImpl implements IUsuarioService{
 
     @Override
     public boolean verifyResetCode(String email, String code) {
-        String storedCode = resetCodes.get(email);
-        return storedCode != null && storedCode.equals(code);
+        ResetCodeInfo info = resetCodes.get(email);
+        if (info == null) return false;
+        if (!info.code.equals(code)) return false;
+        if (System.currentTimeMillis() > info.expiresAt) {
+            resetCodes.remove(email); // Eliminar código expirado
+            return false;
+        }
+        return true;
     }
 
     @Override

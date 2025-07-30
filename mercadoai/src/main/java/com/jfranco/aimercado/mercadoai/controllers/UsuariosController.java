@@ -53,8 +53,12 @@ public class UsuariosController {
     @PostMapping("/send-reset-code")
     public ResponseEntity<?> sendResetCode(@RequestBody ResetCodeRequest request) {
         try {
-            usuarioService.sendResetCode(request.getEmail());
-            return ResponseEntity.ok(Collections.singletonMap("message", "Código enviado al correo"));
+            boolean valid = usuarioService.sendResetCode(request.getEmail());
+            if (!valid) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Correo no encontrado");
+            }else {
+                return ResponseEntity.ok(Collections.singletonMap("message", "Código enviado al correo"));
+            }
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al enviar el código: " + e.getMessage());
         }
