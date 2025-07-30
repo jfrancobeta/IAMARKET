@@ -18,17 +18,14 @@
             <input type="text" maxlength="1" class="form-control text-center fs-5 fw-bold" style="width: 48px;" [(ngModel)]="codeDigits[5]" [ngModelOptions]="{standalone: true}" name="digit5" (input)="onInput($event, 5)">
           </div>
         </div>
-        <div class="text-center text-muted small mb-2">
-          <span>El código expira en <span class="fw-semibold">05:00</span></span>
-        </div>
         <div class="d-grid mb-3">
-          <button type="submit" class="btn btn-primary">Verificar Código</button>
+          <button type="submit" class="btn btn-primary" [disabled]="codeDigits.join('').length !== 6">Verificar Código</button>
         </div>
         <div class="text-center mb-2">
-          <button type="button" class="btn btn-link p-0 small">Reenviar código</button>
+          <button type="button" class="btn btn-link p-0 small" (click)="onResendCode()">Reenviar código</button>
         </div>
         <div class="text-center">
-          <a href="/auth/forgot-password" class="text-decoration-none small"><i class="bi bi-arrow-left"></i> Cambiar correo electrónico</a>
+          <a [routerLink]="['/forgot-password']" routerLinkActive="router-link-active"  class="text-decoration-none small"><i class="bi bi-arrow-left"></i> Cambiar correo electrónico</a>
         </div>
       </form>
     </div>

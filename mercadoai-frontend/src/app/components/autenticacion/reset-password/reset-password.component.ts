@@ -4,11 +4,12 @@ import { Router, RouterModule } from '@angular/router';
 import { UsuariosService } from '../../../services/usuarios.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, CommonModule],
   templateUrl: './reset-password.component.html',
 })
 export class ResetPasswordComponent {

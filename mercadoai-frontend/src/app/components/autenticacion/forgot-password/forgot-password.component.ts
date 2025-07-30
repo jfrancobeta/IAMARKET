@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ResetCodeRequest } from '../../../models/auth-reset.model';
@@ -9,18 +10,20 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [RouterModule,FormsModule,CommonModule],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './forgot-password.component.html',
 })
 export class ForgotPasswordComponent {
-
   ResetCodeRequest: ResetCodeRequest = {
-    email: ''
+    email: '',
   };
 
-  constructor(private router: Router,
-              private usuariosService: UsuariosService
-  ) { }
+  constructor(
+    private router: Router,
+    private usuariosService: UsuariosService
+  ) {}
+
+    
 
   onSubmit() {
     this.usuariosService.sendResetCode(this.ResetCodeRequest).subscribe({
@@ -32,24 +35,38 @@ export class ForgotPasswordComponent {
           title: '¡Enviamos tu código!',
           showConfirmButton: false,
           timer: 2500,
-          timerProgressBar: true
+          timerProgressBar: true,
         });
         sessionStorage.setItem('resetEmail', this.ResetCodeRequest.email);
         this.router.navigate(['/verify-code']);
       },
       error: (error) => {
-        console.error('Error al enviar el código de recuperación:', error);
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'error',
-          title: 'Error al enviar el código. Intenta de nuevo.',
-          showConfirmButton: false,
-          timer: 2500,
-          timerProgressBar: true
-        });
-      }
+        if (error.status === 404) {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Correo no encontrado',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+          });
+        } else {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Error al enviar el código. Intenta de nuevo.',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+          });
+        }
+      },
     });
   }
-
+  isEmailValid(email: string): boolean {
+    // Valida formato: texto@texto.dominio (2-6 letras)
+    return /^[\w-\.]+@([\w-]+\.)+[a-zA-Z]{2,6}$/.test(email);
+  }
 }
