@@ -70,7 +70,8 @@ public class UsuarioServiceImpl implements IUsuarioService{
             desarrollador.setHabilidades(registroRequest.getHabilidades());
             desarrollador.setExperiencia(registroRequest.getExperiencia());
             desarrollador.setPortafolioURL(registroRequest.getPortafolioURL());
-            desarrolladorRepository.save(desarrollador);
+            desarrollador = desarrolladorRepository.save(desarrollador);
+            usuario.setPerfilDesarrollador(desarrollador);
         } else if (registroRequest.getUserType() == 0) { // Compañía
             PerfilCompania compania = new PerfilCompania();
             compania.setUsuario(usuario);
@@ -78,8 +79,11 @@ public class UsuarioServiceImpl implements IUsuarioService{
             compania.setIndustria(registroRequest.getIndustria());
             compania.setUbicacion(registroRequest.getUbicacion());
             compania.setWebsite(registroRequest.getWebsite());
-            companiaRepository.save(compania);
+            compania = companiaRepository.save(compania);
+            usuario.setPerfilCompania(compania);
         }
+        usuarioRepository.save(usuario);
+        
     }
 
     @Override

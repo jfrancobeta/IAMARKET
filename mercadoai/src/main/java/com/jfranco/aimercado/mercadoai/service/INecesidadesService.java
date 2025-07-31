@@ -2,6 +2,7 @@ package com.jfranco.aimercado.mercadoai.service;
 
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.dto.NecesidadDTO;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 
 public interface INecesidadesService {
@@ -10,7 +11,9 @@ public interface INecesidadesService {
 
     Necesidad getNecesidadById(Long id);
 
-    Necesidad saveNecesidad(Necesidad necesidad);
+    Necesidad saveNecesidad(NecesidadDTO necesidad);
+
+    Necesidad updateNecesidad(Long id, NecesidadDTO necesidadDTO);
     
     void deleteNecesidad(Long id);
     

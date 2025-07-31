@@ -3,6 +3,15 @@ package com.jfranco.aimercado.mercadoai.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
+import com.jfranco.aimercado.mercadoai.model.PerfilDesarrollador;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +25,7 @@ import jakarta.persistence.UniqueConstraint;
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
+    // ...existing code...
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +49,13 @@ public class Usuario {
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaActualizacion;
     private Boolean estado;
+
+    // Relación opcional: solo uno de estos se usará según userType
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    private PerfilCompania perfilCompania;
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    private PerfilDesarrollador perfilDesarrollador;
 
     
     public Long getId() {
@@ -106,6 +123,31 @@ public class Usuario {
     }
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.fechaCreacion = LocalDateTime.now();
+        this.fechaActualizacion = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.fechaActualizacion = LocalDateTime.now();
+    }
+
+    public PerfilCompania getPerfilCompania() {
+        return perfilCompania;
+    }
+    public void setPerfilCompania(PerfilCompania perfilCompania) {
+        this.perfilCompania = perfilCompania;
+    }
+
+    public PerfilDesarrollador getPerfilDesarrollador() {
+        return perfilDesarrollador;
+    }
+    public void setPerfilDesarrollador(PerfilDesarrollador perfilDesarrollador) {
+        this.perfilDesarrollador = perfilDesarrollador;
     }
 
 
