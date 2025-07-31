@@ -3,6 +3,7 @@ package com.jfranco.aimercado.mercadoai.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jfranco.aimercado.mercadoai.dto.NecesidadDTO;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 import com.jfranco.aimercado.mercadoai.service.INecesidadesService;
 
@@ -39,7 +40,7 @@ public class NecesidadControlles {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> guardar(@RequestBody Necesidad necesidad) {
+    public ResponseEntity<?> guardar(@RequestBody NecesidadDTO necesidad) {
         Necesidad entity = necesidadesService.saveNecesidad(necesidad);
         if (entity == null) {
             return ResponseEntity.badRequest().body("Error al guardar la necesidad");
@@ -50,19 +51,12 @@ public class NecesidadControlles {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody Necesidad necesidad) {
-        Optional<Necesidad> neceOptional = Optional.of(necesidadesService.getNecesidadById(id));
-        if (neceOptional.isPresent()) {
-            Necesidad necesidadbd = neceOptional.get();
-            necesidadbd.setTitulo(necesidad.getTitulo());
-            necesidadbd.setDescripcion(necesidad.getDescripcion());
-            necesidadbd.setPresupuesto(necesidad.getPresupuesto());
-            necesidadbd.setFechaLimite(necesidad.getFechaLimite());
-            necesidadbd.setCategoria(necesidad.getCategoria());
-            necesidadbd.setEstado(necesidad.getEstado());
-            return ResponseEntity.ok(necesidadesService.saveNecesidad(necesidadbd));
-        } else {
-            return ResponseEntity.status(404).body("Necesidad no encontrada con id: " + id);
+    public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody NecesidadDTO necesidad) {
+        try {
+            Necesidad actualizada = necesidadesService.updateNecesidad(id, necesidad);
+            return ResponseEntity.ok(actualizada);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 
