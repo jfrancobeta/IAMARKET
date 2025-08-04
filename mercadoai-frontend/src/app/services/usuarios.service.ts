@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 import { ResetCodeRequest, ResetPasswordRequest, VerifyCodeRequest } from '../models/auth-reset.model';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
 
-  private url : string = 'http://localhost:8081/usuarios';
+  private url : string =  environment.apiUrl + 'usuarios';
 
   constructor(private http: HttpClient) { }
 

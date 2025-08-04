@@ -1,186 +1,127 @@
 <app-main-layout>
-<div class="container py-4">
-  <div class="d-flex align-items-center justify-content-between mb-4">
-    <div>
-      <h1 class="h2 fw-bold mb-1">Necesidades</h1>
-      <p class="text-muted mb-0">Gestiona y publica las necesidades de IA de tu empresa</p>
-    </div>
-    <a href="/needs/create" class="btn btn-primary">
-      <i class="bi bi-plus-lg me-2"></i>
-      Publicar Necesidad
-    </a>
-  </div>
-
-  <!-- Filtros -->
-  <div class="card mb-4">
-    <div class="card-body">
-      <form class="row g-3 align-items-center">
-        <div class="col-md-4">
-          <div class="input-group">
-            <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
-            <input type="text" class="form-control border-start-0" placeholder="Buscar necesidades...">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <select class="form-select">
-            <option selected>Categoría</option>
-            <option value="ml">Machine Learning</option>
-            <option value="nlp">NLP</option>
-            <option value="cv">Computer Vision</option>
-            <option value="data">Data Science</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <select class="form-select">
-            <option selected>Estado</option>
-            <option value="active">Activa</option>
-            <option value="review">En revisión</option>
-            <option value="completed">Completada</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-secondary w-100">
-            <i class="bi bi-funnel me-2"></i>
-            Filtros
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Lista de necesidades -->
-  <div class="row g-4">
-    <!-- Necesidad 1 -->
-    <div class="col-12">
-      <div class="card h-100 shadow-sm">
-        <div class="card-header">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="fw-bold fs-5">Sistema de Análisis Predictivo para Ventas</span>
-                <span class="badge bg-primary">Activa</span>
-              </div>
-              <span class="badge bg-light text-dark border">Machine Learning</span>
-            </div>
-            <a href="/needs/1" class="btn btn-outline-secondary btn-sm">
-              <i class="bi bi-eye me-2"></i>
-              Ver Detalles
-            </a>
-          </div>
-        </div>
-        <div class="card-body">
-          <p class="mb-3">Necesitamos desarrollar un sistema que pueda predecir las ventas futuras basándose en datos históricos y tendencias del mercado.</p>
-          <div class="row g-3 text-sm">
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success"></i>
-              <span class="fw-medium">$5,000 - $8,000</span>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-clock text-primary"></i>
-              <span>6 semanas</span>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-people text-purple"></i>
-              <span>12 propuestas</span>
-            </div>
-            <div class="col-md-3 text-muted">Hace 2 días</div>
-          </div>
-        </div>
+  <div class="container py-4">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <div>
+        <h1 class="h2 fw-bold mb-1">Necesidades</h1>
+        <p class="text-muted mb-0">
+          Gestiona y publica las necesidades de IA de tu empresa
+        </p>
       </div>
-    </div>
-    <!-- Necesidad 2 -->
-    <div class="col-12">
-      <div class="card h-100 shadow-sm">
-        <div class="card-header">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="fw-bold fs-5">Chatbot con NLP para Atención al Cliente</span>
-                <span class="badge bg-primary">Activa</span>
-              </div>
-              <span class="badge bg-light text-dark border">NLP</span>
-            </div>
-            <a href="/needs/2" class="btn btn-outline-secondary btn-sm">
-              <i class="bi bi-eye me-2"></i>
-              Ver Detalles
-            </a>
-          </div>
-        </div>
-        <div class="card-body">
-          <p class="mb-3">Buscamos implementar un chatbot inteligente que pueda manejar consultas comunes de nuestros clientes de manera automática.</p>
-          <div class="row g-3 text-sm">
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success"></i>
-              <span class="fw-medium">$3,000 - $5,000</span>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-clock text-primary"></i>
-              <span>4 semanas</span>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-people text-purple"></i>
-              <span>8 propuestas</span>
-            </div>
-            <div class="col-md-3 text-muted">Hace 1 semana</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Necesidad 3 -->
-    <div class="col-12">
-      <div class="card h-100 shadow-sm">
-        <div class="card-header">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="fw-bold fs-5">Sistema de Reconocimiento de Imágenes</span>
-                <span class="badge bg-secondary">En revisión</span>
-              </div>
-              <span class="badge bg-light text-dark border">Computer Vision</span>
-            </div>
-            <a href="/needs/3" class="btn btn-outline-secondary btn-sm">
-              <i class="bi bi-eye me-2"></i>
-              Ver Detalles
-            </a>
-          </div>
-        </div>
-        <div class="card-body">
-          <p class="mb-3">Desarrollo de un sistema para clasificar y etiquetar automáticamente imágenes de productos en nuestro inventario.</p>
-          <div class="row g-3 text-sm">
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success"></i>
-              <span class="fw-medium">$7,000 - $10,000</span>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-clock text-primary"></i>
-              <span>8 semanas</span>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-people text-purple"></i>
-              <span>15 propuestas</span>
-            </div>
-            <div class="col-md-3 text-muted">Hace 3 días</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-  
-  <div class="card mt-5">
-    <div class="card-body text-center py-5">
-      <i class="bi bi-file-earmark-text fs-1 text-muted mb-3"></i>
-      <h3 class="mb-2">No hay necesidades publicadas</h3>
-      <p class="text-muted mb-4">
-        Comienza publicando tu primera necesidad de IA para conectar con desarrolladores especializados.
-      </p>
       <a href="/needs/create" class="btn btn-primary">
         <i class="bi bi-plus-lg me-2"></i>
-        Publicar Primera Necesidad
+        Publicar Necesidad
       </a>
     </div>
+
+    <!-- Filtros -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <form class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"
+                ><i class="bi bi-search"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control border-start-0"
+                placeholder="Buscar necesidades..."
+              />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <select class="form-select">
+              <option selected>Categoría</option>
+              <option value="ml">Machine Learning</option>
+              <option value="nlp">NLP</option>
+              <option value="cv">Computer Vision</option>
+              <option value="data">Data Science</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <select class="form-select">
+              <option selected>Estado</option>
+              <option value="active">Activa</option>
+              <option value="review">En revisión</option>
+              <option value="completed">Completada</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-outline-secondary w-100">
+              <i class="bi bi-funnel me-2"></i>
+              Filtros
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Lista de necesidades -->
+    @if (needs.length > 0 ) {
+    <div class="row g-4">
+      @for (need of needs; track $index) {
+      <!-- Necesidad 1 -->
+      <div class="col-12">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                  <span class="fw-bold fs-5">{{ need.titulo }}</span>
+                  <span class="badge bg-primary">Activa</span>
+                </div>
+                <span class="badge bg-light text-dark border">{{
+                  need.categoria
+                }}</span>
+              </div>
+              <a
+                [routerLink]="['/needs', need.id]"
+                routerLinkActive="router-link-active"
+                class="btn btn-outline-secondary btn-sm"
+              >
+                <i class="bi bi-eye me-2"></i>
+                Ver Detalles
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="mb-3">{{ need.descripcion }}</p>
+            <div class="row g-3 text-sm">
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-currency-dollar text-success"></i>
+                <span class="fw-medium">{{ need.presupuesto }}</span>
+              </div>
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-clock text-primary"></i>
+                <span>{{ need.fechaLimite }}</span>
+              </div>
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-people text-purple"></i>
+                <span>12 propuestas</span>
+              </div>
+              <div class="col-md-3 text-muted">{{ need.fechaCreacion }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }@else {
+
+    <div class="card mt-5">
+      <div class="card-body text-center py-5">
+        <i class="bi bi-file-earmark-text fs-1 text-muted mb-3"></i>
+        <h3 class="mb-2">No hay necesidades publicadas</h3>
+        <p class="text-muted mb-4">
+          Comienza publicando tu primera necesidad de IA para conectar con
+          desarrolladores especializados.
+        </p>
+        <a href="/needs/create" class="btn btn-primary">
+          <i class="bi bi-plus-lg me-2"></i>
+          Publicar Primera Necesidad
+        </a>
+      </div>
+    </div>
+    }
   </div>
-  
-</div>
 </app-main-layout>
