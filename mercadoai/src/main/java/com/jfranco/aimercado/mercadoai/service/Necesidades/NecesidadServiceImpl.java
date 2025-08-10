@@ -1,12 +1,12 @@
 
-package com.jfranco.aimercado.mercadoai.service;
+package com.jfranco.aimercado.mercadoai.service.Necesidades;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jfranco.aimercado.mercadoai.dto.NecesidadDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
 import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
@@ -56,7 +56,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
         necesidad.setDescripcion(necesidadDTO.getDescripcion());
         necesidad.setCategoria(necesidadDTO.getCategoria());
         necesidad.setPresupuesto(necesidadDTO.getPresupuesto());
-        necesidad.setCompañia(compania);
+        necesidad.setCompania(compania);
         necesidad.setFechaLimite(necesidadDTO.getFechaLimite());
         necesidad.setSkillsRequired(habilidades);
         necesidad.setRequirements(necesidadDTO.getRequirements());
@@ -79,7 +79,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
         necesidad.setDescripcion(dto.getDescripcion());
         necesidad.setCategoria(dto.getCategoria());
         necesidad.setPresupuesto(dto.getPresupuesto());
-        necesidad.setCompañia(compania);
+        necesidad.setCompania(compania);
         necesidad.setFechaLimite(dto.getFechaLimite());
         necesidad.setSkillsRequired(habilidades);
         necesidad.setRequirements(dto.getRequirements());

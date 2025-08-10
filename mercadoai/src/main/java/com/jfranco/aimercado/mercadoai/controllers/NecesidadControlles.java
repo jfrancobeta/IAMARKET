@@ -3,9 +3,9 @@ package com.jfranco.aimercado.mercadoai.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jfranco.aimercado.mercadoai.dto.NecesidadDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
-import com.jfranco.aimercado.mercadoai.service.INecesidadesService;
+import com.jfranco.aimercado.mercadoai.service.Necesidades.INecesidadesService;
 
 import java.util.Optional;
 

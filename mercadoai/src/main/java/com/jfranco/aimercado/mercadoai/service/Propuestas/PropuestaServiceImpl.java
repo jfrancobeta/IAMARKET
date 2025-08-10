@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.service;
+package com.jfranco.aimercado.mercadoai.service.Propuestas;
 
 import java.util.List;
 

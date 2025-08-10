@@ -1,6 +1,6 @@
 <app-main-layout>
 <div class="container py-4">
-  <a href="/needs" class="btn btn-outline-secondary btn-sm mb-4">
+  <a [routerLink]="['/needs']" class="btn btn-outline-secondary btn-sm mb-4">
     <i class="bi bi-arrow-left me-2"></i>
     Volver a Necesidades
   </a>
@@ -13,22 +13,26 @@
           <div class="d-flex justify-content-between align-items-start">
             <div>
               <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-primary">Activa</span>
-                <span class="badge bg-light text-dark border">Machine Learning</span>
+                <span class="badge bg-primary">{{ need?.estado?.nombre }}</span>
+                <span class="badge bg-light text-dark border">{{ need?.categoria}}</span>
               </div>
-              <h2 class="fw-bold fs-4 mb-1">Sistema de Análisis Predictivo para Ventas</h2>
+              <h2 class="fw-bold fs-4 mb-1">{{ need?.titulo }}</h2>
               <div class="d-flex gap-4 text-muted small">
-                <span><i class="bi bi-calendar me-1"></i>Publicado el 15/01/2024</span>
+                <span><i class="bi bi-calendar me-1"></i>{{ need?.fechaCreacion}}</span>
                 <span><i class="bi bi-people me-1"></i>12 propuestas</span>
               </div>
             </div>
             <div class="d-flex gap-2">
-              <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-pencil me-2"></i>Editar</button>
-              <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash me-2"></i>Eliminar</button>
-              <a [routerLink]="['/needs' ,1, 'send-proposal']" class="btn btn-primary d-flex align-items-center">
-                <i class="bi bi-send me-2"></i>
-                Enviar Propuesta
-              </a>
+              @if (isOwner) {
+                <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-pencil me-2"></i>Editar</button>
+                <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash me-2"></i>Eliminar</button>
+              }
+              @if (roles.includes('ROLE_ADMIN') || roles.includes('ROLE_DEVELOPER')) {
+                <a [routerLink]="['/needs' ,1, 'send-proposal']" class="btn btn-primary d-flex align-items-center">
+                  <i class="bi bi-send me-2"></i>
+                  Enviar Propuesta
+                </a>
+              }
                           
             </div>
           </div>
@@ -36,21 +40,21 @@
         <div class="card-body">
           <h5 class="fw-semibold mb-2">Descripción del Proyecto</h5>
           <p class="text-muted mb-4">
-            Necesitamos desarrollar un sistema que pueda predecir las ventas futuras basándose en datos históricos y tendencias del mercado. El sistema debe ser capaz de procesar grandes volúmenes de datos y proporcionar predicciones precisas que ayuden a nuestro equipo de ventas a tomar decisiones informadas.
+            {{ need?.descripcion }}
           </p>
           <hr>
           <div class="row g-4 mb-4">
             <div class="col-md-4 d-flex align-items-center gap-2">
               <i class="bi bi-currency-dollar text-success fs-5"></i>
               <div>
-                <div class="fw-medium">$5,000 - $8,000</div>
+                <div class="fw-medium">{{ need?.presupuesto }}</div>
                 <div class="text-muted small">Presupuesto</div>
               </div>
             </div>
             <div class="col-md-4 d-flex align-items-center gap-2">
               <i class="bi bi-clock text-primary fs-5"></i>
               <div>
-                <div class="fw-medium">6 semanas</div>
+                <div class="fw-medium">{{need?.fechaLimite}}</div>
                 <div class="text-muted small">Plazo</div>
               </div>
             </div>
@@ -65,19 +69,17 @@
           <hr>
           <h5 class="fw-semibold mb-2">Habilidades Requeridas</h5>
           <div class="d-flex flex-wrap gap-2 mb-4">
-            <span class="badge bg-secondary">Python</span>
-            <span class="badge bg-secondary">TensorFlow</span>
-            <span class="badge bg-secondary">Scikit-learn</span>
-            <span class="badge bg-secondary">Pandas</span>
-            <span class="badge bg-secondary">AWS</span>
+            @for (habilidad of need?.skillsRequired; track $index) {
+              <span class="badge bg-secondary">{{ habilidad.nombre }}</span>
+            }
           </div>
           <h5 class="fw-semibold mb-2">Requisitos Específicos</h5>
           <p class="text-muted mb-4">
-            El sistema debe integrarse con nuestro CRM existente (Salesforce) y ser capaz de manejar datos en tiempo real. Necesitamos una interfaz web simple para visualizar las predicciones.
+            {{ need?.requirements }}
           </p>
           <h5 class="fw-semibold mb-2">Entregables</h5>
           <p class="text-muted mb-4">
-            Código fuente completo, modelo entrenado, documentación técnica, guía de usuario y 3 meses de soporte post-entrega.
+            {{ need?.expectedDeliverables }}
           </p>
         </div>
       </div>
@@ -168,9 +170,9 @@
         </div>
         <div class="card-body">
           <div class="d-flex align-items-center gap-3 mb-3">
-            <img src="/placeholder.svg?height=40&width=40" alt="TechCorp Solutions" class="rounded-circle" width="40" height="40">
+            <img src="" alt="TechCorp Solutions" class="rounded-circle" width="40" height="40">
             <div>
-              <h6 class="fw-semibold mb-0">TechCorp Solutions</h6>
+              <h6 class="fw-semibold mb-0">{{need?.compania?.perfilCompania?.nombreCompania}}</h6>
               <div class="d-flex align-items-center gap-2 text-muted small">
                 <i class="bi bi-star-fill text-warning"></i>
                 <span>4.8</span>

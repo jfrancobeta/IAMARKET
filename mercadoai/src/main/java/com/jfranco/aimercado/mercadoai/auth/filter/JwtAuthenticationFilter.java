@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
+import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -32,11 +33,16 @@ import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.CONTENT_TYPE;;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
-    @Autowired
+
     private AuthenticationManager authenticationManager;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    private UsuarioRepository usuarioRepository;
+
+    public JwtAuthenticationFilter(
+        AuthenticationManager authenticationManager,
+        UsuarioRepository usuarioRepository) {
         this.authenticationManager = authenticationManager;
+        this.usuarioRepository = usuarioRepository;
     }
 
 
@@ -66,6 +72,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 User user = (User) authResult.getPrincipal();
 
                 String username = user.getUsername();
+
+                Usuario usuario = usuarioRepository.findByUsername(username).get();
+
                 Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
 
                 boolean isAdmin = roles.stream()
@@ -75,6 +84,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .add("authorities",new ObjectMapper().writeValueAsString(roles))
                 .add("username", username)
                 .add("isAdmin",isAdmin)
+                .add("usuario", usuario.getId())
                 .build();
 
                 String jwt = Jwts.builder()

@@ -9,8 +9,6 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
-import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
-import com.jfranco.aimercado.mercadoai.model.PerfilDesarrollador;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,11 +19,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-    // ...existing code...
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +40,7 @@ public class Usuario {
         inverseJoinColumns = @JoinColumn(name="role_id"),
         uniqueConstraints = {@UniqueConstraint(columnNames={"user_id","role_id"})}
     )
+    @JsonIgnoreProperties({"usuarios"})
     private List<Role> roles;
 
     
@@ -52,9 +51,11 @@ public class Usuario {
 
     // Relación opcional: solo uno de estos se usará según userType
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    @JsonIgnoreProperties("usuario")
     private PerfilCompania perfilCompania;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    @JsonIgnoreProperties("usuario")
     private PerfilDesarrollador perfilDesarrollador;
 
     

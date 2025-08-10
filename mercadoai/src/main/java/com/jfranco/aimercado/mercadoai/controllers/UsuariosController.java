@@ -7,11 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jfranco.aimercado.mercadoai.dto.RegistroRequest;
-import com.jfranco.aimercado.mercadoai.dto.ResetCodeRequest;
-import com.jfranco.aimercado.mercadoai.dto.ResetPasswordRequest;
-import com.jfranco.aimercado.mercadoai.dto.VerifyCodeRequest;
-import com.jfranco.aimercado.mercadoai.service.IUsuarioService;
+import com.jfranco.aimercado.mercadoai.dto.Auth.RegistroRequest;
+import com.jfranco.aimercado.mercadoai.dto.Auth.ResetCodeRequest;
+import com.jfranco.aimercado.mercadoai.dto.Auth.ResetPasswordRequest;
+import com.jfranco.aimercado.mercadoai.dto.Auth.VerifyCodeRequest;
+import com.jfranco.aimercado.mercadoai.service.Usuarios.IUsuarioService;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;

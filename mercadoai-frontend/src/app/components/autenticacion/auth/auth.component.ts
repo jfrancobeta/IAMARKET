@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from '../../../models/User';
+import { Usuario } from '../../../models/Usuario';
 import { SharingDataService } from '../../../services/sharing-data.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
@@ -9,15 +9,15 @@ import { MainLayoutComponent } from "../../layout/main-layout/main-layout.compon
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [FormsModule, RouterModule, MainLayoutComponent],
+  imports: [FormsModule, RouterModule],
   templateUrl: './auth.component.html'
 })
 export class AuthComponent {
 
-  user: User;
+  user: Usuario;
 
   constructor(private data: SharingDataService ){
-    this.user = new User();
+    this.user = new Usuario();
   }
 
   onSubmit(){

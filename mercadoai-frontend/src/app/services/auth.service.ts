@@ -15,7 +15,8 @@ export class AuthService {
   private _user: any = {
     isAuth: false,
     isAdmin: false,
-    user: undefined
+    user: undefined,
+    usuario : undefined
     
   }
   constructor(private http: HttpClient) { }
@@ -28,7 +29,7 @@ export class AuthService {
 
   set user(user: any){
     this._user = user;
-    sessionStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('login', JSON.stringify(user));
   }
 
   get user(){
@@ -79,6 +80,21 @@ export class AuthService {
     }
     sessionStorage.removeItem('login')
     sessionStorage.removeItem('token')
+  }
+
+  getRoles(){
+    const payload = this.getPayload(this.token);
+    if (payload?.authorities) {
+      try {
+        const authoritiesArray = JSON.parse(payload.authorities);
+        if (Array.isArray(authoritiesArray)) {
+          return authoritiesArray.map((role: any) => role.authority);
+        }
+      } catch (e) {
+        console.error("Error parsing authorities:", e);
+      }
+    }
+    return [];
   }
 
   

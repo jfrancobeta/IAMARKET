@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.dto;
+package com.jfranco.aimercado.mercadoai.dto.Need;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,6 +15,8 @@ public class NecesidadDTO {
     private String requirements;
     private List<String> expectedDeliverables;
     private Long estadoId; 
+
+    
 
     public String getTitulo() {
         return titulo;

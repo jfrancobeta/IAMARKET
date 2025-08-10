@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.dto;
+package com.jfranco.aimercado.mercadoai.dto.Auth;
 
 public class VerifyCodeRequest {
     private String email;
