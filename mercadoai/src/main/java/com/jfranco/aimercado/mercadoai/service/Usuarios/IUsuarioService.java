@@ -1,8 +1,8 @@
-package com.jfranco.aimercado.mercadoai.service;
+package com.jfranco.aimercado.mercadoai.service.Usuarios;
 
 import java.util.List;
 
-import com.jfranco.aimercado.mercadoai.dto.RegistroRequest;
+import com.jfranco.aimercado.mercadoai.dto.Auth.RegistroRequest;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
 
 public interface IUsuarioService {

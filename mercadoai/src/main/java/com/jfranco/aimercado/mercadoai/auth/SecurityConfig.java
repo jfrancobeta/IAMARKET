@@ -22,12 +22,16 @@ import org.springframework.web.filter.CorsFilter;
 
 import com.jfranco.aimercado.mercadoai.auth.filter.JwtAuthenticationFilter;
 import com.jfranco.aimercado.mercadoai.auth.filter.JwtValidationFilter;
+import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
 
 @Configuration
 public class SecurityConfig {
 
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
 
     @Bean
@@ -54,7 +58,7 @@ public class SecurityConfig {
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) // Configurar CORS
         .addFilter(new JwtValidationFilter(authenticationManager()))
-        .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+        .addFilter(new JwtAuthenticationFilter(authenticationManager(),usuarioRepository))
         .csrf(cr -> cr.disable()) // Deshabilitar CSRF para simplificar el desarrollo
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configurar la política de sesión
         .build(); // Permitir acceso a todas las rutas

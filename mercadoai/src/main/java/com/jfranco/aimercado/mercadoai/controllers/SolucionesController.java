@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jfranco.aimercado.mercadoai.model.Solucion;
-import com.jfranco.aimercado.mercadoai.service.ISolucionesService;
+import com.jfranco.aimercado.mercadoai.service.Soluciones.ISolucionesService;
 
 import java.util.Optional;
 //probando una cosa cambio en el main

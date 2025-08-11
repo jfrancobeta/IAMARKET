@@ -1,8 +1,8 @@
-package com.jfranco.aimercado.mercadoai.service;
+package com.jfranco.aimercado.mercadoai.service.Necesidades;
 
 import java.util.List;
 
-import com.jfranco.aimercado.mercadoai.dto.NecesidadDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 
 public interface INecesidadesService {

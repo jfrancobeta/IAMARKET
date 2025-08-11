@@ -35,13 +35,14 @@ export class AppComponent {
           const login = {
             user,
             isAuth: true ,
-            isAdmin: payload.isAdmin
+            isAdmin: payload.isAdmin,
+            usuario: payload.usuario 
           }
           this.serviceAuth.token = token  
           this.serviceAuth.user = login;
 
           this.router.navigate(['/dashboard']);
-          console.log(token)
+          console.log("Login exitoso", login);
           Swal.fire("Login exitoso", `Bienvenido ${user.username}`, "success");
         },
         error: (error) => {

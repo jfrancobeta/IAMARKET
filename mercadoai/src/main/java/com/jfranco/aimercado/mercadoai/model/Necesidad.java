@@ -28,7 +28,7 @@ public class Necesidad {
     private BigDecimal presupuesto;
     @ManyToOne
     @JoinColumn(name = "compania_id")
-    private Usuario compañia;
+    private Usuario compania;
     private LocalDate fechaLimite;
     @ManyToMany
     @JoinTable(
@@ -66,12 +66,12 @@ public class Necesidad {
         this.id = id;
     }
 
-    public Usuario getCompañia() {
-        return compañia;
+    public Usuario getCompania() {
+        return compania;
     }
 
-    public void setCompañia(Usuario compañia) {
-        this.compañia = compañia;
+    public void setCompania(Usuario compania) {
+        this.compania = compania;
     }
 
     public String getTitulo() {

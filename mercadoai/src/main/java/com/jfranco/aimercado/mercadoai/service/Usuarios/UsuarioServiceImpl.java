@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.service;
+package com.jfranco.aimercado.mercadoai.service.Usuarios;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.jfranco.aimercado.mercadoai.dto.RegistroRequest;
+import com.jfranco.aimercado.mercadoai.dto.Auth.RegistroRequest;
 import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
 import com.jfranco.aimercado.mercadoai.model.PerfilDesarrollador;
 import com.jfranco.aimercado.mercadoai.model.Role;
