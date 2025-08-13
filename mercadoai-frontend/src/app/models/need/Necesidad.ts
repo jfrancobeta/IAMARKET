@@ -1,6 +1,6 @@
-import { Estado } from "./Estado";
-import { Habilidad } from "./Habilidad";
-import { Usuario } from "./Usuario";
+import { Estado } from "../Estado";
+import { Habilidad } from "../Habilidad";
+import { Usuario } from "../Usuario";
 
 export class Necesidad {
   id?: number;

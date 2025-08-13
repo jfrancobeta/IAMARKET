@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MainLayoutComponent } from "../../layout/main-layout/main-layout.component";
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NeedService } from '../../../services/need.service';
-import { Necesidad } from '../../../models/Necesidad';
+import { Necesidad } from '../../../models/need/Necesidad';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth.service';
 

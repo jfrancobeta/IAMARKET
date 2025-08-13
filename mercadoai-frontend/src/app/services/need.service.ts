@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Necesidad } from '../models/Necesidad';
-import { NecesidadDTO } from '../models/NecesidadDTO';
+import { Necesidad } from '../models/need/Necesidad';
+import { NecesidadDTO } from '../models/need/NecesidadDTO';
 import { environment } from '../environments/environment';
 
 @Injectable({

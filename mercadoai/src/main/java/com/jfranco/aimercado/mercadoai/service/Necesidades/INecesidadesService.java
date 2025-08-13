@@ -2,19 +2,21 @@ package com.jfranco.aimercado.mercadoai.service.Necesidades;
 
 import java.util.List;
 
-import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
-import com.jfranco.aimercado.mercadoai.model.Necesidad;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadResponseDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
 
 public interface INecesidadesService {
 
-    List<Necesidad> getAllNecesidades();
+    List<NecesidadSummaryDTO> getAllNecesidades();
 
-    Necesidad getNecesidadById(Long id);
+    NecesidadResponseDTO getNecesidadById(Long id);
 
-    Necesidad saveNecesidad(NecesidadDTO necesidad);
+    NecesidadResponseDTO saveNecesidad(NecesidadCreateDTO necesidad);
 
-    Necesidad updateNecesidad(Long id, NecesidadDTO necesidadDTO);
-    
-    void deleteNecesidad(Long id);
-    
+    NecesidadResponseDTO updateNecesidad(Long id, NecesidadUpdateDTO necesidadDTO);
+
+    boolean deleteNecesidad(Long id);
+
 }
