@@ -12,10 +12,12 @@ public class NecesidadSummaryDTO {
     private Long id;
     private String titulo;
     private String categoria;
+    private String descripcion;
     private BigDecimal presupuesto;
     private String compañiaNombre;
     private LocalDate fechaLimite;
     private String estadoNombre;
+    private Integer propuestas;
     private LocalDate fechaCreacion;
 
     // Constructors
@@ -23,7 +25,7 @@ public class NecesidadSummaryDTO {
 
     public NecesidadSummaryDTO(Long id, String titulo, String categoria, BigDecimal presupuesto,
                               String compañiaNombre, LocalDate fechaLimite, String estadoNombre,
-                              LocalDate fechaCreacion) {
+                              LocalDate fechaCreacion, Integer propuestas, String descripcion) {
         this.id = id;
         this.titulo = titulo;
         this.categoria = categoria;
@@ -32,7 +34,11 @@ public class NecesidadSummaryDTO {
         this.fechaLimite = fechaLimite;
         this.estadoNombre = estadoNombre;
         this.fechaCreacion = fechaCreacion;
+        this.propuestas = propuestas;
+        this.descripcion = descripcion;
     }
+
+    
 
     // Getters y Setters
     public Long getId() {
@@ -97,5 +103,21 @@ public class NecesidadSummaryDTO {
 
     public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public Integer getPropuestas() {
+        return propuestas;
+    }
+
+    public void setPropuestas(Integer propuestas) {
+        this.propuestas = propuestas;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

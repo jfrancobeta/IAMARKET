@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Necesidad } from '../models/need/Necesidad';
 import { NecesidadDTO } from '../models/need/NecesidadDTO';
 import { environment } from '../environments/environment';
+import { NecesidadSummaryDTO } from '../models/need/NecesidadSummaryDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class NeedService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Necesidad[]> {
-    return this.http.get<Necesidad[]>(`${this.url}/`);
+  getAll(): Observable<NecesidadSummaryDTO[]> {
+    return this.http.get<NecesidadSummaryDTO[]>(`${this.url}/`);
   }
 
   getById(id: number): Observable<Necesidad> {

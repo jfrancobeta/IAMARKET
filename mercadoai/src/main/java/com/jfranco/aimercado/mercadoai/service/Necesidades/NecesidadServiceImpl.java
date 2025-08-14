@@ -16,6 +16,7 @@ import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.repository.EstadoRepository;
 import com.jfranco.aimercado.mercadoai.repository.HabilidadesRepository;
 import com.jfranco.aimercado.mercadoai.repository.NecesidadesRepository;
+import com.jfranco.aimercado.mercadoai.repository.PropuestaRepository;
 import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
 
 @Service
@@ -33,19 +34,28 @@ public class NecesidadServiceImpl implements INecesidadesService {
     @Autowired
     private HabilidadesRepository habilidadesRepository;
 
+    @Autowired
+    private PropuestaRepository propuestaRepository;
+
     @Override
     public List<NecesidadSummaryDTO> getAllNecesidades() {
-        return necesidadesRepostitory.findAll()
-                .stream()
-                .map(necesidad -> new NecesidadSummaryDTO(
+        List<Necesidad> necesidades = necesidadesRepostitory.findAll();
+       
+        return necesidades.stream()
+                .map(necesidad ->{ 
+                    Integer propuestas = propuestaRepository.countByNecesidadId(necesidad.getId());
+                    return new NecesidadSummaryDTO(
                         necesidad.getId(),
                         necesidad.getTitulo(),
                         necesidad.getCategoria(),
                         necesidad.getPresupuesto(),
-                        necesidad.getCompania().getNombre(), // Usar nombre de la compañía
+                        necesidad.getCompania().getNombre(), 
                         necesidad.getFechaLimite(),
-                        necesidad.getEstado().getNombre(), // Usar nombre del estado
-                        necesidad.getFechaCreacion()))
+                        necesidad.getEstado().getNombre(), 
+                        necesidad.getFechaCreacion(),
+                        propuestas,
+                        necesidad.getDescripcion());
+                })
                 .toList();
     }
 
