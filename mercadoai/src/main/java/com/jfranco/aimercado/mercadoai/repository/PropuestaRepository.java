@@ -14,4 +14,6 @@ public interface PropuestaRepository extends JpaRepository<Propuesta, Long> {
     List<Propuesta> findByNecesidad(Necesidad necesidad);
 
     List<Propuesta> findByDesarrollador(Usuario desarrollador);
+
+    Integer countByNecesidadId(Long necesidadId);
 }

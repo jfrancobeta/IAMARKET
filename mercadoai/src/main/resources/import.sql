@@ -1,4 +1,3 @@
-
 -- Usuario 100% admin (sin perfil)
 INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado) VALUES (1, 'SuperAdmin', 'admin@admin.com', 'admin', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', NULL, 'Administrador total', '2025-07-30', '2025-07-30', true);
 
@@ -116,6 +115,15 @@ INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compan
 INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (8, 'Integración de pagos', 'Agregar pagos con Stripe', 'Backend', 1100, 4, '2025-08-18', 'Soporte para tarjetas y transferencias', 2, '2025-07-30', '2025-07-30');
 INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (9, 'Dashboard React', 'Dashboard administrativo', 'Frontend', 2000, 5, '2025-09-02', 'Gráficas y filtros', 1, '2025-07-30', '2025-07-30');
 INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (10, 'API para móviles', 'Backend para app móvil', 'Backend', 2200, 11, '2025-09-15', 'Autenticación y notificaciones', 0, '2025-07-30', '2025-07-30');
+
+-- Propuestas para las primeras 5 necesidades
+INSERT INTO propuestas (id, necesidad_id, desarrollador_id, precio, entrega, descripcion, estado_id, fecha_creacion)VALUES (1, 1, 2, 2300, '2025-08-10', 'Puedo entregar la API con autenticación JWT y documentación.', 0, '2025-08-01');
+INSERT INTO propuestas (id, necesidad_id, desarrollador_id, precio, entrega, descripcion, estado_id, fecha_creacion)VALUES (2, 1, 3, 2400, '2025-08-12', 'Incluyo pruebas unitarias y despliegue en Heroku.', 1, '2025-08-02');
+INSERT INTO propuestas (id, necesidad_id, desarrollador_id, precio, entrega, descripcion, estado_id, fecha_creacion)VALUES (3, 2, 6, 1700, '2025-08-20', 'Frontend responsive y login con JWT.', 0, '2025-08-03');
+INSERT INTO propuestas (id, necesidad_id, desarrollador_id, precio, entrega, descripcion, estado_id, fecha_creacion)VALUES (4, 3, 7, 1150, '2025-08-15', 'Contenerización completa y documentación.', 2, '2025-08-04');
+INSERT INTO propuestas (id, necesidad_id, desarrollador_id, precio, entrega, descripcion, estado_id, fecha_creacion)VALUES (5, 4, 8, 1450, '2025-08-22', 'Implemento MongoDB y alta disponibilidad.', 1, '2025-08-05');
+INSERT INTO propuestas (id, necesidad_id, desarrollador_id, precio, entrega, descripcion, estado_id, fecha_creacion)VALUES (6, 5, 9, 2900, '2025-09-05', 'App Flutter con push notifications.', 0, '2025-08-06');
+INSERT INTO propuestas (id, necesidad_id, desarrollador_id, precio, entrega, descripcion, estado_id, fecha_creacion)VALUES (6, 5, 9, 2900, '2025-09-05', 'App Flutter con push notifications.', 0, '2025-08-06');
 
 -- Relación necesidades-habilidades (más ejemplos)
 INSERT INTO necesidad_habilidad (necesidad_id, habilidad_id) VALUES (1, 2);
