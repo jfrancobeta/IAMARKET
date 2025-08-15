@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.model.Usuario;
+
 /**
  * DTO para respuestas de necesidades
  * Incluye información completa para mostrar al cliente
@@ -15,7 +17,7 @@ public class NecesidadResponseDTO {
     private String descripcion;
     private String categoria;
     private BigDecimal presupuesto;
-    private String compañiaNombre; // Nombre de la compañía en lugar del ID
+    private Usuario compania; // Nombre de la compañía en lugar del ID
     private LocalDate fechaLimite;
     private List<String> skillsRequired; // Nombres de habilidades en lugar de IDs
     private String requirements;
@@ -28,7 +30,7 @@ public class NecesidadResponseDTO {
     public NecesidadResponseDTO() {}
 
     public NecesidadResponseDTO(Long id, String titulo, String descripcion, String categoria, 
-                               BigDecimal presupuesto, String compañiaNombre, LocalDate fechaLimite,
+                               BigDecimal presupuesto, Usuario compania, LocalDate fechaLimite,
                                List<String> skillsRequired, String requirements, 
                                List<String> expectedDeliverables, String estadoNombre,
                                LocalDate fechaCreacion, LocalDate fechaActualizacion) {
@@ -37,7 +39,7 @@ public class NecesidadResponseDTO {
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.presupuesto = presupuesto;
-        this.compañiaNombre = compañiaNombre;
+        this.compania = compania;
         this.fechaLimite = fechaLimite;
         this.skillsRequired = skillsRequired;
         this.requirements = requirements;
@@ -88,12 +90,12 @@ public class NecesidadResponseDTO {
         this.presupuesto = presupuesto;
     }
 
-    public String getCompañiaNombre() {
-        return compañiaNombre;
+    public Usuario getCompania() {
+        return compania;
     }
 
-    public void setCompañiaNombre(String compañiaNombre) {
-        this.compañiaNombre = compañiaNombre;
+    public void setCompania(Usuario compania) {
+        this.compania = compania;
     }
 
     public LocalDate getFechaLimite() {

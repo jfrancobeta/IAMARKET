@@ -13,7 +13,7 @@
           <div class="d-flex justify-content-between align-items-start">
             <div>
               <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-primary">{{ need?.estado?.nombre }}</span>
+                <span class="badge bg-primary">{{ need?.estadoNombre }}</span>
                 <span class="badge bg-light text-dark border">{{ need?.categoria}}</span>
               </div>
               <h2 class="fw-bold fs-4 mb-1">{{ need?.titulo }}</h2>
@@ -70,7 +70,7 @@
           <h5 class="fw-semibold mb-2">Habilidades Requeridas</h5>
           <div class="d-flex flex-wrap gap-2 mb-4">
             @for (habilidad of need?.skillsRequired; track $index) {
-              <span class="badge bg-secondary">{{ habilidad.nombre }}</span>
+              <span class="badge bg-secondary">{{ habilidad }}</span>
             }
           </div>
           <h5 class="fw-semibold mb-2">Requisitos Específicos</h5>

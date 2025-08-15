@@ -68,7 +68,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
                         necesidad.getDescripcion(),
                         necesidad.getCategoria(),
                         necesidad.getPresupuesto(),
-                        necesidad.getCompania().getNombre(),
+                        necesidad.getCompania(),
                         necesidad.getFechaLimite(),
                         necesidad.getSkillsRequired().stream()
                                 .map(Habilidad::getNombre)
@@ -111,7 +111,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
                 saved.getDescripcion(),
                 saved.getCategoria(),
                 saved.getPresupuesto(),
-                saved.getCompania().getNombre(),
+                saved.getCompania(),
                 saved.getFechaLimite(),
                 saved.getSkillsRequired().stream().map(Habilidad::getNombre).toList(),
                 saved.getRequirements(),
@@ -162,7 +162,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
                 updated.getDescripcion(),
                 updated.getCategoria(),
                 updated.getPresupuesto(),
-                updated.getCompania().getNombre(),
+                updated.getCompania(),
                 updated.getFechaLimite(),
                 updated.getSkillsRequired().stream().map(Habilidad::getNombre).toList(),
                 updated.getRequirements(),

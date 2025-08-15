@@ -5,6 +5,7 @@ import { Necesidad } from '../models/need/Necesidad';
 import { NecesidadDTO } from '../models/need/NecesidadDTO';
 import { environment } from '../environments/environment';
 import { NecesidadSummaryDTO } from '../models/need/NecesidadSummaryDTO';
+import { NecesidadResponseDTO } from '../models/need/NecesidadResponseDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class NeedService {
     return this.http.get<NecesidadSummaryDTO[]>(`${this.url}/`);
   }
 
-  getById(id: number): Observable<Necesidad> {
-    return this.http.get<Necesidad>(`${this.url}/${id}`);
+  getById(id: number): Observable<NecesidadResponseDTO> {
+    return this.http.get<NecesidadResponseDTO>(`${this.url}/${id}`);
   }
 
   create(necesidad: NecesidadDTO): Observable<Necesidad> {
