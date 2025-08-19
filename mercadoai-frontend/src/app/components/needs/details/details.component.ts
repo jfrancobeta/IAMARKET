@@ -5,6 +5,7 @@ import { NeedService } from '../../../services/need.service';
 import { Necesidad } from '../../../models/need/Necesidad';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth.service';
+import { NecesidadResponseDTO } from '../../../models/need/NecesidadResponseDTO';
 
 @Component({
   selector: 'app-details',
@@ -15,7 +16,7 @@ import { AuthService } from '../../../services/auth.service';
 export class DetailsComponent implements OnInit {
 
   id: string | null = null;
-  need: Necesidad | null = null;
+  need: NecesidadResponseDTO | null = null;
   isOwner: boolean = false;
   roles: string[] = [];
   
@@ -31,6 +32,7 @@ export class DetailsComponent implements OnInit {
       {
         next: (data) => {
           this.need = data;
+          console.log(this.need);
           this.isOwner = this.need.compania.id === this.authService.user.usuario;
         },
         error: (error) => {
