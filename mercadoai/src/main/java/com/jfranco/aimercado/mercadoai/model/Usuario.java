@@ -42,12 +42,12 @@ public class Usuario {
     )
     @JsonIgnoreProperties({"usuarios"})
     private List<Role> roles;
-
-    
     private String descripcion;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaActualizacion;
     private Boolean estado;
+
+    private String foto;
 
     // Relación opcional: solo uno de estos se usará según userType
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
@@ -149,6 +149,12 @@ public class Usuario {
     }
     public void setPerfilDesarrollador(PerfilDesarrollador perfilDesarrollador) {
         this.perfilDesarrollador = perfilDesarrollador;
+    }
+    public String getFoto() {
+        return foto;
+    }
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
 

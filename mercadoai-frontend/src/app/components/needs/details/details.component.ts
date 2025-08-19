@@ -32,6 +32,7 @@ export class DetailsComponent implements OnInit {
       {
         next: (data) => {
           this.need = data;
+          console.log(this.need);
           this.isOwner = this.need.compania.id === this.authService.user.usuario;
         },
         error: (error) => {

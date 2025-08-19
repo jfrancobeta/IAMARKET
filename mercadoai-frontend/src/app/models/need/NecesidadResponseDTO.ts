@@ -1,3 +1,4 @@
+import { Propuesta } from "../Propuestas";
 import { Usuario } from "../Usuario";
 
 export interface NecesidadResponseDTO {
@@ -12,6 +13,7 @@ export interface NecesidadResponseDTO {
   requirements: string;
   expectedDeliverables: string[];
   estadoNombre: string;
+  propuestas: Propuesta[];
   fechaCreacion: string; 
   fechaActualizacion: string; 
 }

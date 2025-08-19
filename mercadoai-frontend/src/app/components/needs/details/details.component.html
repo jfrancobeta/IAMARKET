@@ -6,7 +6,6 @@
   </a>
 
   <div class="row g-4">
-    <!-- Main Content -->
     <div class="col-lg-8">
       <div class="card mb-4">
         <div class="card-header">
@@ -19,7 +18,7 @@
               <h2 class="fw-bold fs-4 mb-1">{{ need?.titulo }}</h2>
               <div class="d-flex gap-4 text-muted small">
                 <span><i class="bi bi-calendar me-1"></i>{{ need?.fechaCreacion}}</span>
-                <span><i class="bi bi-people me-1"></i>12 propuestas</span>
+                <span><i class="bi bi-people me-1"></i>{{ need?.propuestas?.length }} propuestas</span>
               </div>
             </div>
             <div class="d-flex gap-2">
@@ -61,7 +60,7 @@
             <div class="col-md-4 d-flex align-items-center gap-2">
               <i class="bi bi-people text-purple fs-5"></i>
               <div>
-                <div class="fw-medium">12 propuestas</div>
+                <div class="fw-medium">{{ need?.propuestas?.length }} propuestas</div>
                 <div class="text-muted small">Recibidas</div>
               </div>
             </div>
@@ -87,18 +86,18 @@
       <!-- Propuestas -->
       <div class="card mb-4">
         <div class="card-header">
-          <h5 class="fw-bold mb-1">Propuestas Recibidas (2)</h5>
+          <h5 class="fw-bold mb-1">Propuestas Recibidas ({{need?.propuestas?.length}})</h5>
           <p class="text-muted mb-0">Revisa las propuestas de desarrolladores interesados en tu proyecto</p>
         </div>
         <div class="card-body">
-          <!-- Propuesta 1 -->
+          @for (propuesta of need?.propuestas; track $index) {
           <div class="card mb-3">
             <div class="card-body">
               <div class="d-flex justify-content-between mb-3">
                 <div class="d-flex align-items-center gap-3">
-                  <img src="/placeholder.svg?height=40&width=40" alt="Ana García" class="rounded-circle" width="40" height="40">
+                  <img src="/placeholder.svg?height=40&width=40" alt="{{propuesta.desarrollador.nombre}}" class="rounded-circle" width="40" height="40">
                   <div>
-                    <h6 class="fw-semibold mb-0">Ana García</h6>
+                    <h6 class="fw-semibold mb-0">{{propuesta.desarrollador.nombre}}</h6>
                     <div class="d-flex align-items-center gap-2 text-muted small">
                       <i class="bi bi-star-fill text-warning"></i>
                       <span>4.9</span>
@@ -108,15 +107,15 @@
                   </div>
                 </div>
                 <div class="text-end">
-                  <div class="fw-bold fs-5">$6,500</div>
-                  <div class="text-muted small">5 semanas</div>
+                  <div class="fw-bold fs-5">{{ propuesta.precio }}</div>
+                  <div class="text-muted small">{{ propuesta.entrega }}</div>
                 </div>
               </div>
               <p class="text-muted mb-3">
-                Tengo amplia experiencia desarrollando sistemas de ML para predicción de ventas. Propongo usar un enfoque híbrido con LSTM y Random Forest...
+                {{ propuesta.descripcion }}
               </p>
               <div class="d-flex justify-content-between align-items-center">
-                <span class="text-muted small">Hace 2 días</span>
+                <span class="text-muted small">{{propuesta.fechaCreacion}}</span>
                 <div class="d-flex gap-2">
                   <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
                   <button class="btn btn-primary btn-sm">Aceptar Propuesta</button>
@@ -124,39 +123,7 @@
               </div>
             </div>
           </div>
-          <!-- Propuesta 2 -->
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="d-flex justify-content-between mb-3">
-                <div class="d-flex align-items-center gap-3">
-                  <img src="/placeholder.svg?height=40&width=40" alt="Carlos Rodríguez" class="rounded-circle" width="40" height="40">
-                  <div>
-                    <h6 class="fw-semibold mb-0">Carlos Rodríguez</h6>
-                    <div class="d-flex align-items-center gap-2 text-muted small">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <span>4.7</span>
-                      <span>•</span>
-                      <span>32 proyectos</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-end">
-                  <div class="fw-bold fs-5">$7,200</div>
-                  <div class="text-muted small">6 semanas</div>
-                </div>
-              </div>
-              <p class="text-muted mb-3">
-                Mi propuesta incluye un análisis completo de los datos existentes y la implementación de múltiples algoritmos para comparar rendimiento...
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="text-muted small">Hace 1 día</span>
-                <div class="d-flex gap-2">
-                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
-                  <button class="btn btn-primary btn-sm">Aceptar Propuesta</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        }
         </div>
       </div>
     </div>

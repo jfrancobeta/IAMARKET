@@ -1,17 +1,22 @@
 package com.jfranco.aimercado.mercadoai.service.Necesidades;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadResponseDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
+import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.repository.EstadoRepository;
 import com.jfranco.aimercado.mercadoai.repository.HabilidadesRepository;
@@ -40,27 +45,41 @@ public class NecesidadServiceImpl implements INecesidadesService {
     @Override
     public List<NecesidadSummaryDTO> getAllNecesidades() {
         List<Necesidad> necesidades = necesidadesRepostitory.findAll();
-       
+
         return necesidades.stream()
-                .map(necesidad ->{ 
+                .map(necesidad -> {
                     Integer propuestas = propuestaRepository.countByNecesidadId(necesidad.getId());
                     return new NecesidadSummaryDTO(
-                        necesidad.getId(),
-                        necesidad.getTitulo(),
-                        necesidad.getCategoria(),
-                        necesidad.getPresupuesto(),
-                        necesidad.getCompania().getNombre(), 
-                        necesidad.getFechaLimite(),
-                        necesidad.getEstado().getNombre(), 
-                        necesidad.getFechaCreacion(),
-                        propuestas,
-                        necesidad.getDescripcion());
+                            necesidad.getId(),
+                            necesidad.getTitulo(),
+                            necesidad.getCategoria(),
+                            necesidad.getPresupuesto(),
+                            necesidad.getCompania().getNombre(),
+                            necesidad.getFechaLimite(),
+                            necesidad.getEstado().getNombre(),
+                            necesidad.getFechaCreacion(),
+                            propuestas,
+                            necesidad.getDescripcion());
                 })
                 .toList();
     }
 
     @Override
     public NecesidadResponseDTO getNecesidadById(Long id) {
+        List<PropuestaDTO> propuestas = propuestaRepository
+        .findByNecesidad(necesidadesRepostitory.findById(id).get())
+        .stream()
+        .map(propuesta -> new PropuestaDTO(
+                propuesta.getId(),
+                propuesta.getNecesidad().getId(),
+                new UsuarioDTO(propuesta.getDesarrollador(),12.4), // Constructor que mapea el usuario
+                propuesta.getPrecio(),
+                propuesta.getEntrega(),
+                propuesta.getDescripcion(),
+                propuesta.getEstado().getNombre(),
+                propuesta.getFechaCreacion()))
+        .toList();
+
         return necesidadesRepostitory.findById(id)
                 .map(necesidad -> new NecesidadResponseDTO(
                         necesidad.getId(),
@@ -68,7 +87,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
                         necesidad.getDescripcion(),
                         necesidad.getCategoria(),
                         necesidad.getPresupuesto(),
-                        necesidad.getCompania(),
+                        new UsuarioDTO(necesidad.getCompania(), null),
                         necesidad.getFechaLimite(),
                         necesidad.getSkillsRequired().stream()
                                 .map(Habilidad::getNombre)
@@ -76,6 +95,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
                         necesidad.getRequirements(),
                         necesidad.getExpectedDeliverables(),
                         necesidad.getEstado().getNombre(),
+                        propuestas,
                         necesidad.getFechaCreacion(),
                         necesidad.getFechaActualizacion()))
                 .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
@@ -111,12 +131,13 @@ public class NecesidadServiceImpl implements INecesidadesService {
                 saved.getDescripcion(),
                 saved.getCategoria(),
                 saved.getPresupuesto(),
-                saved.getCompania(),
+                new UsuarioDTO(saved.getCompania(), null),
                 saved.getFechaLimite(),
                 saved.getSkillsRequired().stream().map(Habilidad::getNombre).toList(),
                 saved.getRequirements(),
                 saved.getExpectedDeliverables(),
                 saved.getEstado().getNombre(),
+                Collections.emptyList(),
                 saved.getFechaCreacion(),
                 saved.getFechaActualizacion());
     }
@@ -156,18 +177,22 @@ public class NecesidadServiceImpl implements INecesidadesService {
         }
 
         Necesidad updated = necesidadesRepostitory.save(necesidad);
+        List<Propuesta> propuestas = propuestaRepository
+                .findByNecesidad(
+                        necesidadesRepostitory.findById(updated.getId()).get());
         return new NecesidadResponseDTO(
                 updated.getId(),
                 updated.getTitulo(),
                 updated.getDescripcion(),
                 updated.getCategoria(),
                 updated.getPresupuesto(),
-                updated.getCompania(),
+                new UsuarioDTO(updated.getCompania(), null),
                 updated.getFechaLimite(),
                 updated.getSkillsRequired().stream().map(Habilidad::getNombre).toList(),
                 updated.getRequirements(),
                 updated.getExpectedDeliverables(),
                 updated.getEstado().getNombre(),
+                propuestas.stream().map(p -> new PropuestaDTO(p, null)).toList(),
                 updated.getFechaCreacion(),
                 updated.getFechaActualizacion());
     }

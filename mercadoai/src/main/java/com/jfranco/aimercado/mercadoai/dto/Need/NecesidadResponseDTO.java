@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.jfranco.aimercado.mercadoai.model.Usuario;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 
 /**
  * DTO para respuestas de necesidades
@@ -17,22 +18,25 @@ public class NecesidadResponseDTO {
     private String descripcion;
     private String categoria;
     private BigDecimal presupuesto;
-    private Usuario compania; // Nombre de la compañía en lugar del ID
+    private UsuarioDTO compania;
     private LocalDate fechaLimite;
-    private List<String> skillsRequired; // Nombres de habilidades en lugar de IDs
+    private List<String> skillsRequired; 
     private String requirements;
     private List<String> expectedDeliverables;
-    private String estadoNombre; // Nombre del estado en lugar del ID
+    private String estadoNombre;
+    private List<PropuestaDTO> propuestas;
     private LocalDate fechaCreacion;
     private LocalDate fechaActualizacion;
+
 
     // Constructors
     public NecesidadResponseDTO() {}
 
     public NecesidadResponseDTO(Long id, String titulo, String descripcion, String categoria, 
-                               BigDecimal presupuesto, Usuario compania, LocalDate fechaLimite,
+                               BigDecimal presupuesto, UsuarioDTO compania, LocalDate fechaLimite,
                                List<String> skillsRequired, String requirements, 
                                List<String> expectedDeliverables, String estadoNombre,
+                               List<PropuestaDTO> propuestas,
                                LocalDate fechaCreacion, LocalDate fechaActualizacion) {
         this.id = id;
         this.titulo = titulo;
@@ -45,11 +49,11 @@ public class NecesidadResponseDTO {
         this.requirements = requirements;
         this.expectedDeliverables = expectedDeliverables;
         this.estadoNombre = estadoNombre;
+        this.propuestas = propuestas;
         this.fechaCreacion = fechaCreacion;
         this.fechaActualizacion = fechaActualizacion;
     }
-
-    // Getters y Setters
+    
     public Long getId() {
         return id;
     }
@@ -90,11 +94,11 @@ public class NecesidadResponseDTO {
         this.presupuesto = presupuesto;
     }
 
-    public Usuario getCompania() {
+    public UsuarioDTO getCompania() {
         return compania;
     }
 
-    public void setCompania(Usuario compania) {
+    public void setCompania(UsuarioDTO compania) {
         this.compania = compania;
     }
 
@@ -152,5 +156,13 @@ public class NecesidadResponseDTO {
 
     public void setFechaActualizacion(LocalDate fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public List<PropuestaDTO> getPropuestas() {
+        return propuestas;
+    }
+
+    public void setPropuestas(List<PropuestaDTO> propuestas) {
+        this.propuestas = propuestas;
     }
 }
