@@ -5,6 +5,7 @@ export class Usuario {
   password?: string;
   userType!: number;
   nombre!: string;
+  foto!: string;
   roles?: string[];
   descripcion?: string;
   fechaCreacion?: string;

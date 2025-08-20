@@ -20,7 +20,6 @@ public class NecesidadSummaryDTO {
     private Integer propuestas;
     private LocalDate fechaCreacion;
 
-    // Constructors
     public NecesidadSummaryDTO() {}
 
     public NecesidadSummaryDTO(Long id, String titulo, String categoria, BigDecimal presupuesto,

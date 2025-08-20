@@ -5,10 +5,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * DTO para actualizar una necesidad existente
- * Todos los campos son opcionales para permitir actualizaciones parciales
- */
 public class NecesidadUpdateDTO {
     
     private String titulo;
