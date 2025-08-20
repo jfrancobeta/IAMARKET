@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadResponseDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
@@ -23,6 +23,7 @@ import com.jfranco.aimercado.mercadoai.repository.HabilidadesRepository;
 import com.jfranco.aimercado.mercadoai.repository.NecesidadesRepository;
 import com.jfranco.aimercado.mercadoai.repository.PropuestaRepository;
 import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.service.Calificacion.ICalificacionService;
 
 @Service
 public class NecesidadServiceImpl implements INecesidadesService {
@@ -41,6 +42,9 @@ public class NecesidadServiceImpl implements INecesidadesService {
 
     @Autowired
     private PropuestaRepository propuestaRepository;
+
+    @Autowired
+    private ICalificacionService calificacionService;
 
     @Override
     public List<NecesidadSummaryDTO> getAllNecesidades() {
@@ -65,29 +69,45 @@ public class NecesidadServiceImpl implements INecesidadesService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public NecesidadResponseDTO getNecesidadById(Long id) {
         List<PropuestaDTO> propuestas = propuestaRepository
         .findByNecesidad(necesidadesRepostitory.findById(id).get())
         .stream()
-        .map(propuesta -> new PropuestaDTO(
+        .map(propuesta -> {
+            Usuario desarrollador = propuesta.getDesarrollador();
+            // Forzar la carga de los perfiles lazy
+            if (desarrollador.getUserType() == 1 && desarrollador.getPerfilDesarrollador() != null) {
+                desarrollador.getPerfilDesarrollador().getHabilidades(); // Toca cualquier campo para forzar la carga
+            }
+            Double calificacionPromedio = calificacionService.getPromedioCalificacionByUsuarioId(desarrollador.getId());
+            return new PropuestaDTO(
                 propuesta.getId(),
                 propuesta.getNecesidad().getId(),
-                new UsuarioDTO(propuesta.getDesarrollador(),12.4), // Constructor que mapea el usuario
+                new UsuarioDTO(desarrollador, calificacionPromedio), // Constructor que mapea el usuario con calificación real
                 propuesta.getPrecio(),
                 propuesta.getEntrega(),
                 propuesta.getDescripcion(),
                 propuesta.getEstado().getNombre(),
-                propuesta.getFechaCreacion()))
+                propuesta.getFechaCreacion());
+        })
         .toList();
 
         return necesidadesRepostitory.findById(id)
-                .map(necesidad -> new NecesidadResponseDTO(
+                .map(necesidad -> {
+                    Usuario compania = necesidad.getCompania();
+                    // Forzar la carga de los perfiles lazy
+                    if (compania.getUserType() == 0 && compania.getPerfilCompania() != null) {
+                        compania.getPerfilCompania().getNombreCompania(); // Toca cualquier campo para forzar la carga
+                    }
+                    Double calificacionCompania = calificacionService.getPromedioCalificacionByUsuarioId(compania.getId());
+                    return new NecesidadResponseDTO(
                         necesidad.getId(),
                         necesidad.getTitulo(),
                         necesidad.getDescripcion(),
                         necesidad.getCategoria(),
                         necesidad.getPresupuesto(),
-                        new UsuarioDTO(necesidad.getCompania(), null),
+                        new UsuarioDTO(compania, calificacionCompania),
                         necesidad.getFechaLimite(),
                         necesidad.getSkillsRequired().stream()
                                 .map(Habilidad::getNombre)
@@ -97,11 +117,13 @@ public class NecesidadServiceImpl implements INecesidadesService {
                         necesidad.getEstado().getNombre(),
                         propuestas,
                         necesidad.getFechaCreacion(),
-                        necesidad.getFechaActualizacion()))
+                        necesidad.getFechaActualizacion());
+                })
                 .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
     }
 
     @Override
+    @Transactional
     public NecesidadResponseDTO saveNecesidad(NecesidadCreateDTO necesidadDTO) {
         Usuario compania = usuarioRepository.findById(necesidadDTO.getCompañiaId())
                 .orElseThrow(
@@ -125,13 +147,18 @@ public class NecesidadServiceImpl implements INecesidadesService {
 
         Necesidad saved = necesidadesRepostitory.save(necesidad);
 
+        // Forzar la carga de los perfiles lazy
+        if (compania.getUserType() == 0 && compania.getPerfilCompania() != null) {
+            compania.getPerfilCompania().getNombreCompania();
+        }
+        Double calificacionCompania = calificacionService.getPromedioCalificacionByUsuarioId(saved.getCompania().getId());
         return new NecesidadResponseDTO(
                 saved.getId(),
                 saved.getTitulo(),
                 saved.getDescripcion(),
                 saved.getCategoria(),
                 saved.getPresupuesto(),
-                new UsuarioDTO(saved.getCompania(), null),
+                new UsuarioDTO(saved.getCompania(), calificacionCompania),
                 saved.getFechaLimite(),
                 saved.getSkillsRequired().stream().map(Habilidad::getNombre).toList(),
                 saved.getRequirements(),
@@ -143,6 +170,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
     }
 
     @Override
+    @Transactional
     public NecesidadResponseDTO updateNecesidad(Long id, NecesidadUpdateDTO dto) {
         Necesidad necesidad = necesidadesRepostitory.findById(id)
                 .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
@@ -180,19 +208,34 @@ public class NecesidadServiceImpl implements INecesidadesService {
         List<Propuesta> propuestas = propuestaRepository
                 .findByNecesidad(
                         necesidadesRepostitory.findById(updated.getId()).get());
+        
+        Usuario compania = updated.getCompania();
+        // Forzar la carga de los perfiles lazy
+        if (compania.getUserType() == 0 && compania.getPerfilCompania() != null) {
+            compania.getPerfilCompania().getNombreCompania();
+        }
+        Double calificacionCompania = calificacionService.getPromedioCalificacionByUsuarioId(updated.getCompania().getId());
         return new NecesidadResponseDTO(
                 updated.getId(),
                 updated.getTitulo(),
                 updated.getDescripcion(),
                 updated.getCategoria(),
                 updated.getPresupuesto(),
-                new UsuarioDTO(updated.getCompania(), null),
+                new UsuarioDTO(updated.getCompania(), calificacionCompania),
                 updated.getFechaLimite(),
                 updated.getSkillsRequired().stream().map(Habilidad::getNombre).toList(),
                 updated.getRequirements(),
                 updated.getExpectedDeliverables(),
                 updated.getEstado().getNombre(),
-                propuestas.stream().map(p -> new PropuestaDTO(p, null)).toList(),
+                propuestas.stream().map(p -> {
+                    Usuario desarrollador = p.getDesarrollador();
+                    // Forzar la carga de los perfiles lazy
+                    if (desarrollador.getUserType() == 1 && desarrollador.getPerfilDesarrollador() != null) {
+                        desarrollador.getPerfilDesarrollador().getHabilidades();
+                    }
+                    Double calificacionDesarrollador = calificacionService.getPromedioCalificacionByUsuarioId(p.getDesarrollador().getId());
+                    return new PropuestaDTO(p, calificacionDesarrollador);
+                }).toList(),
                 updated.getFechaCreacion(),
                 updated.getFechaActualizacion());
     }

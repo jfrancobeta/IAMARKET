@@ -44,6 +44,12 @@ public class CalificacionServiceImpl implements ICalificacionService {
             calificacionRepository.deleteById(id);
         }
     }
+
+    @Override
+    public Double getPromedioCalificacionByUsuarioId(Long usuarioId) {
+        Double promedio = calificacionRepository.findPromedioCalificacionByUsuarioId(usuarioId);
+        return promedio != null ? promedio : 0.0;
+    }
     
     
 }
