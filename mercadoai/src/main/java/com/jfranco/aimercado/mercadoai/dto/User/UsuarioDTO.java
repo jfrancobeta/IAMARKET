@@ -19,13 +19,12 @@ public class UsuarioDTO {
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaActualizacion;
     private List<String> roles;
-    private Double calificacionPromedio;
     private PerfilCompaniaDTO perfilCompania;
     private PerfilDesarrolladorDTO perfilDesarrollador;
 
     public UsuarioDTO(Long id, String username, String email, String nombre, String descripcion, String foto,
             Integer userType, Boolean estado, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion,
-            List<String> roles, Double calificacionPromedio, PerfilCompaniaDTO perfilCompania, 
+            List<String> roles, PerfilCompaniaDTO perfilCompania, 
             PerfilDesarrolladorDTO perfilDesarrollador) {
         this.id = id;
         this.username = username;
@@ -38,13 +37,11 @@ public class UsuarioDTO {
         this.fechaCreacion = fechaCreacion;
         this.fechaActualizacion = fechaActualizacion;
         this.roles = roles;
-        this.calificacionPromedio = calificacionPromedio;
         this.perfilCompania = perfilCompania;
         this.perfilDesarrollador = perfilDesarrollador;
     }
 
-    // Constructor que recibe un Usuario y la calificación promedio
-    public UsuarioDTO(Usuario usuario, Double calificacionPromedio) {
+    public UsuarioDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.username = usuario.getUsername();
         this.email = usuario.getEmail();
@@ -55,11 +52,8 @@ public class UsuarioDTO {
         this.estado = usuario.getEstado();
         this.fechaCreacion = usuario.getFechaCreacion();
         this.fechaActualizacion = usuario.getFechaActualizacion();
-        // Mapear los nombres de los roles
         this.roles = usuario.getRoles() != null ? usuario.getRoles().stream().map(r -> r.getNombre()).toList() : null;
-        this.calificacionPromedio = calificacionPromedio;
-        
-        // Mapear perfiles según el tipo de usuario
+    
         if (usuario.getUserType() != null) {
             if (usuario.getUserType() == 0 && usuario.getPerfilCompania() != null) {
                 // Es una compañía
@@ -157,14 +151,6 @@ public class UsuarioDTO {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
-    }
-
-    public Double getCalificacionPromedio() {
-        return calificacionPromedio;
-    }
-
-    public void setCalificacionPromedio(Double calificacionPromedio) {
-        this.calificacionPromedio = calificacionPromedio;
     }
 
     public PerfilCompaniaDTO getPerfilCompania() {

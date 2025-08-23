@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.repository;
+package com.jfranco.aimercado.mercadoai.repository.Usuario;
 
 import java.util.Optional;
 

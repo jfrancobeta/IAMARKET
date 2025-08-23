@@ -22,7 +22,7 @@ import org.springframework.web.filter.CorsFilter;
 
 import com.jfranco.aimercado.mercadoai.auth.filter.JwtAuthenticationFilter;
 import com.jfranco.aimercado.mercadoai.auth.filter.JwtValidationFilter;
-import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 
 @Configuration
 public class SecurityConfig {

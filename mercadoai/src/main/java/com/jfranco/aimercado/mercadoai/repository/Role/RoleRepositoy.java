@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.repository;
+package com.jfranco.aimercado.mercadoai.repository.Role;
 
 import java.util.Optional;
 

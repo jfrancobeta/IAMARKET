@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.repository;
+package com.jfranco.aimercado.mercadoai.repository.Habilidad;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

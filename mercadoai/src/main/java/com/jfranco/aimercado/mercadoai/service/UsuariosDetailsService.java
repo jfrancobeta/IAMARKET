@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jfranco.aimercado.mercadoai.model.Usuario;
-import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 
 
 

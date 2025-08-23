@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.model.Notification;
+package com.jfranco.aimercado.mercadoai.model;
 
 import java.util.Date;
 

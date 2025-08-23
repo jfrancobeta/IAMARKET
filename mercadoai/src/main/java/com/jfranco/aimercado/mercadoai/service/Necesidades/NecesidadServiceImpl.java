@@ -8,21 +8,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
-import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadResponseDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
 import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
+import com.jfranco.aimercado.mercadoai.mapper.Necesidad.NecesidadMapper;
 import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
-import com.jfranco.aimercado.mercadoai.repository.EstadoRepository;
-import com.jfranco.aimercado.mercadoai.repository.HabilidadesRepository;
-import com.jfranco.aimercado.mercadoai.repository.NecesidadesRepository;
-import com.jfranco.aimercado.mercadoai.repository.PropuestaRepository;
-import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.repository.Estado.EstadoRepository;
+import com.jfranco.aimercado.mercadoai.repository.Habilidad.HabilidadesRepository;
+import com.jfranco.aimercado.mercadoai.repository.Necesidad.NecesidadesRepository;
+import com.jfranco.aimercado.mercadoai.repository.Propuesta.PropuestaRepository;
+import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 import com.jfranco.aimercado.mercadoai.service.Calificacion.ICalificacionService;
 
 @Service
@@ -46,31 +48,20 @@ public class NecesidadServiceImpl implements INecesidadesService {
     @Autowired
     private ICalificacionService calificacionService;
 
+
+    @Autowired
+    private NecesidadMapper necesidadMapper;
+
     @Override
     public List<NecesidadSummaryDTO> getAllNecesidades() {
         List<Necesidad> necesidades = necesidadesRepostitory.findAll();
-
-        return necesidades.stream()
-                .map(necesidad -> {
-                    Integer propuestas = propuestaRepository.countByNecesidadId(necesidad.getId());
-                    return new NecesidadSummaryDTO(
-                            necesidad.getId(),
-                            necesidad.getTitulo(),
-                            necesidad.getCategoria(),
-                            necesidad.getPresupuesto(),
-                            necesidad.getCompania().getNombre(),
-                            necesidad.getFechaLimite(),
-                            necesidad.getEstado().getNombre(),
-                            necesidad.getFechaCreacion(),
-                            propuestas,
-                            necesidad.getDescripcion());
-                })
-                .toList();
+        return necesidades.stream().map(necesidad ->
+         necesidadMapper.toSummaryDTO(necesidad, propuestaRepository.countByNecesidadId(necesidad.getId()))).toList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public NecesidadResponseDTO getNecesidadById(Long id) {
+    public NecesidadDetailsDTO getNecesidadById(Long id) {
         List<PropuestaDTO> propuestas = propuestaRepository
         .findByNecesidad(necesidadesRepostitory.findById(id).get())
         .stream()
@@ -80,11 +71,11 @@ public class NecesidadServiceImpl implements INecesidadesService {
             if (desarrollador.getUserType() == 1 && desarrollador.getPerfilDesarrollador() != null) {
                 desarrollador.getPerfilDesarrollador().getHabilidades(); // Toca cualquier campo para forzar la carga
             }
-            Double calificacionPromedio = calificacionService.getPromedioCalificacionByUsuarioId(desarrollador.getId());
+            
             return new PropuestaDTO(
                 propuesta.getId(),
                 propuesta.getNecesidad().getId(),
-                new UsuarioDTO(desarrollador, calificacionPromedio), // Constructor que mapea el usuario con calificación real
+                new UsuarioDTO(desarrollador), // Constructor que mapea el usuario con calificación real
                 propuesta.getPrecio(),
                 propuesta.getEntrega(),
                 propuesta.getDescripcion(),
@@ -93,38 +84,16 @@ public class NecesidadServiceImpl implements INecesidadesService {
         })
         .toList();
 
-        return necesidadesRepostitory.findById(id)
-                .map(necesidad -> {
-                    Usuario compania = necesidad.getCompania();
-                    // Forzar la carga de los perfiles lazy
-                    if (compania.getUserType() == 0 && compania.getPerfilCompania() != null) {
-                        compania.getPerfilCompania().getNombreCompania(); // Toca cualquier campo para forzar la carga
-                    }
-                    Double calificacionCompania = calificacionService.getPromedioCalificacionByUsuarioId(compania.getId());
-                    return new NecesidadResponseDTO(
-                        necesidad.getId(),
-                        necesidad.getTitulo(),
-                        necesidad.getDescripcion(),
-                        necesidad.getCategoria(),
-                        necesidad.getPresupuesto(),
-                        new UsuarioDTO(compania, calificacionCompania),
-                        necesidad.getFechaLimite(),
-                        necesidad.getSkillsRequired().stream()
-                                .map(Habilidad::getNombre)
-                                .toList(),
-                        necesidad.getRequirements(),
-                        necesidad.getExpectedDeliverables(),
-                        necesidad.getEstado().getNombre(),
-                        propuestas,
-                        necesidad.getFechaCreacion(),
-                        necesidad.getFechaActualizacion());
-                })
-                .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
-    }
+                
+                
+            return new NecesidadDetailsDTO();
+        }
+                
+                
 
     @Override
     @Transactional
-    public NecesidadResponseDTO saveNecesidad(NecesidadCreateDTO necesidadDTO) {
+    public NecesidadDTO saveNecesidad(NecesidadCreateDTO necesidadDTO) {
         Usuario compania = usuarioRepository.findById(necesidadDTO.getCompañiaId())
                 .orElseThrow(
                         () -> new RuntimeException("Compañía no encontrada con id: " + necesidadDTO.getCompañiaId()));
@@ -151,27 +120,13 @@ public class NecesidadServiceImpl implements INecesidadesService {
         if (compania.getUserType() == 0 && compania.getPerfilCompania() != null) {
             compania.getPerfilCompania().getNombreCompania();
         }
-        Double calificacionCompania = calificacionService.getPromedioCalificacionByUsuarioId(saved.getCompania().getId());
-        return new NecesidadResponseDTO(
-                saved.getId(),
-                saved.getTitulo(),
-                saved.getDescripcion(),
-                saved.getCategoria(),
-                saved.getPresupuesto(),
-                new UsuarioDTO(saved.getCompania(), calificacionCompania),
-                saved.getFechaLimite(),
-                saved.getSkillsRequired().stream().map(Habilidad::getNombre).toList(),
-                saved.getRequirements(),
-                saved.getExpectedDeliverables(),
-                saved.getEstado().getNombre(),
-                Collections.emptyList(),
-                saved.getFechaCreacion(),
-                saved.getFechaActualizacion());
+        
+        return new NecesidadDTO();
     }
 
     @Override
     @Transactional
-    public NecesidadResponseDTO updateNecesidad(Long id, NecesidadUpdateDTO dto) {
+    public NecesidadDTO updateNecesidad(Long id, NecesidadUpdateDTO dto) {
         Necesidad necesidad = necesidadesRepostitory.findById(id)
                 .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
 
@@ -210,34 +165,12 @@ public class NecesidadServiceImpl implements INecesidadesService {
                         necesidadesRepostitory.findById(updated.getId()).get());
         
         Usuario compania = updated.getCompania();
-        // Forzar la carga de los perfiles lazy
+        
         if (compania.getUserType() == 0 && compania.getPerfilCompania() != null) {
             compania.getPerfilCompania().getNombreCompania();
         }
-        Double calificacionCompania = calificacionService.getPromedioCalificacionByUsuarioId(updated.getCompania().getId());
-        return new NecesidadResponseDTO(
-                updated.getId(),
-                updated.getTitulo(),
-                updated.getDescripcion(),
-                updated.getCategoria(),
-                updated.getPresupuesto(),
-                new UsuarioDTO(updated.getCompania(), calificacionCompania),
-                updated.getFechaLimite(),
-                updated.getSkillsRequired().stream().map(Habilidad::getNombre).toList(),
-                updated.getRequirements(),
-                updated.getExpectedDeliverables(),
-                updated.getEstado().getNombre(),
-                propuestas.stream().map(p -> {
-                    Usuario desarrollador = p.getDesarrollador();
-                    // Forzar la carga de los perfiles lazy
-                    if (desarrollador.getUserType() == 1 && desarrollador.getPerfilDesarrollador() != null) {
-                        desarrollador.getPerfilDesarrollador().getHabilidades();
-                    }
-                    Double calificacionDesarrollador = calificacionService.getPromedioCalificacionByUsuarioId(p.getDesarrollador().getId());
-                    return new PropuestaDTO(p, calificacionDesarrollador);
-                }).toList(),
-                updated.getFechaCreacion(),
-                updated.getFechaActualizacion());
+
+        return new NecesidadDTO();
     }
 
     @Override

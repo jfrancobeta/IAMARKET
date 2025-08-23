@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jfranco.aimercado.mercadoai.model.Calificacion;
-import com.jfranco.aimercado.mercadoai.repository.CalificacionRepository;
+import com.jfranco.aimercado.mercadoai.repository.Calificacion.CalificacionRepository;
 
 @Service
 public class CalificacionServiceImpl implements ICalificacionService {

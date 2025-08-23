@@ -5,8 +5,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.jfranco.aimercado.mercadoai.model.Notification.Notification;
-import com.jfranco.aimercado.mercadoai.repository.notifications.NotificationRepository;
+import com.jfranco.aimercado.mercadoai.model.Notification;
+import com.jfranco.aimercado.mercadoai.repository.Notificacion.NotificationRepository;
 
 @Service
 public class NotificationServiceImpl implements INotificationService {

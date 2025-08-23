@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jfranco.aimercado.mercadoai.model.Solucion;
-import com.jfranco.aimercado.mercadoai.repository.SolucionesRespository;
+import com.jfranco.aimercado.mercadoai.repository.Solucion.SolucionesRespository;
 
 @Service
 public class SolucionesService implements ISolucionesService {

@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.repository;
+package com.jfranco.aimercado.mercadoai.repository.Solucion;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

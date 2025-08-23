@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.controllers;
+package com.jfranco.aimercado.mercadoai.controllers.Solucion;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

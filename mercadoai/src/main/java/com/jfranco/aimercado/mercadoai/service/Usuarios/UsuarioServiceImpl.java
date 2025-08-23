@@ -13,14 +13,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jfranco.aimercado.mercadoai.dto.Auth.RegistroRequest;
+import com.jfranco.aimercado.mercadoai.model.Notification;
 import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
 import com.jfranco.aimercado.mercadoai.model.PerfilDesarrollador;
 import com.jfranco.aimercado.mercadoai.model.Role;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
-import com.jfranco.aimercado.mercadoai.model.Notification.Notification;
-import com.jfranco.aimercado.mercadoai.repository.CompaniaRepository;
-import com.jfranco.aimercado.mercadoai.repository.DesarrolladorRepository;
-import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.repository.Perfiles.CompaniaRepository;
+import com.jfranco.aimercado.mercadoai.repository.Perfiles.DesarrolladorRepository;
+import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 import com.jfranco.aimercado.mercadoai.service.notifications.INotificationService;
 
 @Service

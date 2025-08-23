@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.controllers;
+package com.jfranco.aimercado.mercadoai.controllers.Usuario;
 
 import java.util.Collections;
 
