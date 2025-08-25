@@ -5,10 +5,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * DTO para actualizar una necesidad existente
- * Todos los campos son opcionales para permitir actualizaciones parciales
- */
 public class NecesidadUpdateDTO {
     
     private String titulo;
@@ -21,7 +17,7 @@ public class NecesidadUpdateDTO {
     private Long compañiaId;
     private LocalDate fechaLimite;
     private List<Long> skillsRequiredIds;
-    private String requirements;
+    private List<String> requirements;
     private List<String> expectedDeliverables;
     private Long estadoId;
 
@@ -85,11 +81,11 @@ public class NecesidadUpdateDTO {
         this.skillsRequiredIds = skillsRequiredIds;
     }
 
-    public String getRequirements() {
+    public List<String> getRequirements() {
         return requirements;
     }
 
-    public void setRequirements(String requirements) {
+    public void setRequirements(List<String> requirements) {
         this.requirements = requirements;
     }
 

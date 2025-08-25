@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MainLayoutComponent } from "../../layout/main-layout/main-layout.component";
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NeedService } from '../../../services/need.service';
-import { Necesidad } from '../../../models/need/Necesidad';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth.service';
-import { NecesidadResponseDTO } from '../../../models/need/NecesidadResponseDTO';
+import { NecesidadUserDetailsDTO } from '../../../models/Necesidad/NecesidadUserDetailsDTO';
 
 @Component({
   selector: 'app-details',
@@ -16,7 +15,7 @@ import { NecesidadResponseDTO } from '../../../models/need/NecesidadResponseDTO'
 export class DetailsComponent implements OnInit {
 
   id: string | null = null;
-  need: NecesidadResponseDTO | null = null;
+  need: NecesidadUserDetailsDTO | null = null;
   isOwner: boolean = false;
   roles: string[] = [];
   

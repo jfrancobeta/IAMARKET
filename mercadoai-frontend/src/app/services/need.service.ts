@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Necesidad } from '../models/need/Necesidad';
-import { NecesidadDTO } from '../models/need/NecesidadDTO';
+import { NecesidadDTO } from '../models/Necesidad/NecesidadDTO';
 import { environment } from '../environments/environment';
-import { NecesidadSummaryDTO } from '../models/need/NecesidadSummaryDTO';
-import { NecesidadResponseDTO } from '../models/need/NecesidadResponseDTO';
+import { NecesidadSummaryDTO } from '../models/Necesidad/NecesidadSummaryDTO';
+import { NecesidadUserDetailsDTO } from '../models/Necesidad/NecesidadUserDetailsDTO';
+import { NecesidadCreateDTO } from '../models/Necesidad/NecesidadCreateDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +19,16 @@ export class NeedService {
     return this.http.get<NecesidadSummaryDTO[]>(`${this.url}/`);
   }
 
-  getById(id: number): Observable<NecesidadResponseDTO> {
-    return this.http.get<NecesidadResponseDTO>(`${this.url}/${id}`);
+  getById(id: number): Observable<NecesidadUserDetailsDTO> {
+    return this.http.get<NecesidadUserDetailsDTO>(`${this.url}/${id}`);
   }
 
-  create(necesidad: NecesidadDTO): Observable<Necesidad> {
-    return this.http.post<Necesidad>(`${this.url}/`, necesidad);
+  create(necesidad: NecesidadCreateDTO): Observable<NecesidadDTO> {
+    return this.http.post<NecesidadDTO>(`${this.url}/`, necesidad);
   }
 
-  update(id: number, necesidad: NecesidadDTO): Observable<Necesidad> {
-    return this.http.put<Necesidad>(`${this.url}/${id}`, necesidad);
+  update(id: number, necesidad: NecesidadDTO): Observable<NecesidadDTO> {
+    return this.http.put<NecesidadDTO>(`${this.url}/${id}`, necesidad);
   }
 
   delete(id: number): Observable<any> {

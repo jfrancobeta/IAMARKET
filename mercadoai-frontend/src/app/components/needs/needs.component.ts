@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MainLayoutComponent } from "../layout/main-layout/main-layout.component";
 import { NeedService } from '../../services/need.service';
-import { Necesidad } from '../../models/need/Necesidad';
 import { RouterModule } from '@angular/router';
-import { NecesidadSummaryDTO } from '../../models/need/NecesidadSummaryDTO';
+import { NecesidadSummaryDTO } from '../../models/Necesidad/NecesidadSummaryDTO';
 
 @Component({
   selector: 'app-needs',

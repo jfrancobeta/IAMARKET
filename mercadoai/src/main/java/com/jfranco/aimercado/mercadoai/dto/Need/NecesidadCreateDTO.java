@@ -27,14 +27,13 @@ public class NecesidadCreateDTO {
     @Positive(message = "El presupuesto debe ser positivo")
     private BigDecimal presupuesto;
     
-    @NotNull(message = "La compañía es obligatoria")
-    private Long compañiaId;
-    
     @Future(message = "La fecha límite debe ser futura")
     private LocalDate fechaLimite;
     
     private List<Long> skillsRequiredIds;
-    private String requirements;
+    
+    private List<String> requirements;
+
     private List<String> expectedDeliverables;
     
     @NotNull(message = "El estado es obligatorio")
@@ -76,14 +75,6 @@ public class NecesidadCreateDTO {
         this.presupuesto = presupuesto;
     }
 
-    public Long getCompañiaId() {
-        return compañiaId;
-    }
-
-    public void setCompañiaId(Long compañiaId) {
-        this.compañiaId = compañiaId;
-    }
-
     public LocalDate getFechaLimite() {
         return fechaLimite;
     }
@@ -100,11 +91,11 @@ public class NecesidadCreateDTO {
         this.skillsRequiredIds = skillsRequiredIds;
     }
 
-    public String getRequirements() {
+    public List<String> getRequirements() {
         return requirements;
     }
 
-    public void setRequirements(String requirements) {
+    public void setRequirements(List<String> requirements) {
         this.requirements = requirements;
     }
 

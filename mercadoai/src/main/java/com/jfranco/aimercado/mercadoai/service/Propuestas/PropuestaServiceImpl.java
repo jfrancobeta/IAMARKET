@@ -8,9 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
-import com.jfranco.aimercado.mercadoai.repository.NecesidadesRepository;
-import com.jfranco.aimercado.mercadoai.repository.PropuestaRepository;
-import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.repository.Necesidad.NecesidadesRepository;
+import com.jfranco.aimercado.mercadoai.repository.Propuesta.PropuestaRepository;
+import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 
 public class PropuestaServiceImpl implements IPropuestasService{
 

@@ -29,7 +29,6 @@ public class PropuestaDTO {
     }
 
     public PropuestaDTO(Propuesta p, Object object) {
-        //TODO Auto-generated constructor stub
     }
 
     public Long getId() {

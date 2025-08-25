@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,8 +38,13 @@ public class Necesidad {
         inverseJoinColumns = @JoinColumn(name = "habilidad_id")
     )
     private List<Habilidad> skillsRequired;
-    private String requirements;
+
+    @ElementCollection
+    private List<String> requirements;
+
+    @ElementCollection
     private List<String> expectedDeliverables;
+    
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;// Estado: 0 - Pendiente, 1 - En Proceso, 2 - Completada, 3 - Cancelada
@@ -114,11 +120,11 @@ public class Necesidad {
         this.categoria = categoria;
     }
 
-    public String getRequirements() {
+    public List<String> getRequirements() {
         return requirements;
     }
 
-    public void setRequirements(String requirements) {
+    public void setRequirements(List<String> requirements) {
         this.requirements = requirements;
     }
 

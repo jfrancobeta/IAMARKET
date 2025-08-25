@@ -10,4 +10,5 @@ public interface ICalificacionService {
     List<Calificacion> findAll();
     Calificacion update(Long id, Calificacion calificacion);
     void delete(Long id);
+    Double getPromedioCalificacionByUsuarioId(Long usuarioId);
 }   

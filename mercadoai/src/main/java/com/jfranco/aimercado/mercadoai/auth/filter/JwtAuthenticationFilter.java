@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
-import com.jfranco.aimercado.mercadoai.repository.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
