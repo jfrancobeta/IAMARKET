@@ -100,9 +100,9 @@
                     <h6 class="fw-semibold mb-0">{{propuesta.desarrollador.nombre}}</h6>
                     <div class="d-flex align-items-center gap-2 text-muted small">
                       <i class="bi bi-star-fill text-warning"></i>
-                      <span>4.9</span>
+                      <span>{{propuesta.desarrollador.calificacionPromedio}}</span>
                       <span>•</span>
-                      <span>45 proyectos</span>
+                      <span>{{propuesta.desarrollador.cantidadProyectos}} proyectos</span>
                     </div>
                   </div>
                 </div>
@@ -142,9 +142,9 @@
               <h6 class="fw-semibold mb-0">{{need?.compania?.perfilCompania?.nombreCompania}}</h6>
               <div class="d-flex align-items-center gap-2 text-muted small">
                 <i class="bi bi-star-fill text-warning"></i>
-                <span>4.8</span>
+                <span>{{need?.compania?.calificacionPromedio}}</span>
                 <span>•</span>
-                <span>23 proyectos</span>
+                <span>{{need?.compania?.cantidadProyectos}} proyectos</span>
               </div>
             </div>
           </div>

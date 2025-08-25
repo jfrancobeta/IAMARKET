@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Usuario } from '../../../models/Usuario';
+import { Usuario } from '../../../models/Usuario/Usuario';
 import { SharingDataService } from '../../../services/sharing-data.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';

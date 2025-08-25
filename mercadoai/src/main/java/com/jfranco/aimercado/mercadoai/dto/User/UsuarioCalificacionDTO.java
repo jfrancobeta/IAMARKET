@@ -2,11 +2,11 @@ package com.jfranco.aimercado.mercadoai.dto.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import com.jfranco.aimercado.mercadoai.model.Usuario;
+
 import com.jfranco.aimercado.mercadoai.dto.Perfil.PerfilCompaniaDTO;
 import com.jfranco.aimercado.mercadoai.dto.Perfil.PerfilDesarrolladorDTO;
 
-public class UsuarioDTO {
+public class UsuarioCalificacionDTO {
 
     private Long id;
     private String username;
@@ -21,8 +21,11 @@ public class UsuarioDTO {
     private List<String> roles;
     private PerfilCompaniaDTO perfilCompania;
     private PerfilDesarrolladorDTO perfilDesarrollador;
+    private Double calificacionPromedio;
+    private Integer cantidadCalificaciones;
+    private Integer cantidadProyectos;
 
-    public UsuarioDTO() {
+    public UsuarioCalificacionDTO() {
     }
 
     public Long getId() {
@@ -129,4 +132,27 @@ public class UsuarioDTO {
         this.perfilDesarrollador = perfilDesarrollador;
     }
 
+    public Double getCalificacionPromedio() {
+        return calificacionPromedio;
+    }
+
+    public void setCalificacionPromedio(Double calificacionPromedio) {
+        this.calificacionPromedio = calificacionPromedio;
+    }
+
+    public Integer getCantidadCalificaciones() {
+        return cantidadCalificaciones;
+    }
+
+    public void setCantidadCalificaciones(Integer cantidadCalificaciones) {
+        this.cantidadCalificaciones = cantidadCalificaciones;
+    }
+
+    public Integer getCantidadProyectos() {
+        return cantidadProyectos;
+    }
+
+    public void setCantidadProyectos(Integer cantidadProyectos) {
+        this.cantidadProyectos = cantidadProyectos;
+    } 
 }

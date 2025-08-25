@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
 
 @Repository
-public interface HabilidadesRepository extends JpaRepository<Habilidad, Long> {
+public interface HabilidadRepository extends JpaRepository<Habilidad, Long> {
 
 
     

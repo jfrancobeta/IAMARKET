@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
-import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDetailsDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUserDetailsDTO;
+import com.jfranco.aimercado.mercadoai.service.Necesidad.INecesidadesService;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
-import com.jfranco.aimercado.mercadoai.service.Necesidades.INecesidadesService;
 
 import java.util.List;
 
@@ -45,9 +45,9 @@ public class NecesidadControlles {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NecesidadDetailsDTO> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<NecesidadUserDetailsDTO> obtenerPorId(@PathVariable Long id) {
         try {
-            NecesidadDetailsDTO necesidad = necesidadesService.getNecesidadById(id);
+            NecesidadUserDetailsDTO necesidad = necesidadesService.getNecesidadById(id);
             if (necesidad != null) {
                 return ResponseEntity.ok(necesidad);
             } else {

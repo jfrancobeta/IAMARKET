@@ -9,7 +9,7 @@
     <p class="text-muted mb-0">Describe tu proyecto de IA para conectar con desarrolladores especializados</p>
   </div>
 
-  <form>
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm" novalidate>
     <!-- Información Básica -->
     <div class="card mb-4">
       <div class="card-header">
@@ -19,16 +19,16 @@
       <div class="card-body">
         <div class="mb-3">
           <label for="title" class="form-label">Título del Proyecto *</label>
-          <input type="text" class="form-control" id="title" placeholder="ej. Sistema de Recomendaciones con Machine Learning" required>
+          <input [(ngModel)]="need.titulo" name="titulo" type="text" class="form-control" id="title" placeholder="ej. Sistema de Recomendaciones con Machine Learning" required>
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Descripción Detallada *</label>
-          <textarea class="form-control" id="description" rows="6" placeholder="Describe tu proyecto, objetivos, contexto y cualquier información relevante..." required></textarea>
+          <textarea [(ngModel)]="need.descripcion" name="descripcion" class="form-control" id="description" rows="6" placeholder="Describe tu proyecto, objetivos, contexto y cualquier información relevante..." required></textarea>
         </div>
         <div class="row g-3">
           <div class="col-md-6">
             <label for="category" class="form-label">Categoría *</label>
-            <select class="form-select" id="category" required>
+            <select [(ngModel)]="need.categoria" name="categoria" class="form-select" id="category" required>
               <option selected disabled>Selecciona una categoría</option>
               <option value="machine-learning">Machine Learning</option>
               <option value="nlp">Procesamiento de Lenguaje Natural</option>
@@ -42,27 +42,12 @@
           </div>
           <div class="col-md-6">
             <label for="budget" class="form-label">Presupuesto *</label>
-            <select class="form-select" id="budget" required>
-              <option selected disabled>Rango de presupuesto</option>
-              <option value="1000-3000">$1,000 - $3,000</option>
-              <option value="3000-5000">$3,000 - $5,000</option>
-              <option value="5000-10000">$5,000 - $10,000</option>
-              <option value="10000-20000">$10,000 - $20,000</option>
-              <option value="20000+">$20,000+</option>
-            </select>
+            <input [(ngModel)]="need.presupuesto" name="presupuesto" type="number" class="form-control" id="budget" placeholder="Monto en USD" required>
           </div>
         </div>
         <div class="mb-3 mt-3">
           <label for="deadline" class="form-label">Plazo de Entrega *</label>
-          <select class="form-select" id="deadline" required>
-            <option selected disabled>Tiempo estimado</option>
-            <option value="1-2-weeks">1-2 semanas</option>
-            <option value="3-4-weeks">3-4 semanas</option>
-            <option value="1-2-months">1-2 meses</option>
-            <option value="2-3-months">2-3 meses</option>
-            <option value="3-6-months">3-6 meses</option>
-            <option value="6-months+">Más de 6 meses</option>
-          </select>
+          <input [(ngModel)]="need.fechaLimite" name="plazoEntrega" type="date" class="form-control" id="deadline" required>
         </div>
       </div>
     </div>
@@ -75,20 +60,20 @@
       </div>
       <div class="card-body">
         <div class="row g-3">
-          <!-- Puedes convertir esto en checkboxes dinámicos con Angular -->
-          <div class="col-md-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="python">
-              <label class="form-check-label" for="python">Python</label>
+          @for (habilidad of habilidades; track $index) {
+            <div class="col-md-3">
+              <div class="form-check">
+                <input 
+                class="form-check-input" 
+                type="checkbox" 
+                id="{{ habilidad.id }}" 
+                value="{{ habilidad.id }}"
+                [checked]="need.skillsRequiredIds.includes(habilidad.id)"
+                (change)="onHabilidadChange($event, habilidad.id)">
+                <label class="form-check-label" for="{{ habilidad.id }}">{{ habilidad.nombre }}</label>
+              </div>
             </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tensorflow">
-              <label class="form-check-label" for="tensorflow">TensorFlow</label>
-            </div>
-          </div>
-          <!-- ...repite para las demás habilidades... -->
+          }
         </div>
       </div>
     </div>
@@ -101,19 +86,57 @@
       </div>
       <div class="card-body">
         <div class="mb-3">
-          <label for="requirements" class="form-label">Requisitos Específicos</label>
-          <textarea class="form-control" id="requirements" rows="4" placeholder="Menciona cualquier requisito técnico específico, integraciones necesarias, estándares de calidad, etc."></textarea>
+          <label for="deliverables" class="form-label">Requisitos Especificos</label>
+          <div class="input-group mb-2">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="nuevoRequerimiento"
+              name="nuevoRequerimiento"
+              placeholder="Agrega un requisito y presiona +"
+            />
+            <button type="button" class="btn btn-outline-primary" (click)="agregarRequeriment()" [disabled]="!nuevoRequerimiento">
+              +
+            </button>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let requerimiento of need.requirements; let i = index">
+              {{ requerimiento }}
+              <button type="button" class="btn btn-sm btn-danger" (click)="eliminarRequeriment(i)">
+                <i class="bi bi-x"></i>
+              </button>
+            </li>
+          </ul>
         </div>
         <div class="mb-3">
           <label for="deliverables" class="form-label">Entregables Esperados</label>
-          <textarea class="form-control" id="deliverables" rows="4" placeholder="Describe qué esperas recibir al final del proyecto (código, documentación, modelos entrenados, etc.)"></textarea>
+          <div class="input-group mb-2">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="nuevoEntregable"
+              name="nuevoEntregable"
+              placeholder="Agrega un entregable y presiona +"
+            />
+            <button type="button" class="btn btn-outline-primary" (click)="agregarEntregable()" [disabled]="!nuevoEntregable">
+              +
+            </button>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let entregable of need.expectedDeliverables; let i = index">
+              {{ entregable }}
+              <button type="button" class="btn btn-sm btn-danger" (click)="eliminarEntregable(i)">
+                <i class="bi bi-x"></i>
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
     <div class="d-flex justify-content-end gap-2">
-      <a href="/needs" class="btn btn-outline-secondary">Cancelar</a>
-      <button type="submit" class="btn btn-primary">
+      <a routerLink="/needs" class="btn btn-outline-secondary">Cancelar</a>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
         <i class="bi bi-save me-2"></i>
         Publicar Necesidad
       </button>

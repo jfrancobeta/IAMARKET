@@ -54,7 +54,9 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.POST, "/usuarios/verify-reset-code").permitAll() // Permitir acceso a verificar código de recuperación sin autenticación
         .requestMatchers(HttpMethod.POST, "/usuarios/reset-password").permitAll() // Permitir
         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-        .requestMatchers(HttpMethod.GET, "/necesidades/").hasAnyRole("DEVELOPER", "COMPANY","ADMIN") // Permitir acceso a listar necesidades sin autenticación
+        .requestMatchers(HttpMethod.GET, "/necesidades/").hasAnyRole("DEVELOPER", "COMPANY", "ADMIN") // Permitir acceso a listar necesidades sin autenticación
+        .requestMatchers(HttpMethod.GET, "/necesidades/{id}").hasAnyRole("DEVELOPER", "ADMIN") // Permitir acceso a obtener necesidad por id sin autenticación
+        .requestMatchers(HttpMethod.POST, "/necesidades/").hasAnyRole("DEVELOPER", "ADMIN") // Permitir acceso a crear necesidad solo a desarrolladores
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) // Configurar CORS
         .addFilter(new JwtValidationFilter(authenticationManager()))

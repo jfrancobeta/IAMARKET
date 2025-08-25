@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
 import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 
 
@@ -18,10 +17,9 @@ public class NecesidadDTO {
     private UsuarioDTO compania;
     private LocalDate fechaLimite;
     private List<String> skillsRequired; 
-    private String requirements;
+    private List<String> requirements;
     private List<String> expectedDeliverables;
     private String estadoNombre;
-    private List<PropuestaDTO> propuestas;
     private LocalDate fechaCreacion;
     private LocalDate fechaActualizacion;
 
@@ -92,11 +90,11 @@ public class NecesidadDTO {
         this.skillsRequired = skillsRequired;
     }
 
-    public String getRequirements() {
+    public List<String> getRequirements() {
         return requirements;
     }
 
-    public void setRequirements(String requirements) {
+    public void setRequirements(List<String> requirements) {
         this.requirements = requirements;
     }
 
@@ -130,13 +128,5 @@ public class NecesidadDTO {
 
     public void setFechaActualizacion(LocalDate fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    public List<PropuestaDTO> getPropuestas() {
-        return propuestas;
-    }
-
-    public void setPropuestas(List<PropuestaDTO> propuestas) {
-        this.propuestas = propuestas;
     }
 }

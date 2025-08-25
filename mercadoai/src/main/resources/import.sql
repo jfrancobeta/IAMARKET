@@ -103,18 +103,41 @@ INSERT INTO habilidades (id, nombre, descripcion) VALUES (23, 'Flutter', 'Framew
 INSERT INTO habilidades (id, nombre, descripcion) VALUES (24, 'MongoDB', 'Base de datos NoSQL orientada a documentos');
 
 -- Necesidades
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (1, 'Desarrollar API REST', 'Crear una API RESTful en Spring Boot', 'Backend', 2500, 4, '2025-08-15', 0, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (2, 'Frontend Angular', 'Construir interfaz web en Angular', 'Frontend', 1800, 5, '2025-09-01', 1, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (3, 'Migración a Docker', 'Contenerizar aplicación existente', 'DevOps', 1200, 11, '2025-08-20', 0, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (4, 'Base de datos NoSQL', 'Implementar MongoDB para microservicio', 'Database', 1500, 12, '2025-08-25', 2, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (5, 'App móvil Flutter', 'Desarrollar app multiplataforma', 'Mobile', 3000, 13, '2025-09-10', 1, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (6, 'Landing Page', 'Diseñar landing page moderna', 'Frontend', 800, 14, '2025-08-05', 0, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (7, 'Automatización con Python', 'Script para automatizar reportes', 'Backend', 950, 15, '2025-08-12', 1, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (8, 'Integración de pagos', 'Agregar pagos con Stripe', 'Backend', 1100, 4, '2025-08-18', 2, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (9, 'Dashboard React', 'Dashboard administrativo', 'Frontend', 2000, 5, '2025-09-02', 1, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (10, 'API para móviles', 'Backend para app móvil', 'Backend', 2200, 11, '2025-09-15', 0, '2025-07-30', '2025-07-30');
 
--- Necesidades con expected_deliverables
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (1, 'Desarrollar API REST', 'Crear una API RESTful en Spring Boot', 'Backend', 2500, 4, '2025-08-15', 'Debe incluir autenticación JWT', 0, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (2, 'Frontend Angular', 'Construir interfaz web en Angular', 'Frontend', 1800, 5, '2025-09-01', 'Responsive y con login', 1, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (3, 'Migración a Docker', 'Contenerizar aplicación existente', 'DevOps', 1200, 11, '2025-08-20', 'Documentar pasos de despliegue', 0, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (4, 'Base de datos NoSQL', 'Implementar MongoDB para microservicio', 'Database', 1500, 12, '2025-08-25', 'Alta disponibilidad', 2, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (5, 'App móvil Flutter', 'Desarrollar app multiplataforma', 'Mobile', 3000, 13, '2025-09-10', 'Push notifications y login social', 1, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (6, 'Landing Page', 'Diseñar landing page moderna', 'Frontend', 800, 14, '2025-08-05', 'SEO optimizado', 0, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (7, 'Automatización con Python', 'Script para automatizar reportes', 'Backend', 950, 15, '2025-08-12', 'Soporte para Excel y PDF', 1, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (8, 'Integración de pagos', 'Agregar pagos con Stripe', 'Backend', 1100, 4, '2025-08-18', 'Soporte para tarjetas y transferencias', 2, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (9, 'Dashboard React', 'Dashboard administrativo', 'Frontend', 2000, 5, '2025-09-02', 'Gráficas y filtros', 1, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, requirements, estado_id, fecha_creacion, fecha_actualizacion) VALUES (10, 'API para móviles', 'Backend para app móvil', 'Backend', 2200, 11, '2025-09-15', 'Autenticación y notificaciones', 0, '2025-07-30', '2025-07-30');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (1, 'Debe incluir autenticación JWT');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (2, 'Responsive y con login');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (3, 'Documentar pasos de despliegue');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (4, 'Alta disponibilidad');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (5, 'Push notifications y login social');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (6, 'SEO optimizado');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (7, 'Soporte para Excel y PDF');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (8, 'Soporte para tarjetas y transferencias');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (9, 'Gráficas y filtros');
+INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (10, 'Autenticación y notificaciones');
+
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (1, 'Documentación técnica');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (1, 'Manual de usuario');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (2, 'Diseño responsivo completo');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (2, 'Pruebas unitarias');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (3, 'Guía de despliegue en Docker');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (4, 'Configuración de alta disponibilidad');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (5, 'App publicada en stores');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (6, 'SEO audit report');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (7, 'Script funcional para Excel y PDF');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (8, 'Integración de Stripe validada');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (9, 'Dashboard con gráficas interactivas');
+INSERT INTO necesidad_expected_deliverables (necesidad_id, expected_deliverables) VALUES (10, 'API documentada para móviles');
+
 
 -- Propuestas para las primeras 5 necesidades
 INSERT INTO propuestas (id, necesidad_id, desarrollador_id, precio, entrega, descripcion, estado_id, fecha_creacion)VALUES (1, 1, 2, 2300, '2025-08-10', 'Puedo entregar la API con autenticación JWT y documentación.', 0, '2025-08-01');

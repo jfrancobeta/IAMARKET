@@ -1,29 +1,35 @@
-package com.jfranco.aimercado.mercadoai.service.Necesidades;
+package com.jfranco.aimercado.mercadoai.service.Necesidad;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
-import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDetailsDTO;
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUserDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaUserDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 import com.jfranco.aimercado.mercadoai.mapper.Necesidad.NecesidadMapper;
+import com.jfranco.aimercado.mercadoai.mapper.Propuesta.PropuestaMapper;
 import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.repository.Estado.EstadoRepository;
-import com.jfranco.aimercado.mercadoai.repository.Habilidad.HabilidadesRepository;
+import com.jfranco.aimercado.mercadoai.repository.Habilidad.HabilidadRepository;
 import com.jfranco.aimercado.mercadoai.repository.Necesidad.NecesidadesRepository;
 import com.jfranco.aimercado.mercadoai.repository.Propuesta.PropuestaRepository;
+import com.jfranco.aimercado.mercadoai.repository.Proyecto.ProyectoRepository;
 import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 import com.jfranco.aimercado.mercadoai.service.Calificacion.ICalificacionService;
 
@@ -40,7 +46,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
     private EstadoRepository estadoRepository;
 
     @Autowired
-    private HabilidadesRepository habilidadesRepository;
+    private HabilidadRepository habilidadesRepository;
 
     @Autowired
     private PropuestaRepository propuestaRepository;
@@ -48,9 +54,14 @@ public class NecesidadServiceImpl implements INecesidadesService {
     @Autowired
     private ICalificacionService calificacionService;
 
+    @Autowired
+    private ProyectoRepository proyectoRepository;
 
     @Autowired
     private NecesidadMapper necesidadMapper;
+
+    @Autowired
+    private PropuestaMapper propuestaMapper;
 
     @Override
     public List<NecesidadSummaryDTO> getAllNecesidades() {
@@ -61,47 +72,68 @@ public class NecesidadServiceImpl implements INecesidadesService {
 
     @Override
     @Transactional(readOnly = true)
-    public NecesidadDetailsDTO getNecesidadById(Long id) {
-        List<PropuestaDTO> propuestas = propuestaRepository
-        .findByNecesidad(necesidadesRepostitory.findById(id).get())
-        .stream()
-        .map(propuesta -> {
-            Usuario desarrollador = propuesta.getDesarrollador();
-            // Forzar la carga de los perfiles lazy
-            if (desarrollador.getUserType() == 1 && desarrollador.getPerfilDesarrollador() != null) {
-                desarrollador.getPerfilDesarrollador().getHabilidades(); // Toca cualquier campo para forzar la carga
+    public NecesidadUserDetailsDTO getNecesidadById(Long id) {
+            Necesidad necesidad = necesidadesRepostitory.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
+            
+            List<Propuesta> propuestas = propuestaRepository.findByNecesidad(necesidad);
+
+            List<PropuestaUserDetailsDTO> propuestasDetailsDTO = new ArrayList<>();
+            
+            for (Propuesta propuesta : propuestas) {
+                Usuario desarrollador = propuesta.getDesarrollador();
+                Double calificacionPromedio = calificacionService.getPromedioCalificacionByUsuarioId(desarrollador.getId());
+                if (calificacionPromedio != null) {
+                    calificacionPromedio = Math.round(calificacionPromedio * 10.0) / 10.0;
+                }
+                Integer cantidadCalificaciones = 0;
+                Integer cantidadProyectos = proyectoRepository.countByPropuesta_Desarrollador_id(desarrollador.getId());
+
+                PropuestaUserDetailsDTO propuestaDTO = propuestaMapper.toPropuestasUserDetailsDTO(
+                    propuesta,
+                    calificacionPromedio,
+                    cantidadCalificaciones,
+                    cantidadProyectos);
+
+                propuestasDetailsDTO.add(propuestaDTO);
             }
             
-            return new PropuestaDTO(
-                propuesta.getId(),
-                propuesta.getNecesidad().getId(),
-                new UsuarioDTO(desarrollador), // Constructor que mapea el usuario con calificación real
-                propuesta.getPrecio(),
-                propuesta.getEntrega(),
-                propuesta.getDescripcion(),
-                propuesta.getEstado().getNombre(),
-                propuesta.getFechaCreacion());
-        })
-        .toList();
+            Double calificacionPromedio = calificacionService.getPromedioCalificacionByUsuarioId(necesidad.getCompania().getId());
+            if (calificacionPromedio != null) {
+                calificacionPromedio = Math.round(calificacionPromedio * 10.0) / 10.0;
+            }
+            Integer cantidadCalificaciones = 0;
+            Integer cantidadProyectos = proyectoRepository.countByPropuesta_Desarrollador_id(necesidad.getCompania().getId());
 
+            NecesidadUserDetailsDTO dto = necesidadMapper.toDetailsDTO(
+                necesidad,
+                propuestasDetailsDTO,
+                calificacionPromedio,
+                cantidadCalificaciones,
+                cantidadProyectos
+            );
+
+            return dto;
+    }
                 
-                
-            return new NecesidadDetailsDTO();
-        }
-                
-                
+                 
 
     @Override
     @Transactional
     public NecesidadDTO saveNecesidad(NecesidadCreateDTO necesidadDTO) {
-        Usuario compania = usuarioRepository.findById(necesidadDTO.getCompañiaId())
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username  =  authentication.getName();
+        Usuario usuario = usuarioRepository.findByUsername(username)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con username: " + username));
+        Usuario compania = usuarioRepository.findById(usuario.getId())
                 .orElseThrow(
-                        () -> new RuntimeException("Compañía no encontrada con id: " + necesidadDTO.getCompañiaId()));
+                        () -> new RuntimeException("Compañía no encontrada con id: " + usuario.getId()));
 
         Estado estado = estadoRepository.findById(necesidadDTO.getEstadoId())
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado con id: " + necesidadDTO.getEstadoId()));
 
         List<Habilidad> habilidades = habilidadesRepository.findAllById(necesidadDTO.getSkillsRequiredIds());
+        
         Necesidad necesidad = new Necesidad();
         necesidad.setTitulo(necesidadDTO.getTitulo());
         necesidad.setDescripcion(necesidadDTO.getDescripcion());
@@ -115,13 +147,8 @@ public class NecesidadServiceImpl implements INecesidadesService {
         necesidad.setEstado(estado);
 
         Necesidad saved = necesidadesRepostitory.save(necesidad);
-
-        // Forzar la carga de los perfiles lazy
-        if (compania.getUserType() == 0 && compania.getPerfilCompania() != null) {
-            compania.getPerfilCompania().getNombreCompania();
-        }
         
-        return new NecesidadDTO();
+        return necesidadMapper.toDTO(saved);
     }
 
     @Override
