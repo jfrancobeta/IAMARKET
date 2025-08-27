@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Usuario } from '../models/Usuario/Usuario';
 import { HttpClient } from '@angular/common/http';
 import { ResetCodeRequest, ResetPasswordRequest, VerifyCodeRequest } from '../models/auth-reset.model';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
