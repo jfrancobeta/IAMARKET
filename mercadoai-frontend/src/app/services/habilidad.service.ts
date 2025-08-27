@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HabilidadDTO } from '../models/Habilidad/HabilidadDTO';
 import { HabilidadCreateDTO } from '../models/Habilidad/HabilidadCreateDTO';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

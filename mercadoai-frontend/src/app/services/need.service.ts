@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NecesidadDTO } from '../models/Necesidad/NecesidadDTO';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { NecesidadSummaryDTO } from '../models/Necesidad/NecesidadSummaryDTO';
 import { NecesidadUserDetailsDTO } from '../models/Necesidad/NecesidadUserDetailsDTO';
 import { NecesidadCreateDTO } from '../models/Necesidad/NecesidadCreateDTO';
