@@ -9,15 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUserDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
-import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
 import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaUserDetailsDTO;
-import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 import com.jfranco.aimercado.mercadoai.mapper.Necesidad.NecesidadMapper;
 import com.jfranco.aimercado.mercadoai.mapper.Propuesta.PropuestaMapper;
 import com.jfranco.aimercado.mercadoai.model.Estado;
