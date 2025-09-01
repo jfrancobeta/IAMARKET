@@ -25,8 +25,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.validation.Valid;
 
 
-
-
 @RestController
 @RequestMapping("/necesidades")
 public class NecesidadControlles {
@@ -45,9 +43,23 @@ public class NecesidadControlles {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NecesidadUserDetailsDTO> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<NecesidadDTO> getById(@PathVariable Long id) {
         try {
-            NecesidadUserDetailsDTO necesidad = necesidadesService.getNecesidadById(id);
+            NecesidadDTO necesidad = necesidadesService.getNecesidadById(id);
+            if (necesidad != null) {
+                return ResponseEntity.ok(necesidad);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/{id}/details")
+    public ResponseEntity<NecesidadUserDetailsDTO> getByidDetails(@PathVariable Long id) {
+        try {
+            NecesidadUserDetailsDTO necesidad = necesidadesService.getNecesidadByIdDetails(id);
             if (necesidad != null) {
                 return ResponseEntity.ok(necesidad);
             } else {

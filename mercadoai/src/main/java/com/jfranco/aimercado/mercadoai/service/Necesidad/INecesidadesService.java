@@ -12,7 +12,9 @@ public interface INecesidadesService {
 
     List<NecesidadSummaryDTO> getAllNecesidades();
 
-    NecesidadUserDetailsDTO getNecesidadById(Long id);
+    NecesidadUserDetailsDTO getNecesidadByIdDetails(Long id);
+
+    NecesidadDTO getNecesidadById(Long id);
 
     NecesidadDTO saveNecesidad(NecesidadCreateDTO necesidad);
 

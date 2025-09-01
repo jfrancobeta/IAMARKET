@@ -1,6 +1,7 @@
 package com.jfranco.aimercado.mercadoai.mapper.Habilidad;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.jfranco.aimercado.mercadoai.dto.Habilidad.HabilidadCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Habilidad.HabilidadDTO;
@@ -11,5 +12,6 @@ public interface HabilidadMapper {
 
     public HabilidadDTO toDTO(Habilidad habilidad);
 
+    @Mapping(target = "id", ignore = true)
     public Habilidad toEntity(HabilidadCreateDTO habilidadDTO);
 }

@@ -1,4 +1,4 @@
-export class Estado {
+export class EstadoDTO {
   id?: number;
   nombre!: string;
 }

@@ -25,6 +25,7 @@ export class RegistroLoginComponent implements OnInit {
 
   onsubmit(userForm: NgForm) {
     if(userForm.valid) {
+      console.log(this.registroRequest);
       this.service.registrarUsuario(this.registroRequest).subscribe({
         next: (response) => {
           Swal.fire({

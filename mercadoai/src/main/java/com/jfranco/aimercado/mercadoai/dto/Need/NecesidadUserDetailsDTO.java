@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.dto.Categoria.CategoriaDTO;
 import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaUserDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.User.UsuarioCalificacionDTO;
 
@@ -12,7 +13,7 @@ public class NecesidadUserDetailsDTO {
     private Long id;
     private String titulo;
     private String descripcion;
-    private String categoria;
+    private CategoriaDTO categoria;
     private BigDecimal presupuesto;
     private UsuarioCalificacionDTO compania;
     private LocalDate fechaLimite;
@@ -51,11 +52,11 @@ public class NecesidadUserDetailsDTO {
         this.descripcion = descripcion;
     }
 
-    public String getCategoria() {
+    public CategoriaDTO getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
     }
 

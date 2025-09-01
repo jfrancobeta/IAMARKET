@@ -19,19 +19,23 @@ export class NeedService {
     return this.http.get<NecesidadSummaryDTO[]>(`${this.url}/`);
   }
 
-  getById(id: number): Observable<NecesidadUserDetailsDTO> {
-    return this.http.get<NecesidadUserDetailsDTO>(`${this.url}/${id}`);
+  getByidDetails(id: number): Observable<NecesidadUserDetailsDTO> {
+    return this.http.get<NecesidadUserDetailsDTO>(`${this.url}/${id}/details`);
+  }
+
+  getById(id: number): Observable<NecesidadDTO> {
+    return this.http.get<NecesidadDTO>(`${this.url}/${id}`);
   }
 
   create(necesidad: NecesidadCreateDTO): Observable<NecesidadDTO> {
     return this.http.post<NecesidadDTO>(`${this.url}/`, necesidad);
   }
 
-  update(id: number, necesidad: NecesidadDTO): Observable<NecesidadDTO> {
+  update(id: number, necesidad: NecesidadCreateDTO): Observable<NecesidadDTO> {
     return this.http.put<NecesidadDTO>(`${this.url}/${id}`, necesidad);
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/eliminar/${id}`);
+    return this.http.delete(`${this.url}/${id}`);
   }
 }

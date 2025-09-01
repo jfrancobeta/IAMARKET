@@ -17,11 +17,13 @@ import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaUserDetailsDTO;
 import com.jfranco.aimercado.mercadoai.mapper.Necesidad.NecesidadMapper;
 import com.jfranco.aimercado.mercadoai.mapper.Propuesta.PropuestaMapper;
+import com.jfranco.aimercado.mercadoai.model.Categoria;
 import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
+import com.jfranco.aimercado.mercadoai.repository.Categoria.CategoriaRepository;
 import com.jfranco.aimercado.mercadoai.repository.Estado.EstadoRepository;
 import com.jfranco.aimercado.mercadoai.repository.Habilidad.HabilidadRepository;
 import com.jfranco.aimercado.mercadoai.repository.Necesidad.NecesidadesRepository;
@@ -55,6 +57,9 @@ public class NecesidadServiceImpl implements INecesidadesService {
     private ProyectoRepository proyectoRepository;
 
     @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    @Autowired
     private NecesidadMapper necesidadMapper;
 
     @Autowired
@@ -69,7 +74,7 @@ public class NecesidadServiceImpl implements INecesidadesService {
 
     @Override
     @Transactional(readOnly = true)
-    public NecesidadUserDetailsDTO getNecesidadById(Long id) {
+    public NecesidadUserDetailsDTO getNecesidadByIdDetails(Long id) {
             Necesidad necesidad = necesidadesRepostitory.findById(id)
                     .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
             
@@ -130,18 +135,11 @@ public class NecesidadServiceImpl implements INecesidadesService {
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado con id: " + necesidadDTO.getEstadoId()));
 
         List<Habilidad> habilidades = habilidadesRepository.findAllById(necesidadDTO.getSkillsRequiredIds());
-        
-        Necesidad necesidad = new Necesidad();
-        necesidad.setTitulo(necesidadDTO.getTitulo());
-        necesidad.setDescripcion(necesidadDTO.getDescripcion());
-        necesidad.setCategoria(necesidadDTO.getCategoria());
-        necesidad.setPresupuesto(necesidadDTO.getPresupuesto());
-        necesidad.setCompania(compania);
-        necesidad.setFechaLimite(necesidadDTO.getFechaLimite());
-        necesidad.setSkillsRequired(habilidades);
-        necesidad.setRequirements(necesidadDTO.getRequirements());
-        necesidad.setExpectedDeliverables(necesidadDTO.getExpectedDeliverables());
-        necesidad.setEstado(estado);
+
+        Categoria categoria = categoriaRepository.findById(necesidadDTO.getCategoria())
+            .orElseThrow(() -> new RuntimeException("Categoría no encontrada con id: " + necesidadDTO.getCategoria()));
+
+        Necesidad necesidad = necesidadMapper.toEntity(necesidadDTO, compania, estado, habilidades, categoria);
 
         Necesidad saved = necesidadesRepostitory.save(necesidad);
         
@@ -154,47 +152,31 @@ public class NecesidadServiceImpl implements INecesidadesService {
         Necesidad necesidad = necesidadesRepostitory.findById(id)
                 .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
 
-        if (dto.getTitulo() != null)
-            necesidad.setTitulo(dto.getTitulo());
-        if (dto.getDescripcion() != null)
-            necesidad.setDescripcion(dto.getDescripcion());
-        if (dto.getCategoria() != null)
-            necesidad.setCategoria(dto.getCategoria());
-        if (dto.getPresupuesto() != null)
-            necesidad.setPresupuesto(dto.getPresupuesto());
-        if (dto.getCompañiaId() != null) {
-            Usuario compania = usuarioRepository.findById(dto.getCompañiaId())
-                    .orElseThrow(() -> new RuntimeException("Compañía no encontrada con id: " + dto.getCompañiaId()));
-            necesidad.setCompania(compania);
+        Estado estado = null;
+
+        if(dto.getEstadoId() != null) {
+            estado = estadoRepository.findById(dto.getEstadoId())
+                .orElseThrow(() -> new RuntimeException("Estado no encontrado con id: " + dto.getEstadoId()));
         }
-        if (dto.getFechaLimite() != null)
-            necesidad.setFechaLimite(dto.getFechaLimite());
-        if (dto.getSkillsRequiredIds() != null) {
-            List<Habilidad> habilidades = habilidadesRepository.findAllById(dto.getSkillsRequiredIds());
-            necesidad.setSkillsRequired(habilidades);
+
+        List<Habilidad> habilidades = null;
+
+        if(dto.getSkillsRequiredIds() != null) {
+            habilidades = habilidadesRepository.findAllById(dto.getSkillsRequiredIds());
         }
-        if (dto.getRequirements() != null)
-            necesidad.setRequirements(dto.getRequirements());
-        if (dto.getExpectedDeliverables() != null)
-            necesidad.setExpectedDeliverables(dto.getExpectedDeliverables());
-        if (dto.getEstadoId() != null) {
-            Estado estado = estadoRepository.findById(dto.getEstadoId())
-                    .orElseThrow(() -> new RuntimeException("Estado no encontrado con id: " + dto.getEstadoId()));
-            necesidad.setEstado(estado);
+
+        Categoria categoria = null;
+
+        if(dto.getCategoria() != null) {
+            categoria = categoriaRepository.findById(dto.getCategoria())
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con id: " + dto.getCategoria()));
         }
+
+        necesidadMapper.updateEntity(necesidad, dto, estado, habilidades, categoria);
 
         Necesidad updated = necesidadesRepostitory.save(necesidad);
-        List<Propuesta> propuestas = propuestaRepository
-                .findByNecesidad(
-                        necesidadesRepostitory.findById(updated.getId()).get());
-        
-        Usuario compania = updated.getCompania();
-        
-        if (compania.getUserType() == 0 && compania.getPerfilCompania() != null) {
-            compania.getPerfilCompania().getNombreCompania();
-        }
 
-        return new NecesidadDTO();
+        return necesidadMapper.toDTO(updated);
     }
 
     @Override
@@ -203,5 +185,12 @@ public class NecesidadServiceImpl implements INecesidadesService {
                 .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
         necesidadesRepostitory.delete(necesidad);
         return true;
+    }
+
+    @Override
+    public NecesidadDTO getNecesidadById(Long id) {
+        Necesidad necesidad = necesidadesRepostitory.findById(id)
+                .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
+        return necesidadMapper.toDTO(necesidad);
     }
 }

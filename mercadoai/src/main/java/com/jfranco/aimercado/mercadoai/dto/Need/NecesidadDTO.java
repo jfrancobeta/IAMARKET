@@ -4,22 +4,24 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.dto.Categoria.CategoriaDTO;
+import com.jfranco.aimercado.mercadoai.dto.Estado.EstadoDTO;
+import com.jfranco.aimercado.mercadoai.dto.Habilidad.HabilidadDTO;
 import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
-
 
 public class NecesidadDTO {
     
     private Long id;
     private String titulo;
     private String descripcion;
-    private String categoria;
+    private CategoriaDTO categoria;
     private BigDecimal presupuesto;
     private UsuarioDTO compania;
     private LocalDate fechaLimite;
-    private List<String> skillsRequired; 
+    private List<HabilidadDTO> skillsRequired;
     private List<String> requirements;
     private List<String> expectedDeliverables;
-    private String estadoNombre;
+    private EstadoDTO estado;
     private LocalDate fechaCreacion;
     private LocalDate fechaActualizacion;
 
@@ -50,11 +52,11 @@ public class NecesidadDTO {
         this.descripcion = descripcion;
     }
 
-    public String getCategoria() {
+    public CategoriaDTO getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
     }
 
@@ -82,11 +84,11 @@ public class NecesidadDTO {
         this.fechaLimite = fechaLimite;
     }
 
-    public List<String> getSkillsRequired() {
+    public List<HabilidadDTO> getSkillsRequired() {
         return skillsRequired;
     }
 
-    public void setSkillsRequired(List<String> skillsRequired) {
+    public void setSkillsRequired(List<HabilidadDTO> skillsRequired) {
         this.skillsRequired = skillsRequired;
     }
 
@@ -106,12 +108,12 @@ public class NecesidadDTO {
         this.expectedDeliverables = expectedDeliverables;
     }
 
-    public String getEstadoNombre() {
-        return estadoNombre;
+    public EstadoDTO getEstado() {
+        return estado;
     }
 
-    public void setEstadoNombre(String estadoNombre) {
-        this.estadoNombre = estadoNombre;
+    public void setEstado(EstadoDTO estado) {
+        this.estado = estado;
     }
 
     public LocalDate getFechaCreacion() {
