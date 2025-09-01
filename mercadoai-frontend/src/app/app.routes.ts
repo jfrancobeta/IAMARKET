@@ -62,6 +62,10 @@ export const routes: Routes = [
         component: CreateComponent
     },
     {
+        path: 'needs/:id/edit',
+        component: CreateComponent
+    },
+    {
         path: 'needs/:id',
         component: DetailsComponent
     },

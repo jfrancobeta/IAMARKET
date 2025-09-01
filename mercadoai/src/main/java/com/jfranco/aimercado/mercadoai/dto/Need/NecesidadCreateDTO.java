@@ -21,7 +21,7 @@ public class NecesidadCreateDTO {
     private String descripcion;
     
     @NotBlank(message = "La categoría es obligatoria")
-    private String categoria;
+    private long categoria;
     
     @NotNull(message = "El presupuesto es obligatorio")
     @Positive(message = "El presupuesto debe ser positivo")
@@ -59,11 +59,11 @@ public class NecesidadCreateDTO {
         this.descripcion = descripcion;
     }
 
-    public String getCategoria() {
+    public long getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(long categoria) {
         this.categoria = categoria;
     }
 

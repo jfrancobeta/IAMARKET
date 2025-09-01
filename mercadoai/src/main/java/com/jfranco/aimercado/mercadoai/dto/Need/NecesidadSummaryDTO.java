@@ -3,6 +3,8 @@ package com.jfranco.aimercado.mercadoai.dto.Need;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.jfranco.aimercado.mercadoai.dto.Categoria.CategoriaDTO;
+
 /**
  * DTO simplificado para listados de necesidades
  * Contiene solo información esencial para optimizar transferencia de datos
@@ -11,7 +13,7 @@ public class NecesidadSummaryDTO {
     
     private Long id;
     private String titulo;
-    private String categoria;
+    private CategoriaDTO categoria;
     private String descripcion;
     private BigDecimal presupuesto;
     private String compañiaNombre;
@@ -38,11 +40,11 @@ public class NecesidadSummaryDTO {
         this.titulo = titulo;
     }
 
-    public String getCategoria() {
+    public CategoriaDTO getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
     }
 

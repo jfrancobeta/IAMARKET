@@ -19,6 +19,18 @@ INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripc
 INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (14, 'Fernando', 'fernando.n@example.com', 'fernandocomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de logística', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
 INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (15, 'Valeria', 'valeria.t@example.com', 'valeriacomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de salud digital', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
 
+--Categorias
+INSERT INTO categorias (id, nombre) VALUES (1, 'Backend');
+INSERT INTO categorias (id, nombre) VALUES (2, 'Frontend');
+INSERT INTO categorias (id, nombre) VALUES (3, 'DevOps');
+INSERT INTO categorias (id, nombre) VALUES (4, 'Database');
+INSERT INTO categorias (id, nombre) VALUES (5, 'Mobile');
+INSERT INTO categorias (id, nombre) VALUES (6, 'QA');
+INSERT INTO categorias (id, nombre) VALUES (7, 'Security');
+INSERT INTO categorias (id, nombre) VALUES (8, 'Cloud');
+INSERT INTO categorias (id, nombre) VALUES (9, 'AI & Data Science');
+INSERT INTO categorias (id, nombre) VALUES (10, 'UI/UX Design');
+
 -- Perfiles desarrollador
 INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (1, 2, 'Java, Spring Boot', 5, 'https://portfolio.johndev.com');
 INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (2, 3, 'Angular, TypeScript', 3, 'https://portfolio.janedev.com');
@@ -103,16 +115,16 @@ INSERT INTO habilidades (id, nombre, descripcion) VALUES (23, 'Flutter', 'Framew
 INSERT INTO habilidades (id, nombre, descripcion) VALUES (24, 'MongoDB', 'Base de datos NoSQL orientada a documentos');
 
 -- Necesidades
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (1, 'Desarrollar API REST', 'Crear una API RESTful en Spring Boot', 'Backend', 2500, 4, '2025-08-15', 0, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (2, 'Frontend Angular', 'Construir interfaz web en Angular', 'Frontend', 1800, 5, '2025-09-01', 1, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (3, 'Migración a Docker', 'Contenerizar aplicación existente', 'DevOps', 1200, 11, '2025-08-20', 0, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (4, 'Base de datos NoSQL', 'Implementar MongoDB para microservicio', 'Database', 1500, 12, '2025-08-25', 2, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (5, 'App móvil Flutter', 'Desarrollar app multiplataforma', 'Mobile', 3000, 13, '2025-09-10', 1, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (6, 'Landing Page', 'Diseñar landing page moderna', 'Frontend', 800, 14, '2025-08-05', 0, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (7, 'Automatización con Python', 'Script para automatizar reportes', 'Backend', 950, 15, '2025-08-12', 1, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (8, 'Integración de pagos', 'Agregar pagos con Stripe', 'Backend', 1100, 4, '2025-08-18', 2, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (9, 'Dashboard React', 'Dashboard administrativo', 'Frontend', 2000, 5, '2025-09-02', 1, '2025-07-30', '2025-07-30');
-INSERT INTO necesidades (id, titulo, descripcion, categoria, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (10, 'API para móviles', 'Backend para app móvil', 'Backend', 2200, 11, '2025-09-15', 0, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (1, 'Desarrollar API REST', 'Crear una API RESTful en Spring Boot', 1, 2500, 4, '2025-08-15', 0, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (2, 'Frontend Angular', 'Construir interfaz web en Angular', 2, 1800, 5, '2025-09-01', 1, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (3, 'Migración a Docker', 'Contenerizar aplicación existente', 3, 1200, 11, '2025-08-20', 0, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (4, 'Base de datos NoSQL', 'Implementar MongoDB para microservicio', 4, 1500, 12, '2025-08-25', 2, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (5, 'App móvil Flutter', 'Desarrollar app multiplataforma', 5, 3000, 13, '2025-09-10', 1, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (6, 'Landing Page', 'Diseñar landing page moderna', 2, 800, 14, '2025-08-05', 0, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (7, 'Automatización con Python', 'Script para automatizar reportes', 1, 950, 15, '2025-08-12', 1, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (8, 'Integración de pagos', 'Agregar pagos con Stripe', 1, 1100, 4, '2025-08-18', 2, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (9, 'Dashboard React', 'Dashboard administrativo', 2, 2000, 5, '2025-09-02', 1, '2025-07-30', '2025-07-30');
+INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (10, 'API para móviles', 'Backend para app móvil', 1, 2200, 11, '2025-09-15', 0, '2025-07-30', '2025-07-30');
 
 INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (1, 'Debe incluir autenticación JWT');
 INSERT INTO necesidad_requirements (necesidad_id, requirements) VALUES (2, 'Responsive y con login');

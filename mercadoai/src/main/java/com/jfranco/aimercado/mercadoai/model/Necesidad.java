@@ -23,14 +23,23 @@ public class Necesidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String titulo;
+
     private String descripcion;
-    private String categoria;
+    
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     private BigDecimal presupuesto;
+
     @ManyToOne
     @JoinColumn(name = "compania_id")
     private Usuario compania;
+
     private LocalDate fechaLimite;
+
     @ManyToMany
     @JoinTable(
         name = "necesidad_habilidad",
@@ -112,11 +121,11 @@ public class Necesidad {
         this.fechaLimite = fechaLimite;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 

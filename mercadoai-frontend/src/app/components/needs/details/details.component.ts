@@ -27,7 +27,7 @@ export class DetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.roles = this.authService.getRoles();
-    this.needsService.getById(Number(this.id)).subscribe(
+    this.needsService.getByidDetails(Number(this.id)).subscribe(
       {
         next: (data) => {
           this.need = data;

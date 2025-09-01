@@ -2,7 +2,6 @@ package com.jfranco.aimercado.mercadoai.dto.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.dto.Perfil.PerfilCompaniaDTO;
 import com.jfranco.aimercado.mercadoai.dto.Perfil.PerfilDesarrolladorDTO;
 

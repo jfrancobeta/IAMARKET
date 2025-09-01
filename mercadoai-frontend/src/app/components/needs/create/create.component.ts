@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MainLayoutComponent } from "../../layout/main-layout/main-layout.component";
-import { Router, RouterModule } from '@angular/router';
+import { MainLayoutComponent } from '../../layout/main-layout/main-layout.component';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NecesidadCreateDTO } from '../../../models/Necesidad/NecesidadCreateDTO';
 import { NeedService } from '../../../services/need.service';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -8,26 +8,27 @@ import { HabilidadDTO } from '../../../models/Habilidad/HabilidadDTO';
 import { HabilidadService } from '../../../services/habilidad.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { CategoriaDTO } from '../../../models/Categoria/CategoriaDTO';
+import { CategoriaService } from '../../../services/categoria.service';
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [MainLayoutComponent,RouterModule,FormsModule,CommonModule],
+  imports: [MainLayoutComponent, RouterModule, FormsModule, CommonModule],
   templateUrl: './create.component.html',
 })
 export class CreateComponent implements OnInit {
-
   need: NecesidadCreateDTO = {
     titulo: '',
     descripcion: '',
-    categoria: '',
+    categoria: 0,
     presupuesto: 0,
     companiaId: 0,
     fechaLimite: '',
     skillsRequiredIds: [],
     requirements: [],
     expectedDeliverables: [],
-    estadoId: 0
+    estadoId: 0,
   };
 
   habilidades: HabilidadDTO[] = [];
@@ -36,42 +37,98 @@ export class CreateComponent implements OnInit {
 
   nuevoRequerimiento: string = '';
 
-  constructor(private needService: NeedService,
+  categorias: CategoriaDTO[] = [];
+
+  idNeed: String | null = null;
+
+  constructor(
+    private needService: NeedService,
     private habilidadService: HabilidadService,
-    private router: Router
+    private categoriaService: CategoriaService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.categoriaService.getAll().subscribe({
+      next: (response) => {
+        this.categorias = response;
+      },
+      error: (error) => {
+        console.error('Error al cargar categorías:', error);
+      }
+    });
+
     this.habilidadService.getAll().subscribe({
       next: (response) => {
         this.habilidades = response;
       },
       error: (error) => {
         console.error('Error al cargar habilidades:', error);
-      }
+      },
     });
+
+    this.idNeed = this.route.snapshot.paramMap.get('id');
+    if (this.idNeed) {
+      this.needService.getById(+this.idNeed).subscribe({
+        next: (data) => {
+          this.need = {
+            titulo: data.titulo,
+            descripcion: data.descripcion,
+            categoria: Number(data.categoria.id) ?? 0,
+            presupuesto: data.presupuesto,
+            companiaId: data.compania?.id ?? 0,
+            fechaLimite: data.fechaLimite,
+            skillsRequiredIds: data.skillsRequired?.map((s: any) => s.id) ?? [],
+            requirements: data.requirements ?? [],
+            expectedDeliverables: data.expectedDeliverables ?? [],
+            estadoId: data.estado.id ?? 0, // Ajusta según tu modelo
+          };
+        },
+        error: (error) => {
+          console.error('Error al cargar la necesidad:', error);
+        },
+      });
+    }
   }
 
-  onSubmit(form: NgForm){
-    if(form.invalid){
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
       return;
     }
-    this.needService.create(this.need).subscribe({
-      next: (response) => {
-        console.log('Necesidad creada:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'La necesidad ha sido creada exitosamente.',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        });
-        this.router.navigate(['/needs']);
-
-      },
-      error: (error) => {
-        console.error('Error al crear necesidad:', error);
-      }
-    });
+    if (this.idNeed) {
+      // Editar
+      this.needService.update(+this.idNeed, this.need).subscribe({
+        next: (response) => {
+          Swal.fire({
+            title: 'Éxito',
+            text: 'La necesidad ha sido actualizada exitosamente.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          });
+          this.router.navigate(['/needs']);
+        },
+        error: (error) => {
+          console.error('Error al actualizar necesidad:', error);
+        },
+      });
+    }else{
+      this.needService.create(this.need).subscribe({
+        next: (response) => {
+          console.log('Necesidad creada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'La necesidad ha sido creada exitosamente.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          });
+          this.router.navigate(['/needs']);
+        },
+        error: (error) => {
+          console.error('Error al crear necesidad:', error);
+        },
+      });
+    }
   }
 
   agregarEntregable() {
@@ -107,12 +164,14 @@ export class CreateComponent implements OnInit {
   }
 
   onHabilidadChange(event: any, id: number) {
-  if (event.target.checked) {
-    if (!this.need.skillsRequiredIds.includes(id)) {
-      this.need.skillsRequiredIds.push(id);
+    if (event.target.checked) {
+      if (!this.need.skillsRequiredIds.includes(id)) {
+        this.need.skillsRequiredIds.push(id);
+      }
+    } else {
+      this.need.skillsRequiredIds = this.need.skillsRequiredIds.filter(
+        (habId) => habId !== id
+      );
     }
-  } else {
-    this.need.skillsRequiredIds = this.need.skillsRequiredIds.filter(habId => habId !== id);
   }
-}
 }

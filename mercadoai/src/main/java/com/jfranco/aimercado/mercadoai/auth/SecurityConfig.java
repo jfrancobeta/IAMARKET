@@ -49,21 +49,23 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests(auth ->
         auth
-        .requestMatchers(HttpMethod.POST, "/usuarios/create-user").permitAll() // Permitir acceso a login sin autenticación
-        .requestMatchers(HttpMethod.POST, "/usuarios/send-reset-code").permitAll() // Permitir acceso a enviar código de recuperación sin autenticación
-        .requestMatchers(HttpMethod.POST, "/usuarios/verify-reset-code").permitAll() // Permitir acceso a verificar código de recuperación sin autenticación
-        .requestMatchers(HttpMethod.POST, "/usuarios/reset-password").permitAll() // Permitir
+        .requestMatchers(HttpMethod.POST, "/usuarios/create-user").permitAll() 
+        .requestMatchers(HttpMethod.POST, "/usuarios/send-reset-code").permitAll() 
+        .requestMatchers(HttpMethod.POST, "/usuarios/verify-reset-code").permitAll() 
+        .requestMatchers(HttpMethod.POST, "/usuarios/reset-password").permitAll() 
         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-        .requestMatchers(HttpMethod.GET, "/necesidades/").hasAnyRole("DEVELOPER", "COMPANY", "ADMIN") // Permitir acceso a listar necesidades sin autenticación
-        .requestMatchers(HttpMethod.GET, "/necesidades/{id}").hasAnyRole("DEVELOPER", "ADMIN") // Permitir acceso a obtener necesidad por id sin autenticación
-        .requestMatchers(HttpMethod.POST, "/necesidades/").hasAnyRole("DEVELOPER", "ADMIN") // Permitir acceso a crear necesidad solo a desarrolladores
+        .requestMatchers(HttpMethod.GET, "/necesidades/").hasAnyRole("DEVELOPER", "COMPANY", "ADMIN") 
+        .requestMatchers(HttpMethod.GET, "/necesidades/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
+        .requestMatchers(HttpMethod.POST, "/necesidades/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
+        .requestMatchers(HttpMethod.PUT, "/necesidades/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
+        .requestMatchers(HttpMethod.GET, "/categorias/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) // Configurar CORS
         .addFilter(new JwtValidationFilter(authenticationManager()))
         .addFilter(new JwtAuthenticationFilter(authenticationManager(),usuarioRepository))
         .csrf(cr -> cr.disable()) // Deshabilitar CSRF para simplificar el desarrollo
-        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configurar la política de sesión
-        .build(); // Permitir acceso a todas las rutas
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) 
+        .build(); 
 
     }
 

@@ -1,7 +1,9 @@
+import { CategoriaDTO } from "../Categoria/CategoriaDTO";
+
 export interface NecesidadSummaryDTO {
   id: number;
   titulo: string;
-  categoria: string;
+  categoria: CategoriaDTO;
   presupuesto: number; 
   descripcion: string;
   companiaNombre: string;

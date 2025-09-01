@@ -5,7 +5,9 @@
     Volver
   </a>
   <div class="mb-4">
-    <h1 class="h2 fw-bold mb-1">Publicar Nueva Necesidad</h1>
+    <h1 class="h2 fw-bold mb-1">
+      {{ idNeed ? 'Editar Necesidad' : 'Publicar Nueva Necesidad' }}
+    </h1>
     <p class="text-muted mb-0">Describe tu proyecto de IA para conectar con desarrolladores especializados</p>
   </div>
 
@@ -30,14 +32,9 @@
             <label for="category" class="form-label">Categoría *</label>
             <select [(ngModel)]="need.categoria" name="categoria" class="form-select" id="category" required>
               <option selected disabled>Selecciona una categoría</option>
-              <option value="machine-learning">Machine Learning</option>
-              <option value="nlp">Procesamiento de Lenguaje Natural</option>
-              <option value="computer-vision">Computer Vision</option>
-              <option value="data-science">Data Science</option>
-              <option value="deep-learning">Deep Learning</option>
-              <option value="ai-automation">Automatización con IA</option>
-              <option value="chatbots">Chatbots</option>
-              <option value="predictive-analytics">Análisis Predictivo</option>
+              @for (categoria of categorias; track $index) {
+                <option [ngValue]="categoria.id">{{ categoria.nombre }}</option>
+              }
             </select>
           </div>
           <div class="col-md-6">
@@ -138,7 +135,7 @@
       <a routerLink="/needs" class="btn btn-outline-secondary">Cancelar</a>
       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
         <i class="bi bi-save me-2"></i>
-        Publicar Necesidad
+        {{ idNeed ? 'Actualizar Necesidad' : 'Publicar Necesidad' }}
       </button>
     </div>
   </form>

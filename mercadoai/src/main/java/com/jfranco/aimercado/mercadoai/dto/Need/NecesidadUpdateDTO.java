@@ -9,12 +9,11 @@ public class NecesidadUpdateDTO {
     
     private String titulo;
     private String descripcion;
-    private String categoria;
+    private Long categoria;
     
     @Positive(message = "El presupuesto debe ser positivo")
     private BigDecimal presupuesto;
     
-    private Long compañiaId;
     private LocalDate fechaLimite;
     private List<Long> skillsRequiredIds;
     private List<String> requirements;
@@ -41,11 +40,11 @@ public class NecesidadUpdateDTO {
         this.descripcion = descripcion;
     }
 
-    public String getCategoria() {
+    public Long getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Long categoria) {
         this.categoria = categoria;
     }
 
@@ -55,14 +54,6 @@ public class NecesidadUpdateDTO {
 
     public void setPresupuesto(BigDecimal presupuesto) {
         this.presupuesto = presupuesto;
-    }
-
-    public Long getCompañiaId() {
-        return compañiaId;
-    }
-
-    public void setCompañiaId(Long compañiaId) {
-        this.compañiaId = compañiaId;
     }
 
     public LocalDate getFechaLimite() {
