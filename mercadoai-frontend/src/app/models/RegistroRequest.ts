@@ -6,17 +6,18 @@ export class RegistroRequest {
     nombre!: string;
     descripcion!: string;
     roles!: Role[];
+    pais?: number;
   
     // Campos específicos para desarrollador
-    habilidades?: string;
+    habilidades?: number[];
     experiencia?: number;
     portafolioURL?: string;
   
     // Campos específicos para compañía
     nombreCompania?: string;
-    industria?: string;
+    industria?: number;
     website?: string;
-    ubicacion?: string;
+    
   }
   
   export class Role {

@@ -54,16 +54,19 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.POST, "/usuarios/verify-reset-code").permitAll() 
         .requestMatchers(HttpMethod.POST, "/usuarios/reset-password").permitAll() 
         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+        .requestMatchers(HttpMethod.GET, "/paises/").permitAll()
+        .requestMatchers(HttpMethod.GET, "/industrias/").permitAll()
+        .requestMatchers(HttpMethod.GET, "/habilidades/").permitAll()
         .requestMatchers(HttpMethod.GET, "/necesidades/").hasAnyRole("DEVELOPER", "COMPANY", "ADMIN") 
         .requestMatchers(HttpMethod.GET, "/necesidades/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
         .requestMatchers(HttpMethod.POST, "/necesidades/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
         .requestMatchers(HttpMethod.PUT, "/necesidades/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
         .requestMatchers(HttpMethod.GET, "/categorias/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
         .anyRequest().authenticated())
-        .cors(cors -> cors.configurationSource(configurationSource())) // Configurar CORS
+        .cors(cors -> cors.configurationSource(configurationSource())) 
         .addFilter(new JwtValidationFilter(authenticationManager()))
         .addFilter(new JwtAuthenticationFilter(authenticationManager(),usuarioRepository))
-        .csrf(cr -> cr.disable()) // Deshabilitar CSRF para simplificar el desarrollo
+        .csrf(cr -> cr.disable()) 
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) 
         .build(); 
 

@@ -19,6 +19,7 @@ public interface UsuarioMapper {
     @Mapping(target = "calificacionPromedio", source = "calificacionPromedio")
     @Mapping(target = "cantidadCalificaciones", source = "cantidadCalificaciones")
     @Mapping(target = "cantidadProyectos", source = "cantidadProyectos")
+    @Mapping(target = "perfilCompania.industria", source = "usuario.perfilCompania.industria.nombre")
     public UsuarioCalificacionDTO toUsuarioCalificacionDTO(
         Usuario usuario,
         Double calificacionPromedio,
@@ -26,6 +27,7 @@ public interface UsuarioMapper {
         Integer cantidadProyectos);
         
     @Mapping(target = "roles" , source = "usuario.roles", qualifiedByName = "rolesToNombreList")
+    @Mapping(target = "perfilCompania.industria", source = "usuario.perfilCompania.industria.nombre")
     public UsuarioDTO toDTO(Usuario usuario);
 
     @Named("rolesToNombreList")

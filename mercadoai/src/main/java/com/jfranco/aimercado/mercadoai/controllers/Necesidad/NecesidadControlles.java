@@ -1,6 +1,7 @@
 package com.jfranco.aimercado.mercadoai.controllers.Necesidad;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
@@ -12,7 +13,10 @@ import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
 
 import java.util.List;
 
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,9 +37,16 @@ public class NecesidadControlles {
     private INecesidadesService necesidadesService;
 
     @GetMapping("/")
-    public ResponseEntity<List<NecesidadSummaryDTO>> listar() {
+    public ResponseEntity<Page<NecesidadSummaryDTO>> listar(
+        @RequestParam(required = false) String search,
+        @RequestParam(required = false) String categoria,
+        @RequestParam(required = false) String estado,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
         try {
-            List<NecesidadSummaryDTO> necesidades = necesidadesService.getAllNecesidades();
+            PageRequest pageable = PageRequest.of(page, size);
+            Page<NecesidadSummaryDTO> necesidades = necesidadesService.getAllNecesidades(search, categoria, estado, pageable);
             return ResponseEntity.ok(necesidades);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

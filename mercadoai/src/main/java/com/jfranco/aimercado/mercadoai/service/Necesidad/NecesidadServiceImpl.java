@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -66,67 +68,79 @@ public class NecesidadServiceImpl implements INecesidadesService {
     private PropuestaMapper propuestaMapper;
 
     @Override
-    public List<NecesidadSummaryDTO> getAllNecesidades() {
-        List<Necesidad> necesidades = necesidadesRepostitory.findAll();
-        return necesidades.stream().map(necesidad ->
-         necesidadMapper.toSummaryDTO(necesidad, propuestaRepository.countByNecesidadId(necesidad.getId()))).toList();
+    public Page<NecesidadSummaryDTO> getAllNecesidades(String search, String categoria, String estado,
+            Pageable pageable) {
+                
+        Page<Necesidad> necesidadesPage;
+
+        if (search != null && !search.isEmpty()) {
+            necesidadesPage = necesidadesRepostitory.findByTituloContainingIgnoreCase(search, pageable);
+        } else if (categoria != null && !categoria.isEmpty()) {
+            necesidadesPage = necesidadesRepostitory.findByCategoriaNombreIgnoreCase(categoria, pageable);
+        } else if (estado != null && !estado.isEmpty()) {
+            necesidadesPage = necesidadesRepostitory.findByEstadoNombreIgnoreCase(estado, pageable);
+        } else {
+            necesidadesPage = necesidadesRepostitory.findAll(pageable);
+        }
+
+        return necesidadesPage.map(necesidad -> necesidadMapper.toSummaryDTO(necesidad,
+                propuestaRepository.countByNecesidadId(necesidad.getId())));
     }
 
     @Override
     @Transactional(readOnly = true)
     public NecesidadUserDetailsDTO getNecesidadByIdDetails(Long id) {
-            Necesidad necesidad = necesidadesRepostitory.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
-            
-            List<Propuesta> propuestas = propuestaRepository.findByNecesidad(necesidad);
+        Necesidad necesidad = necesidadesRepostitory.findById(id)
+                .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
 
-            List<PropuestaUserDetailsDTO> propuestasDetailsDTO = new ArrayList<>();
-            
-            for (Propuesta propuesta : propuestas) {
-                Usuario desarrollador = propuesta.getDesarrollador();
-                Double calificacionPromedio = calificacionService.getPromedioCalificacionByUsuarioId(desarrollador.getId());
-                if (calificacionPromedio != null) {
-                    calificacionPromedio = Math.round(calificacionPromedio * 10.0) / 10.0;
-                }
-                Integer cantidadCalificaciones = 0;
-                Integer cantidadProyectos = proyectoRepository.countByPropuesta_Desarrollador_id(desarrollador.getId());
+        List<Propuesta> propuestas = propuestaRepository.findByNecesidad(necesidad);
 
-                PropuestaUserDetailsDTO propuestaDTO = propuestaMapper.toPropuestasUserDetailsDTO(
+        List<PropuestaUserDetailsDTO> propuestasDetailsDTO = new ArrayList<>();
+
+        for (Propuesta propuesta : propuestas) {
+            Usuario desarrollador = propuesta.getDesarrollador();
+            Double calificacionPromedio = calificacionService.getPromedioCalificacionByUsuarioId(desarrollador.getId());
+            if (calificacionPromedio != null) {
+                calificacionPromedio = Math.round(calificacionPromedio * 10.0) / 10.0;
+            }
+            Integer cantidadCalificaciones = 0;
+            Integer cantidadProyectos = proyectoRepository.countByPropuesta_Desarrollador_id(desarrollador.getId());
+
+            PropuestaUserDetailsDTO propuestaDTO = propuestaMapper.toPropuestasUserDetailsDTO(
                     propuesta,
                     calificacionPromedio,
                     cantidadCalificaciones,
                     cantidadProyectos);
 
-                propuestasDetailsDTO.add(propuestaDTO);
-            }
-            
-            Double calificacionPromedio = calificacionService.getPromedioCalificacionByUsuarioId(necesidad.getCompania().getId());
-            if (calificacionPromedio != null) {
-                calificacionPromedio = Math.round(calificacionPromedio * 10.0) / 10.0;
-            }
-            Integer cantidadCalificaciones = 0;
-            Integer cantidadProyectos = proyectoRepository.countByPropuesta_Desarrollador_id(necesidad.getCompania().getId());
+            propuestasDetailsDTO.add(propuestaDTO);
+        }
 
-            NecesidadUserDetailsDTO dto = necesidadMapper.toDetailsDTO(
+        Double calificacionPromedio = calificacionService
+                .getPromedioCalificacionByUsuarioId(necesidad.getCompania().getId());
+        if (calificacionPromedio != null) {
+            calificacionPromedio = Math.round(calificacionPromedio * 10.0) / 10.0;
+        }
+        Integer cantidadCalificaciones = 0;
+        Integer cantidadProyectos = proyectoRepository
+                .countByPropuesta_Desarrollador_id(necesidad.getCompania().getId());
+
+        NecesidadUserDetailsDTO dto = necesidadMapper.toDetailsDTO(
                 necesidad,
                 propuestasDetailsDTO,
                 calificacionPromedio,
                 cantidadCalificaciones,
-                cantidadProyectos
-            );
+                cantidadProyectos);
 
-            return dto;
+        return dto;
     }
-                
-                 
 
     @Override
     @Transactional
     public NecesidadDTO saveNecesidad(NecesidadCreateDTO necesidadDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username  =  authentication.getName();
+        String username = authentication.getName();
         Usuario usuario = usuarioRepository.findByUsername(username)
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con username: " + username));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con username: " + username));
         Usuario compania = usuarioRepository.findById(usuario.getId())
                 .orElseThrow(
                         () -> new RuntimeException("Compañía no encontrada con id: " + usuario.getId()));
@@ -137,12 +151,13 @@ public class NecesidadServiceImpl implements INecesidadesService {
         List<Habilidad> habilidades = habilidadesRepository.findAllById(necesidadDTO.getSkillsRequiredIds());
 
         Categoria categoria = categoriaRepository.findById(necesidadDTO.getCategoria())
-            .orElseThrow(() -> new RuntimeException("Categoría no encontrada con id: " + necesidadDTO.getCategoria()));
+                .orElseThrow(
+                        () -> new RuntimeException("Categoría no encontrada con id: " + necesidadDTO.getCategoria()));
 
         Necesidad necesidad = necesidadMapper.toEntity(necesidadDTO, compania, estado, habilidades, categoria);
 
         Necesidad saved = necesidadesRepostitory.save(necesidad);
-        
+
         return necesidadMapper.toDTO(saved);
     }
 
@@ -154,22 +169,22 @@ public class NecesidadServiceImpl implements INecesidadesService {
 
         Estado estado = null;
 
-        if(dto.getEstadoId() != null) {
+        if (dto.getEstadoId() != null) {
             estado = estadoRepository.findById(dto.getEstadoId())
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado con id: " + dto.getEstadoId()));
+                    .orElseThrow(() -> new RuntimeException("Estado no encontrado con id: " + dto.getEstadoId()));
         }
 
         List<Habilidad> habilidades = null;
 
-        if(dto.getSkillsRequiredIds() != null) {
+        if (dto.getSkillsRequiredIds() != null) {
             habilidades = habilidadesRepository.findAllById(dto.getSkillsRequiredIds());
         }
 
         Categoria categoria = null;
 
-        if(dto.getCategoria() != null) {
+        if (dto.getCategoria() != null) {
             categoria = categoriaRepository.findById(dto.getCategoria())
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con id: " + dto.getCategoria()));
+                    .orElseThrow(() -> new RuntimeException("Categoría no encontrada con id: " + dto.getCategoria()));
         }
 
         necesidadMapper.updateEntity(necesidad, dto, estado, habilidades, categoria);

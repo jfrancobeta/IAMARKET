@@ -103,9 +103,30 @@
                   >
                 </div>
               </div>
+              <div class="col-md-6">
+                <label for="pais" class="form-label">País</label>
+                <select
+                  class="form-select"
+                  id="pais"
+                  name="pais"
+                  [(ngModel)]="registroRequest.pais"
+                  #pais="ngModel"
+                  required
+                >
+                  <option selected disabled value="">Selecciona un país</option>
+                  <option *ngFor="let pais of paises" [value]="pais.id">
+                    {{ pais.nombre }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="pais.invalid && pais.touched"
+                  class="text-danger small"
+                >
+                  Selecciona un país.
+                </div>
+              </div>
             </div>
 
-           
             <!-- Tabs para rol específico -->
             <ul class="nav nav-tabs mb-4" id="registerTabs" role="tablist">
               <li class="nav-item" role="presentation">
@@ -160,28 +181,51 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label for="sector" class="form-label">Sector</label>
+                    <label for="industria" class="form-label">Industria</label>
                     <select
                       class="form-select"
-                      id="sector"
+                      id="industria"
                       name="industria"
                       [(ngModel)]="registroRequest.industria"
                       #industria="ngModel"
-                      #required
+                      required
                     >
-                      <option selected disabled>Selecciona un sector</option>
-                      <option value="tech">Tecnología</option>
-                      <option value="finance">Finanzas</option>
-                      <option value="healthcare">Salud</option>
-                      <option value="retail">Retail</option>
-                      <option value="manufacturing">Manufactura</option>
-                      <option value="other">Otro</option>
+                      <option selected disabled value="">
+                        Selecciona un sector
+                      </option>
+                      <option
+                        *ngFor="let industria of industrias"
+                        [value]="industria.id"
+                      >
+                        {{ industria.nombre }}
+                      </option>
                     </select>
                     <div
                       *ngIf="industria.invalid && industria.touched"
                       class="text-danger small"
                     >
                       Selecciona un sector.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="website" class="form-label">Sitio web</label>
+                    <input
+                      type="url"
+                      class="form-control"
+                      id="website"
+                      name="website"
+                      [(ngModel)]="registroRequest.website"
+                      #website="ngModel"
+                      placeholder="https://www.miempresa.com"
+                    />
+                    <div
+                      *ngIf="website.invalid && website.touched"
+                      class="text-danger small"
+                    >
+                      Ingresa una URL válida.
                     </div>
                   </div>
                 </div>
@@ -211,76 +255,85 @@
 
             <!-- Desarrollador -->
             <div *ngIf="registroRequest.userType === 1">
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label for="dev-skills" class="form-label"
-                      >Habilidades principales</label
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label">Habilidades principales</label>
+                  <div class="mb-2 d-flex flex-wrap">
+                    <span
+                      *ngFor="let skill of selectedHabilidades"
+                      class="badge bg-primary me-1 mb-1"
                     >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="dev-skills"
-                      placeholder="Machine Learning, NLP, TensorFlow..."
-                      name="habilidades"
-                      [(ngModel)]="registroRequest.habilidades"
-                      #habilidades="ngModel"
-                      required
-                    />
-                    <div
-                      *ngIf="habilidades.invalid && habilidades.touched"
-                      class="text-danger small"
-                    >
-                      Las habilidades son obligatorias.
-                    </div>
+                      {{ skill.nombre }}
+                      <button
+                        type="button"
+                        class="btn-close btn-close-white btn-sm ms-1"
+                        aria-label="Eliminar"
+                        (click)="removeSkill(skill)"
+                      ></button>
+                    </span>
                   </div>
-                  <div class="col-md-6">
-                    <label for="experience" class="form-label"
-                      >Experiencia</label
-                    >
-                    <select
-                      class="form-select"
-                      id="experience"
-                      name="experiencia"
-                      [(ngModel)]="registroRequest.experiencia"
-                      #experiencia="ngModel"
-                      required
-                    >
-                      <option selected disabled>Años de experiencia</option>
-                      <option value="0-1">0-1 años</option>
-                      <option value="2-3">2-3 años</option>
-                      <option value="4-5">4-5 años</option>
-                      <option value="6-10">6-10 años</option>
-                      <option value="10+">Más de 10 años</option>
-                    </select>
-                    <div
-                      *ngIf="experiencia.invalid && experiencia.touched"
-                      class="text-danger small"
-                    >
-                      Selecciona la experiencia.
-                    </div>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#habilidadesModal"
+                  >
+                    Seleccionar habilidades
+                  </button>
+                  <div
+                    *ngIf="selectedHabilidades.length === 0"
+                    class="text-danger small"
+                  >
+                    Las habilidades son obligatorias.
                   </div>
                 </div>
 
-                <div class="mb-3">
-                  <label for="portfolio" class="form-label"
-                    >Portafolio / GitHub</label
+                <div class="col-md-6">
+                  <label for="experience" class="form-label">Experiencia</label>
+                  <select
+                    class="form-select"
+                    id="experience"
+                    name="experiencia"
+                    [(ngModel)]="registroRequest.experiencia"
+                    #experiencia="ngModel"
+                    required
                   >
-                  <input
-                    type="url"
-                    class="form-control"
-                    id="portfolio"
-                    name="portafolioURL"
-                    [(ngModel)]="registroRequest.portafolioURL"
-                    #portafolioURL="ngModel"
-                    placeholder="https://github.com/usuario"
-                  />
+                    <option selected disabled>Años de experiencia</option>
+                    <option value="1">1 años</option>
+                    <option value="3">3 años</option>
+                    <option value="5">5 años</option>
+                    <option value="10">10 años</option>
+                    <option value="10+">Más de 10 años</option>
+                  </select>
                   <div
-                    *ngIf="portafolioURL.invalid && portafolioURL.touched"
+                    *ngIf="experiencia.invalid && experiencia.touched"
                     class="text-danger small"
                   >
-                    Ingresa una URL válida de portafolio.
+                    Selecciona la experiencia.
                   </div>
                 </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="portfolio" class="form-label"
+                  >Portafolio / GitHub</label
+                >
+                <input
+                  type="url"
+                  class="form-control"
+                  id="portfolio"
+                  name="portafolioURL"
+                  [(ngModel)]="registroRequest.portafolioURL"
+                  #portafolioURL="ngModel"
+                  placeholder="https://github.com/usuario"
+                />
+                <div
+                  *ngIf="portafolioURL.invalid && portafolioURL.touched"
+                  class="text-danger small"
+                >
+                  Ingresa una URL válida de portafolio.
+                </div>
+              </div>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">
@@ -294,6 +347,46 @@
             </p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="habilidadesModal"
+  tabindex="-1"
+  aria-labelledby="habilidadesModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="habilidadesModalLabel">Selecciona tus habilidades</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let skill of habilidadesList" class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [id]="'skill-' + skill.id"
+            [value]="skill.id"
+            [(ngModel)]="skill.checked"
+          />
+          <label class="form-check-label" [for]="'skill-' + skill.id">
+            {{ skill.nombre }}
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="confirmSkills()"
+        >
+          Confirmar
+        </button>
       </div>
     </div>
   </div>
