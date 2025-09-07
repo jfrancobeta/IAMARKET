@@ -8,7 +8,6 @@ public class PerfilCompaniaDTO {
     private String nombreCompania;
     private String industria;
     private String website;
-    private String ubicacion;
 
     // Constructor vacío
     public PerfilCompaniaDTO() {}
@@ -19,7 +18,6 @@ public class PerfilCompaniaDTO {
         this.nombreCompania = nombreCompania;
         this.industria = industria;
         this.website = website;
-        this.ubicacion = ubicacion;
     }
 
     // Constructor que recibe una entidad PerfilCompania
@@ -27,9 +25,8 @@ public class PerfilCompaniaDTO {
         if (perfilCompania != null) {
             this.id = perfilCompania.getId();
             this.nombreCompania = perfilCompania.getNombreCompania();
-            this.industria = perfilCompania.getIndustria();
+            this.industria = perfilCompania.getIndustria().getNombre();
             this.website = perfilCompania.getWebsite();
-            this.ubicacion = perfilCompania.getUbicacion();
         }
     }
 
@@ -66,11 +63,4 @@ public class PerfilCompaniaDTO {
         this.website = website;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
 }

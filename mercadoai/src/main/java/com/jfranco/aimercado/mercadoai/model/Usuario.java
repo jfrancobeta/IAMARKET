@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -48,7 +49,10 @@ public class Usuario {
     private Boolean estado;
 
     private String foto;
-
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pais_id")
+    private Pais pais;
     // Relación opcional: solo uno de estos se usará según userType
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
     @JsonIgnoreProperties("usuario")
@@ -155,6 +159,12 @@ public class Usuario {
     }
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+    public Pais getPais() {
+        return pais;
+    }
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 
 

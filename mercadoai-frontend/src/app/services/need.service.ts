@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { NecesidadSummaryDTO } from '../models/Necesidad/NecesidadSummaryDTO';
 import { NecesidadUserDetailsDTO } from '../models/Necesidad/NecesidadUserDetailsDTO';
 import { NecesidadCreateDTO } from '../models/Necesidad/NecesidadCreateDTO';
+import { Page } from '../models/page';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class NeedService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<NecesidadSummaryDTO[]> {
-    return this.http.get<NecesidadSummaryDTO[]>(`${this.url}/`);
+  getAll(params:any): Observable<Page<NecesidadSummaryDTO>> {
+    return this.http.get<Page<NecesidadSummaryDTO>>(`${this.url}/`, { params });
   }
 
   getByidDetails(id: number): Observable<NecesidadUserDetailsDTO> {

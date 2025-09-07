@@ -26,30 +26,45 @@
                 type="text"
                 class="form-control border-start-0"
                 placeholder="Buscar necesidades..."
+                [(ngModel)]="filtros.search"
+                name="search"
+                (ngModelChange)="loadNeeds()"
               />
             </div>
           </div>
           <div class="col-md-2">
-            <select class="form-select">
-              <option selected>Categoría</option>
-              <option value="ml">Machine Learning</option>
-              <option value="nlp">NLP</option>
-              <option value="cv">Computer Vision</option>
-              <option value="data">Data Science</option>
+            <select
+              class="form-select"
+              [(ngModel)]="filtros.categoria"
+              name="categoria"
+              (ngModelChange)="loadNeeds()"
+            >
+              <option value="" selected>Categoría</option>
+              <option
+                *ngFor="let categoria of categorias"
+                [value]="categoria.nombre"
+              >
+                {{ categoria.nombre }}
+              </option>
             </select>
           </div>
           <div class="col-md-2">
-            <select class="form-select">
-              <option selected>Estado</option>
-              <option value="active">Activa</option>
-              <option value="review">En revisión</option>
-              <option value="completed">Completada</option>
+            <select
+              class="form-select"
+              [(ngModel)]="filtros.estado"
+              name="estado"
+              (ngModelChange)="loadNeeds()"
+            >
+              <option value="" selected>Estado</option>
+              <option *ngFor="let estado of estados" [value]="estado.nombre">
+                {{ estado.nombre }}
+              </option>
             </select>
           </div>
           <div class="col-md-2">
-            <button type="button" class="btn btn-outline-secondary w-100">
+            <button type="button" class="btn btn-outline-secondary w-100" (click)="clearFilters()">
               <i class="bi bi-funnel me-2"></i>
-              Filtros
+              Limpiar Filtros
             </button>
           </div>
         </form>
@@ -107,7 +122,6 @@
       }
     </div>
     }@else {
-
     <div class="card mt-5">
       <div class="card-body text-center py-5">
         <i class="bi bi-file-earmark-text fs-1 text-muted mb-3"></i>
@@ -116,7 +130,7 @@
           Comienza publicando tu primera necesidad de IA para conectar con
           desarrolladores especializados.
         </p>
-        <a href="/needs/create" class="btn btn-primary">
+        <a routerLink="/needs/create" class="btn btn-primary">
           <i class="bi bi-plus-lg me-2"></i>
           Publicar Primera Necesidad
         </a>
@@ -124,4 +138,25 @@
     </div>
     }
   </div>
+  <nav *ngIf="totalPages > 0" aria-label="Paginación">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="filtros.page === 0">
+        <button class="page-link" (click)="changePage(filtros.page - 1)">
+          Anterior
+        </button>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let p of [].constructor(totalPages); let i = index"
+        [class.active]="i === filtros.page"
+      >
+        <button class="page-link" (click)="changePage(i)">{{ i + 1 }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="filtros.page === totalPages - 1">
+        <button class="page-link" (click)="changePage(filtros.page + 1)">
+          Siguiente
+        </button>
+      </li>
+    </ul>
+  </nav>
 </app-main-layout>

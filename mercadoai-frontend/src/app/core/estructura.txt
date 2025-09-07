@@ -1,0 +1,115 @@
+src/
+├── app/
+│   ├── core/
+│   │   ├── services/
+│   │   │   └── auth.service.ts
+│   │   ├── guards/
+│   │   │   └── auth.guard.ts
+│   │   ├── interceptors/
+│   │   │   └── http-interceptor.service.ts
+│   │   └── core.module.ts (opcional)
+│   ├── shared/
+│   │   ├── components/
+│   │   │   └── navbar.component.ts
+│   │   ├── pipes/
+│   │   │   └── date-format.pipe.ts
+│   │   ├── directives/
+│   │   │   └── highlight.directive.ts
+│   │   └── shared.module.ts (opcional)
+│   ├── features/
+│   │   ├── industria/
+│   │   │   ├── components/
+│   │   │   │   ├── industria-list.component.ts
+│   │   │   │   └── industria-detail.component.ts
+│   │   │   ├── services/
+│   │   │   │   └── industria.service.ts
+│   │   │   ├── models/
+│   │   │   │   └── industria.dto.ts
+│   │   │   ├── industria.routes.ts
+│   │   │   └── industria.config.ts (opcional)
+│   │   ├── usuario/
+│   │   │   ├── components/
+│   │   │   │   └── usuario-list.component.ts
+│   │   │   ├── services/
+│   │   │   │   └── usuario.service.ts
+│   │   │   ├── models/
+│   │   │   │   └── usuario.dto.ts
+│   │   │   ├── usuario.routes.ts
+│   │   │   └── usuario.config.ts (opcional)
+│   ├── app.routes.ts
+│   └── app.config.ts (opcional)
+├── assets/
+│   ├── images/
+│   └── styles/
+├── environments/
+│   ├── environment.ts
+│   └── environment.prod.ts
+└── index.html
+
+src/
+├── app/
+│   ├── core/                       # Servicios globales, guards, interceptors
+│   │   ├── services/
+│   │   ├── guards/
+│   │   ├── interceptors/
+│   │   └── core.module.ts (opcional)
+│   ├── shared/                     # Componentes, pipes, directivas reutilizables
+│   │   ├── components/
+│   │   ├── pipes/
+│   │   ├── directives/
+│   │   └── shared.module.ts (opcional)
+│   ├── features/                   # Módulos funcionales (por dominio)
+│   │   ├── industria/
+│   │   │   ├── components/
+│   │   │   ├── services/
+│   │   │   ├── models/
+│   │   │   ├── industria.routes.ts
+│   │   │   └── industria.config.ts (opcional)
+│   │   ├── usuario/
+│   │   │   ├── components/
+│   │   │   ├── services/
+│   │   │   ├── models/
+│   │   │   ├── usuario.routes.ts
+│   │   │   └── usuario.config.ts (opcional)
+│   ├── app.routes.ts               # Rutas principales (standalone)
+│   └── app.config.ts (opcional)    # Configuración global
+├── assets/                         # Imágenes, estilos, fuentes
+├── environments/                   # Configuración de entornos
+│   ├── environment.ts
+│   └── environment.prod.ts
+└── index.html
+
+
+src/
+└── main/
+    ├── java/
+    │   └── com/tuempresa/
+    │       ├── config/
+    │       │   ├── SecurityConfig.java         # Configuración de seguridad
+    │       │   └── WebConfig.java              # Configuración web general
+    │       ├── controller/
+    │       │   ├── IndustriaController.java    # Controlador REST para Industria
+    │       │   └── UsuarioController.java      # Controlador REST para Usuario
+    │       ├── dto/
+    │       │   ├── IndustriaDTO.java           # DTO de Industria
+    │       │   └── UsuarioDTO.java             # DTO de Usuario
+    │       ├── entity/
+    │       │   ├── Industria.java              # Entidad JPA de Industria
+    │       │   └── Usuario.java                # Entidad JPA de Usuario
+    │       ├── exception/
+    │       │   ├── CustomException.java        # Excepción personalizada
+    │       │   └── GlobalExceptionHandler.java # Manejo global de excepciones
+    │       ├── repository/
+    │       │   ├── IndustriaRepository.java    # Repositorio JPA de Industria
+    │       │   └── UsuarioRepository.java      # Repositorio JPA de Usuario
+    │       ├── service/
+    │       │   ├── IndustriaService.java       # Lógica de negocio de Industria
+    │       │   └── UsuarioService.java         # Lógica de negocio de Usuario
+    │       ├── util/
+    │       │   └── MapperUtil.java             # Utilidad para mapeos entre entidades y DTOs
+    │       └── Application.java                # Clase principal
+    └── resources/
+        ├── static/                            # Archivos estáticos (CSS, JS)
+        ├── templates/                         # Plantillas (Thymeleaf, etc.)
+        ├── application.properties             # Configuración de la aplicación
+        └── messages.properties    

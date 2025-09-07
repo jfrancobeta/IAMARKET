@@ -12,19 +12,20 @@ public class RegistroRequest {
     private Integer userType; // 0: Compañía, 1: Desarrollador
     private String nombre;
     private String descripcion;
+    private Long pais;
     private List<Role> roles;
 
     // Campos específicos para desarrollador
-    private String habilidades;
+    private List<Long> habilidades;
     private Integer experiencia;
     private String portafolioURL;
 
     // Campos específicos para compañía
     private String nombreCompania;
-    private String industria;
+    private Long industria;
     private String website;
-    private String ubicacion;
-
+    
+    
     public String getUsername() {
         return username;
     }
@@ -81,11 +82,11 @@ public class RegistroRequest {
         this.roles = roles;
     }
 
-    public String getHabilidades() {
+    public List<Long> getHabilidades() {
         return habilidades;
     }
 
-    public void setHabilidades(String habilidades) {
+    public void setHabilidades(List<Long> habilidades) {
         this.habilidades = habilidades;
     }
 
@@ -113,11 +114,11 @@ public class RegistroRequest {
         this.nombreCompania = nombreCompania;
     }
 
-    public String getIndustria() {
+    public Long getIndustria() {
         return industria;
     }
 
-    public void setIndustria(String industria) {
+    public void setIndustria(Long industria) {
         this.industria = industria;
     }
 
@@ -129,12 +130,11 @@ public class RegistroRequest {
         this.website = website;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
+    public Long getPais() {
+        return pais;
     }
 
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setPais(Long pais) {
+        this.pais = pais;
     }
-
 }

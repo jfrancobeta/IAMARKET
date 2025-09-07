@@ -1,6 +1,7 @@
 package com.jfranco.aimercado.mercadoai.service.Necesidad;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadDTO;
@@ -10,7 +11,7 @@ import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
 
 public interface INecesidadesService {
 
-    List<NecesidadSummaryDTO> getAllNecesidades();
+    Page<NecesidadSummaryDTO> getAllNecesidades(String search, String categoria, String estado, Pageable pageable);
 
     NecesidadUserDetailsDTO getNecesidadByIdDetails(Long id);
 
