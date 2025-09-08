@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { PUBLIC_ROUTES } from '../../public-routes';
+import { AuthService } from '../services/auth.service';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const isPublic = PUBLIC_ROUTES.some((route) => req.url.includes(route));

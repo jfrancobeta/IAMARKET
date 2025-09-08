@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
-import { SharingDataService } from './services/sharing-data.service';
-import { AuthService } from './services/auth.service';
 import Swal from 'sweetalert2';
-import { HeaderComponent } from "./components/layout/header/header.component";
-import { MainLayoutComponent } from "./components/layout/main-layout/main-layout.component";
+import { AuthService } from './core/services/auth.service';
+import { SharingDataService } from './core/services/sharing-data.service';
+import { HeaderComponent } from './shared/layout/header/header.component';
+import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, MainLayoutComponent],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
