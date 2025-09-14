@@ -1,14 +1,19 @@
 package com.jfranco.aimercado.mercadoai.service.Soluciones;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import com.jfranco.aimercado.mercadoai.model.Solucion;
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionCreateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDTO;
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionSummaryDTO;
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionUpdateDTO;
 
 public interface ISolucionesService {
 
-    List<Solucion> getAllSoluciones();
-    Solucion getSolucionById(Long id);
-    Solucion saveSolucion(Solucion solucion);
+    Page<SolucionSummaryDTO> getAllSoluciones(String search, String categoria, String estado, Pageable pageable);
+    SolucionDTO getSolucionById(Long id);
+    SolucionDTO saveSolucion(SolucionCreateDTO solucion);
+    SolucionDTO updateSolucion(Long id, SolucionUpdateDTO solucionDTO);   
     void eliminarSolucion(Long id);
     
 }

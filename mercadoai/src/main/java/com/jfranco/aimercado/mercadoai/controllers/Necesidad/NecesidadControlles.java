@@ -11,9 +11,6 @@ import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUserDetailsDTO;
 import com.jfranco.aimercado.mercadoai.service.Necesidad.INecesidadesService;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
 
-import java.util.List;
-
-import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
