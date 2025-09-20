@@ -722,3 +722,151 @@ INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion,
 INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (19, 7, 12, 4, 'Proyecto interesante, buen ambiente', '2025-08-04');
 INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (20, 8, 13, 5, 'Agencia muy organizada y profesional', '2025-08-05');
 
+-- Soluciones 
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion)VALUES (1, 2, 'API RESTful Spring Boot', 'API lista para producción con autenticación JWT', 1200, 15, 3, 1, 2, 10, 'DIAS', '2025-08-01', '2025-08-01');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion)VALUES (2, 3, 'Frontend Angular Responsive', 'Interfaz web moderna y responsiva', 900, 10, 2, 2, 1, 7, 'DIAS', '2025-08-02', '2025-08-02');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion)VALUES (3, 6, 'Landing Page React', 'Landing page optimizada para SEO', 700, 8, 1, 2, 0, 5, 'DIAS', '2025-08-03', '2025-08-03');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion)VALUES (4, 7, 'App Flutter Multiplataforma', 'Aplicación móvil para iOS y Android', 2000, 20, 5, 5, 2, 14, 'DIAS', '2025-08-04', '2025-08-04');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion)VALUES (5, 8, 'Pipeline CI/CD con GitHub Actions', 'Automatización de despliegues y pruebas', 1100, 7, 2, 3, 1, 6, 'DIAS', '2025-08-05', '2025-08-05');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (6, 9, 'Script Python para Reportes', 'Automatización de reportes en Excel y PDF', 800, 12, 3, 1, 2, 5, 'DIAS', '2025-08-06', '2025-08-06');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (7, 10, 'Backend Node.js Express', 'API REST con autenticación y documentación', 1300, 9, 2, 1, 0, 8, 'DIAS', '2025-08-07', '2025-08-07');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (8, 2, 'Microservicio Java', 'Microservicio escalable con Spring Boot', 1500, 11, 2, 1, 1, 12, 'DIAS', '2025-08-08', '2025-08-08');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (9, 3, 'SPA Angular', 'Single Page Application con Angular y RxJS', 1000, 13, 3, 2, 2, 9, 'DIAS', '2025-08-09', '2025-08-09');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (10, 6, 'API GraphQL', 'API GraphQL para microservicios', 1400, 6, 1, 1, 0, 10, 'DIAS', '2025-08-10', '2025-08-10');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (11, 7, 'App iOS Nativa', 'Aplicación nativa para iPhone', 2200, 14, 4, 5, 1, 15, 'DIAS', '2025-08-11', '2025-08-11');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (12, 8, 'Infraestructura AWS', 'Despliegue automatizado en AWS', 1800, 10, 2, 8, 2, 7, 'DIAS', '2025-08-12', '2025-08-12');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (13, 9, 'Machine Learning con Python', 'Modelo de ML para predicción de datos', 1700, 8, 2, 9, 0, 12, 'DIAS', '2025-08-13', '2025-08-13');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (14, 10, 'Sistema de Autenticación', 'Login social y autenticación JWT', 900, 7, 1, 7, 1, 6, 'DIAS', '2025-08-14', '2025-08-14');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (15, 2, 'API RESTful con Documentación', 'API con Swagger y OpenAPI', 1100, 9, 2, 1, 2, 8, 'DIAS', '2025-08-15', '2025-08-15');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (16, 3, 'Panel de Administración Angular', 'Dashboard administrativo con gráficos', 1200, 12, 3, 2, 0, 10, 'DIAS', '2025-08-16', '2025-08-16');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (17, 6, 'API REST Node.js', 'API escalable con Express y MongoDB', 1300, 11, 2, 1, 1, 9, 'DIAS', '2025-08-17', '2025-08-17');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (18, 7, 'App Android Nativa', 'Aplicación nativa para Android', 2100, 13, 4, 5, 2, 14, 'DIAS', '2025-08-18', '2025-08-18');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (19, 8, 'DevOps con Docker y Kubernetes', 'Automatización de despliegues en contenedores', 1600, 8, 2, 3, 0, 7, 'DIAS', '2025-08-19', '2025-08-19');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (20, 9, 'Sistema de Notificaciones Push', 'Notificaciones para apps móviles', 1000, 7, 1, 5, 1, 6, 'DIAS', '2025-08-20', '2025-08-20');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (21, 10, 'API RESTful Python Django', 'API robusta con Django REST Framework', 1250, 10, 2, 1, 2, 8, 'DIAS', '2025-08-21', '2025-08-21');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (22, 2, 'Sistema de Inventario', 'Inventario en tiempo real con alertas', 1400, 9, 2, 4, 0, 12, 'DIAS', '2025-08-22', '2025-08-22');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (23, 3, 'UI/UX Design Web', 'Diseño de interfaces web modernas', 800, 6, 1, 10, 1, 5, 'DIAS', '2025-08-23', '2025-08-23');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (24, 6, 'API RESTful PHP Laravel', 'API segura y documentada con Laravel', 1100, 8, 2, 1, 2, 9, 'DIAS', '2025-08-24', '2025-08-24');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (25, 7, 'App Flutter con Firebase', 'App móvil con login social y notificaciones', 1800, 14, 3, 5, 0, 13, 'DIAS', '2025-08-25', '2025-08-25');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (26, 8, 'Despliegue en Azure', 'Automatización de despliegues en Azure', 1700, 7, 2, 8, 1, 8, 'DIAS', '2025-08-26', '2025-08-26');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (27, 9, 'Modelo de IA para Clasificación', 'Modelo de clasificación de datos', 1600, 9, 2, 9, 2, 11, 'DIAS', '2025-08-27', '2025-08-27');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (28, 10, 'Sistema de Seguridad Web', 'Auditoría y hardening de aplicaciones', 1300, 8, 1, 7, 0, 7, 'DIAS', '2025-08-28', '2025-08-28');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (29, 2, 'API RESTful Go', 'API eficiente y concurrente con Go', 1500, 10, 2, 1, 1, 10, 'DIAS', '2025-08-29', '2025-08-29');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (30, 3, 'SPA React', 'Single Page Application con React y Redux', 1200, 11, 3, 2, 2, 8, 'DIAS', '2025-08-30', '2025-08-30');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (31, 6, 'API RESTful Ruby on Rails', 'API escalable con Rails', 1400, 7, 2, 1, 0, 9, 'DIAS', '2025-08-31', '2025-08-31');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (32, 7, 'App Móvil Kotlin', 'App Android nativa con Kotlin', 1700, 13, 4, 5, 1, 12, 'DIAS', '2025-09-01', '2025-09-01');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (33, 8, 'Infraestructura GCP', 'Despliegue automatizado en Google Cloud', 1800, 8, 2, 8, 2, 8, 'DIAS', '2025-09-02', '2025-09-02');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (34, 9, 'Modelo de IA para Predicción', 'Modelo de predicción de series temporales', 1700, 10, 2, 9, 0, 13, 'DIAS', '2025-09-03', '2025-09-03');
+INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion) VALUES (35, 10, 'Sistema de Autenticación OAuth2', 'Login seguro con OAuth2', 1200, 9, 2, 7, 1, 7, 'DIAS', '2025-09-04', '2025-09-04');
+
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (1, 1); -- Java
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (1, 2); -- Spring Boot
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (2, 3); -- Angular
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (2, 8); -- TypeScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (3, 11); -- React
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (3, 9); -- HTML
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (4, 23); -- Flutter
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (4, 21); -- Kotlin
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (5, 5); -- Docker
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (5, 12);
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (6, 6); -- Python
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (6, 4); -- SQL
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (7, 12); -- Node.js
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (7, 13); -- Express
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (8, 1); -- Java
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (8, 2); -- Spring Boot
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (9, 3); -- Angular
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (9, 7); -- JavaScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (10, 11); -- React
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (10, 12); -- Node.js
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (11, 22); -- Swift
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (12, 5); -- Docker
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (12, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (13, 6); -- Python
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (13, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (14, 7); -- JavaScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (14, 8); -- TypeScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (15, 1); -- Java
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (15, 2); -- Spring Boot
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (16, 3); -- Angular
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (16, 8); -- TypeScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (17, 12); -- Node.js
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (17, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (18, 21); -- Kotlin
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (18, 23); -- Flutter
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (19, 5); -- Docker
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (19, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (20, 23); -- Flutter
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (20, 7); -- JavaScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (21, 6); -- Python
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (21, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (22, 4); -- SQL
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (22, 1); -- Java
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (23, 10); -- CSS
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (23, 9); -- HTML
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (24, 16); -- PHP
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (24, 17); -- Laravel
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (25, 23); -- Flutter
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (25, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (26, 5); -- Docker
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (26, 12); -- Node.js
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (27, 6); -- Python
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (27, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (28, 7); -- JavaScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (28, 13); -- Express
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (29, 20); -- Go
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (29, 4); -- SQL
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (30, 11); -- React
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (30, 7); -- JavaScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (31, 18); -- Ruby
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (31, 19); -- Rails
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (32, 21); -- Kotlin
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (32, 23); -- Flutter
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (33, 5); -- Docker
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (33, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (34, 6); -- Python
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (34, 24); -- MongoDB
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (35, 7); -- JavaScript
+INSERT INTO solucion_habilidad (solucion_id, habilidad_id) VALUES (35, 8);
+
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (1, 'Autenticación JWT');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (1, 'Documentación Swagger');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (2, 'Responsive design');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (2, 'Soporte para PWA');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (3, 'SEO optimizado');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (3, 'Carga rápida');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (4, 'Push notifications');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (4, 'Login social');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (5, 'Pipeline multi-stage');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (5, 'Integración con Slack');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (6, 'Reportes automáticos');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (6, 'Exportación a PDF');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (7, 'API REST');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (7, 'Autenticación JWT');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (8, 'Microservicio escalable');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (8, 'Documentación OpenAPI');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (9, 'SPA con Angular');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (9, 'Soporte RxJS');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (10, 'API GraphQL');
+INSERT INTO solucion_caracteristicas (solucion_id, caracteristicas) VALUES (10, 'Documentación GraphQL');
+
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (1, 'Base de datos MySQL');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (1, 'Servidor Tomcat');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (2, 'API REST disponible');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (2, 'Cuenta Google Cloud');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (3, 'Dominio propio');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (3, 'Acceso a Google Analytics');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (4, 'Cuenta Firebase');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (4, 'Apple Developer Account');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (5, 'Repositorio GitHub');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (5, 'Acceso a servidor de pruebas');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (6, 'Acceso a base de datos');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (6, 'Plantilla de reportes');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (7, 'Servidor Node.js');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (7, 'Base de datos MongoDB');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (8, 'Acceso a repositorio Git');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (8, 'Servidor de pruebas');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (9, 'Cuenta Google Cloud');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (9, 'API REST disponible');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (10, 'Servidor GraphQL');
+INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (10, 'Base de datos configurada');

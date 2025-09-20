@@ -6,8 +6,10 @@ import org.mapstruct.Mapper;
 
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDTO;
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionUpdateDTO;
+import com.jfranco.aimercado.mercadoai.mapper.Usuario.UsuarioMapper;
 import com.jfranco.aimercado.mercadoai.model.Categoria;
 import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
@@ -16,7 +18,7 @@ import com.jfranco.aimercado.mercadoai.model.Usuario;
 
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UsuarioMapper.class})
 public interface SolucionMapper {
 
     @Mapping(target = "categoriaId", source = "categoria.id")
@@ -24,6 +26,9 @@ public interface SolucionMapper {
     @Mapping(target = "estadoId", source = "estado.id")
     @Mapping(target = "habilidadesIds", expression = "java(solucion.getHabilidades() == null ? null : solucion.getHabilidades().stream().map(h -> h.getId()).toList())")
     public SolucionDTO toDTO(Solucion solucion);
+
+    @Mapping(target = "desarrollador", source = "desarrollador")
+    public SolucionDetailsDTO toDetailsDTO(Solucion solucion);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "descripcion", source = "solucionDTO.descripcion")

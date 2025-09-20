@@ -6,10 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDTO;
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionUpdateDTO;
 import com.jfranco.aimercado.mercadoai.mapper.Solucion.SolucionMapper;
@@ -64,28 +67,35 @@ public class SolucionesService implements ISolucionesService {
     }
 
     @Override
-    public SolucionDTO getSolucionById(Long id) {
+    public SolucionDetailsDTO getSolucionById(Long id) {
         Solucion solucion = solucionesRespository.findById(id)
         .orElseThrow(() -> new RuntimeException("Solución no encontrada"));
 
-        return solucionMapper.toDTO(solucion);
+        solucion.incrementarVistas();
+        solucionesRespository.save(solucion);
+
+        return solucionMapper.toDetailsDTO(solucion);
     }
 
     @Override
     public SolucionDTO saveSolucion(SolucionCreateDTO solucionCreate) {
+        
         Categoria categoria = categoriaRepository.findById(solucionCreate.getCategoriaId())
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
 
         Estado estado = estadoRepository.findById(solucionCreate.getEstadoId())
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
-        Usuario desarrollador = usuarioRepository.findById(solucionCreate.getDesarrolladorId())
-                .orElseThrow(() -> new RuntimeException("Desarrollador no encontrado"));
-                
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Usuario usuario = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con username: " + username));
+        
         List<Habilidad> habilidades = habilidadRepository.findAllById(
             solucionCreate.getHabilidadesIds() != null ? solucionCreate.getHabilidadesIds() : List.of()
         );
-        Solucion solucion = solucionMapper.toEntity(solucionCreate, categoria, desarrollador, estado, habilidades);
+        Solucion solucion = solucionMapper.toEntity(solucionCreate, categoria, usuario, estado, habilidades);
         solucion = solucionesRespository.save(solucion);
         return solucionMapper.toDTO(solucion);
     }

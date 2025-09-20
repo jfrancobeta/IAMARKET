@@ -1,11 +1,16 @@
-dfdfdfdfdfddfdfdfdfdfdfdfdfdfd
+<app-main-layout>
 <div class="container py-4">
-  <a href="/solutions" class="btn btn-outline-secondary btn-sm mb-4 d-flex align-items-center">
+  <a
+    routerLink="/solutions"
+    class="btn btn-outline-secondary btn-sm mb-4 d-flex align-items-center"
+  >
     <i class="bi bi-arrow-left me-2"></i>
     Volver
   </a>
   <h1 class="h2 fw-bold mb-1">Crear Nueva Solución</h1>
-  <p class="text-muted mb-4">Publica una solución predefinida para ofrecer servicios específicos</p>
+  <p class="text-muted mb-4">
+    Publica una solución predefinida para ofrecer servicios específicos
+  </p>
 
   <form>
     <div class="card mb-4">
@@ -16,42 +21,79 @@ dfdfdfdfdfddfdfdfdfdfdfdfdfdfd
       <div class="card-body">
         <div class="mb-3">
           <label for="title" class="form-label">Título de la Solución *</label>
-          <input type="text" id="title" class="form-control" placeholder="ej. Sistema de Recomendaciones E-commerce" required>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            placeholder="ej. Sistema de Recomendaciones E-commerce"
+            [(ngModel)]="SolucionDTO.titulo"
+            name="title"
+            required
+          />
         </div>
         <div class="mb-3">
-          <label for="description" class="form-label">Descripción Detallada *</label>
-          <textarea id="description" class="form-control" rows="6" placeholder="Describe tu solución, qué problemas resuelve, cómo funciona..." required></textarea>
+          <label for="description" class="form-label"
+            >Descripción Detallada *</label
+          >
+          <textarea
+            id="description"
+            class="form-control"
+            rows="6"
+            placeholder="Describe tu solución, qué problemas resuelve, cómo funciona..."
+            [(ngModel)]="SolucionDTO.descripcion"
+            name="description"
+            required
+          ></textarea>
         </div>
         <div class="row g-3">
           <div class="col-md-4">
             <label for="category" class="form-label">Categoría *</label>
-            <select id="category" class="form-select" required>
+            <select id="category" class="form-select" required [(ngModel)]="SolucionDTO.categoriaId" name="categoriaId">
               <option selected disabled>Selecciona una categoría</option>
-              <option>Machine Learning</option>
-              <option>Procesamiento de Lenguaje Natural</option>
-              <option>Computer Vision</option>
-              <option>Data Science</option>
-              <option>Deep Learning</option>
-              <option>Automatización con IA</option>
-              <option>Chatbots</option>
-              <option>Análisis Predictivo</option>
+              @for (category of categories; track $index) {
+              <option ngValue="{{ category.id }}">{{ category.nombre }}</option>
+
+              }
             </select>
           </div>
           <div class="col-md-4">
             <label for="price" class="form-label">Precio *</label>
-            <input type="text" id="price" class="form-control" placeholder="$2,500" required>
+            <input
+              type="text"
+              id="price"
+              class="form-control"
+              placeholder="$2,500"
+              [(ngModel)]="SolucionDTO.precio"
+              name="precio"
+              required
+            />
           </div>
           <div class="col-md-4">
-            <label for="deliveryTime" class="form-label">Tiempo de Entrega *</label>
-            <select id="deliveryTime" class="form-select" required>
-              <option selected disabled>Tiempo estimado</option>
-              <option>1 semana</option>
-              <option>2 semanas</option>
-              <option>3 semanas</option>
-              <option>1 mes</option>
-              <option>2 meses</option>
-              <option>Personalizado</option>
-            </select>
+            <label for="deliveryTime" class="form-label"
+              >Tiempo de Entrega *</label
+            >
+            <div class="input-group">
+              <input
+                type="number"
+                min="1"
+                class="form-control"
+                id="deliveryTime"
+                [(ngModel)]="SolucionDTO.tiempoEntrega"
+                name="deliveryTime"
+                required
+                placeholder="Enter time"
+              />
+              <select
+                class="form-select"
+                [(ngModel)]="SolucionDTO.unidadEntrega"
+                name="deliveryUnit"
+                required
+              >
+                <option [ngValue]="UnidadEntrega.Dias">Días</option>
+                <option [ngValue]="UnidadEntrega.Semanas">Semanas</option>
+                <option [ngValue]="UnidadEntrega.Meses">Meses</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -60,82 +102,29 @@ dfdfdfdfdfddfdfdfdfdfdfdfdfdfd
     <div class="card mb-4">
       <div class="card-header">
         <h5 class="fw-bold mb-1">Tecnologías y Herramientas</h5>
-        <p class="text-muted mb-0">Selecciona las tecnologías que utilizas en esta solución</p>
+        <p class="text-muted mb-0">
+          Selecciona las tecnologías que utilizas en esta solución
+        </p>
       </div>
       <div class="card-body">
         <div class="row g-2">
+          @for (skill of skills; track $index) {
           <div class="col-md-3">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-python">
-              <label class="form-check-label" for="tech-python">Python</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-tensorflow">
-              <label class="form-check-label" for="tech-tensorflow">TensorFlow</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-pytorch">
-              <label class="form-check-label" for="tech-pytorch">PyTorch</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-scikit">
-              <label class="form-check-label" for="tech-scikit">Scikit-learn</label>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="{{ skill.id }}"
+                name="habilidadesIds"
+                [checked]="SolucionDTO.habilidadesIds.includes(skill.id)"
+                (change)="onSkillToggle(skill.id, $event)"
+              />
+              <label class="form-check-label" for="{{ skill.nombre }}">{{
+                skill.nombre
+              }}</label>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-keras">
-              <label class="form-check-label" for="tech-keras">Keras</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-opencv">
-              <label class="form-check-label" for="tech-opencv">OpenCV</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-nltk">
-              <label class="form-check-label" for="tech-nltk">NLTK</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-spacy">
-              <label class="form-check-label" for="tech-spacy">spaCy</label>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-pandas">
-              <label class="form-check-label" for="tech-pandas">Pandas</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-numpy">
-              <label class="form-check-label" for="tech-numpy">NumPy</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-aws">
-              <label class="form-check-label" for="tech-aws">AWS</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-gcloud">
-              <label class="form-check-label" for="tech-gcloud">Google Cloud</label>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-azure">
-              <label class="form-check-label" for="tech-azure">Azure</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-docker">
-              <label class="form-check-label" for="tech-docker">Docker</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-kubernetes">
-              <label class="form-check-label" for="tech-kubernetes">Kubernetes</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tech-fastapi">
-              <label class="form-check-label" for="tech-fastapi">FastAPI</label>
-            </div>
-          </div>
+          }
         </div>
       </div>
     </div>
@@ -147,21 +136,96 @@ dfdfdfdfdfddfdfdfdfdfdfdfdfdfd
       </div>
       <div class="card-body">
         <div class="mb-3">
-          <label for="features" class="form-label">Características Principales</label>
-          <textarea id="features" class="form-control" rows="6" placeholder="• Modelo de ML entrenado y optimizado\n• API REST para integración\n• Dashboard de visualización\n• Documentación completa"></textarea>
+          <label for="features" class="form-label"
+            >Características Principales</label
+          >
+          <div class="input-group mb-2">
+            <input
+              id="features"
+              class="form-control"
+              [(ngModel)]="featureInput"
+              name="featureInput"
+              placeholder="Agregar característica"
+              (keyup.enter)="addFeature()"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="addFeature()"
+            >
+              Agregar
+            </button>
+          </div>
+          <ul class="list-group">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let feature of SolucionDTO.caracteristicas; let i = index"
+            >
+              {{ feature }}
+              <button
+                type="button"
+                class="btn btn-sm btn-danger"
+                (click)="removeFeature(i)"
+              >
+                Quitar
+              </button>
+            </li>
+          </ul>
         </div>
         <div class="mb-3">
-          <label for="requirements" class="form-label">Requisitos del Cliente</label>
-          <textarea id="requirements" class="form-control" rows="4" placeholder="Describe qué necesita proporcionar el cliente (datos, accesos, etc.)"></textarea>
+          <label for="requirements" class="form-label"
+            >Requisitos del Cliente</label
+          >
+          <div class="input-group mb-2">
+            <input
+              id="requirements"
+              class="form-control"
+              [(ngModel)]="requirementInput"
+              name="requirementInput"
+              placeholder="Agregar requisito"
+              (keyup.enter)="addRequirement()"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="addRequirement()"
+            >
+              Agregar
+            </button>
+          </div>
+          <ul class="list-group">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let requirement of SolucionDTO.requisitos; let i = index"
+            >
+              {{ requirement }}
+              <button
+                type="button"
+                class="btn btn-sm btn-danger"
+                (click)="removeRequirement(i)"
+              >
+                Quitar
+              </button>
+            </li>
+          </ul>
         </div>
-        <div class="mb-3">
-          <label for="portfolio" class="form-label">Enlaces de Portafolio/Demos</label>
-          <input type="text" id="portfolio" class="form-control" placeholder="https://demo.ejemplo.com, https://github.com/usuario/proyecto">
-        </div>
+
+        <!-- <div class="mb-3">
+          <label for="portfolio" class="form-label"
+            >Enlaces de Portafolio/Demos</label
+          >
+          <input
+            type="text"
+            id="portfolio"
+            class="form-control"
+            placeholder="https://demo.ejemplo.com, https://github.com/usuario/proyecto"
+            
+          />
+        </div> -->
       </div>
     </div>
 
-    <div class="card mb-4">
+    <!-- <div class="card mb-4">
       <div class="card-header">
         <h5 class="fw-bold mb-1">Imágenes y Archivos</h5>
         <p class="text-muted mb-0">Sube imágenes o archivos que muestren tu solución</p>
@@ -176,15 +240,15 @@ dfdfdfdfdfddfdfdfdfdfdfdfdfdfd
           <input type="file" multiple accept=".jpg,.jpeg,.png,.pdf,.zip" class="d-none">
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="d-flex justify-content-end gap-2">
-      <a href="/solutions" class="btn btn-outline-secondary">Cancelar</a>
-      <button type="button" class="btn btn-outline-secondary">Guardar Borrador</button>
-      <button type="submit" class="btn btn-primary">
+      <a routerLink="/solutions" class="btn btn-outline-secondary">Cancelar</a>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">
         <i class="bi bi-save me-2"></i>
         Publicar Solución
       </button>
     </div>
   </form>
 </div>
+</app-main-layout>
