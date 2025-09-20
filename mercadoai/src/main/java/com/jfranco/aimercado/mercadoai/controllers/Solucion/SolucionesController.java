@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDTO;
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionUpdateDTO;
 import com.jfranco.aimercado.mercadoai.service.Soluciones.ISolucionesService;
 
@@ -43,14 +44,14 @@ public class SolucionesController {
             PageRequest pageable = PageRequest.of(page, size);
             return ResponseEntity.ok(solucionesService.getAllSoluciones(search, categoria, estado, pageable));
         }catch (Exception e){
-            return ResponseEntity.badRequest().body("Error al listar soluciones");
+            return ResponseEntity.badRequest().body("Error al listar soluciones: " + e.getMessage());
         }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> GetById(@PathVariable Long id) {
         try{
-            SolucionDTO solucion = solucionesService.getSolucionById(id);
+            SolucionDetailsDTO solucion = solucionesService.getSolucionById(id);
             if(solucion != null){
                 return ResponseEntity.ok(solucion);
             }else{
@@ -73,12 +74,7 @@ public class SolucionesController {
     @PutMapping("/{id}")
     public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody SolucionUpdateDTO solucion) {
         try{
-            Optional<SolucionDTO> existingSolucion = Optional.ofNullable(solucionesService.getSolucionById(id));
-            if(existingSolucion.isPresent()){
-                return ResponseEntity.ok(solucionesService.updateSolucion(id, solucion));
-            }else{
-                return ResponseEntity.badRequest().body("Solución no encontrada");
-            }
+            return ResponseEntity.ok(solucionesService.updateSolucion(id, solucion));
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Error al editar la solución");
         }
@@ -87,21 +83,11 @@ public class SolucionesController {
     @DeleteMapping("eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id){
         try{
-            Optional<SolucionDTO> existingSolucion = Optional.ofNullable(solucionesService.getSolucionById(id));
-            if(existingSolucion.isPresent()){
-                solucionesService.eliminarSolucion(id);
-                return ResponseEntity.ok().body("Solución eliminada");
-            }else{
-                return ResponseEntity.badRequest().body("Solución no encontrada");
-            }
+            solucionesService.eliminarSolucion(id);
+            return ResponseEntity.ok().body("Solución eliminada");
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body("Error al eliminar la solución");
         }
     }
-
-    
-    
-    
-    
 }

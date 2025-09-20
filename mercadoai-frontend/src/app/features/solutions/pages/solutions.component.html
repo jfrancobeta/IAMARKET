@@ -1,198 +1,185 @@
 <app-main-layout>
-<div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h1 class="h2 fw-bold mb-1">Mis Soluciones</h1>
-      <p class="text-muted">Gestiona y publica tus soluciones de IA predefinidas</p>
-    </div>
-    <a href="/solutions/create" class="btn btn-primary d-flex align-items-center">
-      <i class="bi bi-plus me-2"></i>
-      Nueva Solución
-    </a>
-  </div>
-
-  <!-- Filtros -->
-  <div class="card mb-4">
-    <div class="card-body pt-4">
-      <div class="row g-3">
-        <div class="col-md-4">
-          <div class="position-relative">
-            <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-            <input type="text" class="form-control ps-5" placeholder="Buscar soluciones...">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <select class="form-select">
-            <option selected>Categoría</option>
-            <option>Machine Learning</option>
-            <option>NLP</option>
-            <option>Computer Vision</option>
-            <option>Data Science</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <select class="form-select">
-            <option selected>Estado</option>
-            <option>Activa</option>
-            <option>Pausada</option>
-            <option>Borrador</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <button class="btn btn-outline-secondary w-100">
-            <i class="bi bi-funnel me-2"></i>
-            Filtros
-          </button>
-        </div>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="h2 fw-bold mb-1">Mis Soluciones</h1>
+        <p class="text-muted">
+          Gestiona y publica tus soluciones de IA predefinidas
+        </p>
       </div>
-    </div>
-  </div>
-
-  <!-- Grid de Soluciones -->
-  <div class="row g-4">
-    <!-- Solución 1 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100 hover-shadow">
-        <div class="card-header d-flex justify-content-between align-items-start">
-          <span class="badge bg-primary">Activa</span>
-          <div class="d-flex gap-1">
-            <a href="/solutions/1/edit" class="btn btn-sm btn-light"><i class="bi bi-pencil"></i></a>
-            <a href="/solutions/1" class="btn btn-sm btn-light"><i class="bi bi-eye"></i></a>
-          </div>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title mb-1">Sistema de Recomendaciones E-commerce</h5>
-          <span class="badge bg-light text-dark border mb-2">Machine Learning</span>
-          <p class="card-text text-muted mb-3">
-            Solución completa de recomendaciones basada en collaborative filtering y content-based filtering para plataformas de e-commerce.
-          </p>
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div class="d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success"></i>
-              <span class="fw-semibold">$3,500</span>
-            </div>
-            <div class="d-flex align-items-center gap-2 text-muted">
-              <i class="bi bi-clock"></i>
-              <span>3-4 semanas</span>
-            </div>
-          </div>
-          <div class="mb-2">
-            <span class="badge bg-secondary text-light me-1">Python</span>
-            <span class="badge bg-secondary text-light me-1">TensorFlow</span>
-            <span class="badge bg-secondary text-light me-1">AWS</span>
-            <span class="badge bg-secondary text-light me-1">Docker</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-            <div class="d-flex align-items-center gap-1 text-muted">
-              <i class="bi bi-eye"></i>
-              <span>156 vistas</span>
-            </div>
-            <a href="/solutions/1" class="btn btn-sm btn-primary">Ver Detalles</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Solución 2 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100 hover-shadow">
-        <div class="card-header d-flex justify-content-between align-items-start">
-          <span class="badge bg-primary">Activa</span>
-          <div class="d-flex gap-1">
-            <a href="/solutions/2/edit" class="btn btn-sm btn-light"><i class="bi bi-pencil"></i></a>
-            <a href="/solutions/2" class="btn btn-sm btn-light"><i class="bi bi-eye"></i></a>
-          </div>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title mb-1">Chatbot Inteligente con NLP</h5>
-          <span class="badge bg-light text-dark border mb-2">NLP</span>
-          <p class="card-text text-muted mb-3">
-            Chatbot avanzado con procesamiento de lenguaje natural capaz de manejar consultas complejas y aprender de las interacciones.
-          </p>
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div class="d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success"></i>
-              <span class="fw-semibold">$2,800</span>
-            </div>
-            <div class="d-flex align-items-center gap-2 text-muted">
-              <i class="bi bi-clock"></i>
-              <span>2-3 semanas</span>
-            </div>
-          </div>
-          <div class="mb-2">
-            <span class="badge bg-secondary text-light me-1">Python</span>
-            <span class="badge bg-secondary text-light me-1">BERT</span>
-            <span class="badge bg-secondary text-light me-1">FastAPI</span>
-            <span class="badge bg-secondary text-light me-1">React</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-            <div class="d-flex align-items-center gap-1 text-muted">
-              <i class="bi bi-eye"></i>
-              <span>89 vistas</span>
-            </div>
-            <a href="/solutions/2" class="btn btn-sm btn-primary">Ver Detalles</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Solución 3 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100 hover-shadow">
-        <div class="card-header d-flex justify-content-between align-items-start">
-          <span class="badge bg-secondary">Pausada</span>
-          <div class="d-flex gap-1">
-            <a href="/solutions/3/edit" class="btn btn-sm btn-light"><i class="bi bi-pencil"></i></a>
-            <a href="/solutions/3" class="btn btn-sm btn-light"><i class="bi bi-eye"></i></a>
-          </div>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title mb-1">Análisis Predictivo de Inventario</h5>
-          <span class="badge bg-light text-dark border mb-2">Data Science</span>
-          <p class="card-text text-muted mb-3">
-            Sistema de predicción de demanda para optimizar niveles de inventario y reducir costos de almacenamiento.
-          </p>
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div class="d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success"></i>
-              <span class="fw-semibold">$4,200</span>
-            </div>
-            <div class="d-flex align-items-center gap-2 text-muted">
-              <i class="bi bi-clock"></i>
-              <span>4-5 semanas</span>
-            </div>
-          </div>
-          <div class="mb-2">
-            <span class="badge bg-secondary text-light me-1">Python</span>
-            <span class="badge bg-secondary text-light me-1">Scikit-learn</span>
-            <span class="badge bg-secondary text-light me-1">Pandas</span>
-            <span class="badge bg-secondary text-light me-1">Plotly</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-            <div class="d-flex align-items-center gap-1 text-muted">
-              <i class="bi bi-eye"></i>
-              <span>203 vistas</span>
-            </div>
-            <a href="/solutions/3" class="btn btn-sm btn-primary">Ver Detalles</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Estado vacío -->
-  
-  <div class="card mt-5">
-    <div class="card-body text-center py-5">
-      <i class="bi bi-code-slash text-muted mb-3" style="font-size:2rem;"></i>
-      <h3 class="h5 fw-semibold mb-2">No tienes soluciones publicadas</h3>
-      <p class="text-muted mb-4">
-        Crea tu primera solución predefinida para ofrecer servicios específicos a las empresas.
-      </p>
-      <a href="/solutions/create" class="btn btn-primary d-flex align-items-center justify-content-center">
+      <a
+        [routerLink]="['/solutions/create']"
+        class="btn btn-primary d-flex align-items-center"
+      >
         <i class="bi bi-plus me-2"></i>
-        Crear Primera Solución
+        Nueva Solución
       </a>
     </div>
+
+    <div class="card mb-4">
+      <div class="card-body pt-4">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="position-relative">
+              <i
+                class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"
+              ></i>
+              <input
+                type="text"
+                class="form-control ps-5"
+                placeholder="Buscar soluciones..."
+                [(ngModel)]="filtros.search"
+                (ngModelChange)="loadSoluciones()"
+                name="search"
+              />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <select
+              class="form-select"
+              [(ngModel)]="filtros.categoria"
+              name="categoria"
+              (ngModelChange)="loadSoluciones()"
+            >
+              <option value="" selected>Categoría</option>
+              <option
+                *ngFor="let categoria of categorias"
+                [value]="categoria.nombre"
+              >
+                {{ categoria.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <select
+              class="form-select"
+              [(ngModel)]="filtros.estado"
+              (ngModelChange)="loadSoluciones()"
+            >
+              <option value="" selected >Estado</option>
+              <option *ngFor="let estado of estados" [value]="estado.nombre">
+                {{ estado.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-outline-secondary w-100">
+              <i class="bi bi-funnel me-2"></i>
+              Filtros
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      @for (solucion of soluciones; track $index) {
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-shadow">
+          <div
+            class="card-header d-flex justify-content-between align-items-start"
+          >
+            <span class="badge bg-primary">{{ solucion.estadoNombre }}</span>
+            <div class="d-flex gap-1">
+              <a
+                [routerLink]="['/solutions/{{ solucion.id }}/edit']"
+                class="btn btn-sm btn-light"
+                ><i class="bi bi-pencil"></i
+              ></a>
+              <a
+                [routerLink]="['/solutions/{{ solucion.id }}']"
+                class="btn btn-sm btn-light"
+                ><i class="bi bi-eye"></i
+              ></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              {{ solucion.titulo }}
+            </h5>
+            <span class="badge bg-light text-dark border mb-2">{{
+              solucion.categoriaNombre
+            }}</span>
+            <p class="card-text text-muted mb-3">
+              {{ solucion.descripcion }}
+            </p>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-currency-dollar text-success"></i>
+                <span class="fw-semibold">{{
+                  solucion.precio | currency
+                }}</span>
+              </div>
+              <div class="d-flex align-items-center gap-2 text-muted">
+                <i class="bi bi-clock"></i>
+                <span>{{ solucion.tiempoEntrega }}</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              @for (habilidades of solucion.habilidades; track $index) {
+              <span class="badge bg-secondary text-light me-1">{{
+                habilidades
+              }}</span>
+              }
+            </div>
+            <div
+              class="d-flex justify-content-between align-items-center pt-2 border-top"
+            >
+              <div class="d-flex align-items-center gap-1 text-muted">
+                <i class="bi bi-eye"></i>
+                <span>{{ solucion.vistas }}</span>
+              </div>
+              <a
+                [routerLink]="['/solutions', solucion.id]"
+                class="btn btn-sm btn-primary"
+                >Ver Detalles</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    @if (soluciones.length === 0) {
+    <div class="card mt-5">
+      <div class="card-body text-center py-5">
+        <i class="bi bi-code-slash text-muted mb-3" style="font-size: 2rem"></i>
+        <h3 class="h5 fw-semibold mb-2">No tienes soluciones publicadas</h3>
+        <p class="text-muted mb-4">
+          Crea tu primera solución predefinida para ofrecer servicios
+          específicos a las empresas.
+        </p>
+        <a
+          [routerLink]="['/solutions/create']"
+          class="btn btn-primary d-flex align-items-center justify-content-center"
+        >
+          <i class="bi bi-plus me-2"></i>
+          Crear Primera Solución
+        </a>
+      </div>
+    </div>
+    }
   </div>
- 
-</div>
+  <nav *ngIf="totalPages > 0" aria-label="Paginación">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="filtros.page === 0">
+        <button class="page-link" (click)="changePage(filtros.page - 1)">
+          Anterior
+        </button>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let p of [].constructor(totalPages); let i = index"
+        [class.active]="i === filtros.page"
+      >
+        <button class="page-link" (click)="changePage(i)">{{ i + 1 }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="filtros.page === totalPages - 1">
+        <button class="page-link" (click)="changePage(filtros.page + 1)">
+          Siguiente
+        </button>
+      </li>
+    </ul>
+  </nav>
 </app-main-layout>
