@@ -32,4 +32,8 @@ export class SolutionService {
   update(id: number, solucion: SolucionUpdateDTO): Observable<SolucionDTO> {
     return this.http.put<SolucionDTO>(`${this.URL}/${id}`, solucion);
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.URL}/eliminar/${id}`);
+  }
 }

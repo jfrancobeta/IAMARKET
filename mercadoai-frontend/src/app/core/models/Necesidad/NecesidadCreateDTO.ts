@@ -1,3 +1,4 @@
+import { HitoCreateDTO } from "../Hito/HitoCreateDTO";
 
 export interface NecesidadCreateDTO {
   titulo: string;
@@ -8,6 +9,6 @@ export interface NecesidadCreateDTO {
   fechaLimite: string; // o Date si lo conviertes después
   skillsRequiredIds: number[];
   requirements?: string[];
-  expectedDeliverables?: string[];
+  hitos: HitoCreateDTO[];
   estadoId: number;
 }

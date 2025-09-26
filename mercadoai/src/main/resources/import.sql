@@ -870,3 +870,112 @@ INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (9, 'Cuenta Goo
 INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (9, 'API REST disponible');
 INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (10, 'Servidor GraphQL');
 INSERT INTO solucion_requisitos (solucion_id, requisitos) VALUES (10, 'Base de datos configurada');
+
+-- Hitos para Soluciones
+-- Hitos para Solucion 1: API REST con Spring Boot
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (1, 'Análisis de Requisitos', 'Definir endpoints y estructura de la API', '2025-10-05', 1);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (2, 'Desarrollo Backend', 'Implementar controladores y servicios', '2025-10-15', 1);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (3, 'Testing y Documentación', 'Pruebas unitarias y documentación Swagger', '2025-10-25', 1);
+
+-- Hitos para Solucion 2: Frontend React
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (4, 'Diseño UI/UX', 'Mockups y wireframes de la aplicación', '2025-10-08', 2);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (5, 'Desarrollo Frontend', 'Implementar componentes React', '2025-10-18', 2);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (6, 'Integración y Testing', 'Conectar con API y pruebas E2E', '2025-10-28', 2);
+
+-- Hitos para Solucion 3: Sitio Web Corporativo
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (7, 'Arquitectura de Información', 'Definir estructura y contenido del sitio', '2025-10-06', 3);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (8, 'Desarrollo y Diseño', 'Implementar páginas y estilos', '2025-10-16', 3);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (9, 'SEO y Optimización', 'Configurar SEO y optimizar performance', '2025-10-26', 3);
+
+-- Hitos para Solucion 4: App Móvil Nativa
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (10, 'Prototipo Funcional', 'Diseño de pantallas y flujo de usuario', '2025-10-10', 4);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (11, 'Desarrollo Nativo', 'Implementar funcionalidades core', '2025-10-20', 4);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (12, 'Publicación en Stores', 'Preparar y subir a App Store y Play Store', '2025-10-30', 4);
+
+-- Hitos para Solucion 5: Pipeline CI/CD
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (13, 'Configuración Inicial', 'Setup de repositorio y herramientas', '2025-10-07', 5);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (14, 'Pipeline Development', 'Configurar stages de build, test y deploy', '2025-10-17', 5);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (15, 'Monitoreo y Alertas', 'Configurar notificaciones y métricas', '2025-10-27', 5);
+
+-- Hitos para Necesidades
+-- Hitos para Necesidad 1: Sistema de Gestión Empresarial
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (100, 'Análisis y Diseño', 'Levantamiento de requisitos y arquitectura del sistema', '2025-11-15', 1);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (101, 'Desarrollo Módulos Core', 'Implementar módulos de usuarios, productos y ventas', '2025-12-15', 1);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (102, 'Integración y Testing', 'Integrar módulos y realizar pruebas completas', '2025-01-15', 1);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (103, 'Capacitación y Despliegue', 'Entrenar usuarios y poner en producción', '2025-02-01', 1);
+
+-- Hitos para Necesidad 2: Plataforma E-commerce
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (104, 'Setup Inicial y Catálogo', 'Configurar plataforma y cargar productos', '2025-11-10', 2);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (105, 'Sistema de Pagos', 'Integrar pasarelas de pago y checkout', '2025-12-01', 2);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (106, 'Funcionalidades Avanzadas', 'Carrito, wishlist, reviews y recomendaciones', '2025-12-20', 2);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (107, 'Testing y Launch', 'Pruebas completas y lanzamiento oficial', '2025-01-10', 2);
+
+-- Hitos para Necesidad 3: App de Delivery
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (108, 'MVP y Prototipo', 'Desarrollar funcionalidades básicas de pedidos', '2025-11-20', 3);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (109, 'Geolocalización y Tracking', 'Implementar mapas y seguimiento en tiempo real', '2025-12-10', 3);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (110, 'Sistema de Pagos y Notificaciones', 'Integrar pagos móviles y push notifications', '2025-12-25', 3);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (111, 'Beta Testing y Lanzamiento', 'Pruebas con usuarios reales y lanzamiento', '2025-01-15', 3);
+
+-- Hitos para Necesidad 4: Sistema de Inventario
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (112, 'Diseño de Base de Datos', 'Modelar estructura de datos y relaciones', '2025-11-05', 4);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (113, 'Módulo de Inventario', 'CRUD de productos, categorías y stock', '2025-11-25', 4);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (114, 'Reportes y Analytics', 'Generar reportes de stock y movimientos', '2025-12-15', 4);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (115, 'Integración con Ventas', 'Conectar con sistema de ventas existente', '2025-12-30', 4);
+
+-- Hitos para Necesidad 5: Portal de Clientes
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (116, 'Autenticación y Perfiles', 'Sistema de login y gestión de perfiles', '2025-11-12', 5);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (117, 'Dashboard de Cliente', 'Panel con historial de pedidos y facturas', '2025-12-02', 5);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (118, 'Sistema de Tickets', 'Módulo de soporte y seguimiento de tickets', '2025-12-20', 5);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, necesidad_id) VALUES (119, 'Notificaciones y Comunicación', 'Email, SMS y notificaciones en app', '2025-01-08', 5);
+
+-- Hitos adicionales para más soluciones
+-- Hitos para Solucion 6: Sistema de Autenticación
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (120, 'Análisis de Seguridad', 'Definir políticas de seguridad y compliance', '2025-10-12', 6);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (121, 'Implementación OAuth', 'Configurar OAuth 2.0 y JWT', '2025-10-22', 6);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (122, 'Testing de Penetración', 'Pruebas de seguridad y vulnerabilidades', '2025-11-02', 6);
+
+-- Hitos para Solucion 7: Dashboard Analytics
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (123, 'Diseño de Métricas', 'Definir KPIs y visualizaciones', '2025-10-14', 7);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (124, 'Desarrollo de Charts', 'Implementar gráficos y reportes', '2025-10-24', 7);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (125, 'Optimización Performance', 'Optimizar queries y caching', '2025-11-04', 7);
+
+-- Hitos para Solucion 8: Integración de APIs
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (126, 'Mapeo de Endpoints', 'Documentar APIs externas a integrar', '2025-10-16', 8);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (127, 'Desarrollo Middleware', 'Crear capa de integración y transformación', '2025-10-26', 8);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (128, 'Testing de Integración', 'Pruebas end-to-end con APIs externas', '2025-11-06', 8);
+
+-- Hitos para Solucion 9: Base de Datos Optimizada
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (129, 'Análisis de Schema', 'Revisar estructura actual y optimizaciones', '2025-10-18', 9);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (130, 'Implementación de Índices', 'Crear índices y optimizar queries', '2025-10-28', 9);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (131, 'Monitoreo y Tuning', 'Configurar monitoreo y ajuste fino', '2025-11-08', 9);
+
+-- Hitos para Solucion 10: Sistema de Microservicios
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (132, 'Arquitectura de Microservicios', 'Diseñar decomposición y comunicación', '2025-10-20', 10);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (133, 'Implementación de Servicios', 'Desarrollar servicios core independientes', '2025-10-30', 10);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, solucion_id) VALUES (134, 'Gateway y Orquestación', 'API Gateway y service discovery', '2025-11-10', 10);
+
+-- Entregables de ejemplo para algunos hitos
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (1, 'Documento de Requisitos API', 'pdf', 'documents/api-requirements.pdf', '2025-10-05', 1);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (2, 'Código Fuente Backend', 'zip', 'code/backend-v1.0.zip', '2025-10-15', 2);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (3, 'Documentación Swagger', 'json', 'docs/api-swagger.json', '2025-10-25', 3);
+
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (4, 'Mockups UI/UX', 'figma', 'design/ui-mockups.fig', '2025-10-08', 4);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (5, 'Aplicación React', 'zip', 'code/frontend-react.zip', '2025-10-18', 5);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (6, 'Reporte de Testing E2E', 'pdf', 'testing/e2e-results.pdf', '2025-10-28', 6);
+
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (7, 'Arquitectura de Información', 'pdf', 'docs/site-architecture.pdf', '2025-10-06', 7);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (8, 'Sitio Web Completo', 'zip', 'code/corporate-website.zip', '2025-10-16', 8);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (9, 'Reporte SEO', 'pdf', 'seo/seo-optimization-report.pdf', '2025-10-26', 9);
+
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (10, 'Prototipo App Móvil', 'apk', 'mobile/prototype-v1.0.apk', '2025-10-10', 10);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (11, 'App iOS/Android', 'zip', 'mobile/native-apps.zip', '2025-10-20', 11);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (12, 'Guía de Publicación', 'pdf', 'docs/store-publication-guide.pdf', '2025-10-30', 12);
+
+-- Más entregables para hitos de necesidades
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (13, 'Documento de Arquitectura ERP', 'pdf', 'docs/erp-architecture.pdf', '2025-11-15', 100);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (14, 'Módulos Core Desarrollados', 'zip', 'code/erp-core-modules.zip', '2025-12-15', 101);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (15, 'Reporte de Testing Integral', 'pdf', 'testing/erp-integration-tests.pdf', '2025-01-15', 102);
+
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (16, 'Catálogo de Productos', 'csv', 'data/product-catalog.csv', '2025-11-10', 104);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (17, 'Sistema de Pagos Configurado', 'pdf', 'docs/payment-gateway-config.pdf', '2025-12-01', 105);
+INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (18, 'Plataforma E-commerce Live', 'url', 'https://ecommerce.cliente.com', '2025-01-10', 107);

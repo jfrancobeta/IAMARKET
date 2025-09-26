@@ -10,6 +10,7 @@ import { CategoriaService } from '../../../../core/services/categoria.service';
 import { HabilidadService } from '../../../../core/services/habilidad.service';
 import { MainLayoutComponent } from '../../../../shared/layout/main-layout/main-layout.component';
 import { NeedService } from '../../services/need.service';
+import { HitoCreateDTO } from '../../../../core/models/Hito/HitoCreateDTO';
 
 @Component({
   selector: 'app-create',
@@ -27,8 +28,14 @@ export class CreateComponent implements OnInit {
     fechaLimite: '',
     skillsRequiredIds: [],
     requirements: [],
-    expectedDeliverables: [],
+    hitos: [],
     estadoId: 0,
+  };
+
+  nuevoHito: HitoCreateDTO = {
+    nombre: '',
+    descripcion: '',
+    fechaEntrega: '',
   };
 
   habilidades: HabilidadDTO[] = [];
@@ -56,7 +63,7 @@ export class CreateComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cargar categorías:', error);
-      }
+      },
     });
 
     this.habilidadService.getAll().subscribe({
@@ -81,7 +88,7 @@ export class CreateComponent implements OnInit {
             fechaLimite: data.fechaLimite,
             skillsRequiredIds: data.skillsRequired?.map((s: any) => s.id) ?? [],
             requirements: data.requirements ?? [],
-            expectedDeliverables: data.expectedDeliverables ?? [],
+            hitos: data.hitos ?? [],
             estadoId: data.estado.id ?? 0, // Ajusta según tu modelo
           };
         },
@@ -112,7 +119,7 @@ export class CreateComponent implements OnInit {
           console.error('Error al actualizar necesidad:', error);
         },
       });
-    }else{
+    } else {
       this.needService.create(this.need).subscribe({
         next: (response) => {
           console.log('Necesidad creada:', response);
@@ -130,23 +137,6 @@ export class CreateComponent implements OnInit {
       });
     }
   }
-
-  agregarEntregable() {
-    if (this.nuevoEntregable.trim()) {
-      if (!this.need.expectedDeliverables) {
-        this.need.expectedDeliverables = [];
-      }
-      this.need.expectedDeliverables.push(this.nuevoEntregable.trim());
-      this.nuevoEntregable = '';
-    }
-  }
-
-  eliminarEntregable(index: number) {
-    if (this.need.expectedDeliverables) {
-      this.need.expectedDeliverables.splice(index, 1);
-    }
-  }
-
   agregarRequeriment() {
     if (this.nuevoRequerimiento.trim()) {
       if (!this.need.requirements) {
@@ -173,5 +163,19 @@ export class CreateComponent implements OnInit {
         (habId) => habId !== id
       );
     }
+  }
+  agregarHito() {
+    this.need.hitos.push({
+      ...this.nuevoHito,
+    });
+    this.nuevoHito = {
+      nombre: '',
+      descripcion: '',
+      fechaEntrega: '',
+    };
+  }
+
+  eliminarHito(index: number) {
+    this.need.hitos.splice(index, 1);
   }
 }

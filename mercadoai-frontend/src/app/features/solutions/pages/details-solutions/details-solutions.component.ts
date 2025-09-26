@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from '../../../../shared/layout/main-layout/main-layout.component';
 import { SolucionDTO } from '../../../../core/models/Solucion/SolucionDTO';
 import { SolutionService } from '../../services/solution.service';
@@ -11,12 +11,19 @@ import {
 import { CategoriaDTO } from '../../../../core/models/Categoria/CategoriaDTO';
 import { EstadoDTO } from '../../../../core/models/Estado/EstadoDTO';
 import { UsuarioDTO } from '../../../../core/models/Usuario/UsuarioDTO';
-import { DatePipe, DecimalPipe } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-details-solutions',
   standalone: true,
-  imports: [MainLayoutComponent, RouterModule, DatePipe, DecimalPipe],
+  imports: [
+    MainLayoutComponent,
+    RouterModule,
+    DatePipe,
+    DecimalPipe,
+    CommonModule,
+  ],
   templateUrl: './details-solutions.component.html',
 })
 export class DetailsSolutionsComponent implements OnInit {
@@ -32,15 +39,20 @@ export class DetailsSolutionsComponent implements OnInit {
     habilidades: [],
     caracteristicas: [],
     requisitos: [],
+    hitos: [],
     tiempoEntrega: 0,
-    unidadEntrega: UnidadEntrega.Dias, 
+    unidadEntrega: UnidadEntrega.Dias,
     fechaCreacion: '',
     fechaActualizacion: '',
     desarrollador: {} as UsuarioDTO,
   };
+
+  isOwner: boolean = false;
   constructor(
     private solucionService: SolutionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +66,7 @@ export class DetailsSolutionsComponent implements OnInit {
         next: (solucion) => {
           console.log('Loaded solution:', solucion);
           this.SolucionDTO = solucion;
+          this.checkOwnership();
         },
         error: (err) => {
           Swal.fire({
@@ -65,5 +78,44 @@ export class DetailsSolutionsComponent implements OnInit {
         },
       });
     }
+  }
+
+  private checkOwnership(): void {
+    const userId = this.authService.user?.usuario;
+    this.isOwner = this.SolucionDTO.desarrollador.id === userId;
+  }
+
+  onDelete(): void {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.solucionService.delete(this.SolucionDTO.id).subscribe({
+          next: (response) => {
+            console.log('Delete response:', response);
+            Swal.fire({
+              icon: 'success',
+              title: 'Eliminado',
+              text: 'La solución ha sido eliminada.',
+            }).then(() => {
+              this.router.navigate(['/solutions']);
+            });
+          },
+          error: (err: any) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'No se pudo eliminar la solución. Por favor, inténtelo de nuevo más tarde.',
+            });
+            console.error('Error deleting solution:', err);
+          },
+        });
+      }
+    });
   }
 }

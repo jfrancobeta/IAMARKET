@@ -3,6 +3,7 @@ package com.jfranco.aimercado.mercadoai.dto.Solucion;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.model.UnidadEntrega;
 
 public class SolucionUpdateDTO {
@@ -14,6 +15,7 @@ public class SolucionUpdateDTO {
     private List<Long> habilidadesIds;
     private List<String> caracteristicas;
     private List<String> requisitos;
+    private List<HitoUpdateDTO> hitos;
     private int tiempoEntrega;
     private UnidadEntrega unidadEntrega;
 
@@ -98,5 +100,13 @@ public class SolucionUpdateDTO {
 
     public void setUnidadEntrega(UnidadEntrega unidadEntrega) {
         this.unidadEntrega = unidadEntrega;
+    }
+
+    public List<HitoUpdateDTO> getHitos() {
+        return hitos;
+    }
+
+    public void setHitos(List<HitoUpdateDTO> hitos) {
+        this.hitos = hitos;
     }
 }

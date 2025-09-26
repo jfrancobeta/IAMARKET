@@ -4,13 +4,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionCreateDTO;
-import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionUpdateDTO;
 import com.jfranco.aimercado.mercadoai.service.Soluciones.ISolucionesService;
 
-import java.util.Optional;
-
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -84,7 +82,7 @@ public class SolucionesController {
     public ResponseEntity<?> eliminar(@PathVariable Long id){
         try{
             solucionesService.eliminarSolucion(id);
-            return ResponseEntity.ok().body("Solución eliminada");
+            return ResponseEntity.ok(Collections.singletonMap("message", "Solución eliminada"));
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body("Error al eliminar la solución");

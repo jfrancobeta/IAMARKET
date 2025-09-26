@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoUpdateDTO;
+
 public class NecesidadUpdateDTO {
     
     private String titulo;
@@ -17,7 +19,7 @@ public class NecesidadUpdateDTO {
     private LocalDate fechaLimite;
     private List<Long> skillsRequiredIds;
     private List<String> requirements;
-    private List<String> expectedDeliverables;
+    private List<HitoUpdateDTO> hitos;
     private Long estadoId;
 
     // Constructors
@@ -80,12 +82,12 @@ public class NecesidadUpdateDTO {
         this.requirements = requirements;
     }
 
-    public List<String> getExpectedDeliverables() {
-        return expectedDeliverables;
+    public List<HitoUpdateDTO> getHitos() {
+        return hitos;
     }
 
-    public void setExpectedDeliverables(List<String> expectedDeliverables) {
-        this.expectedDeliverables = expectedDeliverables;
+    public void setHitos(List<HitoUpdateDTO> hitos) {
+        this.hitos = hitos;
     }
 
     public Long getEstadoId() {
