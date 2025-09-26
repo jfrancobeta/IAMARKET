@@ -7,6 +7,7 @@ import java.util.List;
 import com.jfranco.aimercado.mercadoai.dto.Categoria.CategoriaDTO;
 import com.jfranco.aimercado.mercadoai.dto.Estado.EstadoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Habilidad.HabilidadDTO;
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoDTO;
 import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 import com.jfranco.aimercado.mercadoai.model.UnidadEntrega;
 
@@ -22,6 +23,7 @@ public class SolucionDetailsDTO {
     private List<HabilidadDTO> habilidades;
     private List<String> caracteristicas;
     private List<String> requisitos;
+    private List<HitoDTO> hitos;
     private int tiempoEntrega;
     private UnidadEntrega unidadEntrega;
     private LocalDate fechaCreacion;
@@ -157,6 +159,14 @@ public class SolucionDetailsDTO {
 
     public void setDesarrollador(UsuarioDTO desarrollador) {
         this.desarrollador = desarrollador;
+    }
+
+    public List<HitoDTO> getHitos() {
+        return hitos;
+    }
+
+    public void setHitos(List<HitoDTO> hitos) {
+        this.hitos = hitos;
     }
 
     

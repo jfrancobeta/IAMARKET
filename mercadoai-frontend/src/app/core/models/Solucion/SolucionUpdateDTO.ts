@@ -1,3 +1,5 @@
+import { HitoUpdateDTO } from "../Hito/HitoUpdateDTO";
+
 export interface SolucionUpdateDTO {
   titulo: string;
   descripcion: string;
@@ -7,6 +9,7 @@ export interface SolucionUpdateDTO {
   habilidadesIds: number[];
   caracteristicas: string[];
   requisitos: string[];
+  hitos: HitoUpdateDTO[];
   tiempoEntrega: number;
   unidadEntrega: string;
 }

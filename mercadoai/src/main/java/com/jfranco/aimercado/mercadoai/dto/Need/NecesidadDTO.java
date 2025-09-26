@@ -7,6 +7,7 @@ import java.util.List;
 import com.jfranco.aimercado.mercadoai.dto.Categoria.CategoriaDTO;
 import com.jfranco.aimercado.mercadoai.dto.Estado.EstadoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Habilidad.HabilidadDTO;
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 
 public class NecesidadDTO {
@@ -20,7 +21,7 @@ public class NecesidadDTO {
     private LocalDate fechaLimite;
     private List<HabilidadDTO> skillsRequired;
     private List<String> requirements;
-    private List<String> expectedDeliverables;
+    private List<HitoCreateDTO> hitos;
     private EstadoDTO estado;
     private LocalDate fechaCreacion;
     private LocalDate fechaActualizacion;
@@ -100,12 +101,12 @@ public class NecesidadDTO {
         this.requirements = requirements;
     }
 
-    public List<String> getExpectedDeliverables() {
-        return expectedDeliverables;
+    public List<HitoCreateDTO> getHitos() {
+        return hitos;
     }
 
-    public void setExpectedDeliverables(List<String> expectedDeliverables) {
-        this.expectedDeliverables = expectedDeliverables;
+    public void setHitos(List<HitoCreateDTO> hitos) {
+        this.hitos = hitos;
     }
 
     public EstadoDTO getEstado() {

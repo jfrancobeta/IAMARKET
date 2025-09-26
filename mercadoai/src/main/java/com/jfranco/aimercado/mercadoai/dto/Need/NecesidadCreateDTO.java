@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoCreateDTO;
+
 /**
  * DTO para crear una nueva necesidad
  * Contiene solo los campos necesarios para la creación
@@ -34,7 +36,7 @@ public class NecesidadCreateDTO {
     
     private List<String> requirements;
 
-    private List<String> expectedDeliverables;
+    private List<HitoCreateDTO> hitos;
     
     @NotNull(message = "El estado es obligatorio")
     private Long estadoId;
@@ -99,12 +101,12 @@ public class NecesidadCreateDTO {
         this.requirements = requirements;
     }
 
-    public List<String> getExpectedDeliverables() {
-        return expectedDeliverables;
+    public List<HitoCreateDTO> getHitos() {
+        return hitos;
     }
 
-    public void setExpectedDeliverables(List<String> expectedDeliverables) {
-        this.expectedDeliverables = expectedDeliverables;
+    public void setHitos(List<HitoCreateDTO> hitos) {
+        this.hitos = hitos;
     }
 
     public Long getEstadoId() {

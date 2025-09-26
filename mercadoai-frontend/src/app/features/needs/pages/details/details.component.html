@@ -1,208 +1,297 @@
 <app-main-layout>
-<div class="container py-4">
-  <a [routerLink]="['/needs']" class="btn btn-outline-secondary btn-sm mb-4">
-    <i class="bi bi-arrow-left me-2"></i>
-    Volver a Necesidades
-  </a>
+  <div class="container py-4">
+    <a [routerLink]="['/needs']" class="btn btn-outline-secondary btn-sm mb-4">
+      <i class="bi bi-arrow-left me-2"></i>
+      Volver a Necesidades
+    </a>
 
-  <div class="row g-4">
-    <div class="col-lg-8">
-      <div class="card mb-4">
-        <div class="card-header">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-primary">{{ need?.estadoNombre }}</span>
-                <span class="badge bg-light text-dark border">{{ need?.categoria}}</span>
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                  <span class="badge bg-primary">{{ need?.estadoNombre }}</span>
+                  <span class="badge bg-light text-dark border">{{
+                    need?.categoria
+                  }}</span>
+                </div>
+                <h2 class="fw-bold fs-4 mb-1">{{ need?.titulo }}</h2>
+                <div class="d-flex gap-4 text-muted small">
+                  <span
+                    ><i class="bi bi-calendar me-1"></i
+                    >{{ need?.fechaCreacion }}</span
+                  >
+                  <span
+                    ><i class="bi bi-people me-1"></i
+                    >{{ need?.propuestas?.length }} propuestas</span
+                  >
+                </div>
               </div>
-              <h2 class="fw-bold fs-4 mb-1">{{ need?.titulo }}</h2>
-              <div class="d-flex gap-4 text-muted small">
-                <span><i class="bi bi-calendar me-1"></i>{{ need?.fechaCreacion}}</span>
-                <span><i class="bi bi-people me-1"></i>{{ need?.propuestas?.length }} propuestas</span>
-              </div>
-            </div>
-            <div class="d-flex gap-2">
-              @if (isOwner) {
-                <a class="btn btn-outline-secondary btn-sm" routerLink="/needs/{{need?.id}}/edit"><i class="bi bi-pencil me-2"></i>Editar</a>
-                <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash me-2"></i>Eliminar</button>
-              }
-              @if (roles.includes('ROLE_ADMIN') || roles.includes('ROLE_DEVELOPER')) {
-                <a [routerLink]="['/needs' ,1, 'send-proposal']" class="btn btn-primary d-flex align-items-center">
+              <div class="d-flex gap-2">
+                @if (isOwner) {
+                <a
+                  class="btn btn-outline-secondary btn-sm"
+                  routerLink="/needs/{{ need?.id }}/edit"
+                  ><i class="bi bi-pencil me-2"></i>Editar</a
+                >
+                <button class="btn btn-outline-danger btn-sm">
+                  <i class="bi bi-trash me-2"></i>Eliminar
+                </button>
+                } @if (roles.includes('ROLE_ADMIN') ||
+                roles.includes('ROLE_DEVELOPER')) {
+                <a
+                  [routerLink]="['/needs', 1, 'send-proposal']"
+                  class="btn btn-primary d-flex align-items-center"
+                >
                   <i class="bi bi-send me-2"></i>
                   Enviar Propuesta
                 </a>
-              }
-                          
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h5 class="fw-semibold mb-2">Descripción del Proyecto</h5>
-          <p class="text-muted mb-4">
-            {{ need?.descripcion }}
-          </p>
-          <hr>
-          <div class="row g-4 mb-4">
-            <div class="col-md-4 d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success fs-5"></i>
-              <div>
-                <div class="fw-medium">{{ need?.presupuesto }}</div>
-                <div class="text-muted small">Presupuesto</div>
-              </div>
-            </div>
-            <div class="col-md-4 d-flex align-items-center gap-2">
-              <i class="bi bi-clock text-primary fs-5"></i>
-              <div>
-                <div class="fw-medium">{{need?.fechaLimite}}</div>
-                <div class="text-muted small">Plazo</div>
-              </div>
-            </div>
-            <div class="col-md-4 d-flex align-items-center gap-2">
-              <i class="bi bi-people text-purple fs-5"></i>
-              <div>
-                <div class="fw-medium">{{ need?.propuestas?.length }} propuestas</div>
-                <div class="text-muted small">Recibidas</div>
+                }
               </div>
             </div>
           </div>
-          <hr>
-          <h5 class="fw-semibold mb-2">Habilidades Requeridas</h5>
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            @for (habilidad of need?.skillsRequired; track $index) {
+          <div class="card-body">
+            <h5 class="fw-semibold mb-2">Descripción del Proyecto</h5>
+            <p class="text-muted mb-4">
+              {{ need?.descripcion }}
+            </p>
+            <hr />
+            <div class="row g-4 mb-4">
+              <div class="col-md-4 d-flex align-items-center gap-2">
+                <i class="bi bi-currency-dollar text-success fs-5"></i>
+                <div>
+                  <div class="fw-medium">{{ need?.presupuesto }}</div>
+                  <div class="text-muted small">Presupuesto</div>
+                </div>
+              </div>
+              <div class="col-md-4 d-flex align-items-center gap-2">
+                <i class="bi bi-clock text-primary fs-5"></i>
+                <div>
+                  <div class="fw-medium">{{ need?.fechaLimite }}</div>
+                  <div class="text-muted small">Plazo</div>
+                </div>
+              </div>
+              <div class="col-md-4 d-flex align-items-center gap-2">
+                <i class="bi bi-people text-purple fs-5"></i>
+                <div>
+                  <div class="fw-medium">
+                    {{ need?.propuestas?.length }} propuestas
+                  </div>
+                  <div class="text-muted small">Recibidas</div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <h5 class="fw-semibold mb-2">Habilidades Requeridas</h5>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              @for (habilidad of need?.skillsRequired; track $index) {
               <span class="badge bg-secondary">{{ habilidad }}</span>
-            }
-          </div>
-          <h5 class="fw-semibold mb-2">Requisitos Específicos</h5>
-          <p class="text-muted mb-4">
-            {{ need?.requirements }}
-          </p>
-          <h5 class="fw-semibold mb-2">Entregables</h5>
-          <p class="text-muted mb-4">
-            {{ need?.expectedDeliverables }}
-          </p>
-        </div>
-      </div>
-
-      <!-- Propuestas -->
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5 class="fw-bold mb-1">Propuestas Recibidas ({{need?.propuestas?.length}})</h5>
-          <p class="text-muted mb-0">Revisa las propuestas de desarrolladores interesados en tu proyecto</p>
-        </div>
-        <div class="card-body">
-          @for (propuesta of need?.propuestas; track $index) {
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="d-flex justify-content-between mb-3">
-                <div class="d-flex align-items-center gap-3">
-                  <img src="{{propuesta.desarrollador.foto}}" alt="{{propuesta.desarrollador.nombre}}" class="rounded-circle" width="40" height="40">
-                  <div>
-                    <h6 class="fw-semibold mb-0">{{propuesta.desarrollador.nombre}}</h6>
-                    <div class="d-flex align-items-center gap-2 text-muted small">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <span>{{propuesta.desarrollador.calificacionPromedio}}</span>
-                      <span>•</span>
-                      <span>{{propuesta.desarrollador.cantidadProyectos}} proyectos</span>
+              }
+            </div>
+            <h5 class="fw-semibold mb-2">Requisitos Específicos</h5>
+            <p class="text-muted mb-4">
+              {{ need?.requirements }}
+            </p>
+            <div class="mb-4">
+              <h5 class="fw-semibold mb-3">Hitos del Proyecto</h5>
+              <div class="row g-3">
+                <div
+                  class="col-12"
+                  *ngFor="let hito of need?.hitos; let index = index"
+                >
+                  <div class="card border-primary">
+                    <div class="card-body">
+                      <div
+                        class="d-flex justify-content-between align-items-start mb-2"
+                      >
+                        <div class="d-flex align-items-center gap-2">
+                          <div
+                            class="d-flex align-items-center justify-content-center rounded-circle bg-primary text-white"
+                            style="width: 2rem; height: 2rem"
+                          >
+                            {{ index + 1 }}
+                          </div>
+                          <h6 class="fw-semibold mb-0">{{ hito.nombre }}</h6>
+                        </div>
+                        <div
+                          class="d-flex align-items-center gap-2 text-muted small"
+                        >
+                          <i class="bi bi-clock"></i>
+                          <span>
+                            {{ hito.fechaEntrega | date : "shortDate" }}
+                          </span>
+                        </div>
+                      </div>
+                      <p class="text-muted mb-2 ms-5">{{ hito.descripcion }}</p>
                     </div>
                   </div>
                 </div>
-                <div class="text-end">
-                  <div class="fw-bold fs-5">{{ propuesta.precio }}</div>
-                  <div class="text-muted small">{{ propuesta.entrega }}</div>
-                </div>
-              </div>
-              <p class="text-muted mb-3">
-                {{ propuesta.descripcion }}
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="text-muted small">{{propuesta.fechaCreacion}}</span>
-                <div class="d-flex gap-2">
-                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
-                  <button class="btn btn-primary btn-sm">Aceptar Propuesta</button>
-                </div>
               </div>
             </div>
           </div>
-        }
         </div>
-      </div>
-    </div>
 
-    <!-- Sidebar -->
-    <div class="col-lg-4">
-      <!-- Información de la Empresa -->
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5 class="fw-bold mb-1">Información de la Empresa</h5>
-        </div>
-        <div class="card-body">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <img src="{{need?.compania?.foto}}" alt="TechCorp Solutions" class="rounded-circle" width="40" height="40">
-            <div>
-              <h6 class="fw-semibold mb-0">{{need?.compania?.perfilCompania?.nombreCompania}}</h6>
-              <div class="d-flex align-items-center gap-2 text-muted small">
-                <i class="bi bi-star-fill text-warning"></i>
-                <span>{{need?.compania?.calificacionPromedio}}</span>
-                <span>•</span>
-                <span>{{need?.compania?.cantidadProyectos}} proyectos</span>
+        <!-- Propuestas -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">
+              Propuestas Recibidas ({{ need?.propuestas?.length }})
+            </h5>
+            <p class="text-muted mb-0">
+              Revisa las propuestas de desarrolladores interesados en tu
+              proyecto
+            </p>
+          </div>
+          <div class="card-body">
+            @for (propuesta of need?.propuestas; track $index) {
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                  <div class="d-flex align-items-center gap-3">
+                    <img
+                      src="{{ propuesta.desarrollador.foto }}"
+                      alt="{{ propuesta.desarrollador.nombre }}"
+                      class="rounded-circle"
+                      width="40"
+                      height="40"
+                    />
+                    <div>
+                      <h6 class="fw-semibold mb-0">
+                        {{ propuesta.desarrollador.nombre }}
+                      </h6>
+                      <div
+                        class="d-flex align-items-center gap-2 text-muted small"
+                      >
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span>{{
+                          propuesta.desarrollador.calificacionPromedio
+                        }}</span>
+                        <span>•</span>
+                        <span
+                          >{{
+                            propuesta.desarrollador.cantidadProyectos
+                          }}
+                          proyectos</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <div class="fw-bold fs-5">{{ propuesta.precio }}</div>
+                    <div class="text-muted small">{{ propuesta.entrega }}</div>
+                  </div>
+                </div>
+                <p class="text-muted mb-3">
+                  {{ propuesta.descripcion }}
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="text-muted small">{{
+                    propuesta.fechaCreacion
+                  }}</span>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-outline-secondary btn-sm">
+                      <i class="bi bi-chat-dots me-2"></i>Mensaje
+                    </button>
+                    <button class="btn btn-primary btn-sm">
+                      Aceptar Propuesta
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <a href="#" class="btn btn-outline-secondary w-100">
-            <i class="bi bi-chat-dots me-2"></i>
-            Contactar Empresa
-          </a>
-        </div>
-      </div>
-      <!-- Estadísticas del Proyecto -->
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5 class="fw-bold mb-1">Estadísticas del Proyecto</h5>
-        </div>
-        <div class="card-body">
-          <div class="d-flex justify-content-between mb-2">
-            <span class="text-sm">Propuestas recibidas</span>
-            <span class="fw-medium">12</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2">
-            <span class="text-sm">Tiempo restante</span>
-            <span class="fw-medium">5 días</span>
-          </div>
-          <div class="d-flex justify-content-between mb-2">
-            <span class="text-sm">Presupuesto promedio</span>
-            <span class="fw-medium">$6,850</span>
-          </div>
-          <hr>
-          <div class="mb-2 d-flex justify-content-between">
-            <span class="text-sm">Progreso de selección</span>
-            <span class="text-sm">60%</span>
-          </div>
-          <div class="progress" style="height: 8px;">
-            <div class="progress-bar" style="width: 60%"></div>
+            }
           </div>
         </div>
       </div>
-      <!-- Acciones Rápidas -->
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5 class="fw-bold mb-1">Acciones Rápidas</h5>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <!-- Información de la Empresa -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">Información de la Empresa</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img
+                src="{{ need?.compania?.foto }}"
+                alt="TechCorp Solutions"
+                class="rounded-circle"
+                width="40"
+                height="40"
+              />
+              <div>
+                <h6 class="fw-semibold mb-0">
+                  {{ need?.compania?.perfilCompania?.nombreCompania }}
+                </h6>
+                <div class="d-flex align-items-center gap-2 text-muted small">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <span>{{ need?.compania?.calificacionPromedio }}</span>
+                  <span>•</span>
+                  <span>{{ need?.compania?.cantidadProyectos }} proyectos</span>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-outline-secondary w-100">
+              <i class="bi bi-chat-dots me-2"></i>
+              Contactar Empresa
+            </a>
+          </div>
         </div>
-        <div class="card-body d-grid gap-2">
-          <button class="btn btn-outline-secondary w-100">
-            <i class="bi bi-send me-2"></i>
-            Invitar Desarrolladores
-          </button>
-          <a class="btn btn-outline-secondary w-100" routerLink="/needs/{{need?.id}}/edit">
-            <i class="bi bi-pencil me-2"></i>
-            Editar Proyecto
-          </a>
-          <button class="btn btn-outline-secondary w-100">
-            <i class="bi bi-people me-2"></i>
-            Ver Todos los Candidatos
-          </button>
+        <!-- Estadísticas del Proyecto -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">Estadísticas del Proyecto</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-sm">Propuestas recibidas</span>
+              <span class="fw-medium">12</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-sm">Tiempo restante</span>
+              <span class="fw-medium">5 días</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-sm">Presupuesto promedio</span>
+              <span class="fw-medium">$6,850</span>
+            </div>
+            <hr />
+            <div class="mb-2 d-flex justify-content-between">
+              <span class="text-sm">Progreso de selección</span>
+              <span class="text-sm">60%</span>
+            </div>
+            <div class="progress" style="height: 8px">
+              <div class="progress-bar" style="width: 60%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Acciones Rápidas -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">Acciones Rápidas</h5>
+          </div>
+          <div class="card-body d-grid gap-2">
+            <button class="btn btn-outline-secondary w-100">
+              <i class="bi bi-send me-2"></i>
+              Invitar Desarrolladores
+            </button>
+            <a
+              class="btn btn-outline-secondary w-100"
+              routerLink="/needs/{{ need?.id }}/edit"
+            >
+              <i class="bi bi-pencil me-2"></i>
+              Editar Proyecto
+            </a>
+            <button class="btn btn-outline-secondary w-100">
+              <i class="bi bi-people me-2"></i>
+              Ver Todos los Candidatos
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </app-main-layout>

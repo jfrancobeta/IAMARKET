@@ -5,11 +5,12 @@ import { NecesidadUserDetailsDTO } from '../../../../core/models/Necesidad/Neces
 import { AuthService } from '../../../../core/services/auth.service';
 import { MainLayoutComponent } from '../../../../shared/layout/main-layout/main-layout.component';
 import { NeedService } from '../../services/need.service';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [MainLayoutComponent,RouterModule],
+  imports: [MainLayoutComponent,RouterModule,DatePipe,CommonModule],
   templateUrl: './details.component.html',
 })
 export class DetailsComponent implements OnInit {

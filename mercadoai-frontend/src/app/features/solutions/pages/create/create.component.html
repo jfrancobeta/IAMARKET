@@ -51,8 +51,7 @@
             <select id="category" class="form-select" required [(ngModel)]="SolucionDTO.categoriaId" name="categoriaId">
               <option selected disabled>Selecciona una categoría</option>
               @for (category of categories; track $index) {
-              <option ngValue="{{ category.id }}">{{ category.nombre }}</option>
-
+              <option [value]="category.id ">{{ category.nombre }}</option>
               }
             </select>
           </div>
@@ -209,19 +208,81 @@
             </li>
           </ul>
         </div>
-
-        <!-- <div class="mb-3">
-          <label for="portfolio" class="form-label"
-            >Enlaces de Portafolio/Demos</label
+        <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Hitos del Proyecto</h5>
+          <p class="text-muted mb-0">
+            Define los hitos y entregables esperados para estructurar mejor el
+            proyecto
+          </p>
+        </div>
+        <div class="card-body">
+          <div
+            *ngFor="let hito of SolucionDTO.hitos; let i = index"
+            class="border rounded-lg p-3 mb-4"
           >
-          <input
-            type="text"
-            id="portfolio"
-            class="form-control"
-            placeholder="https://demo.ejemplo.com, https://github.com/usuario/proyecto"
-            
-          />
-        </div> -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-semibold mb-0">Hito {{ i + 1 }}</h6>
+              <button
+                *ngIf="SolucionDTO.hitos.length > 1"
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                (click)="eliminarHito(i)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+            <div class="row g-3 mb-2">
+              <div class="col-md-6">
+                <label class="form-label" [for]="'milestone-title-' + i"
+                  >Título del Hito</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [id]="'milestone-title-' + i"
+                  placeholder="ej. Análisis y diseño inicial"
+                  [(ngModel)]="hito.nombre"
+                  name="milestone-title-{{ i }}"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" [for]="'milestone-date-' + i"
+                  >Fecha Estimada</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  [id]="'milestone-date-' + i"
+                  [(ngModel)]="hito.fechaEntrega"
+                  name="milestone-date-{{ i }}"
+                />
+              </div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label" [for]="'milestone-description-' + i"
+                >Descripción</label
+              >
+              <textarea
+                class="form-control"
+                [id]="'milestone-description-' + i"
+                rows="2"
+                placeholder="Describe qué se debe completar en este hito..."
+                [(ngModel)]="hito.descripcion"
+                name="milestone-description-{{ i }}"
+              ></textarea>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-outline-primary w-100"
+            (click)="agregarHito()"
+          >
+            <i class="bi bi-plus"></i> Agregar Hito
+          </button>
+        </div>
+      </div>
+        
       </div>
     </div>
 

@@ -6,12 +6,14 @@ import java.util.List;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -27,7 +29,7 @@ public class Necesidad {
     private String titulo;
 
     private String descripcion;
-    
+
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
@@ -41,25 +43,21 @@ public class Necesidad {
     private LocalDate fechaLimite;
 
     @ManyToMany
-    @JoinTable(
-        name = "necesidad_habilidad",
-        joinColumns = @JoinColumn(name = "necesidad_id"),
-        inverseJoinColumns = @JoinColumn(name = "habilidad_id")
-    )
+    @JoinTable(name = "necesidad_habilidad", joinColumns = @JoinColumn(name = "necesidad_id"), inverseJoinColumns = @JoinColumn(name = "habilidad_id"))
     private List<Habilidad> skillsRequired;
 
     @ElementCollection
     private List<String> requirements;
 
-    @ElementCollection
-    private List<String> expectedDeliverables;
-    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "necesidad_id") 
+    private List<Hito> hitos;
+
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;// Estado: 0 - Pendiente, 1 - En Proceso, 2 - Completada, 3 - Cancelada
     private LocalDate fechaCreacion;
     private LocalDate fechaActualizacion;
-
 
     @PrePersist
     public void prePersist() {
@@ -72,7 +70,6 @@ public class Necesidad {
         this.fechaActualizacion = LocalDate.now();
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -137,14 +134,6 @@ public class Necesidad {
         this.requirements = requirements;
     }
 
-    public List<String> getExpectedDeliverables() {
-        return expectedDeliverables;
-    }
-
-    public void setExpectedDeliverables(List<String> expectedDeliverables) {
-        this.expectedDeliverables = expectedDeliverables;
-    }
-
     public Estado getEstado() {
         return estado;
     }
@@ -177,5 +166,12 @@ public class Necesidad {
         this.skillsRequired = skillsRequired;
     }
 
-    
+    public List<Hito> getHitos() {
+        return hitos;
+    }
+
+    public void setHitos(List<Hito> hitos) {
+        this.hitos = hitos;
+    }
+
 }

@@ -1,143 +1,265 @@
 <app-main-layout>
-<div class="container py-4">
-  <a [routerLink]="['/needs']" routerLinkActive="router-link-active"  class="btn btn-outline-secondary btn-sm mb-4">
-    <i class="bi bi-arrow-left me-2"></i>
-    Volver
-  </a>
-  <div class="mb-4">
-    <h1 class="h2 fw-bold mb-1">
-      {{ idNeed ? 'Editar Necesidad' : 'Publicar Nueva Necesidad' }}
-    </h1>
-    <p class="text-muted mb-0">Describe tu proyecto de IA para conectar con desarrolladores especializados</p>
-  </div>
-
-  <form (ngSubmit)="onSubmit(form)" #form="ngForm" novalidate>
-    <!-- Información Básica -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5 class="mb-1">Información Básica</h5>
-        <p class="text-muted mb-0">Proporciona los detalles principales de tu proyecto</p>
-      </div>
-      <div class="card-body">
-        <div class="mb-3">
-          <label for="title" class="form-label">Título del Proyecto *</label>
-          <input [(ngModel)]="need.titulo" name="titulo" type="text" class="form-control" id="title" placeholder="ej. Sistema de Recomendaciones con Machine Learning" required>
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Descripción Detallada *</label>
-          <textarea [(ngModel)]="need.descripcion" name="descripcion" class="form-control" id="description" rows="6" placeholder="Describe tu proyecto, objetivos, contexto y cualquier información relevante..." required></textarea>
-        </div>
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label for="category" class="form-label">Categoría *</label>
-            <select [(ngModel)]="need.categoria" name="categoria" class="form-select" id="category" required>
-              <option selected disabled>Selecciona una categoría</option>
-              @for (categoria of categorias; track $index) {
-                <option [ngValue]="categoria.id">{{ categoria.nombre }}</option>
-              }
-            </select>
-          </div>
-          <div class="col-md-6">
-            <label for="budget" class="form-label">Presupuesto *</label>
-            <input [(ngModel)]="need.presupuesto" name="presupuesto" type="number" class="form-control" id="budget" placeholder="Monto en USD" required>
-          </div>
-        </div>
-        <div class="mb-3 mt-3">
-          <label for="deadline" class="form-label">Plazo de Entrega *</label>
-          <input [(ngModel)]="need.fechaLimite" name="plazoEntrega" type="date" class="form-control" id="deadline" required>
-        </div>
-      </div>
+  <div class="container py-4">
+    <a
+      [routerLink]="['/needs']"
+      routerLinkActive="router-link-active"
+      class="btn btn-outline-secondary btn-sm mb-4"
+    >
+      <i class="bi bi-arrow-left me-2"></i>
+      Volver
+    </a>
+    <div class="mb-4">
+      <h1 class="h2 fw-bold mb-1">
+        {{ idNeed ? "Editar Necesidad" : "Publicar Nueva Necesidad" }}
+      </h1>
+      <p class="text-muted mb-0">
+        Describe tu proyecto de IA para conectar con desarrolladores
+        especializados
+      </p>
     </div>
 
-    <!-- Habilidades Requeridas -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5 class="mb-1">Habilidades Requeridas</h5>
-        <p class="text-muted mb-0">Selecciona las tecnologías y habilidades necesarias para tu proyecto</p>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm" novalidate>
+      <!-- Información Básica -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-1">Información Básica</h5>
+          <p class="text-muted mb-0">
+            Proporciona los detalles principales de tu proyecto
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="title" class="form-label">Título del Proyecto *</label>
+            <input
+              [(ngModel)]="need.titulo"
+              name="titulo"
+              type="text"
+              class="form-control"
+              id="title"
+              placeholder="ej. Sistema de Recomendaciones con Machine Learning"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label"
+              >Descripción Detallada *</label
+            >
+            <textarea
+              [(ngModel)]="need.descripcion"
+              name="descripcion"
+              class="form-control"
+              id="description"
+              rows="6"
+              placeholder="Describe tu proyecto, objetivos, contexto y cualquier información relevante..."
+              required
+            ></textarea>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="category" class="form-label">Categoría *</label>
+              <select
+                [(ngModel)]="need.categoria"
+                name="categoria"
+                class="form-select"
+                id="category"
+                required
+              >
+                <option selected disabled>Selecciona una categoría</option>
+                @for (categoria of categorias; track $index) {
+                <option [ngValue]="categoria.id">{{ categoria.nombre }}</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="budget" class="form-label">Presupuesto *</label>
+              <input
+                [(ngModel)]="need.presupuesto"
+                name="presupuesto"
+                type="number"
+                class="form-control"
+                id="budget"
+                placeholder="Monto en USD"
+                required
+              />
+            </div>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="deadline" class="form-label">Plazo de Entrega *</label>
+            <input
+              [(ngModel)]="need.fechaLimite"
+              name="plazoEntrega"
+              type="date"
+              class="form-control"
+              id="deadline"
+              required
+            />
+          </div>
+        </div>
       </div>
-      <div class="card-body">
-        <div class="row g-3">
-          @for (habilidad of habilidades; track $index) {
+
+      <!-- Habilidades Requeridas -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-1">Habilidades Requeridas</h5>
+          <p class="text-muted mb-0">
+            Selecciona las tecnologías y habilidades necesarias para tu proyecto
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            @for (habilidad of habilidades; track $index) {
             <div class="col-md-3">
               <div class="form-check">
-                <input 
-                class="form-check-input" 
-                type="checkbox" 
-                id="{{ habilidad.id }}" 
-                value="{{ habilidad.id }}"
-                [checked]="need.skillsRequiredIds.includes(habilidad.id)"
-                (change)="onHabilidadChange($event, habilidad.id)">
-                <label class="form-check-label" for="{{ habilidad.id }}">{{ habilidad.nombre }}</label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="{{ habilidad.id }}"
+                  value="{{ habilidad.id }}"
+                  [checked]="need.skillsRequiredIds.includes(habilidad.id)"
+                  (change)="onHabilidadChange($event, habilidad.id)"
+                />
+                <label class="form-check-label" for="{{ habilidad.id }}">{{
+                  habilidad.nombre
+                }}</label>
               </div>
             </div>
-          }
-        </div>
-      </div>
-    </div>
-
-    <!-- Detalles Adicionales -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5 class="mb-1">Detalles Adicionales</h5>
-        <p class="text-muted mb-0">Información adicional que ayude a los desarrolladores a entender mejor tu proyecto</p>
-      </div>
-      <div class="card-body">
-        <div class="mb-3">
-          <label for="deliverables" class="form-label">Requisitos Especificos</label>
-          <div class="input-group mb-2">
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="nuevoRequerimiento"
-              name="nuevoRequerimiento"
-              placeholder="Agrega un requisito y presiona +"
-            />
-            <button type="button" class="btn btn-outline-primary" (click)="agregarRequeriment()" [disabled]="!nuevoRequerimiento">
-              +
-            </button>
+            }
           </div>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let requerimiento of need.requirements; let i = index">
-              {{ requerimiento }}
-              <button type="button" class="btn btn-sm btn-danger" (click)="eliminarRequeriment(i)">
-                <i class="bi bi-x"></i>
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div class="mb-3">
-          <label for="deliverables" class="form-label">Entregables Esperados</label>
-          <div class="input-group mb-2">
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="nuevoEntregable"
-              name="nuevoEntregable"
-              placeholder="Agrega un entregable y presiona +"
-            />
-            <button type="button" class="btn btn-outline-primary" (click)="agregarEntregable()" [disabled]="!nuevoEntregable">
-              +
-            </button>
-          </div>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let entregable of need.expectedDeliverables; let i = index">
-              {{ entregable }}
-              <button type="button" class="btn btn-sm btn-danger" (click)="eliminarEntregable(i)">
-                <i class="bi bi-x"></i>
-              </button>
-            </li>
-          </ul>
         </div>
       </div>
-    </div>
 
-    <div class="d-flex justify-content-end gap-2">
-      <a routerLink="/needs" class="btn btn-outline-secondary">Cancelar</a>
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-        <i class="bi bi-save me-2"></i>
-        {{ idNeed ? 'Actualizar Necesidad' : 'Publicar Necesidad' }}
-      </button>
-    </div>
-  </form>
-</div>
+      <!-- Detalles Adicionales -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-1">Detalles Adicionales</h5>
+          <p class="text-muted mb-0">
+            Información adicional que ayude a los desarrolladores a entender
+            mejor tu proyecto
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="deliverables" class="form-label"
+              >Requisitos Especificos</label
+            >
+            <div class="input-group mb-2">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="nuevoRequerimiento"
+                name="nuevoRequerimiento"
+                placeholder="Agrega un requisito y presiona +"
+              />
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                (click)="agregarRequeriment()"
+                [disabled]="!nuevoRequerimiento"
+              >
+                +
+              </button>
+            </div>
+            <ul class="list-group">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+                *ngFor="let requerimiento of need.requirements; let i = index"
+              >
+                {{ requerimiento }}
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  (click)="eliminarRequeriment(i)"
+                >
+                  <i class="bi bi-x"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Hitos del Proyecto</h5>
+          <p class="text-muted mb-0">
+            Define los hitos y entregables esperados para estructurar mejor el
+            proyecto
+          </p>
+        </div>
+        <div class="card-body">
+          <div
+            *ngFor="let hito of need.hitos; let i = index"
+            class="border rounded-lg p-3 mb-4"
+          >
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-semibold mb-0">Hito {{ i + 1 }}</h6>
+              <button
+                *ngIf="need.hitos.length > 1"
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                (click)="eliminarHito(i)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+            <div class="row g-3 mb-2">
+              <div class="col-md-6">
+                <label class="form-label" [for]="'milestone-title-' + i"
+                  >Título del Hito</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [id]="'milestone-title-' + i"
+                  placeholder="ej. Análisis y diseño inicial"
+                  [(ngModel)]="hito.nombre"
+                  name="milestone-title-{{ i }}"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" [for]="'milestone-date-' + i"
+                  >Fecha Estimada</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  [id]="'milestone-date-' + i"
+                  [(ngModel)]="hito.fechaEntrega"
+                  name="milestone-date-{{ i }}"
+                />
+              </div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label" [for]="'milestone-description-' + i"
+                >Descripción</label
+              >
+              <textarea
+                class="form-control"
+                [id]="'milestone-description-' + i"
+                rows="2"
+                placeholder="Describe qué se debe completar en este hito..."
+                [(ngModel)]="hito.descripcion"
+                name="milestone-description-{{ i }}"
+              ></textarea>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-outline-primary w-100"
+            (click)="agregarHito()"
+          >
+            <i class="bi bi-plus"></i> Agregar Hito
+          </button>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2">
+        <a routerLink="/needs" class="btn btn-outline-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          <i class="bi bi-save me-2"></i>
+          {{ idNeed ? "Actualizar Necesidad" : "Publicar Necesidad" }}
+        </button>
+      </div>
+    </form>
+  </div>
 </app-main-layout>

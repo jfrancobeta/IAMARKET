@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -49,6 +51,10 @@ public class Solucion {
     @ElementCollection
     private List<String> requisitos;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "solucion_id") 
+    private List<Hito> hitos;
+
     private int tiempoEntrega;
 
     @Enumerated(EnumType.STRING)
@@ -60,7 +66,7 @@ public class Solucion {
     public List<String> getCaracteristicas() {
         return caracteristicas;
     }
-
+    
     public int getTiempoEntrega() {
         return tiempoEntrega;
     }
@@ -191,6 +197,16 @@ public class Solucion {
 
     public void incrementarPedidos() {
         this.pedidos++;
+    }
+
+
+    public List<Hito> getHitos() {
+        return hitos;
+    }
+
+
+    public void setHitos(List<Hito> hitos) {
+        this.hitos = hitos;
     }
 
 }

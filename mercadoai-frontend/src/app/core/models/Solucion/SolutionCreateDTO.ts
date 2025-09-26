@@ -1,3 +1,5 @@
+import { HitoCreateDTO } from "../Hito/HitoCreateDTO";
+
 export interface SolucionCreateDTO {
   titulo: string;
   descripcion: string;
@@ -7,6 +9,7 @@ export interface SolucionCreateDTO {
   habilidadesIds: number[];
   caracteristicas: string[];
   requisitos: string[];
+  hitos: HitoCreateDTO[];
   tiempoEntrega: number;
   unidadEntrega: string;
   desarrolladorId: number;

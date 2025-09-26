@@ -17,11 +17,13 @@ import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUserDetailsDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaUserDetailsDTO;
+import com.jfranco.aimercado.mercadoai.mapper.Hito.HitoMapper;
 import com.jfranco.aimercado.mercadoai.mapper.Necesidad.NecesidadMapper;
 import com.jfranco.aimercado.mercadoai.mapper.Propuesta.PropuestaMapper;
 import com.jfranco.aimercado.mercadoai.model.Categoria;
 import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
+import com.jfranco.aimercado.mercadoai.model.Hito;
 import com.jfranco.aimercado.mercadoai.model.Necesidad;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
@@ -67,10 +69,13 @@ public class NecesidadServiceImpl implements INecesidadesService {
     @Autowired
     private PropuestaMapper propuestaMapper;
 
+    @Autowired
+    private HitoMapper hitoMapper;
+
     @Override
     public Page<NecesidadSummaryDTO> getAllNecesidades(String search, String categoria, String estado,
             Pageable pageable) {
-                
+
         Page<Necesidad> necesidadesPage;
 
         if (search != null && !search.isEmpty()) {
@@ -96,6 +101,8 @@ public class NecesidadServiceImpl implements INecesidadesService {
         List<Propuesta> propuestas = propuestaRepository.findByNecesidad(necesidad);
 
         List<PropuestaUserDetailsDTO> propuestasDetailsDTO = new ArrayList<>();
+
+        List<Hito> hitos = necesidad.getHitos();
 
         for (Propuesta propuesta : propuestas) {
             Usuario desarrollador = propuesta.getDesarrollador();
@@ -129,7 +136,8 @@ public class NecesidadServiceImpl implements INecesidadesService {
                 propuestasDetailsDTO,
                 calificacionPromedio,
                 cantidadCalificaciones,
-                cantidadProyectos);
+                cantidadProyectos,
+                hitos.stream().map(hito -> hitoMapper.toDTO(hito)).toList());
 
         return dto;
     }
@@ -154,7 +162,13 @@ public class NecesidadServiceImpl implements INecesidadesService {
                 .orElseThrow(
                         () -> new RuntimeException("Categoría no encontrada con id: " + necesidadDTO.getCategoria()));
 
-        Necesidad necesidad = necesidadMapper.toEntity(necesidadDTO, compania, estado, habilidades, categoria);
+        List<Hito> hitos = new ArrayList<>();
+        if (necesidadDTO.getHitos() != null) {
+            hitos = necesidadDTO.getHitos().stream()
+                    .map(hitoMapper::toEntity)
+                    .toList();
+        }
+        Necesidad necesidad = necesidadMapper.toEntity(necesidadDTO, compania, estado, habilidades, categoria, hitos);
 
         Necesidad saved = necesidadesRepostitory.save(necesidad);
 
@@ -187,7 +201,16 @@ public class NecesidadServiceImpl implements INecesidadesService {
                     .orElseThrow(() -> new RuntimeException("Categoría no encontrada con id: " + dto.getCategoria()));
         }
 
-        necesidadMapper.updateEntity(necesidad, dto, estado, habilidades, categoria);
+        List<Hito> hitos;
+        if (dto.getHitos() != null) {
+            hitos = new ArrayList<>(dto.getHitos().stream()
+                    .map(hitoMapper::toEntity)
+                    .toList());
+        } else {
+            hitos = new ArrayList<>();
+        }
+
+        necesidadMapper.updateEntity(necesidad, dto, estado, habilidades, categoria, hitos);
 
         Necesidad updated = necesidadesRepostitory.save(necesidad);
 
