@@ -8,6 +8,7 @@ import com.jfranco.aimercado.mercadoai.model.Entregable;
 
 @Mapper(componentModel = "spring")
 public interface EntregableMapper {
+    
     EntregableDTO toDTO(Entregable entregable);
 
     @Mapping(target = "hito", ignore = true)

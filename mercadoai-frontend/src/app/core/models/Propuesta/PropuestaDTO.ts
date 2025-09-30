@@ -1,4 +1,4 @@
-export interface Propuesta {
+export interface PropuestaDTO {
   id: number;
   necesidad: any;
   desarrollador: any; 

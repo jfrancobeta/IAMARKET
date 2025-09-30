@@ -1,294 +1,1154 @@
 <app-main-layout>
-<div class="container py-4">
-  <a href="/projects" class="btn btn-outline-secondary btn-sm mb-4">
-    <i class="bi bi-arrow-left me-2"></i>
-    Volver a Proyectos
-  </a>
-  <div class="row g-4">
-    <!-- Main Content -->
-    <div class="col-lg-8">
-      <div class="card mb-4">
-        <div class="card-header">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-secondary">En progreso</span>
-                <span class="badge bg-light text-dark border">Machine Learning</span>
-              </div>
-              <h2 class="fw-bold fs-4 mb-1">Sistema de Análisis Predictivo para Ventas</h2>
-              <span class="text-muted small">Desarrollo de sistema de ML para predicción de ventas usando algoritmos avanzados de machine learning.</span>
-            </div>
-            <div class="d-flex gap-2">
-              <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
-              <button class="btn btn-primary btn-sm"><i class="bi bi-check-circle me-2"></i>Marcar Completado</button>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="mb-3">
-            <div class="d-flex justify-content-between text-sm mb-2">
-              <span>Progreso del proyecto</span>
-              <span class="fw-medium">75%</span>
-            </div>
-            <div class="progress" style="height: 8px;">
-              <div class="progress-bar" style="width: 75%"></div>
-            </div>
-          </div>
-          <hr>
-          <div class="row g-3 text-sm mb-3">
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success"></i>
-              <div>
-                <span class="fw-medium">$6,500</span>
-                <span class="text-muted small d-block">Presupuesto</span>
-              </div>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-clock text-primary"></i>
-              <div>
-                <span class="fw-medium">15 días</span>
-                <span class="text-muted small d-block">Restantes</span>
-              </div>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-calendar text-purple"></i>
-              <div>
-                <span class="fw-medium">20/01/2024</span>
-                <span class="text-muted small d-block">Inicio</span>
-              </div>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-calendar text-danger"></i>
-              <div>
-                <span class="fw-medium">15/02/2024</span>
-                <span class="text-muted small d-block">Entrega</span>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <h5 class="fw-semibold mb-2">Tecnologías</h5>
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            <span class="badge bg-secondary">Python</span>
-            <span class="badge bg-secondary">TensorFlow</span>
-            <span class="badge bg-secondary">Scikit-learn</span>
-            <span class="badge bg-secondary">AWS</span>
-            <span class="badge bg-secondary">Docker</span>
-          </div>
-        </div>
-      </div>
-      <!-- Tabs -->
-      <ul class="nav nav-tabs mb-4" id="projectTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Resumen</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="milestones-tab" data-bs-toggle="tab" data-bs-target="#milestones" type="button" role="tab">Hitos</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="deliverables-tab" data-bs-toggle="tab" data-bs-target="#deliverables" type="button" role="tab">Entregables</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">Archivos</button>
-        </li>
-      </ul>
-      <div class="tab-content">
-        <!-- Resumen -->
-        <div class="tab-pane fade show active" id="overview" role="tabpanel">
-          <div class="card mb-4">
-            <div class="card-header">
-              <h5 class="mb-1">Detalles del Proyecto</h5>
-            </div>
-            <div class="card-body">
-              <h6 class="fw-semibold mb-2">Descripción Completa</h6>
-              <p class="text-muted mb-3">Desarrollo de sistema de ML para predicción de ventas usando algoritmos avanzados de machine learning. Este proyecto incluye el análisis completo de datos históricos de ventas, la implementación de múltiples algoritmos de machine learning para comparar rendimiento, y la creación de una interfaz web para visualizar las predicciones en tiempo real.</p>
-              <hr>
-              <h6 class="fw-semibold mb-2">Objetivos</h6>
-              <ul class="list-disc ps-3 text-muted mb-0">
-                <li>Desarrollar un modelo predictivo con precisión superior al 85%</li>
-                <li>Integrar el sistema con el CRM existente (Salesforce)</li>
-                <li>Crear dashboard interactivo para visualización de predicciones</li>
-                <li>Proporcionar documentación completa y capacitación al equipo</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- Hitos -->
-        <div class="tab-pane fade" id="milestones" role="tabpanel">
-          <div class="card mb-4">
-            <div class="card-header">
-              <h5 class="mb-1">Hitos del Proyecto</h5>
-              <span class="text-muted small">Seguimiento del progreso por fases</span>
-            </div>
-            <div class="card-body">
-              <div class="mb-3">
-                <div class="d-flex align-items-center gap-4 mb-2">
-                  <span class="w-8 h-8 rounded-circle bg-success d-flex align-items-center justify-content-center text-white">1</span>
-                  <div>
-                    <span class="fw-medium text-success">Análisis de requisitos</span>
-                    <span class="text-muted small d-block">Completado: 22/01/2024</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center gap-4 mb-2">
-                  <span class="w-8 h-8 rounded-circle bg-success d-flex align-items-center justify-content-center text-white">2</span>
-                  <div>
-                    <span class="fw-medium text-success">Preparación de datos</span>
-                    <span class="text-muted small d-block">Completado: 28/01/2024</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center gap-4 mb-2">
-                  <span class="w-8 h-8 rounded-circle bg-success d-flex align-items-center justify-content-center text-white">3</span>
-                  <div>
-                    <span class="fw-medium text-success">Desarrollo del modelo</span>
-                    <span class="text-muted small d-block">Completado: 05/02/2024</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center gap-4 mb-2">
-                  <span class="w-8 h-8 rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white">4</span>
-                  <div>
-                    <span class="fw-medium">Entrenamiento y validación</span>
-                    <span class="text-muted small d-block">Fecha estimada: 10/02/2024</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center gap-4 mb-2">
-                  <span class="w-8 h-8 rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white">5</span>
-                  <div>
-                    <span class="fw-medium">Implementación y testing</span>
-                    <span class="text-muted small d-block">Fecha estimada: 15/02/2024</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Entregables -->
-        <div class="tab-pane fade" id="deliverables" role="tabpanel">
-          <div class="card mb-4">
-            <div class="card-header">
-              <h5 class="mb-1">Entregables</h5>
-              <span class="text-muted small">Estado de los entregables del proyecto</span>
-            </div>
-            <div class="card-body">
-              <div class="mb-3">
-                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
-                  <span class="fw-medium">Código fuente completo</span>
-                  <span class="badge bg-secondary">Pendiente</span>
-                </div>
-                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
-                  <span class="fw-medium">Modelo entrenado</span>
-                  <span class="badge bg-secondary">En progreso</span>
-                </div>
-                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
-                  <span class="fw-medium">Documentación técnica</span>
-                  <span class="badge bg-success">Completado</span>
-                </div>
-                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
-                  <span class="fw-medium">Manual de usuario</span>
-                  <span class="badge bg-secondary">Pendiente</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Archivos -->
-        <div class="tab-pane fade" id="files" role="tabpanel">
-          <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <div>
-                <h5 class="mb-1">Archivos del Proyecto</h5>
-                <span class="text-muted small">Documentos y archivos compartidos</span>
-              </div>
-              <button class="btn btn-primary btn-sm"><i class="bi bi-upload me-2"></i>Subir Archivo</button>
-            </div>
-            <div class="card-body">
-              <div class="mb-3">
-                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
-                  <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-file-earmark-text text-muted"></i>
-                    <div>
-                      <span class="fw-medium">requirements.pdf</span>
-                      <span class="text-muted small d-block">2.3 MB • Subido por Cliente • 20/01/2024</span>
-                    </div>
-                  </div>
-                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download"></i></button>
-                </div>
-                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
-                  <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-file-earmark-text text-muted"></i>
-                    <div>
-                      <span class="fw-medium">data_schema.sql</span>
-                      <span class="text-muted small d-block">15 KB • Subido por Ana García • 25/01/2024</span>
-                    </div>
-                  </div>
-                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download"></i></button>
-                </div>
-                <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-2">
-                  <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-file-earmark-text text-muted"></i>
-                    <div>
-                      <span class="fw-medium">progress_report.pdf</span>
-                      <span class="text-muted small d-block">1.8 MB • Subido por Ana García • 01/02/2024</span>
-                    </div>
-                  </div>
-                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="container-fluid py-4">
+    <!-- Back Button -->
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <a href="/projects" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-arrow-left me-2"></i>
+        Volver a Proyectos
+      </a>
     </div>
-    <!-- Sidebar -->
-    <div class="col-lg-4">
-      <!-- Cliente -->
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5 class="mb-1">Cliente</h5>
-        </div>
-        <div class="card-body">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <img src="/placeholder.svg?height=40&width=40" alt="TechCorp Solutions" class="rounded-circle" width="40" height="40">
-            <div>
-              <span class="fw-semibold">TechCorp Solutions</span>
-              <div class="d-flex align-items-center gap-2 text-muted small">
-                <i class="bi bi-star-fill text-warning"></i>
-                <span>4.8</span>
+
+    <div class="row g-4">
+      <!-- Main Content -->
+      <div class="col-lg-8">
+        <!-- Project Header -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="d-flex gap-2 mb-2">
+                  <span class="badge bg-primary">En progreso</span>
+                  <span class="badge bg-outline-secondary">
+                    <i class="bi bi-file-text me-1"></i>
+                    De necesidad
+                  </span>
+                  <span class="badge bg-secondary">Machine Learning</span>
+                </div>
+                <h2 class="card-title">
+                  Sistema de Análisis Predictivo para Ventas
+                </h2>
+                <p class="text-muted mb-2">
+                  Desarrollo de sistema de ML para predicción de ventas usando
+                  algoritmos avanzados de machine learning.
+                </p>
+                <div class="d-flex gap-3 text-muted small">
+                  <span>Origen: Propuesta aceptada</span>
+                  <a href="/needs/123" class="text-decoration-none"
+                    >Ver necesidad original</a
+                  >
+                </div>
+              </div>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="bi bi-chat me-1"></i>
+                  Chat Directo
+                </button>
+                <button
+                  class="btn btn-outline-danger btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#cancelModal"
+                >
+                  <i class="bi bi-x me-1"></i>
+                  Cancelar Proyecto
+                </button>
               </div>
             </div>
           </div>
-          <button class="btn btn-outline-secondary w-100"><i class="bi bi-chat-dots me-2"></i>Contactar Cliente</button>
-        </div>
-      </div>
-      <!-- Desarrollador -->
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5 class="mb-1">Desarrollador</h5>
-        </div>
-        <div class="card-body">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <img src="/placeholder.svg?height=40&width=40" alt="Ana García" class="rounded-circle" width="40" height="40">
+          <div class="card-body">
+            <!-- Cancelation Alert (hidden by default) -->
+            <div class="cancelation-alert d-none" id="cancelationAlert">
+              <div class="d-flex gap-3">
+                <i class="bi bi-exclamation-triangle text-warning"></i>
+                <div class="flex-grow-1">
+                  <h6 class="text-warning mb-1">
+                    Solicitud de Cancelación Enviada
+                  </h6>
+                  <p class="mb-1 small">
+                    <strong>Motivo:</strong>
+                    <span id="cancelationReason"></span>
+                  </p>
+                  <p class="mb-0 text-muted small">Solicitada por el cliente</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="mb-4">
+              <div class="d-flex justify-content-between mb-2">
+                <span>Progreso del proyecto</span>
+                <span class="fw-semibold">65%</span>
+              </div>
+              <div class="progress progress-bar">
+                <div class="progress-bar" style="width: 65%"></div>
+              </div>
+            </div>
+
+            <hr />
+
+            <!-- Project Stats -->
+            <div class="row g-3 mb-4">
+              <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-currency-dollar text-success"></i>
+                  <div>
+                    <div class="fw-semibold">$6,500</div>
+                    <div class="text-muted small">Presupuesto</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-clock text-primary"></i>
+                  <div>
+                    <div class="fw-semibold">15 días</div>
+                    <div class="text-muted small">Restantes</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-check-circle text-success"></i>
+                  <div>
+                    <div class="fw-semibold">2/4</div>
+                    <div class="text-muted small">Hitos</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-file-text text-warning"></i>
+                  <div>
+                    <div class="fw-semibold">3</div>
+                    <div class="text-muted small">Pendientes</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+
+            <!-- Technologies -->
             <div>
-              <span class="fw-semibold">Ana García</span>
-              <div class="d-flex align-items-center gap-2 text-muted small">
-                <i class="bi bi-star-fill text-warning"></i>
-                <span>4.9</span>
+              <h6 class="mb-2">Tecnologías</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-secondary">Python</span>
+                <span class="badge bg-secondary">TensorFlow</span>
+                <span class="badge bg-secondary">Scikit-learn</span>
+                <span class="badge bg-secondary">AWS</span>
+                <span class="badge bg-secondary">Docker</span>
               </div>
             </div>
           </div>
-          <button class="btn btn-outline-secondary w-100"><i class="bi bi-chat-dots me-2"></i>Contactar Desarrollador</button>
+        </div>
+
+        <!-- Tabs -->
+        <ul class="nav nav-tabs mb-4" id="projectTabs">
+          <li class="nav-item">
+            <button
+              class="nav-link active"
+              data-bs-toggle="tab"
+              data-bs-target="#overview"
+            >
+              Resumen
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              data-bs-toggle="tab"
+              data-bs-target="#milestones"
+            >
+              Hitos y Entregables
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              data-bs-toggle="tab"
+              data-bs-target="#communication"
+            >
+              Comunicación
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <!-- Overview Tab -->
+          <div class="tab-pane fade show active" id="overview">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Detalles del Proyecto</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-4">
+                  <h6>Descripción Completa</h6>
+                  <p class="text-muted">
+                    Desarrollo de sistema de ML para predicción de ventas usando
+                    algoritmos avanzados de machine learning. Este proyecto
+                    incluye el análisis completo de datos históricos de ventas,
+                    la implementación de múltiples algoritmos de machine
+                    learning para comparar rendimiento, y la creación de una
+                    interfaz web para visualizar las predicciones en tiempo
+                    real.
+                  </p>
+                </div>
+                <hr />
+                <div>
+                  <h6>Objetivos</h6>
+                  <ul class="text-muted">
+                    <li>
+                      Desarrollar un modelo predictivo con precisión superior al
+                      85%
+                    </li>
+                    <li>
+                      Integrar el sistema con el CRM existente (Salesforce)
+                    </li>
+                    <li>
+                      Crear dashboard interactivo para visualización de
+                      predicciones
+                    </li>
+                    <li>
+                      Proporcionar documentación completa y capacitación al
+                      equipo
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Milestones Tab -->
+          <div class="tab-pane fade" id="milestones">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h5>Hitos y Entregables del Proyecto</h5>
+              <button
+                class="btn btn-primary btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#addMilestoneModal"
+              >
+                <i class="bi bi-plus me-1"></i>
+                Agregar Hito
+              </button>
+            </div>
+
+            <!-- Milestone 1 -->
+            <div class="card mb-4">
+              <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="milestone-number milestone-completed">
+                      <i class="bi bi-check"></i>
+                    </div>
+                    <div>
+                      <h6 class="mb-0 text-success">Análisis de requisitos</h6>
+                      <small class="text-muted">Completado: 22/01/2024</small>
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-success">100% completado</span>
+                    <button class="btn btn-outline-secondary btn-sm">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="text-muted mb-3">
+                  Análisis completo de los requisitos del cliente y definición
+                  del alcance
+                </p>
+
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Progreso del hito</span>
+                    <span>100%</span>
+                  </div>
+                  <div class="progress progress-bar">
+                    <div
+                      class="progress-bar bg-success"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                </div>
+
+                <h6>Entregables</h6>
+
+                <div class="deliverable-card">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-2"
+                  >
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-check-circle-fill text-success"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Documento de requisitos</h6>
+                        <div
+                          class="d-flex align-items-center gap-2 text-muted small"
+                        >
+                          <i class="bi bi-paperclip"></i>
+                          <span>requisitos_sistema.pdf</span>
+                          <span>(2.4 MB)</span>
+                        </div>
+                        <p class="text-muted small mt-1">
+                          Subido por Ana García el 22/01/2024
+                        </p>
+                        <p class="small fst-italic">
+                          "Documento completo con todos los requisitos
+                          funcionales y no funcionales"
+                        </p>
+                      </div>
+                    </div>
+                    <span class="badge badge-status-accepted">Aceptado</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-download"></i>
+                    </button>
+                    <small class="text-muted"
+                      >Revisado por TechCorp Solutions el 22/01/2024</small
+                    >
+                  </div>
+                </div>
+
+                <div class="deliverable-card">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-2"
+                  >
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-check-circle-fill text-success"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Plan de proyecto</h6>
+                        <div
+                          class="d-flex align-items-center gap-2 text-muted small"
+                        >
+                          <i class="bi bi-paperclip"></i>
+                          <span>plan_proyecto.docx</span>
+                          <span>(1.8 MB)</span>
+                        </div>
+                        <p class="text-muted small mt-1">
+                          Subido por Ana García el 22/01/2024
+                        </p>
+                        <p class="small fst-italic">
+                          "Cronograma detallado con hitos y fechas"
+                        </p>
+                      </div>
+                    </div>
+                    <span class="badge badge-status-accepted">Aceptado</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-download"></i>
+                    </button>
+                    <small class="text-muted"
+                      >Revisado por TechCorp Solutions el 22/01/2024</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Milestone 2 -->
+            <div class="card mb-4">
+              <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="milestone-number milestone-completed">
+                      <i class="bi bi-check"></i>
+                    </div>
+                    <div>
+                      <h6 class="mb-0 text-success">Preparación de datos</h6>
+                      <small class="text-muted">Completado: 28/01/2024</small>
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-success">100% completado</span>
+                    <button class="btn btn-outline-secondary btn-sm">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="text-muted mb-3">
+                  Limpieza y preparación de los datos históricos de ventas
+                </p>
+
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Progreso del hito</span>
+                    <span>100%</span>
+                  </div>
+                  <div class="progress progress-bar">
+                    <div
+                      class="progress-bar bg-success"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                </div>
+
+                <h6>Entregables</h6>
+
+                <div class="deliverable-card">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-2"
+                  >
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-check-circle-fill text-success"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Dataset limpio</h6>
+                        <div
+                          class="d-flex align-items-center gap-2 text-muted small"
+                        >
+                          <i class="bi bi-paperclip"></i>
+                          <span>dataset_clean.csv</span>
+                          <span>(15.2 MB)</span>
+                        </div>
+                        <p class="text-muted small mt-1">
+                          Subido por Ana García el 28/01/2024
+                        </p>
+                        <p class="small fst-italic">
+                          "Dataset procesado y listo para entrenamiento"
+                        </p>
+                      </div>
+                    </div>
+                    <span class="badge badge-status-accepted">Aceptado</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-download"></i>
+                    </button>
+                    <small class="text-muted"
+                      >Revisado por TechCorp Solutions el 28/01/2024</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Milestone 3 -->
+            <div class="card mb-4">
+              <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="milestone-number milestone-pending">3</div>
+                    <div>
+                      <h6 class="mb-0">Desarrollo del modelo</h6>
+                      <small class="text-muted"
+                        >Fecha estimada: 05/02/2024</small
+                      >
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-warning">75% completado</span>
+                    <button class="btn btn-outline-secondary btn-sm">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="text-muted mb-3">
+                  Implementación y entrenamiento del modelo de machine learning
+                </p>
+
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Progreso del hito</span>
+                    <span>75%</span>
+                  </div>
+                  <div class="progress progress-bar">
+                    <div
+                      class="progress-bar bg-warning"
+                      style="width: 75%"
+                    ></div>
+                  </div>
+                </div>
+
+                <h6>Entregables</h6>
+
+                <div class="deliverable-card">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-2"
+                  >
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-eye text-warning"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Modelo entrenado</h6>
+                        <div
+                          class="d-flex align-items-center gap-2 text-muted small"
+                        >
+                          <i class="bi bi-paperclip"></i>
+                          <span>modelo_ventas.pkl</span>
+                          <span>(8.7 MB)</span>
+                        </div>
+                        <p class="text-muted small mt-1">
+                          Subido por Ana García el 03/02/2024
+                        </p>
+                        <p class="small fst-italic">
+                          "Modelo con 87% de precisión en datos de prueba"
+                        </p>
+                      </div>
+                    </div>
+                    <span class="badge badge-status-review">En revisión</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex gap-1">
+                      <button
+                        class="btn btn-outline-success btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#acceptModal"
+                      >
+                        <i class="bi bi-hand-thumbs-up"></i>
+                      </button>
+                      <button
+                        class="btn btn-outline-danger btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#rejectModal"
+                      >
+                        <i class="bi bi-hand-thumbs-down"></i>
+                      </button>
+                      <button class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-download"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="deliverable-card">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-2"
+                  >
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-x-circle text-danger"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Reporte de métricas</h6>
+                        <div
+                          class="d-flex align-items-center gap-2 text-muted small"
+                        >
+                          <i class="bi bi-paperclip"></i>
+                          <span>metricas_modelo.pdf</span>
+                          <span>(1.2 MB)</span>
+                        </div>
+                        <p class="text-muted small mt-1">
+                          Subido por Ana García el 02/02/2024
+                        </p>
+                        <p class="small fst-italic">
+                          "Reporte inicial de métricas"
+                        </p>
+                      </div>
+                    </div>
+                    <span class="badge badge-status-rejected">Rechazado</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-download"></i>
+                    </button>
+                    <small class="text-muted"
+                      >Revisado por TechCorp Solutions el 03/02/2024</small
+                    >
+                  </div>
+                </div>
+
+                <div class="deliverable-card">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-2"
+                  >
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-clock text-muted"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Código fuente</h6>
+                        <p class="text-muted small mt-1">Pendiente de subir</p>
+                      </div>
+                    </div>
+                    <span class="badge badge-status-pending">Pendiente</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <button
+                      class="btn btn-primary btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#uploadModal"
+                    >
+                      <i class="bi bi-upload me-1"></i>
+                      Subir Entregable
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Milestone 4 -->
+            <div class="card">
+              <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="milestone-number milestone-pending">4</div>
+                    <div>
+                      <h6 class="mb-0">Implementación y testing</h6>
+                      <small class="text-muted"
+                        >Fecha estimada: 15/02/2024</small
+                      >
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-secondary">0% completado</span>
+                    <button class="btn btn-outline-secondary btn-sm">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="text-muted mb-3">
+                  Despliegue del modelo y pruebas finales
+                </p>
+
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Progreso del hito</span>
+                    <span>0%</span>
+                  </div>
+                  <div class="progress progress-bar">
+                    <div
+                      class="progress-bar bg-secondary"
+                      style="width: 0%"
+                    ></div>
+                  </div>
+                </div>
+
+                <h6>Entregables</h6>
+
+                <div class="deliverable-card">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-2"
+                  >
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-clock text-muted"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Sistema desplegado</h6>
+                        <p class="text-muted small mt-1">Pendiente de subir</p>
+                      </div>
+                    </div>
+                    <span class="badge badge-status-pending">Pendiente</span>
+                  </div>
+                </div>
+
+                <div class="deliverable-card">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-2"
+                  >
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-clock text-muted"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Manual de usuario</h6>
+                        <p class="text-muted small mt-1">Pendiente de subir</p>
+                      </div>
+                    </div>
+                    <span class="badge badge-status-pending">Pendiente</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Communication Tab -->
+          <div class="tab-pane fade" id="communication">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Comunicación del Proyecto</h5>
+                <p class="text-muted small mb-0">
+                  Comentarios y actualizaciones
+                </p>
+              </div>
+              <div class="card-body">
+                <div class="comments-section mb-4">
+                  <div class="d-flex gap-3 mb-3">
+                    <img
+                      src="https://via.placeholder.com/32"
+                      class="avatar avatar-sm rounded-circle"
+                      alt="Ana García"
+                    />
+                    <div class="flex-grow-1">
+                      <div class="d-flex gap-2 mb-1">
+                        <span class="fw-semibold small">Ana García</span>
+                        <span class="text-muted small">25/01/2024 10:30</span>
+                      </div>
+                      <p class="small mb-0">
+                        He completado el análisis inicial de los datos. Los
+                        resultados preliminares son muy prometedores.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="d-flex gap-3 mb-3">
+                    <img
+                      src="https://via.placeholder.com/32"
+                      class="avatar avatar-sm rounded-circle"
+                      alt="TechCorp Solutions"
+                    />
+                    <div class="flex-grow-1">
+                      <div class="d-flex gap-2 mb-1">
+                        <span class="fw-semibold small"
+                          >TechCorp Solutions</span
+                        >
+                        <span class="text-muted small">28/01/2024 14:15</span>
+                      </div>
+                      <p class="small mb-0">
+                        Excelente trabajo en la preparación de datos. ¿Podrías
+                        compartir más detalles sobre la metodología utilizada?
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="d-flex gap-3 mb-3">
+                    <img
+                      src="https://via.placeholder.com/32"
+                      class="avatar avatar-sm rounded-circle"
+                      alt="Ana García"
+                    />
+                    <div class="flex-grow-1">
+                      <div class="d-flex gap-2 mb-1">
+                        <span class="fw-semibold small">Ana García</span>
+                        <span class="text-muted small">28/01/2024 16:45</span>
+                      </div>
+                      <p class="small mb-0">
+                        Por supuesto, he subido un documento detallado con la
+                        metodología en la sección de archivos.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div>
+                  <textarea
+                    class="form-control mb-3"
+                    rows="3"
+                    placeholder="Escribe un comentario..."
+                    id="newComment"
+                  ></textarea>
+                  <div class="d-flex justify-content-end">
+                    <button class="btn btn-primary" onclick="addComment()">
+                      <i class="bi bi-send me-1"></i>
+                      Enviar Comentario
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- Acciones -->
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5 class="mb-1">Acciones</h5>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <!-- Client Info -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h6 class="card-title mb-0">Cliente</h6>
+          </div>
+          <div class="card-body">
+            <div class="d-flex gap-3 mb-3">
+              <img
+                src="https://via.placeholder.com/40"
+                class="avatar rounded-circle"
+                alt="TechCorp Solutions"
+              />
+              <div>
+                <h6 class="mb-0">TechCorp Solutions</h6>
+                <div class="d-flex align-items-center gap-1 text-muted small">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <span>4.8</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary w-100">
+              <i class="bi bi-chat me-1"></i>
+              Contactar Cliente
+            </button>
+          </div>
         </div>
-        <div class="card-body d-grid gap-2">
-          <button class="btn btn-outline-secondary w-100"><i class="bi bi-file-earmark-text me-2"></i>Generar Reporte</button>
-          <button class="btn btn-outline-secondary w-100"><i class="bi bi-calendar me-2"></i>Programar Reunión</button>
-          <button class="btn btn-outline-secondary w-100"><i class="bi bi-star me-2"></i>Calificar Proyecto</button>
+
+        <!-- Developer Info -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h6 class="card-title mb-0">Desarrollador</h6>
+          </div>
+          <div class="card-body">
+            <div class="d-flex gap-3 mb-3">
+              <img
+                src="https://via.placeholder.com/40"
+                class="avatar rounded-circle"
+                alt="Ana García"
+              />
+              <div>
+                <h6 class="mb-0">Ana García</h6>
+                <div class="d-flex align-items-center gap-1 text-muted small">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <span>4.9</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary w-100">
+              <i class="bi bi-chat me-1"></i>
+              Contactar Desarrollador
+            </button>
+          </div>
+        </div>
+
+        <!-- Project Status -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h6 class="card-title mb-0">Estado del Proyecto</h6>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small">Hitos completados</span>
+              <span class="fw-semibold">2/4</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small">Entregables pendientes</span>
+              <span class="fw-semibold">3</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small">En revisión</span>
+              <span class="fw-semibold">1</span>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+              <span class="small">Días restantes</span>
+              <span class="fw-semibold">15</span>
+            </div>
+            <hr />
+            <div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small">Progreso</span>
+                <span class="small">65%</span>
+              </div>
+              <div class="progress progress-bar">
+                <div class="progress-bar" style="width: 65%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title mb-0">Acciones Rápidas</h6>
+          </div>
+          <div class="card-body d-grid gap-2">
+            <button class="btn btn-outline-secondary">
+              <i class="bi bi-file-text me-1"></i>
+              Generar Reporte
+            </button>
+            <button class="btn btn-outline-secondary">
+              <i class="bi bi-calendar me-1"></i>
+              Programar Reunión
+            </button>
+            <button class="btn btn-outline-secondary">
+              <i class="bi bi-star me-1"></i>
+              Calificar Cliente
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Modals -->
+
+  <!-- Cancel Project Modal -->
+  <div class="modal fade" id="cancelModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+            Solicitar Cancelación de Proyecto
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">
+            La cancelación del proyecto requiere la aprobación de ambas partes.
+            Por favor, proporciona un motivo detallado.
+          </p>
+          <div class="mb-3">
+            <label for="cancelReason" class="form-label"
+              >Motivo de la cancelación</label
+            >
+            <textarea
+              class="form-control"
+              id="cancelReason"
+              rows="4"
+              placeholder="Explica detalladamente el motivo de la cancelación..."
+            ></textarea>
+          </div>
+          <div class="alert alert-warning">
+            <strong>Importante:</strong> Una vez enviada la solicitud, la otra
+            parte tendrá que aprobarla para que la cancelación sea efectiva.
+            Esto puede afectar tu calificación según las políticas de la
+            plataforma.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="requestCancelation()"
+          >
+            Enviar Solicitud
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Milestone Modal -->
+  <div class="modal fade" id="addMilestoneModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar Nuevo Hito</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">
+            Define un nuevo hito para el proyecto con sus entregables.
+          </p>
+          <div class="mb-3">
+            <label for="milestoneTitle" class="form-label"
+              >Título del Hito</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="milestoneTitle"
+              placeholder="Ej: Desarrollo de la interfaz de usuario"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="milestoneDescription" class="form-label"
+              >Descripción</label
+            >
+            <textarea
+              class="form-control"
+              id="milestoneDescription"
+              rows="3"
+              placeholder="Describe detalladamente qué incluye este hito..."
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="milestoneDate" class="form-label">Fecha Estimada</label>
+            <input type="date" class="form-control" id="milestoneDate" />
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label class="form-label">Entregables</label>
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm"
+                onclick="addDeliverable()"
+              >
+                <i class="bi bi-plus me-1"></i>
+                Agregar
+              </button>
+            </div>
+            <div id="deliverablesList">
+              <div class="input-group mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Entregable 1"
+                />
+                <button
+                  class="btn btn-outline-danger"
+                  type="button"
+                  onclick="removeDeliverable(this)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-primary">Agregar Hito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Modal -->
+  <div class="modal fade" id="uploadModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Subir Entregable</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">
+            Sube el archivo correspondiente a "Código fuente"
+          </p>
+          <div class="mb-3">
+            <label for="fileUpload" class="form-label">Archivo *</label>
+            <input
+              type="file"
+              class="form-control"
+              id="fileUpload"
+              accept=".pdf,.doc,.docx,.zip,.py,.ipynb,.csv,.xlsx"
+            />
+            <div class="form-text">
+              Formatos soportados: PDF, DOC, ZIP, Python, CSV, Excel (máx. 50MB)
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="uploadComments" class="form-label">Comentarios</label>
+            <textarea
+              class="form-control"
+              id="uploadComments"
+              rows="3"
+              placeholder="Describe el entregable, metodología utilizada, resultados obtenidos..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-primary">Subir Archivo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accept Modal -->
+  <div class="modal fade" id="acceptModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aceptar Entregable</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">
+            ¿Estás seguro de que quieres aceptar "Modelo entrenado"?
+          </p>
+          <div class="mb-3">
+            <label for="acceptComments" class="form-label"
+              >Comentarios (opcional)</label
+            >
+            <textarea
+              class="form-control"
+              id="acceptComments"
+              rows="3"
+              placeholder="Comentarios sobre el entregable..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-success">
+            Aceptar Entregable
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reject Modal -->
+  <div class="modal fade" id="rejectModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Rechazar Entregable</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">
+            Proporciona comentarios sobre por qué rechazas "Modelo entrenado"
+          </p>
+          <div class="mb-3">
+            <label for="rejectComments" class="form-label"
+              >Motivo del rechazo *</label
+            >
+            <textarea
+              class="form-control"
+              id="rejectComments"
+              rows="3"
+              placeholder="Explica qué necesita ser corregido o mejorado..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-danger">
+            Rechazar Entregable
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </app-main-layout>

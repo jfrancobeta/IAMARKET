@@ -979,3 +979,128 @@ INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, h
 INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (16, 'Catálogo de Productos', 'csv', 'data/product-catalog.csv', '2025-11-10', 104);
 INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (17, 'Sistema de Pagos Configurado', 'pdf', 'docs/payment-gateway-config.pdf', '2025-12-01', 105);
 INSERT INTO entregables (id, nombre, tipo_archivo, url_archivo, fecha_entrega, hito_id) VALUES (18, 'Plataforma E-commerce Live', 'url', 'https://ecommerce.cliente.com', '2025-01-10', 107);
+
+-- Entregables para hitos de soluciones
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (19, 1, 'requisitos_api_documentacion.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (20, 1, 'diagrama_arquitectura_api.png');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (21, 2, 'codigo_fuente_controllers.zip');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (22, 2, 'base_datos_scripts.sql');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (23, 3, 'pruebas_unitarias_reporte.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (24, 3, 'documentacion_swagger.json');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (25, 4, 'wireframes_aplicacion.fig');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (26, 4, 'guia_estilos_ui.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (27, 5, 'componentes_react_codigo.zip');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (28, 5, 'configuracion_webpack.js');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (29, 6, 'pruebas_e2e_resultados.html');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (30, 6, 'manual_usuario_frontend.pdf');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (31, 7, 'mapa_sitio_web.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (32, 7, 'contenido_paginas.docx');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (33, 8, 'codigo_fuente_website.zip');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (34, 8, 'assets_imagenes_logos.zip');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (35, 9, 'auditoria_seo_reporte.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (36, 9, 'configuracion_analytics.txt');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (37, 10, 'prototipo_app_figma.fig');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (38, 10, 'flujo_usuario_documentacion.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (39, 11, 'app_android_apk.apk');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (40, 11, 'app_ios_ipa.ipa');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (41, 12, 'guia_publicacion_stores.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (42, 12, 'screenshots_app_stores.zip');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (43, 13, 'configuracion_repositorio.yml');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (44, 13, 'herramientas_pipeline_lista.md');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (45, 14, 'pipeline_configuracion.yml');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (46, 14, 'scripts_deployment.sh');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (47, 15, 'configuracion_alertas.json');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (48, 15, 'dashboard_metricas.html');
+
+-- Entregables para hitos de necesidades
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (49, 100, 'levantamiento_requisitos.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (50, 100, 'arquitectura_sistema_erp.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (51, 101, 'modulo_usuarios_codigo.zip');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (52, 101, 'modulo_productos_codigo.zip');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (53, 101, 'modulo_ventas_codigo.zip');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (54, 102, 'pruebas_integracion_reporte.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (55, 102, 'sistema_integrado_demo.mp4');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (56, 103, 'manual_capacitacion_usuarios.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (57, 103, 'guia_despliegue_produccion.pdf');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (58, 104, 'catalogo_productos_configurado.csv');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (59, 104, 'plataforma_ecommerce_base.zip');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (60, 105, 'integracion_pagos_stripe.php');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (61, 105, 'checkout_proceso_codigo.js');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (62, 106, 'carrito_compras_funcionalidad.js');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (63, 106, 'sistema_reviews_codigo.php');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (64, 107, 'ecommerce_completo_pruebas.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (65, 107, 'manual_administrador_tienda.pdf');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (66, 108, 'app_delivery_mvp.apk');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (67, 108, 'funcionalidades_basicas_demo.mp4');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (68, 109, 'integracion_google_maps.js');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (69, 109, 'tracking_tiempo_real.java');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (70, 110, 'sistema_pagos_moviles.kt');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (71, 110, 'push_notifications_config.json');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (72, 111, 'app_delivery_final.apk');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (73, 111, 'reporte_beta_testing.pdf');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (74, 112, 'modelo_base_datos.sql');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (75, 112, 'diagrama_relacional.png');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (76, 113, 'crud_productos_codigo.php');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (77, 113, 'gestion_stock_funcionalidad.js');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (78, 114, 'reportes_inventario.py');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (79, 114, 'dashboard_analytics_stock.html');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (80, 115, 'integracion_sistema_ventas.java');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (81, 115, 'api_sincronizacion.json');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (82, 116, 'sistema_autenticacion.php');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (83, 116, 'gestion_perfiles_usuarios.js');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (84, 117, 'dashboard_cliente_frontend.vue');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (85, 117, 'historial_pedidos_api.py');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (86, 118, 'sistema_tickets_soporte.php');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (87, 118, 'seguimiento_tickets_panel.html');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (88, 119, 'notificaciones_email_sistema.py');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (89, 119, 'sms_integracion_api.js');
+
+-- Entregables adicionales para los últimos hitos
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (90, 120, 'politicas_seguridad_documento.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (91, 120, 'analisis_compliance.docx');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (92, 121, 'oauth_configuracion.json');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (93, 121, 'jwt_implementacion.js');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (94, 122, 'reporte_penetration_testing.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (95, 122, 'vulnerabilidades_encontradas.xlsx');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (96, 123, 'kpis_metricas_definicion.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (97, 123, 'mockups_dashboard_analytics.fig');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (98, 124, 'charts_graficos_codigo.js');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (99, 124, 'reportes_automatizados.py');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (100, 125, 'optimizacion_queries.sql');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (101, 125, 'configuracion_cache_redis.conf');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (102, 126, 'mapeo_apis_externas.json');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (103, 126, 'documentacion_endpoints.md');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (104, 127, 'middleware_integracion.java');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (105, 127, 'transformacion_datos.py');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (106, 128, 'pruebas_apis_externas.postman');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (107, 128, 'reporte_integracion_testing.pdf');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (108, 129, 'analisis_schema_actual.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (109, 129, 'recomendaciones_optimizacion.docx');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (110, 130, 'indices_optimizados.sql');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (111, 130, 'queries_mejoradas.sql');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (112, 131, 'configuracion_monitoring.yml');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (113, 131, 'scripts_tuning_performance.sh');
+
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (114, 132, 'arquitectura_microservicios.pdf');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (115, 132, 'diagrama_comunicacion_servicios.png');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (116, 133, 'microservicio_usuarios.jar');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (117, 133, 'microservicio_productos.jar');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (118, 134, 'api_gateway_configuracion.yml');
+INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (119, 134, 'service_discovery_setup.docker');
+
+-- Proyectos de ejemplo
+INSERT INTO proyectos (id, solucion_id, propuesta_id, presupuesto, fecha_inicio, fecha_fin, estado_id) VALUES (1, 1, NULL, 2400, '2025-08-15', '2025-09-15', 1);
+INSERT INTO proyectos (id, solucion_id, propuesta_id, presupuesto, fecha_inicio, fecha_fin, estado_id) VALUES (2, 2, NULL, 1700, '2025-08-20', '2025-09-20', 1);
+INSERT INTO proyectos (id, solucion_id, propuesta_id, presupuesto, fecha_inicio, fecha_fin, estado_id) VALUES (3, NULL, 5, 1450, '2025-08-25', '2025-09-25', 2);
+INSERT INTO proyectos (id, solucion_id, propuesta_id, presupuesto, fecha_inicio, fecha_fin, estado_id) VALUES (4, NULL, 6, 2900, '2025-09-10', '2025-10-10', 0);

@@ -1,19 +1,18 @@
 package com.jfranco.aimercado.mercadoai.service.Propuestas;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import com.jfranco.aimercado.mercadoai.model.Propuesta;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaCreateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaSummaryDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaUpdateDTO;
+
 
 public interface IPropuestasService {
-
-
-    List<Propuesta> getAllPropuestas();
-    List<Propuesta> getPropuestasByDesarrollador();
-    Propuesta getPropuestaById(Long id);
-    Propuesta createPropuesta(Propuesta propuesta);
-    void eliminarPropuesta(Long id);
-
-    List<Propuesta> getPropuestasByNecesidad(Long necesidadId);
-
-    
+    PropuestaDTO save(PropuestaCreateDTO dto);
+    PropuestaDTO update(Long id, PropuestaUpdateDTO dto);
+    PropuestaDTO getById(Long id);
+    Page<PropuestaSummaryDTO> getAll(String search, String estado, Pageable pageable);
+    void delete(Long id);
 }
