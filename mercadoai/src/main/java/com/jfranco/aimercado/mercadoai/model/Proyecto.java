@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -33,7 +34,9 @@ public class Proyecto {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
-    private String estado;
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private Estado estado;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "proyecto_id")
@@ -90,11 +93,11 @@ public class Proyecto {
         this.fechaFin = fechaFin;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -105,4 +108,5 @@ public class Proyecto {
     public void setHitos(List<Hito> hitos) {
         this.hitos = hitos;
     }
+
 }

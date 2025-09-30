@@ -1,75 +1,69 @@
 package com.jfranco.aimercado.mercadoai.service.Propuestas;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import com.jfranco.aimercado.mercadoai.model.Necesidad;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaCreateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaSummaryDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaUpdateDTO;
+import com.jfranco.aimercado.mercadoai.mapper.Propuesta.PropuestaMapper;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
-import com.jfranco.aimercado.mercadoai.model.Usuario;
-import com.jfranco.aimercado.mercadoai.repository.Necesidad.NecesidadesRepository;
 import com.jfranco.aimercado.mercadoai.repository.Propuesta.PropuestaRepository;
-import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 
-public class PropuestaServiceImpl implements IPropuestasService{
+public class PropuestaServiceImpl implements IPropuestasService {
 
     @Autowired
     private PropuestaRepository propuestaRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private NecesidadesRepository necesidadesRepository;
+    private PropuestaMapper propuestaMapper;
 
     @Override
-    public List<Propuesta> getAllPropuestas() {
-        return propuestaRepository.findAll();
+    public PropuestaDTO save(PropuestaCreateDTO dto) {
+        Propuesta propuesta = propuestaMapper.toEntity(dto);
+        propuesta = propuestaRepository.save(propuesta);
+
+        return propuestaMapper.toDto(propuesta);
     }
 
     @Override
-    public List<Propuesta> getPropuestasByDesarrollador() {
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuario = usuarioRepository.findByUsername(email)
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con email: " + email));
-        return propuestaRepository.findByDesarrollador(usuario);
-    }
-
-    @Override
-    public Propuesta getPropuestaById(Long id) {
-        return propuestaRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Propuesta no encontrada con id: " + id));
-    }
-
-    @Override
-    public Propuesta createPropuesta(Propuesta propuesta) {
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuario = usuarioRepository.findByUsername(email)
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con email: " + email));
-        
-        propuesta.setDesarrollador(usuario);
-        
-        Necesidad necesidad = necesidadesRepository.findById(propuesta.getNecesidad().getId())
-            .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + propuesta.getNecesidad().getId()));
-        
-        propuesta.setNecesidad(necesidad);
-        
-        return propuestaRepository.save(propuesta);
-    }
-
-    @Override
-    public void eliminarPropuesta(Long id) {
+    public PropuestaDTO update(Long id, PropuestaUpdateDTO dto) {
         Propuesta propuesta = propuestaRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Propuesta no encontrada con id: " + id));
+                .orElseThrow(() -> new RuntimeException("Propuesta no encontrada con id " + id));
+        
+        propuestaMapper.updateEntityFromDto(dto, propuesta);
+        propuesta = propuestaRepository.save(propuesta);
+        
+        return propuestaMapper.toDto(propuesta);
+    }
+
+    @Override
+    public PropuestaDTO getById(Long id) {
+        Propuesta propuesta = propuestaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Propuesta no encontrada con id " + id));
+        return propuestaMapper.toDto(propuesta);
+    }
+
+    @Override
+    public Page<PropuestaSummaryDTO> getAll(String search, String estado, Pageable pageable) {
+        Page<Propuesta> propuestas;
+        if (search != null && !search.isEmpty()) {
+            propuestas = propuestaRepository.findByNecesidadTituloContainingIgnoreCase(search, pageable);
+        } else if (estado != null && !estado.isEmpty()) {
+            propuestas = propuestaRepository.findByEstadoNombreIgnoreCase(estado, pageable);
+        } else {
+            propuestas = propuestaRepository.findAll(pageable);
+        }
+        return propuestas.map(propuesta -> propuestaMapper.toSummaryDto(propuesta));
+    }
+
+    @Override
+    public void delete(Long id) {
+        Propuesta propuesta = propuestaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Propuesta no encontrada con id " + id));
         propuestaRepository.delete(propuesta);
     }
 
-    @Override
-    public List<Propuesta> getPropuestasByNecesidad(Long necesidadId) {
-       Necesidad necesidad = necesidadesRepository.findById(necesidadId)
-            .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + necesidadId));
-        return propuestaRepository.findByNecesidad(necesidad);
-    }
-    
 }

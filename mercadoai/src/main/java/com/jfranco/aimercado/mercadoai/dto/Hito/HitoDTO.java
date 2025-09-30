@@ -1,12 +1,16 @@
 package com.jfranco.aimercado.mercadoai.dto.Hito;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.jfranco.aimercado.mercadoai.dto.Entregable.EntregableDTO;
 
 public class HitoDTO {
     private Long id;
     private String nombre;
     private String descripcion;
     private LocalDate fechaEntrega;
+    private List<EntregableDTO> entregables;
 
     public HitoDTO() {
     }
@@ -41,6 +45,14 @@ public class HitoDTO {
 
     public void setFechaEntrega(LocalDate fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
+    }
+
+    public List<EntregableDTO> getEntregables() {
+        return entregables;
+    }
+
+    public void setEntregables(List<EntregableDTO> entregables) {
+        this.entregables = entregables;
     }
 
 }

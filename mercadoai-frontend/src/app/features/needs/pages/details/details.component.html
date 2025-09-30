@@ -94,37 +94,53 @@
             <p class="text-muted mb-4">
               {{ need?.requirements }}
             </p>
+
             <div class="mb-4">
-              <h5 class="fw-semibold mb-3">Hitos del Proyecto</h5>
-              <div class="row g-3">
+              <h3 class="fw-semibold mb-4">Hitos del Proyecto</h3>
+              <div class="row gy-3">
                 <div
                   class="col-12"
-                  *ngFor="let hito of need?.hitos; let index = index"
+                  *ngFor="let milestone of need?.hitos; let i = index"
                 >
-                  <div class="card border-primary">
-                    <div class="card-body">
-                      <div
-                        class="d-flex justify-content-between align-items-start mb-2"
-                      >
-                        <div class="d-flex align-items-center gap-2">
-                          <div
-                            class="d-flex align-items-center justify-content-center rounded-circle bg-primary text-white"
-                            style="width: 2rem; height: 2rem"
-                          >
-                            {{ index + 1 }}
-                          </div>
-                          <h6 class="fw-semibold mb-0">{{ hito.nombre }}</h6>
-                        </div>
+                  <div class="border rounded-lg p-4">
+                    <div
+                      class="d-flex justify-content-between align-items-start mb-2"
+                    >
+                      <div class="d-flex align-items-center gap-2">
                         <div
-                          class="d-flex align-items-center gap-2 text-muted small"
+                          class="d-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10 text-primary"
+                          style="width: 2rem; height: 2rem; font-weight: 600"
                         >
-                          <i class="bi bi-clock"></i>
-                          <span>
-                            {{ hito.fechaEntrega | date : "shortDate" }}
-                          </span>
+                          {{ i + 1 }}
                         </div>
+                        <h4 class="fw-semibold mb-0">{{ milestone.nombre }}</h4>
                       </div>
-                      <p class="text-muted mb-2 ms-5">{{ hito.descripcion }}</p>
+                      <div
+                        class="d-flex align-items-center gap-2 small text-muted"
+                      >
+                        <i class="bi bi-clock"></i>
+                        <span>
+                          {{ milestone.fechaEntrega | date : "shortDate" }}
+                        </span>
+                      </div>
+                    </div>
+                    <p class="text-muted small mb-3 ms-5">
+                      {{ milestone.descripcion }}
+                    </p>
+                    <div class="ms-5">
+                      <h6 class="small fw-medium mb-2">Entregables:</h6>
+                      <ul class="list-unstyled mb-0">
+                        <li
+                          *ngFor="let entregable of milestone.entregables"
+                          class="d-flex align-items-center gap-2 small text-muted"
+                        >
+                          <span
+                            class="d-inline-block rounded-circle bg-primary"
+                            style="width: 0.5rem; height: 0.5rem"
+                          ></span>
+                          {{ entregable.nombreArchivo }}
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>

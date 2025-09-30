@@ -1,315 +1,347 @@
 <app-main-layout>
-<div class="container py-4">
-  <a
-    routerLink="/solutions"
-    class="btn btn-outline-secondary btn-sm mb-4 d-flex align-items-center"
-  >
-    <i class="bi bi-arrow-left me-2"></i>
-    Volver
-  </a>
-  <h1 class="h2 fw-bold mb-1">Crear Nueva Solución</h1>
-  <p class="text-muted mb-4">
-    Publica una solución predefinida para ofrecer servicios específicos
-  </p>
+  <div class="container py-4">
+    <a
+      routerLink="/solutions"
+      class="btn btn-outline-secondary btn-sm mb-4 d-flex align-items-center"
+    >
+      <i class="bi bi-arrow-left me-2"></i>
+      Volver
+    </a>
+    <h1 class="h2 fw-bold mb-1">Crear Nueva Solución</h1>
+    <p class="text-muted mb-4">
+      Publica una solución predefinida para ofrecer servicios específicos
+    </p>
 
-  <form>
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5 class="fw-bold mb-1">Información Básica</h5>
-        <p class="text-muted mb-0">Describe tu solución de IA predefinida</p>
-      </div>
-      <div class="card-body">
-        <div class="mb-3">
-          <label for="title" class="form-label">Título de la Solución *</label>
-          <input
-            type="text"
-            id="title"
-            class="form-control"
-            placeholder="ej. Sistema de Recomendaciones E-commerce"
-            [(ngModel)]="SolucionDTO.titulo"
-            name="title"
-            required
-          />
+    <form>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Información Básica</h5>
+          <p class="text-muted mb-0">Describe tu solución de IA predefinida</p>
         </div>
-        <div class="mb-3">
-          <label for="description" class="form-label"
-            >Descripción Detallada *</label
-          >
-          <textarea
-            id="description"
-            class="form-control"
-            rows="6"
-            placeholder="Describe tu solución, qué problemas resuelve, cómo funciona..."
-            [(ngModel)]="SolucionDTO.descripcion"
-            name="description"
-            required
-          ></textarea>
-        </div>
-        <div class="row g-3">
-          <div class="col-md-4">
-            <label for="category" class="form-label">Categoría *</label>
-            <select id="category" class="form-select" required [(ngModel)]="SolucionDTO.categoriaId" name="categoriaId">
-              <option selected disabled>Selecciona una categoría</option>
-              @for (category of categories; track $index) {
-              <option [value]="category.id ">{{ category.nombre }}</option>
-              }
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label for="price" class="form-label">Precio *</label>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="title" class="form-label"
+              >Título de la Solución *</label
+            >
             <input
               type="text"
-              id="price"
+              id="title"
               class="form-control"
-              placeholder="$2,500"
-              [(ngModel)]="SolucionDTO.precio"
-              name="precio"
+              placeholder="ej. Sistema de Recomendaciones E-commerce"
+              [(ngModel)]="SolucionDTO.titulo"
+              name="title"
               required
             />
           </div>
-          <div class="col-md-4">
-            <label for="deliveryTime" class="form-label"
-              >Tiempo de Entrega *</label
+          <div class="mb-3">
+            <label for="description" class="form-label"
+              >Descripción Detallada *</label
             >
-            <div class="input-group">
-              <input
-                type="number"
-                min="1"
-                class="form-control"
-                id="deliveryTime"
-                [(ngModel)]="SolucionDTO.tiempoEntrega"
-                name="deliveryTime"
-                required
-                placeholder="Enter time"
-              />
+            <textarea
+              id="description"
+              class="form-control"
+              rows="6"
+              placeholder="Describe tu solución, qué problemas resuelve, cómo funciona..."
+              [(ngModel)]="SolucionDTO.descripcion"
+              name="description"
+              required
+            ></textarea>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="category" class="form-label">Categoría *</label>
               <select
+                id="category"
                 class="form-select"
-                [(ngModel)]="SolucionDTO.unidadEntrega"
-                name="deliveryUnit"
                 required
+                [(ngModel)]="SolucionDTO.categoriaId"
+                name="categoriaId"
               >
-                <option [ngValue]="UnidadEntrega.Dias">Días</option>
-                <option [ngValue]="UnidadEntrega.Semanas">Semanas</option>
-                <option [ngValue]="UnidadEntrega.Meses">Meses</option>
+                <option selected disabled>Selecciona una categoría</option>
+                @for (category of categories; track $index) {
+                <option [value]="category.id">{{ category.nombre }}</option>
+                }
               </select>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5 class="fw-bold mb-1">Tecnologías y Herramientas</h5>
-        <p class="text-muted mb-0">
-          Selecciona las tecnologías que utilizas en esta solución
-        </p>
-      </div>
-      <div class="card-body">
-        <div class="row g-2">
-          @for (skill of skills; track $index) {
-          <div class="col-md-3">
-            <div class="form-check">
+            <div class="col-md-4">
+              <label for="price" class="form-label">Precio *</label>
               <input
-                class="form-check-input"
-                type="checkbox"
-                value="{{ skill.id }}"
-                name="habilidadesIds"
-                [checked]="SolucionDTO.habilidadesIds.includes(skill.id)"
-                (change)="onSkillToggle(skill.id, $event)"
+                type="text"
+                id="price"
+                class="form-control"
+                placeholder="$2,500"
+                [(ngModel)]="SolucionDTO.precio"
+                name="precio"
+                required
               />
-              <label class="form-check-label" for="{{ skill.nombre }}">{{
-                skill.nombre
-              }}</label>
+            </div>
+            <div class="col-md-4">
+              <label for="deliveryTime" class="form-label"
+                >Tiempo de Entrega *</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  min="1"
+                  class="form-control"
+                  id="deliveryTime"
+                  [(ngModel)]="SolucionDTO.tiempoEntrega"
+                  name="deliveryTime"
+                  required
+                  placeholder="Enter time"
+                />
+                <select
+                  class="form-select"
+                  [(ngModel)]="SolucionDTO.unidadEntrega"
+                  name="deliveryUnit"
+                  required
+                >
+                  <option [ngValue]="UnidadEntrega.Dias">Días</option>
+                  <option [ngValue]="UnidadEntrega.Semanas">Semanas</option>
+                  <option [ngValue]="UnidadEntrega.Meses">Meses</option>
+                </select>
+              </div>
             </div>
           </div>
-          }
         </div>
       </div>
-    </div>
 
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5 class="fw-bold mb-1">Características y Entregables</h5>
-        <p class="text-muted mb-0">Detalla qué incluye tu solución</p>
-      </div>
-      <div class="card-body">
-        <div class="mb-3">
-          <label for="features" class="form-label"
-            >Características Principales</label
-          >
-          <div class="input-group mb-2">
-            <input
-              id="features"
-              class="form-control"
-              [(ngModel)]="featureInput"
-              name="featureInput"
-              placeholder="Agregar característica"
-              (keyup.enter)="addFeature()"
-            />
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              (click)="addFeature()"
-            >
-              Agregar
-            </button>
-          </div>
-          <ul class="list-group">
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-              *ngFor="let feature of SolucionDTO.caracteristicas; let i = index"
-            >
-              {{ feature }}
-              <button
-                type="button"
-                class="btn btn-sm btn-danger"
-                (click)="removeFeature(i)"
-              >
-                Quitar
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div class="mb-3">
-          <label for="requirements" class="form-label"
-            >Requisitos del Cliente</label
-          >
-          <div class="input-group mb-2">
-            <input
-              id="requirements"
-              class="form-control"
-              [(ngModel)]="requirementInput"
-              name="requirementInput"
-              placeholder="Agregar requisito"
-              (keyup.enter)="addRequirement()"
-            />
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              (click)="addRequirement()"
-            >
-              Agregar
-            </button>
-          </div>
-          <ul class="list-group">
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-              *ngFor="let requirement of SolucionDTO.requisitos; let i = index"
-            >
-              {{ requirement }}
-              <button
-                type="button"
-                class="btn btn-sm btn-danger"
-                (click)="removeRequirement(i)"
-              >
-                Quitar
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div class="card mb-4">
+      <div class="card mb-4">
         <div class="card-header">
-          <h5 class="fw-bold mb-1">Hitos del Proyecto</h5>
+          <h5 class="fw-bold mb-1">Tecnologías y Herramientas</h5>
           <p class="text-muted mb-0">
-            Define los hitos y entregables esperados para estructurar mejor el
-            proyecto
+            Selecciona las tecnologías que utilizas en esta solución
           </p>
         </div>
         <div class="card-body">
-          <div
-            *ngFor="let hito of SolucionDTO.hitos; let i = index"
-            class="border rounded-lg p-3 mb-4"
-          >
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h6 class="fw-semibold mb-0">Hito {{ i + 1 }}</h6>
+          <div class="row g-2">
+            @for (skill of skills; track $index) {
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="{{ skill.id }}"
+                  name="habilidadesIds"
+                  [checked]="SolucionDTO.habilidadesIds.includes(skill.id)"
+                  (change)="onSkillToggle(skill.id, $event)"
+                />
+                <label class="form-check-label" for="{{ skill.nombre }}">{{
+                  skill.nombre
+                }}</label>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="fw-bold mb-1">Características y Entregables</h5>
+          <p class="text-muted mb-0">Detalla qué incluye tu solución</p>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="features" class="form-label"
+              >Características Principales</label
+            >
+            <div class="input-group mb-2">
+              <input
+                id="features"
+                class="form-control"
+                [(ngModel)]="featureInput"
+                name="featureInput"
+                placeholder="Agregar característica"
+                (keyup.enter)="addFeature()"
+              />
               <button
-                *ngIf="SolucionDTO.hitos.length > 1"
                 type="button"
-                class="btn btn-outline-danger btn-sm"
-                (click)="eliminarHito(i)"
+                class="btn btn-outline-primary"
+                (click)="addFeature()"
               >
-                <i class="bi bi-trash"></i>
+                Agregar
               </button>
             </div>
-            <div class="row g-3 mb-2">
-              <div class="col-md-6">
-                <label class="form-label" [for]="'milestone-title-' + i"
-                  >Título del Hito</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  [id]="'milestone-title-' + i"
-                  placeholder="ej. Análisis y diseño inicial"
-                  [(ngModel)]="hito.nombre"
-                  name="milestone-title-{{ i }}"
-                />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label" [for]="'milestone-date-' + i"
-                  >Fecha Estimada</label
-                >
-                <input
-                  type="date"
-                  class="form-control"
-                  [id]="'milestone-date-' + i"
-                  [(ngModel)]="hito.fechaEntrega"
-                  name="milestone-date-{{ i }}"
-                />
-              </div>
-            </div>
-            <div class="mb-2">
-              <label class="form-label" [for]="'milestone-description-' + i"
-                >Descripción</label
+            <ul class="list-group">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+                *ngFor="
+                  let feature of SolucionDTO.caracteristicas;
+                  let i = index
+                "
               >
-              <textarea
+                {{ feature }}
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  (click)="removeFeature(i)"
+                >
+                  Quitar
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="mb-3">
+            <label for="requirements" class="form-label"
+              >Requisitos del Cliente</label
+            >
+            <div class="input-group mb-2">
+              <input
+                id="requirements"
                 class="form-control"
-                [id]="'milestone-description-' + i"
-                rows="2"
-                placeholder="Describe qué se debe completar en este hito..."
-                [(ngModel)]="hito.descripcion"
-                name="milestone-description-{{ i }}"
-              ></textarea>
+                [(ngModel)]="requirementInput"
+                name="requirementInput"
+                placeholder="Agregar requisito"
+                (keyup.enter)="addRequirement()"
+              />
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                (click)="addRequirement()"
+              >
+                Agregar
+              </button>
+            </div>
+            <ul class="list-group">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+                *ngFor="
+                  let requirement of SolucionDTO.requisitos;
+                  let i = index
+                "
+              >
+                {{ requirement }}
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  (click)="removeRequirement(i)"
+                >
+                  Quitar
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-1">Hitos del Proyecto</h5>
+              <p class="text-muted mb-0">
+                Define los hitos y entregables esperados para estructurar mejor
+                el proyecto
+              </p>
+            </div>
+            <div class="card-body">
+              <div
+                *ngFor="let hito of SolucionDTO.hitos; let i = index"
+                class="border rounded-lg p-4 mb-4"
+              >
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h6 class="fw-semibold mb-0">Hito {{ i + 1 }}</h6>
+                  <button
+                    *ngIf="SolucionDTO.hitos.length > 1"
+                    type="button"
+                    class="btn btn-outline-danger btn-sm"
+                    (click)="eliminarHito(i)"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+                <div class="row g-3 mb-2">
+                  <div class="col-md-6">
+                    <label class="form-label" [for]="'milestone-title-' + i"
+                      >Título del Hito</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      [id]="'milestone-title-' + i"
+                      placeholder="ej. Análisis y diseño inicial"
+                      [(ngModel)]="hito.nombre"
+                      name="milestone-title-{{ i }}"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" [for]="'milestone-date-' + i"
+                      >Fecha Estimada</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      [id]="'milestone-date-' + i"
+                      [(ngModel)]="hito.fechaEntrega"
+                      name="milestone-date-{{ i }}"
+                    />
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label" [for]="'milestone-description-' + i"
+                    >Descripción</label
+                  >
+                  <textarea
+                    class="form-control"
+                    [id]="'milestone-description-' + i"
+                    rows="2"
+                    placeholder="Describe qué se debe completar en este hito..."
+                    [(ngModel)]="hito.descripcion"
+                    name="milestone-description-{{ i }}"
+                  ></textarea>
+                </div>
+                <div class="mb-2">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <label class="form-label mb-0">Entregables</label>
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary btn-sm"
+                      (click)="agregarEntregableAHito(i)"
+                    >
+                      <i class="bi bi-plus"></i> Agregar
+                    </button>
+                  </div>
+                  <div
+                    *ngFor="let entregable of hito.entregables; let j = index"
+                    class="d-flex gap-2 mb-2"
+                  >
+                    <input
+                      class="form-control"
+                      placeholder="ej. Documento de análisis técnico"
+                      [(ngModel)]="hito.entregables[j].nombreArchivo"
+                      name="milestone-{{ i }}-deliverable-{{ j }}"
+                    />
+                    <button
+                      *ngIf="hito.entregables.length > 1"
+                      type="button"
+                      class="btn btn-outline-danger btn-sm"
+                      (click)="eliminarEntregableDeHito(i, j)"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-primary w-100"
+                (click)="agregarHito()"
+              >
+                <i class="bi bi-plus"></i> Agregar Hito
+              </button>
             </div>
           </div>
-          <button
-            type="button"
-            class="btn btn-outline-primary w-100"
-            (click)="agregarHito()"
-          >
-            <i class="bi bi-plus"></i> Agregar Hito
-          </button>
         </div>
       </div>
-        
+      <div class="d-flex justify-content-end gap-2">
+        <a routerLink="/solutions" class="btn btn-outline-secondary"
+          >Cancelar</a
+        >
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+          <i class="bi bi-save me-2"></i>
+          Publicar Solución
+        </button>
       </div>
-    </div>
-
-    <!-- <div class="card mb-4">
-      <div class="card-header">
-        <h5 class="fw-bold mb-1">Imágenes y Archivos</h5>
-        <p class="text-muted mb-0">Sube imágenes o archivos que muestren tu solución</p>
-      </div>
-      <div class="card-body text-center">
-        <div class="border border-2 border-dashed rounded p-5 mb-3">
-          <i class="bi bi-upload text-muted mb-3" style="font-size:2rem;"></i>
-          <h3 class="h5 fw-semibold mb-2">Sube archivos</h3>
-          <p class="text-muted mb-3">Arrastra y suelta archivos aquí o haz clic para seleccionar</p>
-          <button type="button" class="btn btn-outline-secondary">Seleccionar Archivos</button>
-          <p class="text-sm text-muted mt-2">Formatos soportados: JPG, PNG, PDF, ZIP (máx. 10MB)</p>
-          <input type="file" multiple accept=".jpg,.jpeg,.png,.pdf,.zip" class="d-none">
-        </div>
-      </div>
-    </div> -->
-
-    <div class="d-flex justify-content-end gap-2">
-      <a routerLink="/solutions" class="btn btn-outline-secondary">Cancelar</a>
-      <button type="submit" class="btn btn-primary" (click)="onSubmit()">
-        <i class="bi bi-save me-2"></i>
-        Publicar Solución
-      </button>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 </app-main-layout>

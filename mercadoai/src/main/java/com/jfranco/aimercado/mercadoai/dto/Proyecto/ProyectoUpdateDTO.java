@@ -10,7 +10,6 @@ public class ProyectoUpdateDTO {
     private BigDecimal presupuesto;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private String estado;
     private List<HitoUpdateDTO> hitos;
 
     public ProyectoUpdateDTO() {
@@ -38,14 +37,6 @@ public class ProyectoUpdateDTO {
 
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public List<HitoUpdateDTO> getHitos() {

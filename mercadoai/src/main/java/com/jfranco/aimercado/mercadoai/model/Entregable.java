@@ -18,8 +18,14 @@ public class Entregable {
     private Long id;
 
     private String nombreArchivo;
+    
     private String url;
+
     private LocalDate fechaEntrega;
+
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private Estado estado;
 
     @ManyToOne
     @JoinColumn(name = "hito_id")

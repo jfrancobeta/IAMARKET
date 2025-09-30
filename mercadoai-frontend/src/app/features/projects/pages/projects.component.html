@@ -1,171 +1,288 @@
 <app-main-layout>
-<div class="container py-4">
-  <div class="mb-4">
-    <h1 class="h2 fw-bold mb-1">Proyectos</h1>
-    <p class="text-muted mb-0">Gestiona todos tus proyectos activos y completados</p>
-  </div>
+  <div class="container py-4">
+    <div class="mb-4">
+      <h1 class="h2 fw-bold mb-1">Proyectos</h1>
+      <p class="text-muted mb-0">
+        Gestiona todos tus proyectos activos y completados
+      </p>
+    </div>
 
-  <!-- Stats Cards -->
-  <div class="row g-4 mb-4">
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100">
-        <div class="card-header d-flex justify-content-between align-items-center pb-2">
-          <span class="fw-medium">Proyectos Activos</span>
-          <i class="bi bi-briefcase text-muted"></i>
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div
+            class="card-header d-flex justify-content-between align-items-center pb-2"
+          >
+            <span class="fw-medium">Proyectos Activos</span>
+            <i class="bi bi-briefcase text-muted"></i>
+          </div>
+          <div class="card-body">
+            <div class="fs-3 fw-bold">3</div>
+            <p class="text-xs text-muted mb-0">En desarrollo</p>
+          </div>
         </div>
-        <div class="card-body">
-          <div class="fs-3 fw-bold">3</div>
-          <p class="text-xs text-muted mb-0">En desarrollo</p>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div
+            class="card-header d-flex justify-content-between align-items-center pb-2"
+          >
+            <span class="fw-medium">Completados</span>
+            <i class="bi bi-check-circle text-muted"></i>
+          </div>
+          <div class="card-body">
+            <div class="fs-3 fw-bold">1</div>
+            <p class="text-xs text-muted mb-0">Este mes</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div
+            class="card-header d-flex justify-content-between align-items-center pb-2"
+          >
+            <span class="fw-medium">Ingresos Totales</span>
+            <i class="bi bi-currency-dollar text-muted"></i>
+          </div>
+          <div class="card-body">
+            <div class="fs-3 fw-bold">$20,000</div>
+            <p class="text-xs text-muted mb-0">Valor total</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100">
+          <div
+            class="card-header d-flex justify-content-between align-items-center pb-2"
+          >
+            <span class="fw-medium">Progreso Promedio</span>
+            <i class="bi bi-clock text-muted"></i>
+          </div>
+          <div class="card-body">
+            <div class="fs-3 fw-bold">77%</div>
+            <p class="text-xs text-muted mb-0">Todos los proyectos</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100">
-        <div class="card-header d-flex justify-content-between align-items-center pb-2">
-          <span class="fw-medium">Completados</span>
-          <i class="bi bi-check-circle text-muted"></i>
-        </div>
-        <div class="card-body">
-          <div class="fs-3 fw-bold">1</div>
-          <p class="text-xs text-muted mb-0">Este mes</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100">
-        <div class="card-header d-flex justify-content-between align-items-center pb-2">
-          <span class="fw-medium">Ingresos Totales</span>
-          <i class="bi bi-currency-dollar text-muted"></i>
-        </div>
-        <div class="card-body">
-          <div class="fs-3 fw-bold">$20,000</div>
-          <p class="text-xs text-muted mb-0">Valor total</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100">
-        <div class="card-header d-flex justify-content-between align-items-center pb-2">
-          <span class="fw-medium">Progreso Promedio</span>
-          <i class="bi bi-clock text-muted"></i>
-        </div>
-        <div class="card-body">
-          <div class="fs-3 fw-bold">77%</div>
-          <p class="text-xs text-muted mb-0">Todos los proyectos</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Filtros -->
-  <div class="card mb-4">
-    <div class="card-body">
-      <form class="row g-3 align-items-center">
-        <div class="col-md-4">
-          <div class="input-group">
-            <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
-            <input type="text" class="form-control border-start-0" placeholder="Buscar proyectos...">
+    <!-- Filtros -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <form class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"
+                ><i class="bi bi-search"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control border-start-0"
+                placeholder="Buscar proyectos..."
+              />
+            </div>
           </div>
-        </div>
-        <div class="col-md-2">
-          <select class="form-select">
-            <option selected>Estado</option>
-            <option>En progreso</option>
-            <option>En revisión</option>
-            <option>Completado</option>
-            <option>Retrasado</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <select class="form-select">
-            <option selected>Categoría</option>
-            <option>Machine Learning</option>
-            <option>NLP</option>
-            <option>Computer Vision</option>
-            <option>Data Science</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-secondary w-100">
-            <i class="bi bi-funnel me-2"></i>
-            Filtros
-          </button>
-        </div>
-      </form>
+          <div class="col-md-2">
+            <select
+              class="form-select"
+              [(ngModel)]="filtros.estado"
+              name="estado"
+              (ngModelChange)="loadProjects()"
+            >
+              <option value="" selected>Estado</option>
+              <option *ngFor="let estado of estados" [value]="estado.nombre">
+                {{ estado.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <select
+              class="form-select"
+              [(ngModel)]="filtros.tipo"
+              name="tipo"
+              (ngModelChange)="loadProjects()"
+            >
+              <option value="" selected>Tipo</option>
+              <option value="propuesta">Propuesta</option>
+              <option value="solucion">Solucion</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-outline-secondary w-100">
+              <i class="bi bi-funnel me-2"></i>
+              Filtros
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- Lista de proyectos -->
-  <div class="row g-4">
-    <!-- Proyecto 1 -->
-    <div class="col-12">
-      <div class="card h-100 shadow-sm">
-        <div class="card-header">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-secondary"><i class="bi bi-clock me-1"></i>En progreso</span>
-                <span class="badge bg-light text-dark border">Machine Learning</span>
-              </div>
-              <h5 class="fw-bold mb-1">Sistema de Análisis Predictivo para Ventas</h5>
-              <span class="text-muted small">Desarrollo de sistema de ML para predicción de ventas usando algoritmos avanzados.</span>
-            </div>
-            <div class="d-flex gap-2">
-              <a href="/projects/1" class="btn btn-outline-secondary btn-sm"><i class="bi bi-eye me-2"></i>Ver Detalles</a>
-              <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <!-- Progreso -->
-          <div class="mb-3">
-            <div class="d-flex justify-content-between text-sm mb-2">
-              <span>Progreso del proyecto</span>
-              <span class="fw-medium">75%</span>
-            </div>
-            <div class="progress" style="height: 8px;">
-              <div class="progress-bar" style="width: 75%"></div>
-            </div>
-          </div>
-          <!-- Detalles -->
-          <div class="row g-3 text-sm mb-3">
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-currency-dollar text-success"></i>
+    <!-- Lista de proyectos -->
+    <div class="row g-4">
+      @for (proyecto of proyectos; track $index) { @if (proyecto.solucion) {
+      <div class="col-12">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-start">
               <div>
-                <span class="fw-medium">$6,500</span>
-                <span class="text-muted small d-block">Presupuesto</span>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                  <span class="badge bg-secondary"
+                    ><i class="bi bi-clock me-1"></i>{{proyecto.solucion.estadoId}}</span
+                  >
+                  <span class="badge bg-light text-dark border"
+                    >Machine Learning</span
+                  >
+                </div>
+                <h5 class="fw-bold mb-1">
+                  Sistema de Análisis Predictivo para Ventas
+                </h5>
+                <span class="text-muted small"
+                  >Desarrollo de sistema de ML para predicción de ventas usando
+                  algoritmos avanzados.</span
+                >
               </div>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-calendar text-primary"></i>
-              <div>
-                <span class="fw-medium">15 días</span>
-                <span class="text-muted small d-block">Restantes</span>
-              </div>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-person text-purple"></i>
-              <div>
-                <span class="fw-medium">TechCorp Solutions</span>
-                <span class="text-muted small d-block">Cliente</span>
-              </div>
-            </div>
-            <div class="col-md-3 d-flex align-items-center gap-2">
-              <i class="bi bi-person text-orange"></i>
-              <div>
-                <span class="fw-medium">Ana García</span>
-                <span class="text-muted small d-block">Desarrollador</span>
+              <div class="d-flex gap-2">
+                <a href="/projects/1" class="btn btn-outline-secondary btn-sm"
+                  ><i class="bi bi-eye me-2"></i>Ver Detalles</a
+                >
+                <button class="btn btn-outline-secondary btn-sm">
+                  <i class="bi bi-chat-dots me-2"></i>Mensaje
+                </button>
               </div>
             </div>
           </div>
-          <div class="d-flex justify-content-between text-sm text-muted">
-            <span>Inicio: 20/01/2024</span>
-            <span>Entrega: 15/02/2024</span>
+          <div class="card-body">
+            <!-- Progreso -->
+            <div class="mb-3">
+              <div class="d-flex justify-content-between text-sm mb-2">
+                <span>Progreso del proyecto</span>
+                <span class="fw-medium">75%</span>
+              </div>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar" style="width: 75%"></div>
+              </div>
+            </div>
+            <!-- Detalles -->
+            <div class="row g-3 text-sm mb-3">
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-currency-dollar text-success"></i>
+                <div>
+                  <span class="fw-medium">$6,500</span>
+                  <span class="text-muted small d-block">Presupuesto</span>
+                </div>
+              </div>
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-calendar text-primary"></i>
+                <div>
+                  <span class="fw-medium">15 días</span>
+                  <span class="text-muted small d-block">Restantes</span>
+                </div>
+              </div>
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-person text-purple"></i>
+                <div>
+                  <span class="fw-medium">TechCorp Solutions</span>
+                  <span class="text-muted small d-block">Cliente</span>
+                </div>
+              </div>
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-person text-orange"></i>
+                <div>
+                  <span class="fw-medium">Ana García</span>
+                  <span class="text-muted small d-block">Desarrollador</span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between text-sm text-muted">
+              <span>Inicio: 20/01/2024</span>
+              <span>Entrega: 15/02/2024</span>
+            </div>
           </div>
         </div>
       </div>
+      } @else {
+      <div class="col-12">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                  <span class="badge bg-secondary"
+                    ><i class="bi bi-clock me-1"></i>En progreso</span
+                  >
+                  <span class="badge bg-light text-dark border"
+                    >Machine Learning</span
+                  >
+                </div>
+                <h5 class="fw-bold mb-1">
+                  Sistema de Análisis Predictivo para Ventas
+                </h5>
+                <span class="text-muted small"
+                  >Desarrollo de sistema de ML para predicción de ventas usando
+                  algoritmos avanzados.</span
+                >
+              </div>
+              <div class="d-flex gap-2">
+                <a href="/projects/1" class="btn btn-outline-secondary btn-sm"
+                  ><i class="bi bi-eye me-2"></i>Ver Detalles</a
+                >
+                <button class="btn btn-outline-secondary btn-sm">
+                  <i class="bi bi-chat-dots me-2"></i>Mensaje
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Progreso -->
+            <div class="mb-3">
+              <div class="d-flex justify-content-between text-sm mb-2">
+                <span>Progreso del proyecto</span>
+                <span class="fw-medium">75%</span>
+              </div>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar" style="width: 75%"></div>
+              </div>
+            </div>
+            <!-- Detalles -->
+            <div class="row g-3 text-sm mb-3">
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-currency-dollar text-success"></i>
+                <div>
+                  <span class="fw-medium">$6,500</span>
+                  <span class="text-muted small d-block">Presupuesto</span>
+                </div>
+              </div>
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-calendar text-primary"></i>
+                <div>
+                  <span class="fw-medium">15 días</span>
+                  <span class="text-muted small d-block">Restantes</span>
+                </div>
+              </div>
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-person text-purple"></i>
+                <div>
+                  <span class="fw-medium">TechCorp Solutions</span>
+                  <span class="text-muted small d-block">Cliente</span>
+                </div>
+              </div>
+              <div class="col-md-3 d-flex align-items-center gap-2">
+                <i class="bi bi-person text-orange"></i>
+                <div>
+                  <span class="fw-medium">Ana García</span>
+                  <span class="text-muted small d-block">Desarrollador</span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between text-sm text-muted">
+              <span>Inicio: 20/01/2024</span>
+              <span>Entrega: 15/02/2024</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      } }
     </div>
-    <!-- ...repite para los demás proyectos... -->
   </div>
-</div>
 </app-main-layout>

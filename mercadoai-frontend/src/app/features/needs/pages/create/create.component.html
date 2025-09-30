@@ -180,7 +180,7 @@
 
       <div class="card mb-4">
         <div class="card-header">
-          <h5 class="fw-bold mb-1">Hitos del Proyecto</h5>
+          <h5 class="mb-1">Hitos del Proyecto</h5>
           <p class="text-muted mb-0">
             Define los hitos y entregables esperados para estructurar mejor el
             proyecto
@@ -189,7 +189,7 @@
         <div class="card-body">
           <div
             *ngFor="let hito of need.hitos; let i = index"
-            class="border rounded-lg p-3 mb-4"
+            class="border rounded-lg p-4 mb-4"
           >
             <div class="d-flex justify-content-between align-items-center mb-3">
               <h6 class="fw-semibold mb-0">Hito {{ i + 1 }}</h6>
@@ -241,6 +241,39 @@
                 [(ngModel)]="hito.descripcion"
                 name="milestone-description-{{ i }}"
               ></textarea>
+            </div>
+            <div class="mb-2">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <label class="form-label mb-0">Entregables</label>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  (click)="agregarEntregableAHito(i)"
+                >
+                  <i class="bi bi-plus"></i> Agregar
+                </button>
+              </div>
+              <div
+                *ngFor="let entregable of hito.entregables; let j = index"
+                class="d-flex gap-2 mb-2"
+              >
+                <input
+                  class="form-control"
+                  placeholder="ej. Documento de análisis técnico"
+                  [(ngModel)]="hito.entregables[j].nombreArchivo"
+                  name="milestone-{{ i }}-deliverable-{{ j }}"
+                />
+                <button
+                  *ngIf="hito.entregables.length > 1"
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  (click)="eliminarEntregableDeHito(i, j)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
             </div>
           </div>
           <button

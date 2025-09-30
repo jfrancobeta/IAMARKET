@@ -36,6 +36,7 @@ export class CreateComponent implements OnInit {
     nombre: '',
     descripcion: '',
     fechaEntrega: '',
+    entregables: []
   };
 
   habilidades: HabilidadDTO[] = [];
@@ -172,10 +173,19 @@ export class CreateComponent implements OnInit {
       nombre: '',
       descripcion: '',
       fechaEntrega: '',
+      entregables: [],
     };
   }
 
   eliminarHito(index: number) {
     this.need.hitos.splice(index, 1);
+  }
+
+  agregarEntregableAHito(hitoIndex: number) {
+  this.need.hitos[hitoIndex].entregables.push({ nombreArchivo: '' });
+  }
+
+  eliminarEntregableDeHito(hitoIndex: number, entregableIndex: number) {
+    this.need.hitos[hitoIndex].entregables.splice(entregableIndex, 1);
   }
 }
