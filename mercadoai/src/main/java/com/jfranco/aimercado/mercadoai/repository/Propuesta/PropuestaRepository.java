@@ -17,6 +17,12 @@ public interface PropuestaRepository extends JpaRepository<Propuesta, Long> {
 
     List<Propuesta> findByDesarrollador(Usuario desarrollador);
 
+    Page<Propuesta> findByNecesidadCompaniaId(Long companiaId, Pageable pageable);
+
+    Page<Propuesta> findByDesarrolladorId(Long desarrolladorId, Pageable pageable);
+    Page<Propuesta> findByDesarrolladorIdAndNecesidadTituloContainingIgnoreCase(Long desarrolladorId, String titulo, Pageable pageable);
+    Page<Propuesta> findByDesarrolladorIdAndEstadoNombreIgnoreCase(Long desarrolladorId, String estado, Pageable pageable);
+
     Integer countByNecesidadId(Long necesidadId);
 
     Page<Propuesta> findByEstadoNombreIgnoreCase(String estado, Pageable pageable);

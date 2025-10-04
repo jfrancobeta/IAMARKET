@@ -71,6 +71,13 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.PUT, "/proyectos/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/proyectos/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/proyectos/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        //propuestas
+        .requestMatchers(HttpMethod.GET, "/propuestas/sent").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        .requestMatchers(HttpMethod.GET, "/propuestas/received").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        .requestMatchers(HttpMethod.GET, "/propuestas/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        .requestMatchers(HttpMethod.POST, "/propuestas/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        .requestMatchers(HttpMethod.PUT, "/propuestas/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        .requestMatchers(HttpMethod.DELETE, "/propuestas/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) 
         .addFilter(new JwtValidationFilter(authenticationManager()))

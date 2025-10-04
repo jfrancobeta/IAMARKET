@@ -24,16 +24,13 @@
             <div class="col-md-4">
               <div class="input-group">
                 <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
-                <input type="text" class="form-control border-start-0" placeholder="Buscar propuestas...">
+                <input type="text" class="form-control border-start-0" placeholder="Buscar propuestas..." [(ngModel)]="search" name="search" (ngModelChange)="loadPropuestasEnviadas()">
               </div>
             </div>
             <div class="col-md-2">
-              <select class="form-select">
-                <option selected>Estado</option>
-                <option>Pendiente</option>
-                <option>Aceptada</option>
-                <option>Rechazada</option>
-                <option>En revisión</option>
+              <select class="form-select" [(ngModel)]="estado" name="estado" (ngModelChange)="loadPropuestasEnviadas()">
+                <option value="" selected>Estado</option>
+                <option *ngFor="let estado of estados" [value]="estado.nombre">{{ estado.nombre }}</option>
               </select>
             </div>
             <div class="col-md-2">
@@ -48,60 +45,59 @@
       <!-- Lista de propuestas enviadas -->
       <div class="row g-4">
         <div class="col-12">
-          <div class="card h-100 shadow-sm">
+          @for (propuestaEnviada of propuestasEnviadas; track $index) {
+          <div class="card shadow-sm">
             <div class="card-header">
               <div class="d-flex justify-content-between align-items-start">
                 <div>
-                  <span class="badge bg-secondary me-2"><i class="bi bi-clock me-1"></i>Pendiente</span>
-                  <h5 class="fw-bold mb-1">Sistema de Análisis Predictivo para Ventas</h5>
+                  <span class="badge bg-secondary me-2"><i class="bi bi-clock me-1"></i>{{ propuestaEnviada.estadoNombre }}</span>
+                  <h5 class="fw-bold mb-1">{{ propuestaEnviada.necesidad.titulo }}</h5>
                   <div class="d-flex align-items-center gap-2">
-                    <img src="/placeholder.svg?height=40&width=40" alt="TechCorp Solutions" class="rounded-circle" width="24" height="24">
-                    <span class="text-sm text-muted">TechCorp Solutions</span>
+                    <img src="{{ propuestaEnviada.desarrollador.foto }}" alt="TechCorp Solutions" class="rounded-circle" width="24" height="24">
+                    <span class="text-sm text-muted">{{propuestaEnviada.desarrollador.nombre}}</span>
                   </div>
                 </div>
                 <div class="d-flex gap-2">
-                  <a [routerLink]="['/proposals/2']" routerLinkActive="router-link-active"  class="btn btn-outline-secondary btn-sm"><i class="bi bi-eye me-2"></i>Ver Detalles</a>
+                  <a [routerLink]="['/proposals/', propuestaEnviada.id]" routerLinkActive="router-link-active"  class="btn btn-outline-secondary btn-sm"><i class="bi bi-eye me-2"></i>Ver Detalles</a>
                   <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <p class="mb-3">Propuesta para desarrollar un sistema de ML para predicción de ventas usando LSTM y Random Forest...</p>
+              <p class="mb-3">{{ propuestaEnviada.descripcion }}</p>
               <div class="row g-3 text-sm">
                 <div class="col-md-3 d-flex align-items-center gap-2">
                   <i class="bi bi-currency-dollar text-success"></i>
-                  <span class="fw-medium">$6,500</span>
+                  <span class="fw-medium">{{ propuestaEnviada.precio }}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center gap-2">
                   <i class="bi bi-clock text-primary"></i>
-                  <span>5 semanas</span>
+                  <span>{{ getSemanasEntreFechas(propuestaEnviada.fechaCreacion, propuestaEnviada.entrega) }}</span>
                 </div>
-                <div class="col-md-3 text-muted">Enviada: 20/01/2024</div>
+                <div class="col-md-3 text-muted">Enviada: {{ propuestaEnviada.fechaCreacion | date: 'dd/MM/yyyy' }}</div>
                 <div class="col-md-3 text-end">
-                  <!-- Si está aceptada, muestra botón para ver proyecto -->
                 </div>
               </div>
             </div>
           </div>
+        }
         </div>
-        <!-- ...repite para las demás propuestas enviadas... -->
       </div>
     </div>
-    <!-- Propuestas Recibidas -->
     <div class="tab-pane fade" id="received" role="tabpanel">
-      <!-- Lista de propuestas recibidas -->
       <div class="row g-4">
         <div class="col-12">
-          <div class="card h-100 shadow-sm">
+          @for (propuestaRecibida of propuestasRecibidas; track $index) {
+          <div class="card shadow-sm">
             <div class="card-header">
               <div class="d-flex justify-content-between align-items-start">
                 <div>
-                  <span class="badge bg-secondary me-2"><i class="bi bi-clock me-1"></i>Pendiente</span>
-                  <h5 class="fw-bold mb-1">Mi Proyecto: Sistema de Recomendaciones</h5>
+                  <span class="badge bg-secondary me-2"><i class="bi bi-clock me-1"></i>{{ propuestaRecibida.estadoNombre }}</span>
+                  <h5 class="fw-bold mb-1">{{ propuestaRecibida.necesidad.titulo }}</h5>
                   <div class="d-flex align-items-center gap-2">
-                    <img src="/placeholder.svg?height=40&width=40" alt="Ana García" class="rounded-circle" width="24" height="24">
-                    <span class="text-sm text-muted">Ana García</span>
-                    <span class="text-xs text-muted">★ 4.9</span>
+                    <img src="{{ propuestaRecibida.desarrollador.foto }}" alt="{{ propuestaRecibida.desarrollador.nombre }}" class="rounded-circle" width="24" height="24">
+                    <span class="text-sm text-muted">{{ propuestaRecibida.desarrollador.nombre }}</span>
+                    <!-- <span class="text-xs text-muted">★ 4.9</span> -->
                   </div>
                 </div>
                 <div class="d-flex gap-2">
@@ -112,22 +108,22 @@
               </div>
             </div>
             <div class="card-body">
-              <p class="mb-3">Propuesta detallada para implementar sistema de recomendaciones usando collaborative filtering...</p>
+              <p class="mb-3">{{ propuestaRecibida.descripcion }}</p>
               <div class="row g-3 text-sm">
                 <div class="col-md-3 d-flex align-items-center gap-2">
                   <i class="bi bi-currency-dollar text-success"></i>
-                  <span class="fw-medium">$5,500</span>
+                  <span class="fw-medium">{{ propuestaRecibida.precio }}</span>
                 </div>
                 <div class="col-md-3 d-flex align-items-center gap-2">
                   <i class="bi bi-clock text-primary"></i>
-                  <span>4 semanas</span>
+                  <span>{{ getSemanasEntreFechas(propuestaRecibida.fechaCreacion, propuestaRecibida.entrega) }}</span>
                 </div>
-                <div class="col-md-3 text-muted">Recibida: 22/01/2024</div>
+                <div class="col-md-3 text-muted">Recibida: {{ propuestaRecibida.fechaCreacion | date: 'dd/MM/yyyy' }}</div>
               </div>
             </div>
           </div>
+        }
         </div>
-        <!-- ...repite para las demás propuestas recibidas... -->
       </div>
     </div>
   </div>

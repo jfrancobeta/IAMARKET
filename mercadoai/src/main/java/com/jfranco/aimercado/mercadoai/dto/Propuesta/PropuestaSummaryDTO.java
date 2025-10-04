@@ -3,15 +3,19 @@ package com.jfranco.aimercado.mercadoai.dto.Propuesta;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.jfranco.aimercado.mercadoai.dto.Need.NecesidadSummaryDTO;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
+
 public class PropuestaSummaryDTO {
     private Long id;
-    private Long necesidadId;
-    private Long desarrolladorId;
+    private NecesidadSummaryDTO necesidad;
+    private UsuarioDTO desarrollador;
     private BigDecimal precio;
     private LocalDate entrega;
     private String descripcion;
     private String estadoNombre;
     private LocalDate fechaCreacion;
+    
     public PropuestaSummaryDTO() {
     }
     public Long getId() {
@@ -20,18 +24,7 @@ public class PropuestaSummaryDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    public Long getNecesidadId() {
-        return necesidadId;
-    }
-    public void setNecesidadId(Long necesidadId) {
-        this.necesidadId = necesidadId;
-    }
-    public Long getDesarrolladorId() {
-        return desarrolladorId;
-    }
-    public void setDesarrolladorId(Long desarrolladorId) {
-        this.desarrolladorId = desarrolladorId;
-    }
+    
     public BigDecimal getPrecio() {
         return precio;
     }
@@ -61,5 +54,17 @@ public class PropuestaSummaryDTO {
     }
     public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+    public NecesidadSummaryDTO getNecesidad() {
+        return necesidad;
+    }
+    public void setNecesidad(NecesidadSummaryDTO necesidad) {
+        this.necesidad = necesidad;
+    }
+    public UsuarioDTO getDesarrollador() {
+        return desarrollador;
+    }
+    public void setDesarrollador(UsuarioDTO desarrollador) {
+        this.desarrollador = desarrollador;
     }
 }

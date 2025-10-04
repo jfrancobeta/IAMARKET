@@ -1,4 +1,4 @@
 export interface EntregableUpdateDTO {
-  id: number;
+  id?: number;
   nombreArchivo: string;
 }

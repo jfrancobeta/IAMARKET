@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { ProposalsComponent } from './pages/proposals.component';
-import { SendProposalComponent } from '../needs/pages/send-proposal/send-proposal.component';
 import { DetailsProposalComponent } from './pages/details-proposal/details-proposal.component';
+import { SendProposalComponent } from './pages/send-proposal/send-proposal.component';
 
 export const proposalsRoutes: Routes = [
   {
@@ -15,5 +15,9 @@ export const proposalsRoutes: Routes = [
   {
     path: 'proposals/:id',
     component: DetailsProposalComponent,
+  },
+  {
+    path: 'proposals/:id/edit',
+    component: SendProposalComponent,
   },
 ];

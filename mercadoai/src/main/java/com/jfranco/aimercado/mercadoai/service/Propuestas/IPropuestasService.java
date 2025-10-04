@@ -13,6 +13,9 @@ public interface IPropuestasService {
     PropuestaDTO save(PropuestaCreateDTO dto);
     PropuestaDTO update(Long id, PropuestaUpdateDTO dto);
     PropuestaDTO getById(Long id);
-    Page<PropuestaSummaryDTO> getAll(String search, String estado, Pageable pageable);
+    Page<PropuestaSummaryDTO> getAllSent(String search, String estado, Pageable pageable);
+    Page<PropuestaSummaryDTO> getAllReceived(Pageable pageable);
     void delete(Long id);
+    void aceptarPropuesta(Long id);
+    void rechazarPropuesta(Long id);
 }
