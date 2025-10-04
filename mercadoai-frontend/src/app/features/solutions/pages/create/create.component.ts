@@ -43,10 +43,10 @@ export class CreateComponent implements OnInit {
   };
 
   nuevoHito: HitoCreateDTO = {
-      nombre: '',
-      descripcion: '',
-      fechaEntrega: '',
-      entregables: []
+    nombre: '',
+    descripcion: '',
+    fechaEntrega: '',
+    entregables: [],
   };
 
   featureInput: string = '';
@@ -222,9 +222,9 @@ export class CreateComponent implements OnInit {
   }
   agregarEntregableAHito(hitoIndex: number) {
     this.SolucionDTO.hitos[hitoIndex].entregables.push({ nombreArchivo: '' });
-}
+  }
 
-eliminarEntregableDeHito(hitoIndex: number, entregableIndex: number) {
-  this.SolucionDTO.hitos[hitoIndex].entregables.splice(entregableIndex, 1);
-}
+  eliminarEntregableDeHito(hitoIndex: number, entregableIndex: number) {
+    this.SolucionDTO.hitos[hitoIndex].entregables.splice(entregableIndex, 1);
+  }
 }

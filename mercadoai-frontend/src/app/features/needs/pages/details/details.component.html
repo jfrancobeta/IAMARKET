@@ -42,7 +42,7 @@
                 } @if (roles.includes('ROLE_ADMIN') ||
                 roles.includes('ROLE_DEVELOPER')) {
                 <a
-                  [routerLink]="['/needs', 1, 'send-proposal']"
+                  [routerLink]="['/needs', need?.id, 'send-proposal']"
                   class="btn btn-primary d-flex align-items-center"
                 >
                   <i class="bi bi-send me-2"></i>

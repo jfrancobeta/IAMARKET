@@ -32,6 +32,12 @@ public abstract class NecesidadMapper {
     @Mapping(target = "propuestas", source = "cantidadPropuestas")
     public abstract NecesidadSummaryDTO toSummaryDTO(Necesidad necesidad, Integer cantidadPropuestas);
 
+
+    @Mapping(target = "compañiaNombre", source = "compania.nombre")
+    @Mapping(target = "estadoNombre", source = "estado.nombre")
+    @Mapping(target = "propuestas", ignore = true) 
+    public abstract NecesidadSummaryDTO toSummaryDTO(Necesidad necesidad);
+    
     public NecesidadUserDetailsDTO toDetailsDTO(
             Necesidad necesidad,
             List<PropuestaUserDetailsDTO> propuestas,

@@ -1,5 +1,7 @@
 package com.jfranco.aimercado.mercadoai.service.Proyecto;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -9,9 +11,11 @@ import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.mapper.Proyecto.ProyectoMapper;
+import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Proyecto;
 import com.jfranco.aimercado.mercadoai.model.Solucion;
+import com.jfranco.aimercado.mercadoai.repository.Estado.EstadoRepository;
 import com.jfranco.aimercado.mercadoai.repository.Propuesta.PropuestaRepository;
 import com.jfranco.aimercado.mercadoai.repository.Proyecto.ProyectoRepository;
 import com.jfranco.aimercado.mercadoai.repository.Solucion.SolucionesRespository;
@@ -30,7 +34,10 @@ public class ProyectoService implements IProyectoService{
     
     @Autowired
     private ProyectoMapper proyectoMapper;
-    
+
+    @Autowired
+    private EstadoRepository estadoRepository;
+
     @Override
     public Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo,
             Pageable pageable) {
@@ -92,6 +99,22 @@ public class ProyectoService implements IProyectoService{
         Proyecto proyecto = proyectoRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
         proyectoRepository.delete(proyecto);
+    }
+
+    @Override
+    public ProyectoDTO createFromPropuesta(Propuesta propuesta) {
+        Proyecto proyecto = new Proyecto();
+
+        Estado estado = estadoRepository.findByNombre("EN_PROGRESO")
+                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        proyecto.setEstado(estado);
+
+        proyecto.setFechaInicio(LocalDate.now());
+
+        proyectoRepository.save(proyecto);
+
+        return proyectoMapper.toDto(proyecto);
     }
 
     

@@ -7,6 +7,7 @@ import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
+import com.jfranco.aimercado.mercadoai.model.Propuesta;
 
 public interface IProyectoService {
     
@@ -15,5 +16,6 @@ public interface IProyectoService {
     ProyectoDTO getById(Long id);
     Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo, Pageable pageable);
     void delete(Long id);
+    ProyectoDTO createFromPropuesta(Propuesta propuestaId);
 
 }

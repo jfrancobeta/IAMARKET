@@ -11,6 +11,8 @@ public interface EntregableMapper {
     
     EntregableDTO toDTO(Entregable entregable);
 
+    @Mapping(target = "fechaEntrega", ignore = true)
     @Mapping(target = "hito", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Entregable toEntity(EntregableDTO dto);
 }

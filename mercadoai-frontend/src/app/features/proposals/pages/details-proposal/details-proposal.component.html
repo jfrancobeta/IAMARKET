@@ -1,7 +1,7 @@
 <app-main-layout>
 <div class="container py-4">
   <div class="d-flex align-items-center gap-4 mb-4">
-    <a href="/proposals" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
+    <a routerLink="/proposals" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
       <i class="bi bi-arrow-left me-2"></i>
       Volver a Propuestas
     </a>
@@ -14,17 +14,17 @@
         <div class="card-header d-flex justify-content-between align-items-start">
           <div>
             <div class="d-flex align-items-center gap-2 mb-2">
-              <span class="badge bg-secondary"><i class="bi bi-clock me-1"></i>Pendiente</span>
-              <span class="badge bg-light text-dark border">Machine Learning</span>
+              <span class="badge bg-secondary"><i class="bi bi-clock me-1"></i>{{propuesta.estado.nombre}}</span>
+              <span class="badge bg-light text-dark border">{{propuesta.necesidad.categoria.nombre}}</span>
             </div>
-            <h2 class="fw-bold fs-4 mb-1">Sistema de Análisis Predictivo para Ventas</h2>
+            <h2 class="fw-bold fs-4 mb-1">{{propuesta.necesidad.titulo}}</h2>
             <div class="d-flex gap-4 text-muted small">
-              <span><i class="bi bi-calendar me-1"></i>Enviada el 20/01/2024</span>
-              <span><i class="bi bi-building me-1"></i>TechCorp Solutions</span>
+              <span><i class="bi bi-calendar me-1"></i>Enviada el {{propuesta.fechaCreacion | date: 'dd/MM/yyyy'}}</span>
+              <span><i class="bi bi-building me-1"></i>{{propuesta.desarrollador.nombre}}</span>
             </div>
           </div>
           <div class="d-flex gap-2">
-            <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-pencil me-2"></i>Editar Propuesta</button>
+            <button [routerLink]="['/proposals', propuesta.id, 'edit']"  class="btn btn-outline-secondary btn-sm"><i class="bi bi-pencil me-2"></i>Editar Propuesta</button>
             <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat-dots me-2"></i>Mensaje</button>
           </div>
         </div>
@@ -33,21 +33,21 @@
             <div class="col-md-4 d-flex align-items-center gap-2">
               <i class="bi bi-currency-dollar text-success fs-5"></i>
               <div>
-                <div class="fw-medium">$6,500</div>
+                <div class="fw-medium">{{propuesta.precio | currency}}</div>
                 <div class="text-muted small">Tu oferta</div>
               </div>
             </div>
             <div class="col-md-4 d-flex align-items-center gap-2">
               <i class="bi bi-clock text-primary fs-5"></i>
               <div>
-                <div class="fw-medium">5 semanas</div>
+                <div class="fw-medium">{{propuesta.entrega}}</div>
                 <div class="text-muted small">Tiempo estimado</div>
               </div>
             </div>
             <div class="col-md-4 d-flex align-items-center gap-2">
               <i class="bi bi-file-earmark-text text-purple fs-5"></i>
               <div>
-                <div class="fw-medium">$5,000 - $8,000</div>
+                <div class="fw-medium">{{propuesta.necesidad.presupuesto | currency}}</div>
                 <div class="text-muted small">Presupuesto cliente</div>
               </div>
             </div>
@@ -55,7 +55,7 @@
           <hr>
           <h5 class="fw-semibold mb-2">Descripción de tu Propuesta</h5>
           <p class="text-muted mb-4">
-            Propongo desarrollar un sistema de análisis predictivo robusto utilizando técnicas avanzadas de machine learning. Mi enfoque incluirá la implementación de múltiples algoritmos para garantizar la máxima precisión en las predicciones.
+            {{propuesta.descripcion}}
           </p>
         </div>
       </div>
@@ -65,7 +65,7 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">Detalles</button>
         </li>
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
           <button class="nav-link" id="approach-tab" data-bs-toggle="tab" data-bs-target="#approach" type="button" role="tab">Enfoque</button>
         </li>
         <li class="nav-item" role="presentation">
@@ -73,7 +73,7 @@
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="timeline-tab" data-bs-toggle="tab" data-bs-target="#timeline" type="button" role="tab">Cronograma</button>
-        </li>
+        </li> -->
       </ul>
       <div class="tab-content" id="proposalTabsContent">
         <div class="tab-pane fade show active" id="details" role="tabpanel">
@@ -83,18 +83,18 @@
             </div>
             <div class="card-body">
               <h6 class="fw-semibold mb-2">Descripción del Cliente</h6>
-              <p class="text-muted mb-3">Necesitamos desarrollar un sistema que pueda predecir las ventas futuras basándose en datos históricos y tendencias del mercado.</p>
+              <p class="text-muted mb-3">{{propuesta.necesidad.descripcion}}</p>
               <div class="row g-4 mb-3">
                 <div class="col-md-6">
                   <h6 class="fw-medium mb-1">Presupuesto del Cliente</h6>
-                  <p class="text-muted">$5,000 - $8,000</p>
+                  <p class="text-muted">{{propuesta.necesidad.presupuesto | currency}}</p>
                 </div>
                 <div class="col-md-6">
                   <h6 class="fw-medium mb-1">Plazo Solicitado</h6>
-                  <p class="text-muted">6 semanas</p>
+                  <p class="text-muted">{{propuesta.necesidad.fechaLimite | date}}</p>
                 </div>
               </div>
-              <h6 class="fw-medium mb-2">Tu Experiencia Relevante</h6>
+              <!-- <h6 class="fw-medium mb-2">Tu Experiencia Relevante</h6>
               <pre class="bg-light p-3 rounded text-muted small mb-0" style="white-space: pre-wrap;">
 Tengo más de 5 años de experiencia desarrollando sistemas de ML para predicción de ventas:
 
@@ -103,7 +103,7 @@ Tengo más de 5 años de experiencia desarrollando sistemas de ML para predicci�
 • SaaS Platform (2021): Predictor de churn que mejoró la retención en 22%
 
 Tecnologías utilizadas: Python, TensorFlow, Scikit-learn, Pandas, AWS SageMaker, Docker
-              </pre>
+              </pre> -->
             </div>
           </div>
         </div>
@@ -238,13 +238,13 @@ Entrega Final
           <div class="d-flex align-items-center gap-3 mb-3">
             <span class="avatar bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;">TC</span>
             <div>
-              <h6 class="fw-semibold mb-0">TechCorp Solutions</h6>
-              <div class="d-flex align-items-center gap-2 text-muted small">
+              <h6 class="fw-semibold mb-0">{{propuesta.necesidad.compania.nombre}}</h6>
+              <!-- <div class="d-flex align-items-center gap-2 text-muted small">
                 <i class="bi bi-star-fill text-warning"></i>
                 <span>4.8</span>
                 <span>•</span>
                 <span>23 proyectos</span>
-              </div>
+              </div> -->
             </div>
           </div>
           <a href="#" class="btn btn-outline-secondary w-100">
@@ -262,19 +262,19 @@ Entrega Final
           <div class="d-flex align-items-center gap-3 mb-3">
             <span class="avatar bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;">AG</span>
             <div>
-              <h6 class="fw-semibold mb-0">Ana García</h6>
-              <div class="d-flex align-items-center gap-2 text-muted small">
+              <h6 class="fw-semibold mb-0">{{propuesta.desarrollador.nombre}}</h6>
+              <!-- <div class="d-flex align-items-center gap-2 text-muted small">
                 <i class="bi bi-star-fill text-warning"></i>
                 <span>4.9</span>
                 <span>•</span>
                 <span>45 proyectos</span>
-              </div>
+              </div> -->
             </div>
           </div>
-          <div class="mb-2 d-flex justify-content-between">
+          <!-- <div class="mb-2 d-flex justify-content-between">
             <span class="text-muted">Tiempo de respuesta:</span>
             <span class="fw-medium">2 horas</span>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- Estado de la Propuesta -->
@@ -283,7 +283,7 @@ Entrega Final
           <h5 class="fw-bold mb-1">Estado de la Propuesta</h5>
         </div>
         <div class="card-body text-center">
-          <span class="badge bg-secondary mb-2"><i class="bi bi-clock me-1"></i>Pendiente</span>
+          <span class="badge bg-secondary mb-2"><i class="bi bi-clock me-1"></i>{{propuesta.estado.nombre}}</span>
           <p class="text-muted small mb-2">Esperando respuesta del cliente</p>
           <div class="d-grid gap-2">
             <button class="btn btn-outline-secondary w-100"><i class="bi bi-pencil me-2"></i>Editar Propuesta</button>

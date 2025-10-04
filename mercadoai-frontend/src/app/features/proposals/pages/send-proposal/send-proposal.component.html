@@ -1,0 +1,198 @@
+<app-main-layout>
+  <div class="container py-4">
+    <div class="d-flex align-items-center gap-4 mb-4">
+      <a [routerLink]="['/needs', necesidad?.id]" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
+        <i class="bi bi-arrow-left me-2"></i>
+        Volver al Proyecto
+      </a>
+      <div>
+        <h1 class="h2 fw-bold mb-1">
+           {{ isEditMode ? 'Editar Propuesta' : 'Crear Propuesta' }}
+        </h1>
+        <p class="text-muted">
+          {{ isEditMode ? 'Edita los detalles de tu propuesta' : 'Ajusta los detalles del proyecto según tu propuesta' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Formulario de Propuesta -->
+      <div class="col-lg-8" *ngIf="necesidad">
+        <form (ngSubmit)="onSubmit()" #form="ngForm" class="mb-4">
+          <!-- Información Básica -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="fw-bold mb-1">Información Básica</h5>
+              <p class="text-muted mb-0">Ajusta el título, descripción y presupuesto</p>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+              <label for="title" class="form-label">Título del Proyecto</label>
+              <input id="title" class="form-control" [value]="necesidad.titulo" name="titulo" placeholder="Título del proyecto" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descripción</label>
+              <textarea id="description" class="form-control" name="descripcion" rows="4" placeholder="Descripción del proyecto" disabled>{{ necesidad.descripcion }}</textarea>
+            </div>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="budget" class="form-label">Tu Presupuesto *</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                    <input id="budget" class="form-control" [(ngModel)]="propuesta.precio" name="precio" placeholder="6,500" required>
+                  </div>
+                  <small class="text-muted">Presupuesto original: {{ necesidad.presupuesto }}</small>
+                </div>
+                <div class="col-md-6">
+                  <label for="timeline" class="form-label">Tu Tiempo de Entrega *</label>
+                  <input id="timeline" class="form-control" [(ngModel)]="propuesta.entrega" name="entrega" placeholder="5 semanas" required>
+                  <small class="text-muted">Plazo original: {{ necesidad.fechaLimite }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enfoque Técnico -->
+          <!-- <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="fw-bold mb-1">Tu Enfoque Técnico</h5>
+              <p class="text-muted mb-0">Explica cómo abordarás el proyecto</p>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="approach" class="form-label">Metodología y Enfoque *</label>
+                <textarea id="approach" class="form-control" [(ngModel)]="proposal.approach" name="approach" rows="6" required placeholder="Describe tu enfoque técnico, metodología, tecnologías que usarás..."></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="experience" class="form-label">Tu Experiencia Relevante</label>
+                <textarea id="experience" class="form-control" [(ngModel)]="proposal.experience" name="experience" rows="4" placeholder="Describe proyectos similares, resultados obtenidos, certificaciones..."></textarea>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- Hitos Ajustados -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="fw-bold mb-1">Hitos del Proyecto</h5>
+              <p class="text-muted mb-0">Ajusta los hitos, fechas y entregables según tu propuesta</p>
+            </div>
+            <div class="card-body">
+              <div *ngFor="let hitos of propuesta.hitos; let i = index" class="border rounded-lg p-4 mb-4">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10 text-primary"
+                    style="width: 2rem; height: 2rem; font-weight: 600;">
+                    {{ i + 1 }}
+                  </div>
+                  <input class="form-control fw-semibold" [(ngModel)]="hitos.nombre" name="milestone-title-{{i}}" placeholder="Título del hito" required>
+                </div>
+                <div class="ms-5">
+                  <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <textarea class="form-control" [(ngModel)]="hitos.descripcion" name="milestone-description-{{i}}" rows="2" placeholder="Descripción del hito"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Fecha de Entrega</label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                      <input type="date" class="form-control" [(ngModel)]="hitos.fechaEntrega" name="milestone-date-{{i}}">
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <label class="form-label mb-0">Entregables</label>
+                      <button type="button" class="btn btn-outline-primary btn-sm" (click)="addDeliverable(i)">
+                        <i class="bi bi-plus"></i> Agregar
+                      </button>
+                    </div>
+                    <div *ngFor="let deliverable of hitos.entregables; let j = index" class="d-flex align-items-center gap-2 mb-2">
+                      <input class="form-control" [(ngModel)]="hitos.entregables[j].nombreArchivo" name="milestone-{{i}}-deliverable-{{j}}" placeholder="Entregable">
+                      <button *ngIf="hitos.entregables.length > 1" type="button" class="btn btn-outline-danger btn-sm" (click)="removeDeliverable(i, j)">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline-primary w-100" (click)="addMilestone()">
+                <i class="bi bi-plus"></i> Agregar Hito
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <a [routerLink]="['/needs', necesidad.id]" class="btn btn-outline-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">
+             <i class="bi bi-send me-2"></i>
+              {{ isEditMode ? 'Actualizar Propuesta' : 'Enviar Propuesta' }}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Sidebar con comparación -->
+      <div class="col-lg-4" *ngIf="necesidad">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">Proyecto Original</h5>
+          </div>
+          <div class="card-body">
+            <h4 class="fw-semibold mb-2">{{ necesidad.titulo }}</h4>
+            <p class="text-muted">{{ necesidad.descripcion }}</p>
+            <hr>
+            <div class="mb-2 d-flex justify-content-between">
+              <span class="text-muted">Empresa:</span>
+              <span class="fw-medium">{{ necesidad.compania.nombre }}</span>
+            </div>
+            <div class="mb-2 d-flex justify-content-between">
+              <span class="text-muted">Presupuesto:</span>
+              <span class="fw-medium">{{ necesidad.presupuesto }}</span>
+            </div>
+            <div class="mb-2 d-flex justify-content-between">
+              <span class="text-muted">Plazo:</span>
+              <span class="fw-medium">{{ necesidad.fechaLimite }}</span>
+            </div>
+            <div class="mb-2 d-flex justify-content-between">
+              <span class="text-muted">Categoría:</span>
+              <span class="badge bg-secondary">{{ necesidad.categoria.nombre }}</span>
+            </div>
+            <div>
+              <h6 class="fw-medium mb-2">Habilidades Requeridas</h6>
+              <div class="d-flex flex-wrap gap-1">
+                <span *ngFor="let skill of necesidad.skillsRequired" class="badge bg-secondary">{{ skill.nombre }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="fw-bold mb-1">Tu Propuesta</h5>
+          </div>
+          <div class="card-body">
+            <div class="mb-2 d-flex justify-content-between">
+              <span class="text-muted">Tu Presupuesto:</span>
+              <span class="fw-medium">${{ propuesta.precio }}</span>
+            </div>
+            <div class="mb-2 d-flex justify-content-between">
+              <span class="text-muted">Tu Plazo:</span>
+              <span class="fw-medium">{{ propuesta.entrega }}</span>
+            </div>
+            <div class="mb-2 d-flex justify-content-between">
+              <span class="text-muted">Hitos:</span>
+              <span class="fw-medium">{{ propuesta.hitos.length }}</span>
+            </div>
+            <hr>
+            <div class="text-sm">
+              <h6 class="fw-medium">Consejos:</h6>
+              <ul class="text-muted mb-0">
+                <li>Ajusta las fechas de manera realista</li>
+                <li>Personaliza los entregables</li>
+                <li>Sé específico en tu enfoque</li>
+                <li>Menciona tu experiencia relevante</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-main-layout>

@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -43,6 +44,11 @@ public class Propuesta {
     private List<Hito> hitos;
 
     private LocalDate fechaCreacion;
+
+    @PrePersist
+    protected void onCreate() {
+        this.fechaCreacion = LocalDate.now();
+    }
 
     public Long getId() {
         return id;
@@ -91,6 +97,14 @@ public class Propuesta {
     }
     public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public List<Hito> getHitos() {
+        return hitos;
+    }
+
+    public void setHitos(List<Hito> hitos) {
+        this.hitos = hitos;
     }
 
     

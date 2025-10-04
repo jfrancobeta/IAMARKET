@@ -1,10 +1,16 @@
+import { EstadoDTO } from "../Estado/EstadoDTO";
+import { HitoDTO } from "../Hito/HitoDTO";
+import { NecesidadDTO } from "../Necesidad/NecesidadDTO";
+import { UsuarioDTO } from "../Usuario/UsuarioDTO";
+
 export interface PropuestaDTO {
   id: number;
-  necesidad: any;
-  desarrollador: any; 
+  necesidad: NecesidadDTO;
+  desarrollador: UsuarioDTO;
   precio: number;
-  entrega: string;
+  entrega: string; 
   descripcion: string;
-  estado: any; 
+  estado: EstadoDTO;
+  hitos: HitoDTO[];
   fechaCreacion: string; 
 }
