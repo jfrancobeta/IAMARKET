@@ -9,4 +9,5 @@ export interface SolucionSummaryDTO {
   unidadEntrega: string;
   habilidades: string[];
   vistas: number;
+  fechaCreacion: string;
 }

@@ -1,4 +1,8 @@
+import { CategoriaDTO } from "../Categoria/CategoriaDTO";
+import { EstadoDTO } from "../Estado/EstadoDTO";
+import { HabilidadDTO } from "../Habilidad/HabilidadDTO";
 import { HitoDTO } from "../Hito/HitoDTO";
+import { UsuarioDTO } from "../Usuario/UsuarioDTO";
 
 export interface SolucionDTO {
   id: number;
@@ -7,9 +11,9 @@ export interface SolucionDTO {
   precio: number;
   vistas: number;
   pedidos: number;
-  categoriaId: number;
-  estadoId: number;
-  habilidadesIds: number[];
+  categoria: CategoriaDTO;
+  estado: EstadoDTO;
+  habilidades: HabilidadDTO[];
   caracteristicas: string[];
   requisitos: string[];
   hitos: HitoDTO[];
@@ -17,5 +21,5 @@ export interface SolucionDTO {
   unidadEntrega: string; 
   fechaCreacion: string; 
   fechaActualizacion: string;
-  desarrolladorId: number;
+  desarrollador: UsuarioDTO;
 }

@@ -7,18 +7,22 @@ import { ProyectoDTO } from '../../../core/models/Proyecto/ProyectoDTO';
 import { ProyectoSummaryDTO } from '../../../core/models/Proyecto/ProyectoSummaryDTO';
 import { ProyectoUpdateDTO } from '../../../core/models/Proyecto/ProyectoUpdateDTO';
 import { Page } from '../../../core/models/shared/page';
+import { HitoCreateDTO } from '../../../core/models/Hito/HitoCreateDTO';
+import { HitoDTO } from '../../../core/models/Hito/HitoDTO';
+import { HitoUpdateDTO } from '../../../core/models/Hito/HitoUpdateDTO';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProyectoService {
-
   private apiUrl = environment.apiUrl + 'proyectos';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAll(params: any): Observable<Page<ProyectoSummaryDTO>> {
-      return this.http.get<Page<ProyectoSummaryDTO>>(`${this.apiUrl}/`, { params });
+    return this.http.get<Page<ProyectoSummaryDTO>>(`${this.apiUrl}/`, {
+      params,
+    });
   }
 
   getById(id: number): Observable<ProyectoDTO> {
@@ -35,5 +39,12 @@ export class ProyectoService {
 
   eliminar(id: number): Observable<string> {
     return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
+  }
+
+  addHito(proyectoId: number, dto: HitoCreateDTO): Observable<HitoDTO> {
+    return this.http.post<HitoDTO>(`${this.apiUrl}/${proyectoId}/hitos`, dto);
+  }
+  editarHito(proyectoId: number, hitoId: number, dto: HitoUpdateDTO): Observable<HitoDTO> {
+    return this.http.put<HitoDTO>(`${this.apiUrl}/${proyectoId}/hitos/${hitoId}`, dto);
   }
 }

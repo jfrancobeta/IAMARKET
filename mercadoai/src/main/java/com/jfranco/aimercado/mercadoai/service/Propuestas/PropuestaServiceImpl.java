@@ -139,14 +139,14 @@ public class PropuestaServiceImpl implements IPropuestasService {
         Propuesta propuesta = propuestaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Propuesta no encontrada con id " + id));
 
-        Estado estadoAceptado = estadoRepository.findByNombre("ACEPTADA")
-                .orElseThrow(() -> new RuntimeException("Estado 'ACEPTADA' no encontrado"));
-        
+        Estado estadoAceptado = estadoRepository.findByNombre("Aceptada")
+                .orElseThrow(() -> new RuntimeException("Estado 'Aceptada' no encontrado"));
+
         propuesta.setEstado(estadoAceptado);
 
         List<Propuesta> otras = propuestaRepository.findByNecesidad(propuesta.getNecesidad());
-        Estado rechazada = estadoRepository.findByNombre("RECHAZADA")
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+        Estado rechazada = estadoRepository.findByNombre("Rechazada")
+                .orElseThrow(() -> new RuntimeException("Estado 'Rechazada' no encontrado"));
         for (Propuesta otra : otras) {
             if (!otra.getId().equals(id)) {
                 otra.setEstado(rechazada);
@@ -155,7 +155,7 @@ public class PropuestaServiceImpl implements IPropuestasService {
         }
 
         Necesidad necesidad = propuesta.getNecesidad();
-        Estado estadoAceptadoNecesidad = estadoRepository.findByNombre("EN_PROGRESO")
+        Estado estadoAceptadoNecesidad = estadoRepository.findByNombre("En Proceso")
                 .orElseThrow(() -> new RuntimeException("Estado 'EN PROGRESO' no encontrado"));
         necesidad.setEstado(estadoAceptadoNecesidad);
         necesidadRepository.save(necesidad);
@@ -169,7 +169,7 @@ public class PropuestaServiceImpl implements IPropuestasService {
     public void rechazarPropuesta(Long id) {
         Propuesta propuesta = propuestaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Propuesta no encontrada"));
-        Estado rechazada = estadoRepository.findByNombre("RECHAZADA")
+        Estado rechazada = estadoRepository.findByNombre("Rechazada")
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
         propuesta.setEstado(rechazada);
         propuestaRepository.save(propuesta);

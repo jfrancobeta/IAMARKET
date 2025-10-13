@@ -61,16 +61,22 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.GET, "/necesidades/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
         .requestMatchers(HttpMethod.POST, "/necesidades/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
         .requestMatchers(HttpMethod.PUT, "/necesidades/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
+        //categorias
         .requestMatchers(HttpMethod.GET, "/categorias/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY") 
+        //soluciones
         .requestMatchers(HttpMethod.GET, "/soluciones/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/soluciones/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.POST, "/soluciones/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.PUT, "/soluciones/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.DELETE, "/soluciones/eliminar/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        //proyectos
         .requestMatchers(HttpMethod.POST, "/proyectos/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.PUT, "/proyectos/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/proyectos/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/proyectos/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        //proyectos hitos
+        .requestMatchers(HttpMethod.POST, "/proyectos/{proyectoId}/hitos").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        .requestMatchers(HttpMethod.PUT, "/proyectos/{proyectoId}/hitos/{hitoId}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         //propuestas
         .requestMatchers(HttpMethod.GET, "/propuestas/sent").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/propuestas/received").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
@@ -78,6 +84,9 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.POST, "/propuestas/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.PUT, "/propuestas/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.DELETE, "/propuestas/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        //entregables 
+        .requestMatchers(HttpMethod.POST, "/entregables/{id}/upload").hasAnyRole( "ADMIN", "DEVELOPER")
+        .requestMatchers(HttpMethod.POST, "/entregables/{id}/aprobar").hasAnyRole( "COMPANY", "ADMIN")
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) 
         .addFilter(new JwtValidationFilter(authenticationManager()))
@@ -95,6 +104,7 @@ public class SecurityConfig {
         config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://iamarket.vercel.app"));
         config.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE"));
         config.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
+        config.setExposedHeaders(Arrays.asList("Content-Disposition"));
         config.setAllowCredentials(true); // Permitir credenciales
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

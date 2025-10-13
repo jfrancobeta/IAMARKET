@@ -128,22 +128,21 @@
               <div>
                 <div class="d-flex align-items-center gap-2 mb-1">
                   <span class="badge bg-secondary"
-                    ><i class="bi bi-clock me-1"></i>{{proyecto.solucion.estadoId}}</span
+                    ><i class="bi bi-clock me-1"></i>{{proyecto.solucion.estadoNombre}}</span
                   >
                   <span class="badge bg-light text-dark border"
-                    >Machine Learning</span
+                    >{{proyecto.solucion.categoriaNombre}}</span
                   >
                 </div>
                 <h5 class="fw-bold mb-1">
-                  Sistema de Análisis Predictivo para Ventas
+                  {{proyecto.solucion.titulo}}
                 </h5>
                 <span class="text-muted small"
-                  >Desarrollo de sistema de ML para predicción de ventas usando
-                  algoritmos avanzados.</span
+                  >{{proyecto.solucion.descripcion}}</span
                 >
               </div>
               <div class="d-flex gap-2">
-                <a href="/projects/1" class="btn btn-outline-secondary btn-sm"
+                <a routerLink="/projects/{{proyecto.id}}" class="btn btn-outline-secondary btn-sm"
                   ><i class="bi bi-eye me-2"></i>Ver Detalles</a
                 >
                 <button class="btn btn-outline-secondary btn-sm">
@@ -168,14 +167,14 @@
               <div class="col-md-3 d-flex align-items-center gap-2">
                 <i class="bi bi-currency-dollar text-success"></i>
                 <div>
-                  <span class="fw-medium">$6,500</span>
+                  <span class="fw-medium">${{proyecto.solucion.precio}}</span>
                   <span class="text-muted small d-block">Presupuesto</span>
                 </div>
               </div>
               <div class="col-md-3 d-flex align-items-center gap-2">
                 <i class="bi bi-calendar text-primary"></i>
                 <div>
-                  <span class="fw-medium">15 días</span>
+                  <span class="fw-medium">{{ getDiasRestantes(proyecto) }}</span>
                   <span class="text-muted small d-block">Restantes</span>
                 </div>
               </div>
@@ -195,7 +194,7 @@
               </div>
             </div>
             <div class="d-flex justify-content-between text-sm text-muted">
-              <span>Inicio: 20/01/2024</span>
+              <span>Inicio: {{proyecto.solucion.fechaCreacion | date: 'dd/MM/yyyy'}}</span>
               <span>Entrega: 15/02/2024</span>
             </div>
           </div>
@@ -209,22 +208,21 @@
               <div>
                 <div class="d-flex align-items-center gap-2 mb-1">
                   <span class="badge bg-secondary"
-                    ><i class="bi bi-clock me-1"></i>En progreso</span
+                    ><i class="bi bi-clock me-1"></i>{{proyecto.propuesta?.estadoNombre}}</span
                   >
                   <span class="badge bg-light text-dark border"
-                    >Machine Learning</span
+                    >{{proyecto.propuesta?.necesidad?.categoria?.nombre}}</span
                   >
                 </div>
                 <h5 class="fw-bold mb-1">
-                  Sistema de Análisis Predictivo para Ventas
+                  {{proyecto.propuesta?.necesidad?.titulo}}
                 </h5>
                 <span class="text-muted small"
-                  >Desarrollo de sistema de ML para predicción de ventas usando
-                  algoritmos avanzados.</span
+                  >{{proyecto.propuesta?.descripcion}}</span
                 >
               </div>
               <div class="d-flex gap-2">
-                <a href="/projects/1" class="btn btn-outline-secondary btn-sm"
+                <a routerLink="/projects/{{proyecto.id}}" class="btn btn-outline-secondary btn-sm"
                   ><i class="bi bi-eye me-2"></i>Ver Detalles</a
                 >
                 <button class="btn btn-outline-secondary btn-sm">
@@ -249,14 +247,14 @@
               <div class="col-md-3 d-flex align-items-center gap-2">
                 <i class="bi bi-currency-dollar text-success"></i>
                 <div>
-                  <span class="fw-medium">$6,500</span>
+                  <span class="fw-medium">{{proyecto.propuesta?.precio | currency}}</span>
                   <span class="text-muted small d-block">Presupuesto</span>
                 </div>
               </div>
               <div class="col-md-3 d-flex align-items-center gap-2">
                 <i class="bi bi-calendar text-primary"></i>
                 <div>
-                  <span class="fw-medium">15 días</span>
+                  <span class="fw-medium">{{ getDiasRestantes(proyecto) }}</span>
                   <span class="text-muted small d-block">Restantes</span>
                 </div>
               </div>
@@ -270,19 +268,20 @@
               <div class="col-md-3 d-flex align-items-center gap-2">
                 <i class="bi bi-person text-orange"></i>
                 <div>
-                  <span class="fw-medium">Ana García</span>
+                  <span class="fw-medium">{{proyecto.propuesta?.desarrollador?.nombre}}</span>
                   <span class="text-muted small d-block">Desarrollador</span>
                 </div>
               </div>
             </div>
             <div class="d-flex justify-content-between text-sm text-muted">
-              <span>Inicio: 20/01/2024</span>
-              <span>Entrega: 15/02/2024</span>
+              <span>Inicio: {{proyecto.propuesta?.fechaCreacion | date: 'dd/MM/yyyy'}}</span>
+              <span>Entrega: {{proyecto.propuesta?.entrega | date: 'dd/MM/yyyy'}}</span>
             </div>
           </div>
         </div>
       </div>
-      } }
+      } 
+    }
     </div>
   </div>
 </app-main-layout>

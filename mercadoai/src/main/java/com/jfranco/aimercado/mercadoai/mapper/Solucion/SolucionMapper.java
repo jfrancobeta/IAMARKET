@@ -22,10 +22,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = { UsuarioMapper.class })
 public abstract class SolucionMapper {
 
-    @Mapping(target = "categoriaId", source = "categoria.id")
-    @Mapping(target = "desarrolladorId", source = "desarrollador.id")
-    @Mapping(target = "estadoId", source = "estado.id")
-    @Mapping(target = "habilidadesIds", expression = "java(solucion.getHabilidades() == null ? null : solucion.getHabilidades().stream().map(h -> h.getId()).toList())")
+    @Mapping(target = "categoria", source = "categoria")
+    @Mapping(target = "desarrollador", source = "desarrollador")
+    @Mapping(target = "estado", source = "estado")
+    @Mapping(target = "habilidades", source = "habilidades")
     public abstract SolucionDTO toDTO(Solucion solucion);
 
     @Mapping(target = "desarrollador", source = "desarrollador")

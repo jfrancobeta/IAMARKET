@@ -4,19 +4,24 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.dto.Categoria.CategoriaDTO;
+import com.jfranco.aimercado.mercadoai.dto.Estado.EstadoDTO;
+import com.jfranco.aimercado.mercadoai.dto.Habilidad.HabilidadDTO;
 import com.jfranco.aimercado.mercadoai.dto.Hito.HitoDTO;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 import com.jfranco.aimercado.mercadoai.model.UnidadEntrega;
 
 public class SolucionDTO {
     private Long id;
     private String titulo;
     private String descripcion;
+    private UsuarioDTO desarrollador;
     private BigDecimal precio;
     private int vistas;
     private int pedidos;
-    private Long categoriaId;
-    private Long estadoId;
-    private List<Long> habilidadesIds;
+    private CategoriaDTO categoria;
+    private EstadoDTO estado;
+    private List<HabilidadDTO> habilidades;
     private List<String> caracteristicas;
     private List<String> requisitos;
     private List<HitoDTO> hitos;
@@ -24,7 +29,6 @@ public class SolucionDTO {
     private UnidadEntrega unidadEntrega;
     private LocalDate fechaCreacion;
     private LocalDate fechaActualizacion;
-    private Long desarrolladorId;
 
     public SolucionDTO() {
     }
@@ -76,30 +80,7 @@ public class SolucionDTO {
     public void setPedidos(int pedidos) {
         this.pedidos = pedidos;
     }
-
-    public Long getCategoriaId() {
-        return categoriaId;
-    }
-
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
-    }
-
-    public Long getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(Long estadoId) {
-        this.estadoId = estadoId;
-    }
-
-    public List<Long> getHabilidadesIds() {
-        return habilidadesIds;
-    }
-
-    public void setHabilidadesIds(List<Long> habilidadesIds) {
-        this.habilidadesIds = habilidadesIds;
-    }
+    
 
     public List<String> getCaracteristicas() {
         return caracteristicas;
@@ -149,20 +130,44 @@ public class SolucionDTO {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public Long getDesarrolladorId() {
-        return desarrolladorId;
-    }
-
-    public void setDesarrolladorId(Long desarrolladorId) {
-        this.desarrolladorId = desarrolladorId;
-    }
-
     public List<HitoDTO> getHitos() {
         return hitos;
     }
 
     public void setHitos(List<HitoDTO> hitos) {
         this.hitos = hitos;
+    }
+
+    public CategoriaDTO getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaDTO categoria) {
+        this.categoria = categoria;
+    }
+
+    public EstadoDTO getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoDTO estado) {
+        this.estado = estado;
+    }
+
+    public List<HabilidadDTO> getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(List<HabilidadDTO> habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public UsuarioDTO getDesarrollador() {
+        return desarrollador;
+    }
+
+    public void setDesarrollador(UsuarioDTO desarrollador) {
+        this.desarrollador = desarrollador;
     }
 
 }

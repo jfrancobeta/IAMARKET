@@ -66,6 +66,11 @@ public abstract class PropuestaMapper {
     @Mapping(target = "hitos", source = "dto.hitos")
     public abstract Propuesta toEntity(PropuestaCreateDTO dto, Necesidad necesidad, Usuario desarrollador, Estado estado);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "necesidad", ignore = true)
+    @Mapping(target = "desarrollador", ignore = true)
+    @Mapping(target = "estado", ignore = true)
+    @Mapping(target = "fechaCreacion", ignore = true)
     public abstract Propuesta updateEntityFromDto(PropuestaUpdateDTO dto, @MappingTarget Propuesta propuesta);
 
 }

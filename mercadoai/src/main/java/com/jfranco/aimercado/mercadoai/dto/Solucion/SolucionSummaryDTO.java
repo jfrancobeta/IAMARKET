@@ -1,6 +1,7 @@
 package com.jfranco.aimercado.mercadoai.dto.Solucion;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 public class SolucionSummaryDTO {
@@ -14,6 +15,7 @@ public class SolucionSummaryDTO {
     private String unidadEntrega;
     private List<String> habilidades;
     private int vistas;
+    private LocalDate fechaCreacion;
 
     public SolucionSummaryDTO() {
     }
@@ -96,6 +98,14 @@ public class SolucionSummaryDTO {
 
     public void setVistas(int vistas) {
         this.vistas = vistas;
+    }
+
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDate fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
 }

@@ -74,4 +74,13 @@ public class Entregable {
         this.hito = hito;
     }
 
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+    
+
 }
