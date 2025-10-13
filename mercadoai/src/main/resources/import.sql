@@ -119,6 +119,10 @@ INSERT INTO estados (id, nombre) VALUES (0, 'Pendiente');
 INSERT INTO estados (id, nombre) VALUES (1, 'En Proceso');
 INSERT INTO estados (id, nombre) VALUES (2, 'Completada');
 INSERT INTO estados (id, nombre) VALUES (3, 'Cancelada');
+INSERT INTO estados (id, nombre) VALUES (4, 'Rechazado');
+INSERT INTO estados (id, nombre) VALUES (5, 'Aceptada');
+INSERT INTO estados (id, nombre) VALUES (6, 'Aprobado');
+INSERT INTO estados (id, nombre) VALUES (7, 'Creado');
 
 -- Habilidades
 INSERT INTO habilidades (id, nombre, descripcion) VALUES (1, 'Java', 'Lenguaje de programación orientado a objetos');
@@ -1100,7 +1104,15 @@ INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (118, 134, 'api_gat
 INSERT INTO entregables (id, hito_id, nombre_archivo) VALUES (119, 134, 'service_discovery_setup.docker');
 
 -- Proyectos de ejemplo
-INSERT INTO proyectos (id, solucion_id, propuesta_id, presupuesto, fecha_inicio, fecha_fin, estado_id) VALUES (1, 1, NULL, 2400, '2025-08-15', '2025-09-15', 1);
-INSERT INTO proyectos (id, solucion_id, propuesta_id, presupuesto, fecha_inicio, fecha_fin, estado_id) VALUES (2, 2, NULL, 1700, '2025-08-20', '2025-09-20', 1);
-INSERT INTO proyectos (id, solucion_id, propuesta_id, presupuesto, fecha_inicio, fecha_fin, estado_id) VALUES (3, NULL, 5, 1450, '2025-08-25', '2025-09-25', 2);
-INSERT INTO proyectos (id, solucion_id, propuesta_id, presupuesto, fecha_inicio, fecha_fin, estado_id) VALUES (4, NULL, 6, 2900, '2025-09-10', '2025-10-10', 0);
+INSERT INTO proyectos (id, solucion_id, propuesta_id, empresa_id, desarrollador_id, presupuesto, fecha_inicio, fecha_fin, estado_id)VALUES (1, 1, NULL, 4, 2, 2400, '2025-08-15', '2025-09-15', 1);
+INSERT INTO proyectos (id, solucion_id, propuesta_id, empresa_id, desarrollador_id, presupuesto, fecha_inicio, fecha_fin, estado_id)VALUES (2, 2, NULL, 5, 3, 1700, '2025-08-20', '2025-09-20', 1);
+INSERT INTO proyectos (id, solucion_id, propuesta_id, empresa_id, desarrollador_id, presupuesto, fecha_inicio, fecha_fin, estado_id)VALUES (3, NULL, 5, 12, 8, 1450, '2025-08-25', '2025-09-25', 2);
+INSERT INTO proyectos (id, solucion_id, propuesta_id, empresa_id, desarrollador_id, presupuesto, fecha_inicio, fecha_fin, estado_id)VALUES (4, NULL, 6, 13, 9, 2900, '2025-09-10', '2025-10-10', 0);
+
+-- Hitos para el proyecto 1
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, proyecto_id) VALUES (201, 'Hito 1', 'Primer hito del proyecto', '2025-08-20', 1);
+INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, proyecto_id) VALUES (202, 'Hito 2', 'Segundo hito del proyecto', '2025-09-01', 1);
+
+-- Entregables para los hitos del proyecto 1 (solo url, nombre y estado en 0)
+INSERT INTO entregables (id, nombre_archivo, url, estado_id, hito_id) VALUES (301, 'Entregable 1', 'https://ejemplo.com/entregable1.pdf', 0, 201);
+INSERT INTO entregables (id, nombre_archivo, url, estado_id, hito_id) VALUES (302, 'Entregable 2', 'https://ejemplo.com/entregable2.pdf', 0, 202);

@@ -96,4 +96,25 @@ public class PropuestaController {
         }
     }
 
+    @PostMapping("/{id}/aceptar")
+    public ResponseEntity<?> aceptarPropuesta(@PathVariable Long id) {
+        try {
+            propuestaService.aceptarPropuesta(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al aceptar la propuesta");
+        }
+    }
+
+    @PostMapping("/{id}/rechazar")
+    public ResponseEntity<?> rechazarPropuesta(@PathVariable Long id) {
+        try {
+            propuestaService.rechazarPropuesta(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al rechazar la propuesta");
+        }
+    }
+
+
 }

@@ -2,6 +2,7 @@ package com.jfranco.aimercado.mercadoai.mapper.Hito;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import com.jfranco.aimercado.mercadoai.dto.Hito.HitoCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Hito.HitoDTO;
@@ -18,5 +19,8 @@ public interface HitoMapper {
     Hito toEntity(HitoCreateDTO dto);
 
     Hito toEntity(HitoUpdateDTO dto);
+
+    @Mapping(target = "id", ignore = true)
+    void updateEntity(HitoUpdateDTO dto, @MappingTarget Hito hito);
     
 }

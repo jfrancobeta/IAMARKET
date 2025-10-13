@@ -1,12 +1,12 @@
 package com.jfranco.aimercado.mercadoai.dto.Proyecto;
 
-import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaDTO;
-import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDTO;
+import com.jfranco.aimercado.mercadoai.dto.Propuesta.PropuestaSummaryDTO;
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionSummaryDTO;
 
 public class ProyectoSummaryDTO {
     private Long id;
-    private SolucionDTO solucion;
-    private PropuestaDTO propuesta;
+    private SolucionSummaryDTO solucion;
+    private PropuestaSummaryDTO propuesta;
 
     public ProyectoSummaryDTO() {
     }
@@ -19,20 +19,22 @@ public class ProyectoSummaryDTO {
         this.id = id;
     }
 
-    public PropuestaDTO getPropuesta() {
-        return propuesta;
-    }
-
-    public void setPropuesta(PropuestaDTO propuesta) {
-        this.propuesta = propuesta;
-    }
-
-    public SolucionDTO getSolucion() {
+    public SolucionSummaryDTO getSolucion() {
         return solucion;
     }
 
-    public void setSolucion(SolucionDTO solucion) {
+    public void setSolucion(SolucionSummaryDTO solucion) {
         this.solucion = solucion;
     }
+
+    public PropuestaSummaryDTO getPropuesta() {
+        return propuesta;
+    }
+
+    public void setPropuesta(PropuestaSummaryDTO propuesta) {
+        this.propuesta = propuesta;
+    }
+
+    
 
 }

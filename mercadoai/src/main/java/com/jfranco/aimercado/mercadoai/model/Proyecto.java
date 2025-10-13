@@ -29,6 +29,14 @@ public class Proyecto {
     @OneToOne
     private Propuesta propuesta;
 
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    private Usuario empresa;
+
+    @ManyToOne
+    @JoinColumn(name = "desarrollador_id")
+    private Usuario desarrollador;
+
     private BigDecimal presupuesto;
 
     private LocalDate fechaInicio;
@@ -44,7 +52,6 @@ public class Proyecto {
 
     public Proyecto() {
     }
-
     public Long getId() {
         return id;
     }
@@ -107,6 +114,30 @@ public class Proyecto {
 
     public void setHitos(List<Hito> hitos) {
         this.hitos = hitos;
+    }
+
+
+
+    public Usuario getEmpresa() {
+        return empresa;
+    }
+
+
+
+    public void setEmpresa(Usuario empresa) {
+        this.empresa = empresa;
+    }
+
+
+
+    public Usuario getDesarrollador() {
+        return desarrollador;
+    }
+
+
+
+    public void setDesarrollador(Usuario desarrollador) {
+        this.desarrollador = desarrollador;
     }
 
 }

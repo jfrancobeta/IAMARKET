@@ -89,4 +89,20 @@ export class ProposalsComponent implements OnInit {
     const semanas = Math.max(1, Math.round(diffDias / 7));
     return `${semanas} semana${semanas > 1 ? 's' : ''}`;
   }
+
+  aceptarPropuesta(id: number): void {
+    this.propuestaService.aceptarPropuesta(id).subscribe({
+      next: () => {
+        this.loadPropuestasRecibidas();
+      },
+    });
+  }
+
+  rechazarPropuesta(id: number): void {
+    this.propuestaService.rechazarPropuesta(id).subscribe({
+      next: () => {
+        this.loadPropuestasRecibidas();
+      },
+    });
+  }
 }

@@ -2,10 +2,13 @@ package com.jfranco.aimercado.mercadoai.dto.Entregable;
 
 import java.time.LocalDate;
 
+import com.jfranco.aimercado.mercadoai.dto.Estado.EstadoDTO;
+
 public class EntregableDTO {
     private Long id;
     private String nombreArchivo;
     private String url;
+    private EstadoDTO estado;
     private LocalDate fechaEntrega;
 
     public EntregableDTO() {
@@ -43,4 +46,11 @@ public class EntregableDTO {
         this.fechaEntrega = fechaEntrega;
     }
 
+    public EstadoDTO getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoDTO estado) {
+        this.estado = estado;
+    }
 }

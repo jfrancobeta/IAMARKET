@@ -1,42 +1,42 @@
 package com.jfranco.aimercado.mercadoai.service.Proyecto;
 
 import java.time.LocalDate;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
-import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoCreateDTO;
+
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoCreateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoDTO;
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
+import com.jfranco.aimercado.mercadoai.mapper.Hito.HitoMapper;
 import com.jfranco.aimercado.mercadoai.mapper.Proyecto.ProyectoMapper;
+import com.jfranco.aimercado.mercadoai.model.Entregable;
 import com.jfranco.aimercado.mercadoai.model.Estado;
+import com.jfranco.aimercado.mercadoai.model.Hito;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Proyecto;
-import com.jfranco.aimercado.mercadoai.model.Solucion;
 import com.jfranco.aimercado.mercadoai.repository.Estado.EstadoRepository;
-import com.jfranco.aimercado.mercadoai.repository.Propuesta.PropuestaRepository;
 import com.jfranco.aimercado.mercadoai.repository.Proyecto.ProyectoRepository;
-import com.jfranco.aimercado.mercadoai.repository.Solucion.SolucionesRespository;
 
 @Service
-public class ProyectoService implements IProyectoService{
+public class ProyectoService implements IProyectoService {
 
     @Autowired
     private ProyectoRepository proyectoRepository;
 
     @Autowired
-    private PropuestaRepository propuestaRepository;
-
-    @Autowired
-    private SolucionesRespository solucionesRespository;
-    
-    @Autowired
     private ProyectoMapper proyectoMapper;
 
     @Autowired
     private EstadoRepository estadoRepository;
+
+    @Autowired
+    private HitoMapper hitoMapper;
 
     @Override
     public Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo,
@@ -60,25 +60,10 @@ public class ProyectoService implements IProyectoService{
     }
 
     @Override
-    public ProyectoDTO save(ProyectoCreateDTO dto) {
-        Propuesta propuesta = propuestaRepository.findById(dto.getPropuestaId())
-            .orElseThrow(() -> new RuntimeException("Propuesta no encontrada"));
-
-        Solucion solucion = solucionesRespository.findById(dto.getSolucionId())
-            .orElseThrow(() -> new RuntimeException("Solucion no encontrada"));
-
-        Proyecto proyecto = proyectoMapper.toEntity(dto, propuesta, solucion);
-
-        proyecto = proyectoRepository.save(proyecto);
-        
-        return proyectoMapper.toDto(proyecto);
-    }
-
-    @Override
     public ProyectoDTO update(Long id, ProyectoUpdateDTO dto) {
         Proyecto proyecto = proyectoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
-        
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+
         proyectoMapper.updateEntity(dto, proyecto);
         proyecto = proyectoRepository.save(proyecto);
 
@@ -88,16 +73,15 @@ public class ProyectoService implements IProyectoService{
     @Override
     public ProyectoDTO getById(Long id) {
         Proyecto proyecto = proyectoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
-        
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+
         return proyectoMapper.toDto(proyecto);
     }
-
 
     @Override
     public void delete(Long id) {
         Proyecto proyecto = proyectoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
         proyectoRepository.delete(proyecto);
     }
 
@@ -105,18 +89,105 @@ public class ProyectoService implements IProyectoService{
     public ProyectoDTO createFromPropuesta(Propuesta propuesta) {
         Proyecto proyecto = new Proyecto();
 
-        Estado estado = estadoRepository.findByNombre("EN_PROGRESO")
+        Estado estado = estadoRepository.findByNombre("En Proceso")
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
         proyecto.setEstado(estado);
-
         proyecto.setFechaInicio(LocalDate.now());
+        proyecto.setPropuesta(propuesta);
+        proyecto.setPresupuesto(propuesta.getPrecio());
+        if (propuesta.getHitos() != null) {
+            List<Hito> hitosProyecto = propuesta.getHitos().stream().map(hitoPropuesta -> {
+                Hito hito = new Hito();
+                hito.setNombre(hitoPropuesta.getNombre());
+                hito.setDescripcion(hitoPropuesta.getDescripcion());
+                hito.setFechaEntrega(hitoPropuesta.getFechaEntrega());
+                if (hitoPropuesta.getEntregables() != null) {
+                    List<Entregable> entregables = hitoPropuesta.getEntregables().stream().map(entregablePropuesta -> {
+                        Entregable entregable = new Entregable();
+                        entregable.setNombreArchivo(entregablePropuesta.getNombreArchivo());
+                        entregable.setFechaEntrega(entregablePropuesta.getFechaEntrega());
+                        entregable.setHito(hito);
+                        return entregable;
+                    }).toList();
+                    hito.setEntregables(entregables);
+                }
+                return hito;
+            }).toList();
+            proyecto.setHitos(hitosProyecto);
+        }
 
         proyectoRepository.save(proyecto);
 
         return proyectoMapper.toDto(proyecto);
     }
 
-    
-    
+    @Override
+    public HitoDTO addHito(Long proyectoId, HitoCreateDTO dto) {
+        Proyecto proyecto = proyectoRepository.findById(proyectoId)
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+
+        Hito hito = hitoMapper.toEntity(dto);
+
+        Estado estadoCreado = estadoRepository.findByNombre("Creado")
+                .orElseThrow(() -> new RuntimeException("Estado 'Creado' no encontrado"));
+
+        if (dto.getEntregables() != null) {
+            List<Entregable> entregables = dto.getEntregables().stream().map(entregableDTO -> {
+                Entregable entregable = new Entregable();
+                entregable.setNombreArchivo(entregableDTO.getNombreArchivo());
+                entregable.setHito(hito);
+                entregable.setEstado(estadoCreado);
+                return entregable;
+            }).toList();
+            hito.setEntregables(entregables);
+        }
+
+        if (proyecto.getHitos() == null) {
+            proyecto.setHitos(new java.util.ArrayList<>());
+        }
+        proyecto.getHitos().add(hito);
+
+        proyectoRepository.save(proyecto);
+
+        HitoDTO hitoDTO = hitoMapper.toDTO(hito);
+
+        return hitoDTO;
+    }
+
+    @Override
+    public HitoDTO updateHito(Long proyectoId, Long hitoId, HitoUpdateDTO dto) {
+        Proyecto proyecto = proyectoRepository.findById(proyectoId)
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+        
+        Hito hito = proyecto.getHitos().stream()
+                .filter(h -> h.getId().equals(hitoId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Hito no encontrado"));
+
+        Estado estadoCreado = estadoRepository.findByNombre("Creado")
+                .orElseThrow(() -> new RuntimeException("Estado 'Creado' no encontrado"));
+        
+        hitoMapper.updateEntity(dto, hito);
+
+        if (dto.getEntregables() != null) {
+            
+            hito.getEntregables().clear();
+
+            for (var entregableDTO : dto.getEntregables()) {
+                Entregable entregable = new Entregable();
+
+                entregable.setNombreArchivo(entregableDTO.getNombreArchivo());
+                entregable.setHito(hito);
+                entregable.setEstado(estadoCreado); 
+                
+                hito.getEntregables().add(entregable);
+            }
+        }
+
+        proyectoRepository.save(proyecto);
+
+        return hitoMapper.toDTO(hito);
+    }
+
 }

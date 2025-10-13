@@ -19,9 +19,11 @@ export class PropuestaService {
   getAllSent(params: any): Observable<Page<PropuestaSummaryDTO>> {
     return this.http.get<Page<PropuestaSummaryDTO>>(`${this.apiUrl}/sent`, { params });
   }
+
   getAllReceived(params: any): Observable<Page<PropuestaSummaryDTO>> {
     return this.http.get<Page<PropuestaSummaryDTO>>(`${this.apiUrl}/received`, { params });
   }
+
   getById(id: number): Observable<PropuestaDTO> {
     return this.http.get<PropuestaDTO>(`${this.apiUrl}/${id}`);
   }
@@ -36,5 +38,13 @@ export class PropuestaService {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  aceptarPropuesta(id: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${id}/aceptar`, {});
+  }
+
+  rechazarPropuesta(id: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${id}/rechazar`, {});
   }
 }

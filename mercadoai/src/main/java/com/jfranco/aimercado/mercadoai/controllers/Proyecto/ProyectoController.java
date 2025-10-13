@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoCreateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoCreateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoDTO;
+import com.jfranco.aimercado.mercadoai.dto.Hito.HitoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
@@ -59,22 +61,6 @@ public class ProyectoController {
         }
     }
 
-    @PostMapping("/")
-    public ResponseEntity<ProyectoDTO> crear(@Valid @RequestBody ProyectoCreateDTO proyectoCreateDTO) {
-        try {
-            ProyectoDTO nuevoProyecto = proyectoService.save(proyectoCreateDTO);
-            if (nuevoProyecto != null) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProyecto);
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-            }
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<ProyectoDTO> actualizar(@PathVariable Long id,
             @Valid @RequestBody ProyectoUpdateDTO proyectoUpdateDTO) {
@@ -103,6 +89,33 @@ public class ProyectoController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error interno del servidor");
+        }
+    }
+
+    @PostMapping("/{proyectoId}/hitos")
+    public ResponseEntity<?> addHito(
+            @PathVariable Long proyectoId,
+            @RequestBody HitoCreateDTO dto) {
+        try {
+            HitoDTO nuevoHito = proyectoService.addHito(proyectoId, dto);
+            return ResponseEntity.status(201).body(nuevoHito);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al agregar el hito");
+        }
+    }
+
+    @PutMapping("/{proyectoId}/hitos/{hitoId}")
+    public ResponseEntity<?> updateHito(
+            @PathVariable Long proyectoId,
+            @PathVariable Long hitoId,
+            @RequestBody HitoUpdateDTO dto) {
+        try {
+            HitoDTO hitoActualizado = proyectoService.updateHito(proyectoId, hitoId, dto);
+            return ResponseEntity.ok(hitoActualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hito o proyecto no encontrado");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el hito");
         }
     }
 }
