@@ -16,9 +16,9 @@
     <div class="col-md-4">
       <div class="card h-100">
         <div class="card-header text-center">
-          <img src="/placeholder.svg?height=96&width=96" alt="Profile" class="rounded-circle mb-2" width="96" height="96">
-          <h5 class="card-title mb-0">Juan Desarrollador</h5>
-          <p class="card-text text-muted mb-2">Especialista en Machine Learning</p>
+          <img src="{{ usuario.foto}}" alt="Profile" class="rounded-circle mb-2" width="96" height="96">
+          <h5 class="card-title mb-0">{{ usuario.username}}</h5>
+          <p class="card-text text-muted mb-2">{{usuario.descripcion}}</p>
           <div class="d-flex justify-content-center align-items-center gap-1 mb-2">
             <i class="bi bi-star-fill text-warning"></i>
             <span class="fw-medium">4.9</span>
@@ -32,7 +32,7 @@
           </div>
           <div class="d-flex align-items-center gap-2 text-muted mb-2">
             <i class="bi bi-calendar"></i>
-            Miembro desde Enero 2023
+            Miembro desde {{usuario.fechaCreacion | date:'longDate'}}
           </div>
           <div class="d-flex gap-2">
             <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-globe"></i></a>
@@ -66,26 +66,22 @@
               <div class="row mb-3">
                 <div class="col">
                   <label for="name" class="form-label">Nombre completo</label>
-                  <input type="text" class="form-control" id="name" value="Juan Desarrollador" disabled>
+                  <input type="text" class="form-control" id="name" value="{{ usuario.nombre }}" disabled>
                 </div>
                 <div class="col">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" value="juan@email.com" disabled>
+                  <input type="email" class="form-control" id="email" value="{{ usuario.email }}" disabled>
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col">
-                  <label for="phone" class="form-label">Teléfono</label>
-                  <input type="text" class="form-control" id="phone" value="+34 600 123 456" disabled>
-                </div>
                 <div class="col">
                   <label for="location" class="form-label">Ubicación</label>
                   <input type="text" class="form-control" id="location" value="Madrid, España" disabled>
                 </div>
               </div>
               <div class="mb-3">
-                <label for="bio" class="form-label">Biografía</label>
-                <textarea class="form-control" id="bio" rows="4" disabled>Desarrollador especializado en Machine Learning con más de 5 años de experiencia. Apasionado por crear soluciones innovadoras que resuelvan problemas reales del negocio.</textarea>
+                <label for="bio" class="form-label">Descripción</label>
+                <textarea class="form-control" id="bio" rows="4" disabled>{{ usuario.descripcion }}</textarea>
               </div>
             </form>
           </div>

@@ -14,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jfranco.aimercado.mercadoai.dto.Auth.RegistroRequest;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
+import com.jfranco.aimercado.mercadoai.exception.ResourceNotFoundException;
+import com.jfranco.aimercado.mercadoai.mapper.Usuario.UsuarioMapper;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
 import com.jfranco.aimercado.mercadoai.model.Notification;
 import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
@@ -54,6 +57,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Autowired
     private HabilidadRepository habilidadRepository;
+
+    @Autowired
+    private UsuarioMapper usuarioMapper;
 
     @Override
     public List<Usuario> getAllUsuarios() {
@@ -183,6 +189,13 @@ public class UsuarioServiceImpl implements IUsuarioService {
         usuarioRepository.save(usuario.get());
         resetCodes.remove(email);
         return true;
+    }
+
+    @Override
+    public UsuarioDTO getUsuarioByUsername(String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "username", username));
+        return usuarioMapper.toDTO(usuario);
     }
 
 }

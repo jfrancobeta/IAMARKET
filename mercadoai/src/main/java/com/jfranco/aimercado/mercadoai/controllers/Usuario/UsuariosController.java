@@ -5,22 +5,23 @@ import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import com.jfranco.aimercado.mercadoai.dto.Auth.RegistroRequest;
 import com.jfranco.aimercado.mercadoai.dto.Auth.ResetCodeRequest;
 import com.jfranco.aimercado.mercadoai.dto.Auth.ResetPasswordRequest;
 import com.jfranco.aimercado.mercadoai.dto.Auth.VerifyCodeRequest;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 import com.jfranco.aimercado.mercadoai.service.Usuarios.IUsuarioService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
-@RestController()
+@RestController
 @RequestMapping("/usuarios")
 public class UsuariosController {
 
@@ -39,24 +40,23 @@ public class UsuariosController {
 
     @PostMapping("/create-user")
     public ResponseEntity<?> save(@RequestBody RegistroRequest registroRequest) {
-        try{
+        try {
             usuarioService.saveUsuario(registroRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(
-                Collections.singletonMap("message", "Usuario registrado exitosamente"));
-        }catch(Exception e){
+                    Collections.singletonMap("message", "Usuario registrado exitosamente"));
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al registrar el usuario: " + e.getMessage());
         }
-        
+
     }
 
-    // Enviar código de recuperación al correo
     @PostMapping("/send-reset-code")
     public ResponseEntity<?> sendResetCode(@RequestBody ResetCodeRequest request) {
         try {
             boolean valid = usuarioService.sendResetCode(request.getEmail());
             if (!valid) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Correo no encontrado");
-            }else {
+            } else {
                 return ResponseEntity.ok(Collections.singletonMap("message", "Código enviado al correo"));
             }
         } catch (Exception e) {
@@ -64,7 +64,6 @@ public class UsuariosController {
         }
     }
 
-    
     @PostMapping("/verify-reset-code")
     public ResponseEntity<?> verifyResetCode(@RequestBody VerifyCodeRequest request) {
         boolean valid = usuarioService.verifyResetCode(request.getEmail(), request.getCode());
@@ -75,21 +74,26 @@ public class UsuariosController {
         }
     }
 
-    
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
         try {
-            boolean valid = usuarioService.resetPassword(request.getEmail(), request.getCode(), request.getNewPassword());
+            boolean valid = usuarioService.resetPassword(request.getEmail(), request.getCode(),
+                    request.getNewPassword());
             if (valid) {
                 return ResponseEntity.ok(Collections.singletonMap("message", "Contraseña actualizada correctamente"));
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error al actualizar la contraseña: Código inválido o expirado");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body("Error al actualizar la contraseña: Código inválido o expirado");
             }
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al actualizar la contraseña: " + e.getMessage());
         }
     }
-    
-    
-    
+
+    @PreAuthorize("hasAnyRole('ADMIN','DEVELOPER','COMPANY')")
+    @GetMapping("/{username}")
+    public ResponseEntity<UsuarioDTO> getUsuarioByUsername(@PathVariable String username) {
+        UsuarioDTO usuarioDTO = usuarioService.getUsuarioByUsername(username);
+        return ResponseEntity.ok(usuarioDTO);
+    }
 }

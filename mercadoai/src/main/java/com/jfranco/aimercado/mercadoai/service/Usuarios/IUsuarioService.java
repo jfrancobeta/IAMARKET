@@ -3,6 +3,7 @@ package com.jfranco.aimercado.mercadoai.service.Usuarios;
 import java.util.List;
 
 import com.jfranco.aimercado.mercadoai.dto.Auth.RegistroRequest;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
 
 public interface IUsuarioService {
@@ -12,6 +13,8 @@ public interface IUsuarioService {
     void saveUsuario(RegistroRequest registroRequest);
 
     Usuario getUsuarioById(Long id);
+
+    UsuarioDTO getUsuarioByUsername(String username);
 
     void eliminarUsuario(Long id);
 

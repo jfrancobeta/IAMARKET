@@ -64,13 +64,13 @@ INSERT INTO categorias (id, nombre) VALUES (9, 'AI & Data Science');
 INSERT INTO categorias (id, nombre) VALUES (10, 'UI/UX Design');
 
 -- Perfiles desarrollador
-INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (1, 2, 'Java, Spring Boot', 5, 'https://portfolio.johndev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (2, 3, 'Angular, TypeScript', 3, 'https://portfolio.janedev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (3, 6, 'React, Node.js, MongoDB', 4, 'https://portfolio.carlosdev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (4, 7, 'Flutter, Kotlin, Swift', 6, 'https://portfolio.sofiadev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (5, 8, 'Docker, Kubernetes, AWS', 7, 'https://portfolio.diegodev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (6, 9, 'Python, Django, Machine Learning', 4, 'https://portfolio.anadev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, habilidades, experiencia, portafolioURL) VALUES (7, 10, 'React, Node.js, Express', 3, 'https://portfolio.luisdev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (1, 2, 5, 'https://portfolio.johndev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (2, 3, 3, 'https://portfolio.janedev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (3, 6, 4, 'https://portfolio.carlosdev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (4, 7, 6, 'https://portfolio.sofiadev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (5, 8, 7, 'https://portfolio.diegodev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (6, 9, 4, 'https://portfolio.anadev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (7, 10, 3, 'https://portfolio.luisdev.com');
 
 -- Perfiles compañía
 INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (1, 4, 'Tech Solutions', 1, 'https://techsolutions.com');
