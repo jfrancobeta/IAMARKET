@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.dto.Perfil;
+package com.jfranco.aimercado.mercadoai.dto.Profile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,14 +7,16 @@ import com.jfranco.aimercado.mercadoai.dto.Habilidad.HabilidadDTO;
 import com.jfranco.aimercado.mercadoai.model.PerfilDesarrollador;
 
 public class PerfilDesarrolladorDTO {
-    
+
     private Long id;
     private List<HabilidadDTO> habilidades;
     private Integer experiencia;
     private String portafolioURL;
+    private String githubURL;
+    private String linkedinURL;
 
-    // Constructor vacío
-    public PerfilDesarrolladorDTO() {}
+    public PerfilDesarrolladorDTO() {
+    }
 
     // Constructor completo
     public PerfilDesarrolladorDTO(Long id, List<HabilidadDTO> habilidades, Integer experiencia, String portafolioURL) {
@@ -75,5 +77,21 @@ public class PerfilDesarrolladorDTO {
 
     public void setPortafolioURL(String portafolioURL) {
         this.portafolioURL = portafolioURL;
+    }
+
+    public String getGithubURL() {
+        return githubURL;
+    }
+
+    public void setGithubURL(String githubURL) {
+        this.githubURL = githubURL;
+    }
+
+    public String getLinkedinURL() {
+        return linkedinURL;
+    }
+
+    public void setLinkedinURL(String linkedinURL) {
+        this.linkedinURL = linkedinURL;
     }
 }

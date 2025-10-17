@@ -1,154 +1,3 @@
--- Usuario 100% admin (sin perfil)
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (1, 'SuperAdmin', 'admin@admin.com', 'admin', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', NULL, 'Administrador total', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-
--- Usuarios desarrolladores
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (2, 'John', 'john.doe@example.com', 'johndev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrollador backend', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (3, 'Jane', 'jane.smith@example.com', 'janedev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Frontend developer', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (6, 'Carlos', 'carlos.m@example.com', 'carlosdev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrollador fullstack', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (7, 'Sofia', 'sofia.r@example.com', 'sofiadev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrolladora móvil', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (8, 'Diego', 'diego.l@example.com', 'diegodev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Especialista en DevOps', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (9, 'Ana', 'ana.p@example.com', 'anadev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrolladora Python', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (10, 'Luis', 'luis.v@example.com', 'luisdev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrollador React/Node.js', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-
--- Usuarios compañía
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (4, 'Laura', 'laura.m@example.com', 'lauracomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de tecnología', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (5, 'Michael', 'michael.b@example.com', 'michaelcomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Consultora de software', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (11, 'Patricia', 'patricia.g@example.com', 'patriciacomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Startup fintech', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (12, 'Roberto', 'roberto.h@example.com', 'robertocomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de e-commerce', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (13, 'Carmen', 'carmen.s@example.com', 'carmencomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Agencia digital', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (14, 'Fernando', 'fernando.n@example.com', 'fernandocomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de logística', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto) VALUES (15, 'Valeria', 'valeria.t@example.com', 'valeriacomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de salud digital', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp');
-
---Categorias-- Industrias
-INSERT INTO industrias (id, nombre) VALUES (1, 'Tecnología');
-INSERT INTO industrias (id, nombre) VALUES (2, 'Finanzas');
-INSERT INTO industrias (id, nombre) VALUES (3, 'Salud');
-INSERT INTO industrias (id, nombre) VALUES (4, 'Educación');
-INSERT INTO industrias (id, nombre) VALUES (5, 'Manufactura');
-INSERT INTO industrias (id, nombre) VALUES (6, 'Construcción');
-INSERT INTO industrias (id, nombre) VALUES (7, 'Transporte');
-INSERT INTO industrias (id, nombre) VALUES (8, 'Agricultura');
-INSERT INTO industrias (id, nombre) VALUES (9, 'Energía');
-INSERT INTO industrias (id, nombre) VALUES (10, 'Comercio');
-INSERT INTO industrias (id, nombre) VALUES (11, 'Turismo');
-INSERT INTO industrias (id, nombre) VALUES (12, 'Alimentos y Bebidas');
-INSERT INTO industrias (id, nombre) VALUES (13, 'Telecomunicaciones');
-INSERT INTO industrias (id, nombre) VALUES (14, 'Automotriz');
-INSERT INTO industrias (id, nombre) VALUES (15, 'Publicidad');
-INSERT INTO industrias (id, nombre) VALUES (16, 'Consultoría');
-INSERT INTO industrias (id, nombre) VALUES (17, 'Legal');
-INSERT INTO industrias (id, nombre) VALUES (18, 'Medios de Comunicación');
-INSERT INTO industrias (id, nombre) VALUES (19, 'Bienes Raíces');
-INSERT INTO industrias (id, nombre) VALUES (20, 'Logística');
-INSERT INTO industrias (id, nombre) VALUES (21, 'Minería');
-INSERT INTO industrias (id, nombre) VALUES (22, 'Química');
-INSERT INTO industrias (id, nombre) VALUES (23, 'Seguros');
-INSERT INTO industrias (id, nombre) VALUES (24, 'Arte y Entretenimiento');
-INSERT INTO industrias (id, nombre) VALUES (25, 'Deportes');
-INSERT INTO industrias (id, nombre) VALUES (26, 'Ambiental');
-INSERT INTO industrias (id, nombre) VALUES (27, 'Electrónica');
-INSERT INTO industrias (id, nombre) VALUES (28, 'Farmacéutica');
-INSERT INTO industrias (id, nombre) VALUES (29, 'Recursos Humanos');
-INSERT INTO industrias (id, nombre) VALUES (30, 'Servicios Públicos');
-
--- Categorías de desarrollo
-INSERT INTO categorias (id, nombre) VALUES (1, 'Backend');
-INSERT INTO categorias (id, nombre) VALUES (2, 'Frontend');
-INSERT INTO categorias (id, nombre) VALUES (3, 'DevOps');
-INSERT INTO categorias (id, nombre) VALUES (4, 'Database');
-INSERT INTO categorias (id, nombre) VALUES (5, 'Mobile');
-INSERT INTO categorias (id, nombre) VALUES (6, 'QA');
-INSERT INTO categorias (id, nombre) VALUES (7, 'Security');
-INSERT INTO categorias (id, nombre) VALUES (8, 'Cloud');
-INSERT INTO categorias (id, nombre) VALUES (9, 'AI & Data Science');
-INSERT INTO categorias (id, nombre) VALUES (10, 'UI/UX Design');
-
--- Perfiles desarrollador
-INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (1, 2, 5, 'https://portfolio.johndev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (2, 3, 3, 'https://portfolio.janedev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (3, 6, 4, 'https://portfolio.carlosdev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (4, 7, 6, 'https://portfolio.sofiadev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (5, 8, 7, 'https://portfolio.diegodev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (6, 9, 4, 'https://portfolio.anadev.com');
-INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (7, 10, 3, 'https://portfolio.luisdev.com');
-
--- Perfiles compañía
-INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (1, 4, 'Tech Solutions', 1, 'https://techsolutions.com');
-INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (2, 5, 'SoftConsulting', 2, 'https://softconsulting.com');
-INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (3, 11, 'PayTech Solutions', 3, 'https://paytech.com');
-INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (4, 12, 'EcoMart Digital', 4, 'https://ecomart.com');
-INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (5, 13, 'Creative Digital Agency', 5, 'https://creativedigital.com');
-INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (6, 14, 'LogiTech Express', 6, 'https://logitech.com');
-INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (7, 15, 'HealthTech Colombia', 7, 'https://healthtech.co');
-
-
--- Solo los roles solicitados
-INSERT INTO roles (id, nombre) VALUES (1, 'ROLE_ADMIN');
-INSERT INTO roles (id, nombre) VALUES (2, 'ROLE_DEVELOPER');
-INSERT INTO roles (id, nombre) VALUES (3, 'ROLE_COMPANY');
-
-
--- Asignar roles
--- SuperAdmin solo admin
-INSERT INTO users_roles (user_id, role_id) VALUES (1, 1);
-
--- John y Jane desarrolladores
-INSERT INTO users_roles (user_id, role_id) VALUES (2, 2);
-INSERT INTO users_roles (user_id, role_id) VALUES (3, 2);
-
--- Nuevos desarrolladores
-INSERT INTO users_roles (user_id, role_id) VALUES (6, 2);
-INSERT INTO users_roles (user_id, role_id) VALUES (7, 2);
-INSERT INTO users_roles (user_id, role_id) VALUES (8, 2);
-INSERT INTO users_roles (user_id, role_id) VALUES (9, 2);
-INSERT INTO users_roles (user_id, role_id) VALUES (10, 2);
-
--- Laura y Michael compañías
-INSERT INTO users_roles (user_id, role_id) VALUES (4, 3);
-INSERT INTO users_roles (user_id, role_id) VALUES (5, 3);
-
--- Nuevas compañías
-INSERT INTO users_roles (user_id, role_id) VALUES (11, 3);
-INSERT INTO users_roles (user_id, role_id) VALUES (12, 3);
-INSERT INTO users_roles (user_id, role_id) VALUES (13, 3);
-INSERT INTO users_roles (user_id, role_id) VALUES (14, 3);
-INSERT INTO users_roles (user_id, role_id) VALUES (15, 3);
-
--- Estados
-INSERT INTO estados (id, nombre) VALUES (0, 'Pendiente');
-INSERT INTO estados (id, nombre) VALUES (1, 'En Proceso');
-INSERT INTO estados (id, nombre) VALUES (2, 'Completada');
-INSERT INTO estados (id, nombre) VALUES (3, 'Cancelada');
-INSERT INTO estados (id, nombre) VALUES (4, 'Rechazado');
-INSERT INTO estados (id, nombre) VALUES (5, 'Aceptada');
-INSERT INTO estados (id, nombre) VALUES (6, 'Aprobado');
-INSERT INTO estados (id, nombre) VALUES (7, 'Creado');
-
--- Habilidades
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (1, 'Java', 'Lenguaje de programación orientado a objetos');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (2, 'Spring Boot', 'Framework para desarrollo de aplicaciones Java');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (3, 'Angular', 'Framework para aplicaciones web frontend');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (4, 'SQL', 'Lenguaje para gestión de bases de datos relacionales');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (5, 'Docker', 'Plataforma para contenedores y despliegue de aplicaciones');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (6, 'Python', 'Lenguaje de programación multiparadigma');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (7, 'JavaScript', 'Lenguaje de programación para desarrollo web');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (8, 'TypeScript', 'Superset de JavaScript con tipado estático');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (9, 'HTML', 'Lenguaje de marcado para páginas web');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (10, 'CSS', 'Lenguaje de estilos para páginas web');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (11, 'React', 'Librería para interfaces de usuario web');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (12, 'Node.js', 'Entorno de ejecución para JavaScript en servidor');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (13, 'Express', 'Framework para aplicaciones web en Node.js');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (14, 'C#', 'Lenguaje de programación orientado a objetos de Microsoft');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (15, 'ASP.NET', 'Framework para aplicaciones web en .NET');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (16, 'PHP', 'Lenguaje de programación para desarrollo web backend');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (17, 'Laravel', 'Framework para aplicaciones web en PHP');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (18, 'Ruby', 'Lenguaje de programación dinámico y orientado a objetos');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (19, 'Rails', 'Framework para aplicaciones web en Ruby');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (20, 'Go', 'Lenguaje de programación eficiente y concurrente');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (21, 'Kotlin', 'Lenguaje de programación moderno para JVM y Android');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (22, 'Swift', 'Lenguaje de programación para iOS y macOS');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (23, 'Flutter', 'Framework para aplicaciones móviles multiplataforma');
-INSERT INTO habilidades (id, nombre, descripcion) VALUES (24, 'MongoDB', 'Base de datos NoSQL orientada a documentos');
 
 -- Paises
 INSERT INTO paises (id, nombre, codigo_iso) VALUES (1, 'Afganistán', 'AF');
@@ -345,6 +194,192 @@ INSERT INTO paises (id, nombre, codigo_iso) VALUES (191, 'Yibuti', 'DJ');
 INSERT INTO paises (id, nombre, codigo_iso) VALUES (192, 'Zambia', 'ZM');
 INSERT INTO paises (id, nombre, codigo_iso) VALUES (193, 'Zimbabue', 'ZW');
  
+ 
+-- Usuario 100% admin (sin perfil)
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (1, 'SuperAdmin', 'admin@admin.com', 'admin', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', NULL, 'Administrador total', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+
+-- Usuarios desarrolladores
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (2, 'John', 'john.doe@example.com', 'johndev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrollador backend', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (3, 'Jane', 'jane.smith@example.com', 'janedev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Frontend developer', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (6, 'Carlos', 'carlos.m@example.com', 'carlosdev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrollador fullstack', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (7, 'Sofia', 'sofia.r@example.com', 'sofiadev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrolladora móvil', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (8, 'Diego', 'diego.l@example.com', 'diegodev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Especialista en DevOps', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (9, 'Ana', 'ana.p@example.com', 'anadev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrolladora Python', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (10, 'Luis', 'luis.v@example.com', 'luisdev', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 1, 'Desarrollador React/Node.js', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+
+-- Usuarios compañía
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (4, 'Laura', 'laura.m@example.com', 'lauracomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de tecnología', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (5, 'Michael', 'michael.b@example.com', 'michaelcomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Consultora de software', '2025-07-30', '2025-07-30', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (11, 'Patricia', 'patricia.g@example.com', 'patriciacomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Startup fintech', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (12, 'Roberto', 'roberto.h@example.com', 'robertocomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de e-commerce', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (13, 'Carmen', 'carmen.s@example.com', 'carmencomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Agencia digital', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (14, 'Fernando', 'fernando.n@example.com', 'fernandocomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de logística', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+INSERT INTO usuarios (id, nombre, email, username, password, user_type, descripcion, fecha_creacion, fecha_actualizacion, estado, foto, pais_id) VALUES (15, 'Valeria', 'valeria.t@example.com', 'valeriacomp', '$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS', 0, 'Empresa de salud digital', '2025-08-06', '2025-08-06', true, 'https://res.cloudinary.com/dfjremvhf/image/upload/v1755657501/imagen_obccks.webp', 9);
+
+--Categorias-- Industrias
+INSERT INTO industrias (id, nombre) VALUES (1, 'Tecnología');
+INSERT INTO industrias (id, nombre) VALUES (2, 'Finanzas');
+INSERT INTO industrias (id, nombre) VALUES (3, 'Salud');
+INSERT INTO industrias (id, nombre) VALUES (4, 'Educación');
+INSERT INTO industrias (id, nombre) VALUES (5, 'Manufactura');
+INSERT INTO industrias (id, nombre) VALUES (6, 'Construcción');
+INSERT INTO industrias (id, nombre) VALUES (7, 'Transporte');
+INSERT INTO industrias (id, nombre) VALUES (8, 'Agricultura');
+INSERT INTO industrias (id, nombre) VALUES (9, 'Energía');
+INSERT INTO industrias (id, nombre) VALUES (10, 'Comercio');
+INSERT INTO industrias (id, nombre) VALUES (11, 'Turismo');
+INSERT INTO industrias (id, nombre) VALUES (12, 'Alimentos y Bebidas');
+INSERT INTO industrias (id, nombre) VALUES (13, 'Telecomunicaciones');
+INSERT INTO industrias (id, nombre) VALUES (14, 'Automotriz');
+INSERT INTO industrias (id, nombre) VALUES (15, 'Publicidad');
+INSERT INTO industrias (id, nombre) VALUES (16, 'Consultoría');
+INSERT INTO industrias (id, nombre) VALUES (17, 'Legal');
+INSERT INTO industrias (id, nombre) VALUES (18, 'Medios de Comunicación');
+INSERT INTO industrias (id, nombre) VALUES (19, 'Bienes Raíces');
+INSERT INTO industrias (id, nombre) VALUES (20, 'Logística');
+INSERT INTO industrias (id, nombre) VALUES (21, 'Minería');
+INSERT INTO industrias (id, nombre) VALUES (22, 'Química');
+INSERT INTO industrias (id, nombre) VALUES (23, 'Seguros');
+INSERT INTO industrias (id, nombre) VALUES (24, 'Arte y Entretenimiento');
+INSERT INTO industrias (id, nombre) VALUES (25, 'Deportes');
+INSERT INTO industrias (id, nombre) VALUES (26, 'Ambiental');
+INSERT INTO industrias (id, nombre) VALUES (27, 'Electrónica');
+INSERT INTO industrias (id, nombre) VALUES (28, 'Farmacéutica');
+INSERT INTO industrias (id, nombre) VALUES (29, 'Recursos Humanos');
+INSERT INTO industrias (id, nombre) VALUES (30, 'Servicios Públicos');
+
+-- Categorías de desarrollo
+INSERT INTO categorias (id, nombre) VALUES (1, 'Backend');
+INSERT INTO categorias (id, nombre) VALUES (2, 'Frontend');
+INSERT INTO categorias (id, nombre) VALUES (3, 'DevOps');
+INSERT INTO categorias (id, nombre) VALUES (4, 'Database');
+INSERT INTO categorias (id, nombre) VALUES (5, 'Mobile');
+INSERT INTO categorias (id, nombre) VALUES (6, 'QA');
+INSERT INTO categorias (id, nombre) VALUES (7, 'Security');
+INSERT INTO categorias (id, nombre) VALUES (8, 'Cloud');
+INSERT INTO categorias (id, nombre) VALUES (9, 'AI & Data Science');
+INSERT INTO categorias (id, nombre) VALUES (10, 'UI/UX Design');
+
+-- Perfiles desarrollador
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (1, 2, 5, 'https://portfolio.johndev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (2, 3, 3, 'https://portfolio.janedev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (3, 6, 4, 'https://portfolio.carlosdev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (4, 7, 6, 'https://portfolio.sofiadev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (5, 8, 7, 'https://portfolio.diegodev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (6, 9, 4, 'https://portfolio.anadev.com');
+INSERT INTO perfil_desarrollador (id, usuario_id, experiencia, portafoliourl) VALUES (7, 10, 3, 'https://portfolio.luisdev.com');
+
+-- Perfiles compañía
+INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (1, 4, 'Tech Solutions', 1, 'https://techsolutions.com');
+INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (2, 5, 'SoftConsulting', 2, 'https://softconsulting.com');
+INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (3, 11, 'PayTech Solutions', 3, 'https://paytech.com');
+INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (4, 12, 'EcoMart Digital', 4, 'https://ecomart.com');
+INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (5, 13, 'Creative Digital Agency', 5, 'https://creativedigital.com');
+INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (6, 14, 'LogiTech Express', 6, 'https://logitech.com');
+INSERT INTO perfil_compania (id, usuario_id, nombre_compania, industria_id, website) VALUES (7, 15, 'HealthTech Colombia', 7, 'https://healthtech.co');
+
+
+-- Solo los roles solicitados
+INSERT INTO roles (id, nombre) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO roles (id, nombre) VALUES (2, 'ROLE_DEVELOPER');
+INSERT INTO roles (id, nombre) VALUES (3, 'ROLE_COMPANY');
+
+
+-- Asignar roles
+-- SuperAdmin solo admin
+INSERT INTO users_roles (user_id, role_id) VALUES (1, 1);
+
+-- John y Jane desarrolladores
+INSERT INTO users_roles (user_id, role_id) VALUES (2, 2);
+INSERT INTO users_roles (user_id, role_id) VALUES (3, 2);
+
+-- Nuevos desarrolladores
+INSERT INTO users_roles (user_id, role_id) VALUES (6, 2);
+INSERT INTO users_roles (user_id, role_id) VALUES (7, 2);
+INSERT INTO users_roles (user_id, role_id) VALUES (8, 2);
+INSERT INTO users_roles (user_id, role_id) VALUES (9, 2);
+INSERT INTO users_roles (user_id, role_id) VALUES (10, 2);
+
+-- Laura y Michael compañías
+INSERT INTO users_roles (user_id, role_id) VALUES (4, 3);
+INSERT INTO users_roles (user_id, role_id) VALUES (5, 3);
+
+-- Nuevas compañías
+INSERT INTO users_roles (user_id, role_id) VALUES (11, 3);
+INSERT INTO users_roles (user_id, role_id) VALUES (12, 3);
+INSERT INTO users_roles (user_id, role_id) VALUES (13, 3);
+INSERT INTO users_roles (user_id, role_id) VALUES (14, 3);
+INSERT INTO users_roles (user_id, role_id) VALUES (15, 3);
+
+-- Estados
+INSERT INTO estados (id, nombre) VALUES (0, 'Pendiente');
+INSERT INTO estados (id, nombre) VALUES (1, 'En Proceso');
+INSERT INTO estados (id, nombre) VALUES (2, 'Completada');
+INSERT INTO estados (id, nombre) VALUES (3, 'Cancelada');
+INSERT INTO estados (id, nombre) VALUES (4, 'Rechazado');
+INSERT INTO estados (id, nombre) VALUES (5, 'Aceptada');
+INSERT INTO estados (id, nombre) VALUES (6, 'Aprobado');
+INSERT INTO estados (id, nombre) VALUES (7, 'Creado');
+
+-- Habilidades
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (1, 'Java', 'Lenguaje de programación orientado a objetos');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (2, 'Spring Boot', 'Framework para desarrollo de aplicaciones Java');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (3, 'Angular', 'Framework para aplicaciones web frontend');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (4, 'SQL', 'Lenguaje para gestión de bases de datos relacionales');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (5, 'Docker', 'Plataforma para contenedores y despliegue de aplicaciones');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (6, 'Python', 'Lenguaje de programación multiparadigma');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (7, 'JavaScript', 'Lenguaje de programación para desarrollo web');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (8, 'TypeScript', 'Superset de JavaScript con tipado estático');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (9, 'HTML', 'Lenguaje de marcado para páginas web');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (10, 'CSS', 'Lenguaje de estilos para páginas web');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (11, 'React', 'Librería para interfaces de usuario web');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (12, 'Node.js', 'Entorno de ejecución para JavaScript en servidor');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (13, 'Express', 'Framework para aplicaciones web en Node.js');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (14, 'C#', 'Lenguaje de programación orientado a objetos de Microsoft');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (15, 'ASP.NET', 'Framework para aplicaciones web en .NET');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (16, 'PHP', 'Lenguaje de programación para desarrollo web backend');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (17, 'Laravel', 'Framework para aplicaciones web en PHP');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (18, 'Ruby', 'Lenguaje de programación dinámico y orientado a objetos');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (19, 'Rails', 'Framework para aplicaciones web en Ruby');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (20, 'Go', 'Lenguaje de programación eficiente y concurrente');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (21, 'Kotlin', 'Lenguaje de programación moderno para JVM y Android');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (22, 'Swift', 'Lenguaje de programación para iOS y macOS');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (23, 'Flutter', 'Framework para aplicaciones móviles multiplataforma');
+INSERT INTO habilidades (id, nombre, descripcion) VALUES (24, 'MongoDB', 'Base de datos NoSQL orientada a documentos');
+
+-- John (perfil_desarrollador_id = 1, usuario_id = 2)
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (1, 1); -- Java
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (1, 2); -- Spring Boot
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (1, 4); -- SQL
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (1, 5); -- Docker
+
+-- Jane (perfil_desarrollador_id = 2, usuario_id = 3)
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (2, 3); -- Angular
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (2, 8); -- TypeScript
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (2, 9); -- HTML
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (2, 10); -- CSS
+
+-- Carlos (perfil_desarrollador_id = 3, usuario_id = 6)
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (3, 1); -- Java
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (3, 11); -- React
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (3, 12); -- Node.js
+
+-- Sofia (perfil_desarrollador_id = 4, usuario_id = 7)
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (4, 23); -- Flutter
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (4, 21); -- Kotlin
+
+-- Diego (perfil_desarrollador_id = 5, usuario_id = 8)
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (5, 5); -- Docker
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (5, 24); -- MongoDB
+
+-- Ana (perfil_desarrollador_id = 6, usuario_id = 9)
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (6, 6); -- Python
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (6, 4); -- SQL
+
+-- Luis (perfil_desarrollador_id = 7, usuario_id = 10)
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (7, 11); -- React
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (7, 12); -- Node.js
+INSERT INTO perfil_desarrollador_habilidad (perfil_desarrollador_id, habilidad_id) VALUES (7, 13); -- Express
 -- Necesidades
 INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (1, 'Desarrollar API REST', 'Crear una API RESTful en Spring Boot', 1, 2500, 4, '2025-08-15', 0, '2025-07-30', '2025-07-30');
 INSERT INTO necesidades (id, titulo, descripcion, categoria_id, presupuesto, compania_id, fecha_limite, estado_id, fecha_creacion, fecha_actualizacion) VALUES (2, 'Frontend Angular', 'Construir interfaz web en Angular', 2, 1800, 5, '2025-09-01', 1, '2025-07-30', '2025-07-30');

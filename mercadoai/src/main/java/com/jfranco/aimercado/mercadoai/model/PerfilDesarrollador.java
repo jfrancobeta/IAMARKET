@@ -23,46 +23,69 @@ public class PerfilDesarrollador {
     private Usuario usuario;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "perfil_desarrollador_habilidad",
-        joinColumns = @JoinColumn(name = "perfil_desarrollador_id"),
-        inverseJoinColumns = @JoinColumn(name = "habilidad_id")
-    )
+    @JoinTable(name = "perfil_desarrollador_habilidad", joinColumns = @JoinColumn(name = "perfil_desarrollador_id"), inverseJoinColumns = @JoinColumn(name = "habilidad_id"))
     private List<Habilidad> habilidades;
 
     private Integer experiencia;
     private String portafolioURL;
+
+    private String githubURL;
+    private String linkedinURL;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public Usuario getUsuario() {
         return usuario;
     }
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
     public List<Habilidad> getHabilidades() {
         return habilidades;
     }
+
     public void setHabilidades(List<Habilidad> habilidades) {
         this.habilidades = habilidades;
     }
+
     public Integer getExperiencia() {
         return experiencia;
     }
+
     public void setExperiencia(Integer experiencia) {
         this.experiencia = experiencia;
     }
+
     public String getPortafolioURL() {
         return portafolioURL;
     }
+
     public void setPortafolioURL(String portafolioURL) {
         this.portafolioURL = portafolioURL;
     }
 
-    
+    public String getGithubURL() {
+        return githubURL;
+    }
+
+    public void setGithubURL(String githubURL) {
+        this.githubURL = githubURL;
+    }
+
+    public String getLinkedinURL() {
+        return linkedinURL;
+    }
+
+    public void setLinkedinURL(String linkedinURL) {
+        this.linkedinURL = linkedinURL;
+    }
 
 }
