@@ -12,10 +12,16 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jfranco.aimercado.mercadoai.dto.Auth.RegistroRequest;
+import com.jfranco.aimercado.mercadoai.dto.User.UserPersonalUpdateDTO;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
+import com.jfranco.aimercado.mercadoai.exception.ResourceNotFoundException;
+import com.jfranco.aimercado.mercadoai.mapper.Usuario.UsuarioMapper;
 import com.jfranco.aimercado.mercadoai.model.Habilidad;
 import com.jfranco.aimercado.mercadoai.model.Notification;
+import com.jfranco.aimercado.mercadoai.model.Pais;
 import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
 import com.jfranco.aimercado.mercadoai.model.PerfilDesarrollador;
 import com.jfranco.aimercado.mercadoai.model.Role;
@@ -55,6 +61,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Autowired
     private HabilidadRepository habilidadRepository;
 
+    @Autowired
+    private UsuarioMapper usuarioMapper;
+
     @Override
     public List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
@@ -70,7 +79,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
         usuario.setUsername(registroRequest.getUsername());
         usuario.setEmail(registroRequest.getEmail());
-        usuario.setPassword(passwordEncoder.encode(registroRequest.getPassword())); 
+        usuario.setPassword(passwordEncoder.encode(registroRequest.getPassword()));
         usuario.setUserType(registroRequest.getUserType());
         usuario.setNombre(registroRequest.getNombre());
         usuario.setDescripcion(registroRequest.getDescripcion());
@@ -92,8 +101,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
             PerfilDesarrollador desarrollador = new PerfilDesarrollador();
             desarrollador.setUsuario(usuario);
             List<Habilidad> habilidades = registroRequest.getHabilidades().stream()
-                .map(id -> habilidadRepository.findById(id).orElseThrow(() -> new RuntimeException("Habilidad no encontrada: " + id)))
-                .collect(Collectors.toList());
+                    .map(id -> habilidadRepository.findById(id)
+                            .orElseThrow(() -> new RuntimeException("Habilidad no encontrada: " + id)))
+                    .collect(Collectors.toList());
             desarrollador.setHabilidades(habilidades);
             desarrollador.setExperiencia(registroRequest.getExperiencia());
             desarrollador.setPortafolioURL(registroRequest.getPortafolioURL());
@@ -183,6 +193,53 @@ public class UsuarioServiceImpl implements IUsuarioService {
         usuarioRepository.save(usuario.get());
         resetCodes.remove(email);
         return true;
+    }
+
+    @Override
+    public UsuarioDTO getUsuarioByUsername(String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "username", username));
+        return usuarioMapper.toDTO(usuario);
+    }
+
+    @Override
+    public UsuarioDTO updateUsuarioPersonal(Long id, UserPersonalUpdateDTO model) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", id));
+
+        Pais pais = paisRepository.findById(model.getPaisId())
+                .orElseThrow(() -> new ResourceNotFoundException("País", "id", model.getPaisId()));
+
+        usuarioMapper.updateEntity(model, usuario);
+        usuario.setPais(pais);
+
+        usuario = usuarioRepository.save(usuario);
+
+        return usuarioMapper.toDTO(usuario);
+    }
+
+    @Override
+    public String uploadProfilePhoto(Long id, MultipartFile file) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", id));
+
+        String folder = "uploads/usuarios/";
+        String fileName = id + ".jpg";
+        java.io.File dir = new java.io.File(folder);
+        if (!dir.exists())
+            dir.mkdirs();
+
+        java.nio.file.Path path = java.nio.file.Paths.get(folder + fileName);
+        try {
+            file.transferTo(path); // Usar transferTo para MultipartFile
+        } catch (Exception e) {
+            throw new RuntimeException("Error guardando la foto de perfil", e);
+        }
+
+        String photoUrl = "/uploads/usuarios/" + fileName;
+        usuario.setFoto(photoUrl);
+        usuarioRepository.save(usuario);
+        return photoUrl;
     }
 
 }

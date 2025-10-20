@@ -5,6 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +24,7 @@ import com.jfranco.aimercado.mercadoai.dto.Hito.HitoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
+import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.service.Proyecto.IProyectoService;
 
 import jakarta.validation.Valid;
@@ -117,5 +121,34 @@ public class ProyectoController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el hito");
         }
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','COMPANY','DEVELOPER')")
+    @PostMapping("/{id}/cancel-request")
+    public ResponseEntity<?> requestCancel(
+            @PathVariable Long id,
+            @RequestBody String reason,
+            @AuthenticationPrincipal String user) {
+        proyectoService.requestProjectCancel(id, user, reason);
+        return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','COMPANY','DEVELOPER')")
+    @PostMapping("/{id}/cancel-accept")
+    public ResponseEntity<?> approveCancel(
+            @PathVariable Long id,
+            @AuthenticationPrincipal String user) {
+        proyectoService.approveProjectCancel(id, user);
+        return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','COMPANY','DEVELOPER')")
+    @PostMapping("/{id}/cancel-reject")
+    public ResponseEntity<?> rejectCancel(
+            @PathVariable Long id,
+            @RequestBody String reason,
+            @AuthenticationPrincipal String user) {
+        proyectoService.rejectProjectCancel(id, user, reason);
+        return ResponseEntity.ok().build();
     }
 }

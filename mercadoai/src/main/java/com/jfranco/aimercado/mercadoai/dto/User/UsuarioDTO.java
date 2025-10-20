@@ -2,8 +2,10 @@ package com.jfranco.aimercado.mercadoai.dto.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import com.jfranco.aimercado.mercadoai.dto.Perfil.PerfilCompaniaDTO;
-import com.jfranco.aimercado.mercadoai.dto.Perfil.PerfilDesarrolladorDTO;
+
+import com.jfranco.aimercado.mercadoai.dto.Pais.PaisDTO;
+import com.jfranco.aimercado.mercadoai.dto.Profile.PerfilCompaniaDTO;
+import com.jfranco.aimercado.mercadoai.dto.Profile.PerfilDesarrolladorDTO;
 
 public class UsuarioDTO {
 
@@ -13,6 +15,7 @@ public class UsuarioDTO {
     private String nombre;
     private String descripcion;
     private String foto;
+    private PaisDTO pais;
     private Integer userType;
     private Boolean estado;
     private LocalDateTime fechaCreacion;
@@ -126,6 +129,16 @@ public class UsuarioDTO {
 
     public void setPerfilDesarrollador(PerfilDesarrolladorDTO perfilDesarrollador) {
         this.perfilDesarrollador = perfilDesarrollador;
+    }
+
+
+    public PaisDTO getPais() {
+        return pais;
+    }
+
+
+    public void setPais(PaisDTO pais) {
+        this.pais = pais;
     }
 
 }

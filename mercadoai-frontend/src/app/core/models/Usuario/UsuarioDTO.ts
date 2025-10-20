@@ -1,3 +1,4 @@
+import { PaisDTO } from "../Pais/PaisDTO";
 import { PerfilCompaniaDTO } from "../Perfil/PerfilCompaniaDTO";
 import { PerfilDesarrolladorDTO } from "../Perfil/PerfilDesarrolladorDTO";
 
@@ -6,6 +7,7 @@ export interface UsuarioDTO {
   username: string;
   email: string;
   nombre: string;
+  pais: PaisDTO;
   descripcion: string;
   foto: string;
   userType: number;

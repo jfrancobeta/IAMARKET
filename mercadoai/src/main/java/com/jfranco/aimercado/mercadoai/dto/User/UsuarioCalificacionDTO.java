@@ -3,8 +3,8 @@ package com.jfranco.aimercado.mercadoai.dto.User;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.jfranco.aimercado.mercadoai.dto.Perfil.PerfilCompaniaDTO;
-import com.jfranco.aimercado.mercadoai.dto.Perfil.PerfilDesarrolladorDTO;
+import com.jfranco.aimercado.mercadoai.dto.Profile.PerfilCompaniaDTO;
+import com.jfranco.aimercado.mercadoai.dto.Profile.PerfilDesarrolladorDTO;
 
 public class UsuarioCalificacionDTO {
 

@@ -13,6 +13,8 @@ import com.jfranco.aimercado.mercadoai.dto.Hito.HitoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
+import com.jfranco.aimercado.mercadoai.exception.InvalidOperationException;
+import com.jfranco.aimercado.mercadoai.exception.ResourceNotFoundException;
 import com.jfranco.aimercado.mercadoai.mapper.Hito.HitoMapper;
 import com.jfranco.aimercado.mercadoai.mapper.Proyecto.ProyectoMapper;
 import com.jfranco.aimercado.mercadoai.model.Entregable;
@@ -20,8 +22,13 @@ import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Hito;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Proyecto;
+import com.jfranco.aimercado.mercadoai.model.Usuario;
+import com.jfranco.aimercado.mercadoai.model.CancelRequest.CancelRequest;
+import com.jfranco.aimercado.mercadoai.model.CancelRequest.CancelStatus;
+import com.jfranco.aimercado.mercadoai.repository.CancelRequest.CancelRequestRepository;
 import com.jfranco.aimercado.mercadoai.repository.Estado.EstadoRepository;
 import com.jfranco.aimercado.mercadoai.repository.Proyecto.ProyectoRepository;
+import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 
 @Service
 public class ProyectoService implements IProyectoService {
@@ -34,6 +41,12 @@ public class ProyectoService implements IProyectoService {
 
     @Autowired
     private EstadoRepository estadoRepository;
+
+    @Autowired
+    private CancelRequestRepository cancelRequestRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private HitoMapper hitoMapper;
@@ -159,7 +172,7 @@ public class ProyectoService implements IProyectoService {
     public HitoDTO updateHito(Long proyectoId, Long hitoId, HitoUpdateDTO dto) {
         Proyecto proyecto = proyectoRepository.findById(proyectoId)
                 .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
-        
+
         Hito hito = proyecto.getHitos().stream()
                 .filter(h -> h.getId().equals(hitoId))
                 .findFirst()
@@ -167,11 +180,11 @@ public class ProyectoService implements IProyectoService {
 
         Estado estadoCreado = estadoRepository.findByNombre("Creado")
                 .orElseThrow(() -> new RuntimeException("Estado 'Creado' no encontrado"));
-        
+
         hitoMapper.updateEntity(dto, hito);
 
         if (dto.getEntregables() != null) {
-            
+
             hito.getEntregables().clear();
 
             for (var entregableDTO : dto.getEntregables()) {
@@ -179,8 +192,8 @@ public class ProyectoService implements IProyectoService {
 
                 entregable.setNombreArchivo(entregableDTO.getNombreArchivo());
                 entregable.setHito(hito);
-                entregable.setEstado(estadoCreado); 
-                
+                entregable.setEstado(estadoCreado);
+
                 hito.getEntregables().add(entregable);
             }
         }
@@ -188,6 +201,69 @@ public class ProyectoService implements IProyectoService {
         proyectoRepository.save(proyecto);
 
         return hitoMapper.toDTO(hito);
+    }
+
+    @Override
+    public void requestProjectCancel(Long proyectoId, String usuario, String reason) {
+        Proyecto proyecto = proyectoRepository.findById(proyectoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Proyecto", "id", proyectoId));
+        Usuario solicitante = usuarioRepository.findByUsername(usuario)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "username", usuario));
+
+        boolean exists = cancelRequestRepository.existsByProyectoIdAndStatus(proyectoId, CancelStatus.PENDING);
+        
+        if (exists)
+            throw new InvalidOperationException("Ya existe una solicitud de cancelación pendiente para este proyecto");
+
+        Usuario destinatario = proyecto.getEmpresa().getId().equals(solicitante.getId()) ? proyecto.getDesarrollador() : proyecto.getEmpresa();
+
+        CancelRequest request = new CancelRequest();
+        request.setProyecto(proyecto);
+        request.setRequestedBy(solicitante);
+        request.setRequestedTo(destinatario);
+        request.setReason(reason);
+        request.setStatus(CancelStatus.PENDING);
+        request.setRequestedAt(java.time.LocalDateTime.now());
+
+        cancelRequestRepository.save(request);
+    }
+
+    @Override
+    public void approveProjectCancel(Long proyectoId, String usuario) {
+        CancelRequest request = cancelRequestRepository
+                .findFirstByProyectoIdAndStatus(proyectoId, CancelStatus.PENDING)
+                .orElseThrow(() -> new ResourceNotFoundException("CancelRequest", "proyectoId", proyectoId));
+
+        if (!request.getRequestedTo().getUsername().equals(usuario)) {
+            throw new InvalidOperationException("Solo la otra parte puede aprobar la cancelación");
+        }
+
+        request.setStatus(CancelStatus.ACCEPTED);
+        request.setRespondedAt(java.time.LocalDateTime.now());
+        cancelRequestRepository.save(request);
+
+        Proyecto proyecto = request.getProyecto();
+        Estado estadoCancelado = estadoRepository.findByNombre("Cancelada")
+                .orElseThrow(() -> new ResourceNotFoundException("Estado", "nombre", "Cancelada"));
+
+        proyecto.setEstado(estadoCancelado);
+        proyectoRepository.save(proyecto);
+    }
+
+    @Override
+    public void rejectProjectCancel(Long proyectoId, String usuario, String reason) {
+        CancelRequest request = cancelRequestRepository
+                .findFirstByProyectoIdAndStatus(proyectoId, CancelStatus.PENDING)
+                .orElseThrow(() -> new InvalidOperationException("No hay solicitud pendiente para este proyecto"));
+
+        if (!request.getRequestedTo().getUsername().equals(usuario)) {
+            throw new InvalidOperationException("Solo la otra parte puede rechazar la cancelación");
+        }
+
+        request.setStatus(CancelStatus.REJECTED);
+        request.setRespondedAt(java.time.LocalDateTime.now());
+        request.setResponseReason(reason);
+        cancelRequestRepository.save(request);
     }
 
 }

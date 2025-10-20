@@ -1,4 +1,4 @@
-package com.jfranco.aimercado.mercadoai.dto.Perfil;
+package com.jfranco.aimercado.mercadoai.dto.Profile;
 
 import com.jfranco.aimercado.mercadoai.model.PerfilCompania;
 

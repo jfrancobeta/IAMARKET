@@ -1,6 +1,10 @@
+import { HabilidadDTO } from "../Habilidad/HabilidadDTO";
+
 export interface PerfilDesarrolladorDTO {
   id: number;
-  habilidades: string;
+  habilidades: HabilidadDTO[];
   experiencia: number;
   portafolioURL: string;
+  githubURL: string;
+  linkedinURL: string;
 }
