@@ -73,30 +73,145 @@
                   class="btn btn-outline-danger btn-sm"
                   data-bs-toggle="modal"
                   data-bs-target="#cancelModal"
+                  [disabled]="hasPendingCancelRequest"
+                  [title]="
+                    hasPendingCancelRequest
+                      ? 'Ya existe una solicitud de cancelación pendiente'
+                      : 'Solicitar cancelación del proyecto'
+                  "
                 >
                   <i class="bi bi-x me-1"></i>
-                  Cancelar Proyecto
+                  {{
+                    hasPendingCancelRequest
+                      ? "Cancelación Pendiente"
+                      : "Cancelar Proyecto"
+                  }}
                 </button>
               </div>
             </div>
           </div>
           <div class="card-body">
             <!-- Cancelation Alert (hidden by default) -->
-            <div class="cancelation-alert d-none" id="cancelationAlert">
-              <div class="d-flex gap-3">
-                <i class="bi bi-exclamation-triangle text-warning"></i>
-                <div class="flex-grow-1">
-                  <h6 class="text-warning mb-1">
-                    Solicitud de Cancelación Enviada
-                  </h6>
-                  <p class="mb-1 small">
-                    <strong>Motivo:</strong>
-                    <span id="cancelationReason"></span>
-                  </p>
-                  <p class="mb-0 text-muted small">Solicitada por el cliente</p>
+            <ng-container *ngIf="proyecto.cancelRequests.length > 0">
+              <div
+                *ngFor="let cancelRequest of proyecto.cancelRequests"
+                class="mb-3"
+              >
+                <!-- Solicitud Pendiente -->
+                <div
+                  *ngIf="cancelRequest.status === 'PENDING'"
+                  class="alert alert-warning"
+                >
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="d-flex gap-3">
+                      <i class="bi bi-exclamation-triangle text-warning"></i>
+                      <div class="flex-grow-1">
+                        <h6 class="text-warning mb-1">
+                          Solicitud de Cancelación Pendiente
+                        </h6>
+                        <p class="mb-1 small">
+                          <strong>Motivo:</strong> {{ cancelRequest.reason }}
+                        </p>
+                        <p class="mb-0 text-muted small">
+                          Solicitada por
+                          {{ cancelRequest.requestedByUsername }} el
+                          {{
+                            cancelRequest.requestedAt
+                              | date : "dd/MM/yyyy HH:mm"
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                    <!-- Botones para aprobar/rechazar (solo si no soy quien solicitó) -->
+                    <div
+                      *ngIf="!isRequestedByCurrentUser(cancelRequest)"
+                      class="d-flex gap-2"
+                    >
+                      <button
+                        class="btn btn-outline-success btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#approveCancelModal"
+                        (click)="selectedCancelRequest = cancelRequest"
+                      >
+                        <i class="bi bi-check me-1"></i>
+                        Aprobar
+                      </button>
+                      <button
+                        class="btn btn-outline-danger btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#rejectCancelModal"
+                        (click)="selectedCancelRequest = cancelRequest"
+                      >
+                        <i class="bi bi-x me-1"></i>
+                        Rechazar
+                      </button>
+                    </div>
+                    <div
+                      *ngIf="isRequestedByCurrentUser(cancelRequest)"
+                      class="text-muted small"
+                    >
+                      Esperando respuesta
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  *ngIf="cancelRequest.status === 'APPROVED'"
+                  class="alert alert-success"
+                >
+                  <div class="d-flex gap-3">
+                    <i class="bi bi-check-circle text-success"></i>
+                    <div class="flex-grow-1">
+                      <h6 class="text-success mb-1">Cancelación Aprobada</h6>
+                      <p class="mb-1 small">
+                        <strong>Motivo original:</strong>
+                        {{ cancelRequest.reason }}
+                      </p>
+                      <p class="mb-0 text-muted small">
+                        Solicitada por {{ cancelRequest.requestedByUsername }} y
+                        aprobada el
+                        {{
+                          cancelRequest.respondedAt | date : "dd/MM/yyyy HH:mm"
+                        }}
+                      </p>
+                      <p
+                        *ngIf="cancelRequest.responseReason"
+                        class="mb-0 text-muted small"
+                      >
+                        <strong>Comentario:</strong>
+                        {{ cancelRequest.responseReason }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="cancelRequest.status === 'REJECTED'"
+                  class="alert alert-danger"
+                >
+                  <div class="d-flex gap-3">
+                    <i class="bi bi-x-circle text-danger"></i>
+                    <div class="flex-grow-1">
+                      <h6 class="text-danger mb-1">Cancelación Rechazada</h6>
+                      <p class="mb-1 small">
+                        <strong>Motivo original:</strong>
+                        {{ cancelRequest.reason }}
+                      </p>
+                      <p class="mb-1 small">
+                        <strong>Motivo del rechazo:</strong>
+                        {{ cancelRequest.responseReason }}
+                      </p>
+                      <p class="mb-0 text-muted small">
+                        Solicitada por {{ cancelRequest.requestedByUsername }} y
+                        rechazada el
+                        {{
+                          cancelRequest.respondedAt | date : "dd/MM/yyyy HH:mm"
+                        }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ng-container>
 
             <hr />
 
@@ -178,15 +293,6 @@
               Hitos y Entregables
             </button>
           </li>
-          <!-- <li class="nav-item">
-            <button
-              class="nav-link"
-              data-bs-toggle="tab"
-              data-bs-target="#communication"
-            >
-              Comunicación
-            </button>
-          </li> -->
         </ul>
 
         <div class="tab-content">
@@ -508,16 +614,18 @@
           <div class="card-body">
             <div class="d-flex gap-3 mb-3">
               <img
-                src="{{proyecto.empresa.foto}}"
+                src="{{ proyecto.empresa.foto }}"
                 class="avatar rounded-circle"
-                alt="{{proyecto.empresa.nombre}}"
-                style="width: 40px; height: 40px; object-fit: cover;"
+                alt="{{ proyecto.empresa.nombre }}"
+                style="width: 40px; height: 40px; object-fit: cover"
               />
               <div>
-                <h6 class="mb-0">{{proyecto.empresa.perfilCompania.nombreCompania}}</h6>
+                <h6 class="mb-0">
+                  {{ proyecto.empresa.perfilCompania.nombreCompania }}
+                </h6>
                 <div class="d-flex align-items-center gap-1 text-muted small">
                   <i class="bi bi-person-fill text-secondary"></i>
-                  {{proyecto.empresa.nombre}}
+                  {{ proyecto.empresa.nombre }}
                 </div>
               </div>
             </div>
@@ -536,13 +644,13 @@
           <div class="card-body">
             <div class="d-flex gap-3 mb-3">
               <img
-                src="{{proyecto.desarrollador.foto}}"
+                src="{{ proyecto.desarrollador.foto }}"
                 class="avatar rounded-circle"
-                alt="{{proyecto.desarrollador.nombre}}"
-                style="width: 40px; height: 40px; object-fit: cover;"
+                alt="{{ proyecto.desarrollador.nombre }}"
+                style="width: 40px; height: 40px; object-fit: cover"
               />
               <div>
-                <h6 class="mb-0">{{proyecto.desarrollador.nombre}}</h6>
+                <h6 class="mb-0">{{ proyecto.desarrollador.nombre }}</h6>
                 <div class="d-flex align-items-center gap-1 text-muted small">
                   <i class="bi bi-star-fill text-warning"></i>
                   <span>4.9</span>
@@ -648,6 +756,7 @@
               id="cancelReason"
               rows="4"
               placeholder="Explica detalladamente el motivo de la cancelación..."
+              [(ngModel)]="cancelReason"
             ></textarea>
           </div>
           <div class="alert alert-warning">
@@ -668,8 +777,13 @@
           <button
             type="button"
             class="btn btn-danger"
-            onclick="requestCancelation()"
+            (click)="requestCancelation()"
+            [disabled]="processingCancel || !cancelReason?.trim()"
           >
+            <span
+              *ngIf="processingCancel"
+              class="spinner-border spinner-border-sm me-2"
+            ></span>
             Enviar Solicitud
           </button>
         </div>
@@ -941,4 +1055,139 @@
       </div>
     </div>
   </div>
+
+  <!-- Approve Cancel Modal -->
+<div class="modal fade" id="approveCancelModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-check-circle text-success me-2"></i>
+          Aprobar Cancelación de Proyecto
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="selectedCancelRequest" class="mb-3">
+          <p class="text-muted">
+            Estás a punto de aprobar la solicitud de cancelación del proyecto.
+          </p>
+          <div class="alert alert-info">
+            <strong>Motivo de la solicitud:</strong><br>
+            {{ selectedCancelRequest.reason }}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="approveComments" class="form-label">
+            Comentarios adicionales (opcional)
+          </label>
+          <textarea
+            class="form-control"
+            id="approveComments"
+            rows="3"
+            placeholder="Comentarios sobre la aprobación..."
+            [(ngModel)]="approveComments"
+          ></textarea>
+        </div>
+        <div class="alert alert-warning">
+          <strong>Importante:</strong> Una vez aprobada, el proyecto será cancelado 
+          definitivamente y no se podrá revertir esta acción.
+        </div>
+        </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="approveCancelation()"
+          [disabled]="processingCancel"
+        >
+          <span
+            *ngIf="processingCancel"
+            class="spinner-border spinner-border-sm me-2"
+          ></span>
+          Aprobar Cancelación
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reject Cancel Modal -->
+<div class="modal fade" id="rejectCancelModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-x-circle text-danger me-2"></i>
+          Rechazar Cancelación de Proyecto
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="selectedCancelRequest" class="mb-3">
+          <p class="text-muted">
+            Estás rechazando la solicitud de cancelación del proyecto.
+          </p>
+          <div class="alert alert-info">
+            <strong>Motivo de la solicitud:</strong><br>
+            {{ selectedCancelRequest.reason }}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="rejectCancelComments" class="form-label">
+            Motivo del rechazo *
+          </label>
+          <textarea
+            class="form-control"
+            id="rejectCancelComments"
+            rows="3"
+            placeholder="Explica por qué rechazas la cancelación..."
+            [(ngModel)]="rejectComments"
+            required
+          ></textarea>
+        </div>
+        <div class="alert alert-info">
+          <strong>Nota:</strong> El proyecto continuará normalmente después de rechazar 
+          la cancelación.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="rejectCancelation()"
+          [disabled]="processingCancel || !rejectComments?.trim()"
+        >
+          <span
+            *ngIf="processingCancel"
+            class="spinner-border spinner-border-sm me-2"
+          ></span>
+          Rechazar Cancelación
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 </app-main-layout>

@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { HitoCreateDTO } from '../../../../core/models/Hito/HitoCreateDTO';
 import { FormsModule } from '@angular/forms';
 import { HitoUpdateDTO } from '../../../../core/models/Hito/HitoUpdateDTO';
+import { CancelRequestDTO } from '../../../../core/models/CancelRequest/CancelRequestDTO';
 
 @Component({
   selector: 'app-details',
@@ -28,6 +29,11 @@ export class DetailsComponent implements OnInit {
   modoHito: 'crear' | 'editar' = 'crear';
   hitoEditIndex: number | null = null;
   agregandoHito = false;
+  cancelReason: string = '';
+  selectedCancelRequest: CancelRequestDTO | null = null;
+  approveComments: string = '';
+  rejectComments: string = '';
+  processingCancel = false;
 
   nuevoHito = {
     id: null,
@@ -306,5 +312,144 @@ export class DetailsComponent implements OnInit {
     (window as any).bootstrap.Modal.getOrCreateInstance(
       document.getElementById('addMilestoneModal')
     ).show();
+  }
+
+  requestCancelation() {
+    if (this.hasPendingCancelRequest) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Ya existe una solicitud de cancelación pendiente.',
+        text: 'Espera a que la otra parte responda antes de enviar una nueva solicitud.',
+      });
+      return;
+    }
+
+    if (!this.cancelReason.trim()) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Debe ingresar una razón para la cancelación.',
+      });
+      return;
+    }
+
+    this.processingCancel = true;
+    this.proyectoService
+      .requestCancel(this.proyecto.id, this.cancelReason)
+      .subscribe({
+        next: () => {
+          this.processingCancel = false;
+          Swal.fire({
+            icon: 'success',
+            title: 'Solicitud de cancelación enviada.',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+          this.loadProjectDetails(this.proyecto.id);
+          (window as any).bootstrap.Modal.getOrCreateInstance(
+            document.getElementById('cancelModal')
+          ).hide();
+          this.cancelReason = '';
+        },
+        error: () => {
+          this.processingCancel = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'No se pudo enviar la solicitud de cancelación.',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+        },
+      });
+  }
+
+  isRequestedByCurrentUser(cancelRequest: any): boolean {
+    const currentUserId = this.authService.user.user;
+    return cancelRequest.requestedById === currentUserId;
+  }
+
+  get hasPendingCancelRequest(): boolean {
+    return this.proyecto?.cancelRequests?.some(
+      (request: any) => request.status === 'PENDING'
+    ) || false;
+  }
+
+  get pendingCancelRequest(): any {
+    return this.proyecto?.cancelRequests?.find(
+      (request: any) => request.status === 'PENDING'
+    );
+  }
+
+  approveCancelation() {
+    if (!this.selectedCancelRequest) return;
+
+    this.processingCancel = true;
+    this.proyectoService.approveCancel(this.proyecto.id).subscribe({
+      next: () => {
+        this.processingCancel = false;
+        Swal.fire(
+          'Cancelación aprobada',
+          'El proyecto fue cancelado.',
+          'success'
+        );
+        this.loadProjectDetails(this.proyecto.id);
+        this.closeApproveModal();
+      },
+      error: () => {
+        this.processingCancel = false;
+        Swal.fire('Error', 'No se pudo aprobar la cancelación.', 'error');
+      },
+    });
+  }
+
+  rejectCancelation() {
+    if (!this.selectedCancelRequest || !this.rejectComments.trim()) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Motivo requerido',
+        text: 'Debes ingresar un motivo para el rechazo.',
+      });
+      return;
+    }
+    this.processingCancel = true;
+    this.proyectoService
+      .rejectCancel(this.proyecto.id, this.rejectComments)
+      .subscribe({
+        next: () => {
+          this.processingCancel = false;
+          Swal.fire(
+            'Cancelación rechazada',
+            'La cancelación fue rechazada.',
+            'success'
+          );
+          this.loadProjectDetails(this.proyecto.id);
+          this.closeRejectModal();
+        },
+        error: () => {
+          this.processingCancel = false;
+          Swal.fire('Error', 'No se pudo rechazar la cancelación.', 'error');
+        },
+      });
+  }
+
+  private closeApproveModal() {
+    (window as any).bootstrap.Modal.getOrCreateInstance(
+      document.getElementById('approveCancelModal')
+    ).hide();
+    this.selectedCancelRequest = null;
+    this.approveComments = '';
+  }
+
+  private closeRejectModal() {
+    (window as any).bootstrap.Modal.getOrCreateInstance(
+      document.getElementById('rejectCancelModal')
+    ).hide();
+    this.selectedCancelRequest = null;
+    this.rejectComments = '';
   }
 }

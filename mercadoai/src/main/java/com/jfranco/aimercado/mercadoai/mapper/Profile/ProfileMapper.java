@@ -16,6 +16,7 @@ public interface ProfileMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "usuario", ignore = true)
+    @Mapping(target = "habilidades", ignore = true) 
     public PerfilDesarrollador updateEntityDeveloper(ProfileDeveloperUpdateDTO dto, @MappingTarget PerfilDesarrollador perfil);
     
 }

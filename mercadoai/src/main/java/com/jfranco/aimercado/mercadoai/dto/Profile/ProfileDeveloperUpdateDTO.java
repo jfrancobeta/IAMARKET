@@ -2,13 +2,11 @@ package com.jfranco.aimercado.mercadoai.dto.Profile;
 
 import java.util.List;
 
-import com.jfranco.aimercado.mercadoai.dto.Habilidad.HabilidadCreateDTO;
-
 public class ProfileDeveloperUpdateDTO {
     private String portafolioURL;
     private String githubURL;
     private String linkedinURL;
-    private List<HabilidadCreateDTO> habilidades;
+    private List<Long> habilidades;
     private Integer experiencia;
 
     public ProfileDeveloperUpdateDTO() {
@@ -46,11 +44,11 @@ public class ProfileDeveloperUpdateDTO {
         this.experiencia = experiencia;
     }
 
-    public List<HabilidadCreateDTO> getHabilidades() {
+    public List<Long> getHabilidades() {
         return habilidades;
     }
 
-    public void setHabilidades(List<HabilidadCreateDTO> habilidades) {
+    public void setHabilidades(List<Long> habilidades) {
         this.habilidades = habilidades;
     }
 

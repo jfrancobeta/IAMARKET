@@ -16,6 +16,9 @@ import { HabilidadDTO } from '../../../core/models/Habilidad/HabilidadDTO';
 import { UserPersonalUpdateDTO } from '../../../core/models/Usuario/UserPersonalUpdateDTO';
 import { ProfileDeveloperUpdateDTO } from '../../../core/models/Perfil/ProfileDeveloperUpdateDTO';
 import { RouterLink } from '@angular/router';
+import { PaisDTO } from '../../../core/models/Pais/PaisDTO';
+import { PaisService } from '../../../core/services/pais.service';
+import { HabilidadService } from '../../../core/services/habilidad.service';
 
 @Component({
   selector: 'app-profile',
@@ -32,6 +35,8 @@ import { RouterLink } from '@angular/router';
 export class ProfileComponent implements OnInit {
   usuario!: UsuarioDTO;
   username: string = '';
+  countries: PaisDTO[] = [];
+  skills: HabilidadDTO[] = [];
 
   personalForm!: FormGroup;
   professionalForm!: FormGroup;
@@ -45,6 +50,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
+    private countryService: PaisService,
+    private skillsService: HabilidadService,
     private authService: AuthService,
     private fb: FormBuilder
   ) {}
@@ -53,6 +60,26 @@ export class ProfileComponent implements OnInit {
     this.initForms();
     this.loadUsername();
     this.loadUserData();
+    this.loadCountries();
+    this.loadSkills();
+  }
+
+  loadSkills(): void {
+    this.skillsService.getAll().subscribe({
+      next: (data) => {
+        console.log('skills', data);
+        this.skills = data;
+      },
+    });
+  }
+
+  loadCountries(): void {
+    this.countryService.getPaises().subscribe({
+      next: (data) => {
+        console.log('countries', data);
+        this.countries = data;
+      },
+    });
   }
 
   loadUsername() {
@@ -89,14 +116,14 @@ export class ProfileComponent implements OnInit {
         { value: '', disabled: true },
         [
           Validators.required,
-          Validators.pattern(/^https?:\/\/(www\.)?github\.com\/.+/)
+          Validators.pattern(/^https?:\/\/(www\.)?github\.com\/.+/),
         ],
       ],
       linkedinUrl: [
         { value: '', disabled: true },
         [
           Validators.required,
-          Validators.pattern(/^https?:\/\/(www\.)?linkedin\.com\/.+/)
+          Validators.pattern(/^https?:\/\/(www\.)?linkedin\.com\/.+/),
         ],
       ],
     });
@@ -127,7 +154,7 @@ export class ProfileComponent implements OnInit {
     this.personalForm.patchValue({
       nombre: usuario.nombre,
       email: usuario.email,
-      pais: usuario.pais,
+      pais: usuario.pais.id,
       descripcion: usuario.descripcion,
       foto: usuario.foto,
     });
@@ -147,12 +174,7 @@ export class ProfileComponent implements OnInit {
     if (Array.isArray(usuario.perfilDesarrollador.habilidades)) {
       usuario.perfilDesarrollador.habilidades.forEach(
         (habilidad: HabilidadDTO) => {
-          habilidadesArray.push(
-            this.fb.group({
-              id: [habilidad.id],
-              nombre: [habilidad.nombre, Validators.required],
-            })
-          );
+          habilidadesArray.push(this.fb.control(habilidad.id));
         }
       );
     }
@@ -160,13 +182,20 @@ export class ProfileComponent implements OnInit {
     console.log('habilidades', habilidadesArray);
   }
 
+  getHabilidadNombre(id: number): string {
+  const habilidad = this.skills.find(h => h.id === id);
+  return habilidad ? habilidad.nombre : '';
+}
   get habilidades(): FormArray {
     return this.professionalForm.get('habilidades') as FormArray;
   }
 
-  agregarHabilidad(habilidad: string): void {
-    if (habilidad && habilidad.trim()) {
-      this.habilidades.push(this.fb.control(habilidad.trim()));
+  agregarHabilidad(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const habilidadId = Number(select.value);
+    if (!habilidadId) return;
+    if (!this.habilidades.value.includes(habilidadId)) {
+      this.habilidades.push(this.fb.control(habilidadId));
     }
   }
 
@@ -199,7 +228,9 @@ export class ProfileComponent implements OnInit {
       this.professionalForm.get('portfolioUrl')?.enable();
       this.professionalForm.get('githubUrl')?.enable();
       this.professionalForm.get('linkedinUrl')?.enable();
-      Object.values(this.professionalForm.controls).forEach(control => control.markAsUntouched());
+      Object.values(this.professionalForm.controls).forEach((control) =>
+        control.markAsUntouched()
+      );
     } else {
       this.professionalForm.get('anosExperiencia')?.disable();
       this.professionalForm.get('portfolioUrl')?.disable();
@@ -280,7 +311,7 @@ export class ProfileComponent implements OnInit {
       nombre: formValue.nombre,
       email: formValue.email,
       descripcion: formValue.descripcion,
-      paisId: formValue.pais.id,
+      paisId: formValue.pais,
     };
     console.log('updateData', updateData);
     this.isLoading = true;
@@ -323,38 +354,38 @@ export class ProfileComponent implements OnInit {
       portafolioURL: formValue.portfolioUrl,
       githubURL: formValue.githubUrl,
       linkedinURL: formValue.linkedinUrl,
-      habilidad: formValue.habilidades,
+      habilidades: formValue.habilidades,
       experiencia: formValue.anosExperiencia,
     };
 
     this.isLoading = true;
-  this.profileService
-    .updateDeveloperProfile(this.usuario.id, updateData)
-    .subscribe({
-      next: (response) => {
-        // Actualiza solo el perfil de desarrollador
-        this.usuario.perfilDesarrollador = response;
-        this.toggleEditProfessional();
-        Swal.fire({
-          icon: 'success',
-          title: '¡Actualizado!',
-          text: 'Los cambios se guardaron correctamente',
-          timer: 2000,
-          showConfirmButton: false,
-        });
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error al actualizar perfil:', error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudieron guardar los cambios',
-          confirmButtonColor: '#d33',
-        });
-        this.isLoading = false;
-      },
-    });
+    this.profileService
+      .updateDeveloperProfile(this.usuario.id, updateData)
+      .subscribe({
+        next: (response) => {
+          // Actualiza solo el perfil de desarrollador
+          this.usuario.perfilDesarrollador = response;
+          this.toggleEditProfessional();
+          Swal.fire({
+            icon: 'success',
+            title: '¡Actualizado!',
+            text: 'Los cambios se guardaron correctamente',
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error al actualizar perfil:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudieron guardar los cambios',
+            confirmButtonColor: '#d33',
+          });
+          this.isLoading = false;
+        },
+      });
   }
 
   // Getters para validaciones
@@ -372,6 +403,4 @@ export class ProfileComponent implements OnInit {
     const control = this.personalForm.get('pais');
     return control?.invalid && control?.touched;
   }
-
-  
 }

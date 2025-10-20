@@ -63,6 +63,9 @@ public class Usuario {
     private PerfilDesarrollador perfilDesarrollador;
 
     
+    
+    public Usuario() {
+    }
     public Long getId() {
         return id;
     }

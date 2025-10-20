@@ -50,7 +50,7 @@
           <div class="card-body">
             <div class="d-flex align-items-center gap-2 text-muted mb-2">
               <i class="bi bi-geo-alt"></i>
-              {{ usuario.pais }}
+              {{ usuario.pais.nombre }}
             </div>
             <div class="d-flex align-items-center gap-2 text-muted mb-2">
               <i class="bi bi-calendar"></i>
@@ -143,12 +143,19 @@
                 <div class="row mb-3">
                   <div class="col">
                     <label for="location" class="form-label">Ubicación</label>
-                    <input
-                      type="text"
+                    <select
                       class="form-control"
                       id="location"
                       formControlName="pais"
-                    />
+                      [disabled]="!isEditingPersonal"
+                    >
+                      <option
+                        *ngFor="let pais of countries"
+                        [ngValue]="pais.id"
+                      >
+                        {{ pais.nombre }}
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -204,36 +211,27 @@
                 <div class="mb-3">
                   <label class="form-label">Habilidades principales</label>
                   <div class="d-flex flex-wrap gap-2">
-                    <ng-container formArrayName="habilidades">
-                      <span
-                        *ngFor="
-                          let habilidad of habilidades.controls;
-                          let i = index
-                        "
-                        class="badge bg-secondary"
-                      >
-                        gfgfg
-                        {{ habilidad.value.nombre }}
-                        <button
-                          *ngIf="isEditingProfessional"
-                          type="button"
-                          class="btn-close btn-close-white btn-sm ms-1"
-                          aria-label="Eliminar"
-                          (click)="eliminarHabilidad(i)"
-                        ></button>
-                      </span>
-                    </ng-container>
-                    <input
+                    <select
                       *ngIf="isEditingProfessional"
-                      type="text"
                       class="form-control form-control-sm w-auto"
-                      #nuevaHabilidad
-                      placeholder="Agregar habilidad"
-                      (keyup.enter)="
-                        agregarHabilidad(nuevaHabilidad.value);
-                        nuevaHabilidad.value = ''
-                      "
-                    />
+                      (change)="agregarHabilidad($event)"
+                    >
+                      <option value="">Selecciona habilidad</option>
+                      <option
+                        *ngFor="let habilidad of skills"
+                        [value]="habilidad.id"
+                      >
+                        {{ habilidad.nombre }}
+                      </option>
+                    </select>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                      <span
+                        *ngFor="let habilidadId of habilidades.value"
+                        class="badge bg-primary"
+                      >
+                        {{ getHabilidadNombre(habilidadId) }}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div class="mb-3">

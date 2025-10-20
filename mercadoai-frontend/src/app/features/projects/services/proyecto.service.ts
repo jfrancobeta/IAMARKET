@@ -44,7 +44,30 @@ export class ProyectoService {
   addHito(proyectoId: number, dto: HitoCreateDTO): Observable<HitoDTO> {
     return this.http.post<HitoDTO>(`${this.apiUrl}/${proyectoId}/hitos`, dto);
   }
-  editarHito(proyectoId: number, hitoId: number, dto: HitoUpdateDTO): Observable<HitoDTO> {
-    return this.http.put<HitoDTO>(`${this.apiUrl}/${proyectoId}/hitos/${hitoId}`, dto);
+  editarHito(
+    proyectoId: number,
+    hitoId: number,
+    dto: HitoUpdateDTO
+  ): Observable<HitoDTO> {
+    return this.http.put<HitoDTO>(
+      `${this.apiUrl}/${proyectoId}/hitos/${hitoId}`,
+      dto
+    );
+  }
+
+  requestCancel(id: number, reason: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${id}/cancel-request`, reason, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  approveCancel(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${id}/cancel-accept`, {});
+  }
+
+  rejectCancel(id: number, reason: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${id}/cancel-reject`, reason, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.jfranco.aimercado.mercadoai.model.CancelRequest.CancelRequest;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,6 +51,9 @@ public class Proyecto {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "proyecto_id")
     private List<Hito> hitos;
+
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.ALL)
+    private List<CancelRequest> cancelRequests;
 
     public Proyecto() {
     }
@@ -138,6 +143,12 @@ public class Proyecto {
 
     public void setDesarrollador(Usuario desarrollador) {
         this.desarrollador = desarrollador;
+    }
+    public List<CancelRequest> getCancelRequests() {
+        return cancelRequests;
+    }
+    public void setCancelRequests(List<CancelRequest> cancelRequests) {
+        this.cancelRequests = cancelRequests;
     }
 
 }

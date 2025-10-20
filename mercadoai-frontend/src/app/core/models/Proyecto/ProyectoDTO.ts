@@ -1,3 +1,4 @@
+import { CancelRequestDTO } from "../CancelRequest/CancelRequestDTO";
 import { HitoDTO } from "../Hito/HitoDTO";
 import { PropuestaDTO } from "../Propuesta/PropuestaDTO";
 import { SolucionDTO } from "../Solucion/SolucionDTO";
@@ -14,4 +15,5 @@ export interface ProyectoDTO {
   fechaFin: string;
   estado: string;
   hitos: HitoDTO[];
+  cancelRequests: CancelRequestDTO[];
 }

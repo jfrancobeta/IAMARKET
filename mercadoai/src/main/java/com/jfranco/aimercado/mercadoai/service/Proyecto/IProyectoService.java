@@ -20,4 +20,7 @@ public interface IProyectoService {
     ProyectoDTO createFromPropuesta(Propuesta propuestaId);
     HitoDTO addHito(Long proyectoId, HitoCreateDTO dto);
     HitoDTO updateHito(Long proyectoId, Long hitoId, HitoUpdateDTO dto);
+    void requestProjectCancel(Long proyectoId, String usuario, String reason);
+    void approveProjectCancel(Long proyectoId, String usuario);
+    void rejectProjectCancel(Long proyectoId, String usuario, String reason);
 }
