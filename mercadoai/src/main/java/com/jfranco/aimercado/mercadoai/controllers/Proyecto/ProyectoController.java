@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,6 @@ import com.jfranco.aimercado.mercadoai.dto.Hito.HitoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
-import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.service.Proyecto.IProyectoService;
 
 import jakarta.validation.Valid;
@@ -41,10 +39,11 @@ public class ProyectoController {
             @RequestParam(required = false) String estado,
             @RequestParam(required = false) String tipo,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "10") int size,
+            @AuthenticationPrincipal String username) {
         try {
             PageRequest pageable = PageRequest.of(page, size);
-            Page<ProyectoSummaryDTO> proyectos = proyectoService.getAll(search, estado, tipo, pageable);
+            Page<ProyectoSummaryDTO> proyectos = proyectoService.getAll(search, estado, tipo, pageable, username);
             return ResponseEntity.ok(proyectos);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

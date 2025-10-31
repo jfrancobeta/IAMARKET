@@ -736,31 +736,6 @@ INSERT INTO necesidad_habilidad (necesidad_id, habilidad_id) VALUES (3, 5); -- D
 INSERT INTO necesidad_habilidad (necesidad_id, habilidad_id) VALUES (4, 24); -- MongoDB
 INSERT INTO necesidad_habilidad (necesidad_id, habilidad_id) VALUES (5, 23); -- Flutter
 
--- Calificaciones (20 ejemplos)
--- Calificaciones para desarrolladores
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (1, 4, 2, 5, 'Excelente trabajo en la API, muy profesional', '2025-08-01');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (2, 5, 2, 4, 'Buen desempeño, cumplió con los tiempos', '2025-08-03');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (3, 11, 2, 5, 'Muy satisfecho con el resultado', '2025-08-05');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (4, 4, 3, 4, 'Buena implementación del frontend', '2025-08-02');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (5, 12, 3, 3, 'Trabajo aceptable, algunas mejoras necesarias', '2025-08-04');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (6, 13, 6, 5, 'Desarrollador fullstack excepcional', '2025-08-06');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (7, 14, 6, 4, 'Cumplió con las expectativas', '2025-08-07');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (8, 15, 7, 5, 'Experta en desarrollo móvil', '2025-08-08');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (9, 4, 7, 4, 'Buen trabajo con Flutter', '2025-08-09');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (10, 5, 8, 5, 'Especialista en DevOps muy competente', '2025-08-10');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (11, 11, 8, 4, 'Buen manejo de Docker y Kubernetes', '2025-08-11');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (12, 12, 9, 5, 'Excelente en Python y ML', '2025-08-12');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (13, 13, 9, 4, 'Muy profesional y puntual', '2025-08-13');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (14, 14, 10, 4, 'Buen desarrollador React/Node', '2025-08-14');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (15, 15, 10, 5, 'Trabajo excepcional, muy recomendado', '2025-08-15');
-
--- Calificaciones para compañías (desde desarrolladores)
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (16, 2, 4, 5, 'Empresa muy profesional, pagos puntuales', '2025-08-01');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (17, 3, 5, 4, 'Buena comunicación y requisitos claros', '2025-08-02');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (18, 6, 11, 5, 'Excelente startup para trabajar', '2025-08-03');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (19, 7, 12, 4, 'Proyecto interesante, buen ambiente', '2025-08-04');
-INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, calificacion, comentario, fecha_calificacion) VALUES (20, 8, 13, 5, 'Agencia muy organizada y profesional', '2025-08-05');
-
 -- Soluciones 
 INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion)VALUES (1, 2, 'API RESTful Spring Boot', 'API lista para producción con autenticación JWT', 1200, 15, 3, 1, 2, 10, 'DIAS', '2025-08-01', '2025-08-01');
 INSERT INTO soluciones (id, desarrollador_id, titulo, descripcion, precio, vistas, pedidos, categoria_id, estado_id, tiempo_entrega, unidad_entrega, fecha_creacion, fecha_actualizacion)VALUES (2, 3, 'Frontend Angular Responsive', 'Interfaz web moderna y responsiva', 900, 10, 2, 2, 1, 7, 'DIAS', '2025-08-02', '2025-08-02');
@@ -1151,3 +1126,29 @@ INSERT INTO hitos (id, nombre, descripcion, fecha_entrega, proyecto_id) VALUES (
 -- Entregables para los hitos del proyecto 1 (solo url, nombre y estado en 0)
 INSERT INTO entregables (id, nombre_archivo, url, estado_id, hito_id) VALUES (301, 'Entregable 1', 'https://ejemplo.com/entregable1.pdf', 0, 201);
 INSERT INTO entregables (id, nombre_archivo, url, estado_id, hito_id) VALUES (302, 'Entregable 2', 'https://ejemplo.com/entregable2.pdf', 0, 202);
+
+-- Calificaciones (20 ejemplos)
+-- Calificaciones para desarrolladores
+-- Calificaciones para desarrolladores (COMPLETED y algunos PENDING)
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (1, 4, 2, 1, 5, 'Excelente trabajo en la API, muy profesional', '2025-08-01', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (2, 5, 2, 1, 4, 'Buen desempeño, cumplió con los tiempos', '2025-08-03', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, estado) VALUES (3, 11, 2, 2, 'PENDING');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (4, 4, 3, 2, 4, 'Buena implementación del frontend', '2025-08-02', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, estado) VALUES (5, 12, 3, 3, 'PENDING');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (6, 13, 6, 3, 5, 'Desarrollador fullstack excepcional', '2025-08-06', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (7, 14, 6, 4, 4, 'Cumplió con las expectativas', '2025-08-07', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (8, 15, 7, 4, 5, 'Experta en desarrollo móvil', '2025-08-08', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, estado) VALUES (9, 4, 7, 1, 'PENDING');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (10, 5, 8, 2, 5, 'Especialista en DevOps muy competente', '2025-08-10', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (11, 11, 8, 2, 4, 'Buen manejo de Docker y Kubernetes', '2025-08-11', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (12, 12, 9, 3, 5, 'Excelente en Python y ML', '2025-08-12', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (13, 13, 9, 3, 4, 'Muy profesional y puntual', '2025-08-13', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (14, 14, 10, 4, 4, 'Buen desarrollador React/Node', '2025-08-14', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (15, 15, 10, 4, 5, 'Trabajo excepcional, muy recomendado', '2025-08-15', 'COMPLETED');
+
+-- Calificaciones para compañías (desde desarrolladores, COMPLETED y algunos PENDING)
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (16, 2, 4, 1, 5, 'Empresa muy profesional, pagos puntuales', '2025-08-01', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, estado) VALUES (17, 3, 5, 2, 'PENDING');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (18, 6, 11, 3, 5, 'Excelente startup para trabajar', '2025-08-03', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, calificacion, comentario, fecha_calificacion, estado) VALUES (19, 7, 12, 3, 4, 'Proyecto interesante, buen ambiente', '2025-08-04', 'COMPLETED');
+INSERT INTO calificaciones (id, usuario_id, usuario_calificado_id, proyecto_id, estado) VALUES (20, 8, 13, 4, 'PENDING');

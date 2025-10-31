@@ -53,20 +53,23 @@ public class ProyectoService implements IProyectoService {
 
     @Override
     public Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo,
-            Pageable pageable) {
+            Pageable pageable, String username) {
 
+        Usuario usuario = usuarioRepository.findByUsername(username)
+            .orElseThrow(() -> new ResourceNotFoundException("Usuario", "username", username));
+        
         Page<Proyecto> proyectosPage;
 
         if ("solucion".equalsIgnoreCase(tipo)) {
-            proyectosPage = proyectoRepository.findBySolucionIsNotNull(pageable);
+            proyectosPage = proyectoRepository.findBySolucionIsNotNullAndUsuario(usuario.getId(), pageable);
         } else if ("propuesta".equalsIgnoreCase(tipo)) {
-            proyectosPage = proyectoRepository.findByPropuestaIsNotEmpty(pageable);
+            proyectosPage = proyectoRepository.findByPropuestaIsNotNullAndUsuario(usuario.getId(), pageable);
         } else if (search != null && !search.isEmpty()) {
-            proyectosPage = proyectoRepository.searchByTitulo(search, pageable);
+            proyectosPage = proyectoRepository.searchByTituloAndUsuario(search, usuario.getId(), pageable);
         } else if (estado != null && !estado.isEmpty()) {
-            proyectosPage = proyectoRepository.findByEstadoNombreIgnoreCase(estado, pageable);
+            proyectosPage = proyectoRepository.findByEstadoNombreIgnoreCaseAndUsuario(estado, usuario.getId(), pageable);
         } else {
-            proyectosPage = proyectoRepository.findAll(pageable);
+            proyectosPage = proyectoRepository.findByEmpresaIdOrDesarrolladorId(usuario.getId(), usuario.getId(), pageable);
         }
 
         return proyectosPage.map(proyectoMapper::toSummaryDTO);

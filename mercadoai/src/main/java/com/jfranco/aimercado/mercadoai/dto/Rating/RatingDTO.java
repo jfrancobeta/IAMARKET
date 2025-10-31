@@ -1,32 +1,22 @@
-package com.jfranco.aimercado.mercadoai.model;
+package com.jfranco.aimercado.mercadoai.dto.Rating;
 
 import java.time.LocalDate;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "calificaciones")
-public class Calificacion {
+import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
+import com.jfranco.aimercado.mercadoai.dto.User.UsuarioDTO;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RatingDTO {
     private Long id;
-
-    @ManyToOne
-    private Usuario usuario;
-
-    @ManyToOne
-    private Usuario usuarioCalificado;
-    
-    private int calificacion; // Valor entre 1 y 5
-    
+    private UsuarioDTO usuario;
+    private UsuarioDTO usuarioCalificado;
+    private ProyectoDTO proyecto;
+    private int calificacion;
     private String comentario;
-
+    private String estado;
     private LocalDate fechaCalificacion;
+
+    public RatingDTO() {
+    }
 
     public Long getId() {
         return id;
@@ -36,20 +26,28 @@ public class Calificacion {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
 
-    public Usuario getUsuarioCalificado() {
+    public UsuarioDTO getUsuarioCalificado() {
         return usuarioCalificado;
     }
 
-    public void setUsuarioCalificado(Usuario usuarioCalificado) {
+    public void setUsuarioCalificado(UsuarioDTO usuarioCalificado) {
         this.usuarioCalificado = usuarioCalificado;
+    }
+
+    public ProyectoDTO getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(ProyectoDTO proyecto) {
+        this.proyecto = proyecto;
     }
 
     public int getCalificacion() {
@@ -68,6 +66,14 @@ public class Calificacion {
         this.comentario = comentario;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public LocalDate getFechaCalificacion() {
         return fechaCalificacion;
     }
@@ -75,5 +81,7 @@ public class Calificacion {
     public void setFechaCalificacion(LocalDate fechaCalificacion) {
         this.fechaCalificacion = fechaCalificacion;
     }
+
+    
 
 }

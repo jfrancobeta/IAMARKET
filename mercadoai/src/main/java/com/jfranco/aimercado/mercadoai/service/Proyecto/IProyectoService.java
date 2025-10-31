@@ -15,7 +15,7 @@ public interface IProyectoService {
     
     ProyectoDTO update(Long id, ProyectoUpdateDTO dto);
     ProyectoDTO getById(Long id);
-    Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo, Pageable pageable);
+    Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo, Pageable pageable, String username);
     void delete(Long id);
     ProyectoDTO createFromPropuesta(Propuesta propuestaId);
     HitoDTO addHito(Long proyectoId, HitoCreateDTO dto);
