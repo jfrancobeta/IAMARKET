@@ -10,14 +10,17 @@ import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
+import com.jfranco.aimercado.mercadoai.model.Solucion;
+import com.jfranco.aimercado.mercadoai.model.Usuario;
 
 public interface IProyectoService {
     
     ProyectoDTO update(Long id, ProyectoUpdateDTO dto);
     ProyectoDTO getById(Long id);
-    Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo, Pageable pageable);
+    Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo, Pageable pageable, String username);
     void delete(Long id);
     ProyectoDTO createFromPropuesta(Propuesta propuestaId);
+    ProyectoDTO createFromSolucion(Solucion solucion, Usuario empresa);
     HitoDTO addHito(Long proyectoId, HitoCreateDTO dto);
     HitoDTO updateHito(Long proyectoId, Long hitoId, HitoUpdateDTO dto);
     void requestProjectCancel(Long proyectoId, String usuario, String reason);

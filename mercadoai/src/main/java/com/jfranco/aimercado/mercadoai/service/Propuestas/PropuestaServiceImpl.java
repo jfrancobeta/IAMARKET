@@ -21,6 +21,7 @@ import com.jfranco.aimercado.mercadoai.repository.Estado.EstadoRepository;
 import com.jfranco.aimercado.mercadoai.repository.Necesidad.NecesidadesRepository;
 import com.jfranco.aimercado.mercadoai.repository.Propuesta.PropuestaRepository;
 import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.service.Payment.PaymentService;
 import com.jfranco.aimercado.mercadoai.service.Proyecto.ProyectoService;
 
 @Service
@@ -43,6 +44,9 @@ public class PropuestaServiceImpl implements IPropuestasService {
 
     @Autowired
     private ProyectoService proyectoService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @Override
     public PropuestaDTO save(PropuestaCreateDTO dto) {
@@ -145,7 +149,7 @@ public class PropuestaServiceImpl implements IPropuestasService {
         propuesta.setEstado(estadoAceptado);
 
         List<Propuesta> otras = propuestaRepository.findByNecesidad(propuesta.getNecesidad());
-        Estado rechazada = estadoRepository.findByNombre("Rechazada")
+        Estado rechazada = estadoRepository.findByNombre("Rechazado")
                 .orElseThrow(() -> new RuntimeException("Estado 'Rechazada' no encontrado"));
         for (Propuesta otra : otras) {
             if (!otra.getId().equals(id)) {
@@ -160,7 +164,8 @@ public class PropuestaServiceImpl implements IPropuestasService {
         necesidad.setEstado(estadoAceptadoNecesidad);
         necesidadRepository.save(necesidad);
 
-        proyectoService.createFromPropuesta(propuesta);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        paymentService.createPendingPayment(propuesta.getId(),"propuesta", username);
 
         propuestaRepository.save(propuesta);
     }

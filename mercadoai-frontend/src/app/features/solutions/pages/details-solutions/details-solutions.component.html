@@ -194,9 +194,7 @@
                     >
                       <i class="bi bi-clock"></i>
                       <span>
-                        {{
-                          hito.fechaEntrega | date : "yyyy-MM-dd"
-                        }}
+                        {{ hito.fechaEntrega | date : "yyyy-MM-dd" }}
                       </span>
                     </div>
                   </div>
@@ -363,8 +361,9 @@
             </p>
             <p class="text-muted mb-3">Precio fijo</p>
             <a
-              href="#"
+              href="javascript:void(0)"
               class="btn btn-primary w-100 mb-2 d-flex align-items-center justify-content-center"
+              (click)="buyNow()"
             >
               <i class="bi bi-cart me-2"></i>
               Comprar Ahora
