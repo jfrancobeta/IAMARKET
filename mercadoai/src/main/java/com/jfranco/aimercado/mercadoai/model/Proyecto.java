@@ -25,7 +25,8 @@ public class Proyecto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "solucion_id")
     private Solucion solucion;
 
     @OneToOne

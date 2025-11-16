@@ -49,6 +49,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests(auth ->
         auth
+        .requestMatchers(HttpMethod.POST, "/payments/webhook").permitAll()
         .requestMatchers(HttpMethod.POST, "/usuarios/create-user").permitAll() 
         .requestMatchers(HttpMethod.POST, "/usuarios/send-reset-code").permitAll() 
         .requestMatchers(HttpMethod.POST, "/usuarios/verify-reset-code").permitAll() 

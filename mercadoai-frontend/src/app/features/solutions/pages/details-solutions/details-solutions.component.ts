@@ -13,6 +13,9 @@ import { EstadoDTO } from '../../../../core/models/Estado/EstadoDTO';
 import { UsuarioDTO } from '../../../../core/models/Usuario/UsuarioDTO';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
+import { PaymentService } from '../../../../core/services/payment.service';
+import { PaymentResponseDTO } from '../../../../core/models/payment/PaymentResponseDTO';
+import { PaymentCreateDTO } from '../../../../core/models/payment/PaymentcreateDTO';
 
 @Component({
   selector: 'app-details-solutions',
@@ -52,11 +55,35 @@ export class DetailsSolutionsComponent implements OnInit {
     private solucionService: SolutionService,
     private route: ActivatedRoute,
     private authService: AuthService,
+    private paymentService: PaymentService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadSolucion();
+  }
+
+  buyNow(){
+  this.paymentService.createPendingPayment(this.SolucionDTO.id, "solucion").subscribe({
+   next: (response: PaymentResponseDTO) => {
+        // Si el backend responde con una URL de pago, redirige
+        if (response && response.initPoint) {
+          Swal.fire({
+            title: 'Redirigiendo al pago...',
+            text: 'Serás redirigido a la plataforma de pago.',
+          }).then(() => {
+            window.location.href = response.initPoint;
+          });
+        } else {
+          // Maneja el caso de éxito sin redirección
+          alert('Pago creado correctamente');
+        }
+      },
+      error: (err) => {
+        alert('No se pudo iniciar el pago');
+        console.error(err);
+      }
+    });
   }
 
   private loadSolucion(): void {

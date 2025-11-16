@@ -22,6 +22,7 @@ import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Hito;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Proyecto;
+import com.jfranco.aimercado.mercadoai.model.Solucion;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.model.CancelRequest.CancelRequest;
 import com.jfranco.aimercado.mercadoai.model.CancelRequest.CancelStatus;
@@ -112,6 +113,9 @@ public class ProyectoService implements IProyectoService {
         proyecto.setFechaInicio(LocalDate.now());
         proyecto.setPropuesta(propuesta);
         proyecto.setPresupuesto(propuesta.getPrecio());
+        proyecto.setEmpresa(propuesta.getNecesidad().getCompania());
+        proyecto.setDesarrollador(propuesta.getDesarrollador());
+        
         if (propuesta.getHitos() != null) {
             List<Hito> hitosProyecto = propuesta.getHitos().stream().map(hitoPropuesta -> {
                 Hito hito = new Hito();
@@ -135,6 +139,46 @@ public class ProyectoService implements IProyectoService {
 
         proyectoRepository.save(proyecto);
 
+        return proyectoMapper.toDto(proyecto);
+    }
+
+    @Override
+    public ProyectoDTO createFromSolucion(Solucion solucion, Usuario empresa) {
+        Proyecto proyecto = new Proyecto();
+
+        Estado estado = estadoRepository.findByNombre("En Proceso")
+                .orElseThrow(() -> new ResourceNotFoundException("Estado", "nombre", "En Proceso"));
+        
+        proyecto.setEstado(estado);
+        proyecto.setFechaInicio(LocalDate.now());
+        proyecto.setSolucion(solucion);
+        proyecto.setPresupuesto(solucion.getPrecio());
+        proyecto.setDesarrollador(solucion.getDesarrollador());
+        proyecto.setEmpresa(empresa);
+
+        if(solucion.getHitos() != null){
+            List<Hito> hitosProyecto = solucion.getHitos().stream().map(hitoSolucion -> {
+                Hito hito = new Hito();
+                hito.setNombre(hitoSolucion.getNombre());
+                hito.setDescripcion(hitoSolucion.getDescripcion());
+                hito.setFechaEntrega(hitoSolucion.getFechaEntrega());
+                if (hitoSolucion.getEntregables() != null) {
+                    List<Entregable> entregables = hitoSolucion.getEntregables().stream().map(entregableSolucion -> {
+                        Entregable entregable = new Entregable();
+                        entregable.setNombreArchivo(entregableSolucion.getNombreArchivo());
+                        entregable.setFechaEntrega(entregableSolucion.getFechaEntrega());
+                        entregable.setHito(hito);
+                        return entregable;
+                    }).toList();
+                    hito.setEntregables(entregables);
+                }
+                return hito;
+            }).toList();
+
+            proyecto.setHitos(hitosProyecto);
+        }
+        proyectoRepository.save(proyecto);
+        
         return proyectoMapper.toDto(proyecto);
     }
 

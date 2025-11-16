@@ -8,6 +8,7 @@ import { EstadoDTO } from '../../../core/models/Estado/EstadoDTO';
 import { EstadoService } from '../../../core/services/estado.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-proposals',
@@ -75,7 +76,7 @@ export class ProposalsComponent implements OnInit {
         console.log(page);
         this.propuestasRecibidas = page.content;
         this.totalReceived = page.totalElements;
-        console.log("recibidas", this.propuestasRecibidas);
+        console.log('recibidas', this.propuestasRecibidas);
       },
     });
   }
@@ -101,7 +102,24 @@ export class ProposalsComponent implements OnInit {
   rechazarPropuesta(id: number): void {
     this.propuestaService.rechazarPropuesta(id).subscribe({
       next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Propuesta aceptada!',
+          text: 'Se ha creado un pago. Realiza el pago para iniciar el proyecto.',
+          confirmButtonText: 'Aceptar',
+        });
         this.loadPropuestasRecibidas();
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text:
+            err?.error?.message ||
+            'No se pudo aceptar la propuesta. Intenta nuevamente.',
+          confirmButtonText: 'Cerrar',
+        });
+        console.error(err);
       },
     });
   }
