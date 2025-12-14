@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfranco.aimercado.mercadoai.auth.SimpleGrantedAuthorityJsonCreator;
+import com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -27,13 +28,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.CONTENT_TYPE;
 import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.HEADER_AUTHORIZATION;
 import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.PREFIX_TOKEN;
-import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.SECRET_KEY;
+
 
 public class JwtValidationFilter extends BasicAuthenticationFilter {
 
-    public JwtValidationFilter(AuthenticationManager authenticationManager) {
-        super(authenticationManager);
+    private final TokenJwtConfig tokenJwtConfig;
 
+    public JwtValidationFilter(AuthenticationManager authenticationManager, TokenJwtConfig tokenJwtConfig) {
+        super(authenticationManager);
+        this.tokenJwtConfig = tokenJwtConfig;
     }
 
     @Override
@@ -49,7 +52,7 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
         String token = header.replace(PREFIX_TOKEN, "");
         try {
 
-            Claims claims = Jwts.parser().verifyWith(SECRET_KEY).build().parseSignedClaims(token).getPayload();
+            Claims claims = Jwts.parser().verifyWith(tokenJwtConfig.getSecretKey()).build().parseSignedClaims(token).getPayload();
             String username = claims.get("username").toString();
             Object authoritiesClaims = claims.get("authorities");
 

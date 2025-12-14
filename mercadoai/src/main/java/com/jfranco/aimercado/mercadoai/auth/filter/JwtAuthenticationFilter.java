@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 
@@ -25,7 +26,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.SECRET_KEY;
 import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.HEADER_AUTHORIZATION;
 import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.PREFIX_TOKEN;
 import static com.jfranco.aimercado.mercadoai.auth.TokenJwtConfig.CONTENT_TYPE;;
@@ -37,11 +37,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private UsuarioRepository usuarioRepository;
 
+    private TokenJwtConfig tokenJwtConfig;
+
     public JwtAuthenticationFilter(
         AuthenticationManager authenticationManager,
-        UsuarioRepository usuarioRepository) {
+        UsuarioRepository usuarioRepository,
+        TokenJwtConfig tokenJwtConfig) {
         this.authenticationManager = authenticationManager;
         this.usuarioRepository = usuarioRepository;
+        this.tokenJwtConfig = tokenJwtConfig;
     }
 
 
@@ -89,7 +93,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 String jwt = Jwts.builder()
                 .subject(username)
                 .claims(claims)
-                .signWith(SECRET_KEY)
+                .signWith(tokenJwtConfig.getSecretKey())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 3600000))
                 .compact();
