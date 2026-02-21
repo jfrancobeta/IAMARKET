@@ -150,7 +150,7 @@
         </div>
 
         <!-- Propuestas -->
-        <div class="card mb-4">
+        <div class="card mb-4" *ngIf="isOwner">
           <div class="card-header">
             <h5 class="fw-bold mb-1">
               Propuestas Recibidas ({{ need?.propuestas?.length }})
