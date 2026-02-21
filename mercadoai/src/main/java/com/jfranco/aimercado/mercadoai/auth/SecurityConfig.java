@@ -33,6 +33,9 @@ public class SecurityConfig {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private TokenJwtConfig tokenJwtConfig;
+
 
     @Bean
     AuthenticationManager authenticationManager() throws Exception {
@@ -49,6 +52,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests(auth ->
         auth
+        .requestMatchers("/ws-chat/**").permitAll()
         .requestMatchers(HttpMethod.POST, "/payments/webhook").permitAll()
         .requestMatchers(HttpMethod.POST, "/usuarios/create-user").permitAll() 
         .requestMatchers(HttpMethod.POST, "/usuarios/send-reset-code").permitAll() 
@@ -90,8 +94,8 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.POST, "/entregables/{id}/aprobar").hasAnyRole( "COMPANY", "ADMIN")
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) 
-        .addFilter(new JwtValidationFilter(authenticationManager()))
-        .addFilter(new JwtAuthenticationFilter(authenticationManager(),usuarioRepository))
+        .addFilter(new JwtValidationFilter(authenticationManager(), tokenJwtConfig))
+        .addFilter(new JwtAuthenticationFilter(authenticationManager(), usuarioRepository, tokenJwtConfig))
         .csrf(cr -> cr.disable()) 
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) 
         .build(); 

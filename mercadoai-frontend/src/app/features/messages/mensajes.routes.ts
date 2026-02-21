@@ -6,4 +6,8 @@ export const mensajesRoutes: Routes = [
         path: 'messages',
         component: MessagesComponent
     },
+    {
+        path: 'messages/:id',
+        component: MessagesComponent
+    }
 ]

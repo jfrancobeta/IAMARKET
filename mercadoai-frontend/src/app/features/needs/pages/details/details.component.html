@@ -207,7 +207,7 @@
                     propuesta.fechaCreacion
                   }}</span>
                   <div class="d-flex gap-2">
-                    <button class="btn btn-outline-secondary btn-sm">
+                    <button class="btn btn-outline-secondary btn-sm" (click)="contactMessage(propuesta.desarrollador.id)">
                       <i class="bi bi-chat-dots me-2"></i>Mensaje
                     </button>
                     <button class="btn btn-primary btn-sm">
@@ -250,10 +250,10 @@
                 </div>
               </div>
             </div>
-            <a href="#" class="btn btn-outline-secondary w-100">
+            <button class="btn btn-outline-secondary w-100" (click)="contactMessage(need?.compania?.id)">
               <i class="bi bi-chat-dots me-2"></i>
               Contactar Empresa
-            </a>
+            </button>
           </div>
         </div>
         <!-- Estadísticas del Proyecto -->

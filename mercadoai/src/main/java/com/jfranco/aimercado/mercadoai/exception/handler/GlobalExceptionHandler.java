@@ -39,4 +39,20 @@ public class GlobalExceptionHandler {
         String traceId = MDC.get("traceId");
         return traceId != null ? traceId : "N/A";
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(
+            IllegalArgumentException ex,
+            WebRequest request) {
+
+        ErrorResponse error = new ErrorResponse();
+        error.setTimestamp(LocalDateTime.now().toString());
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setError("Bad Request");
+        error.setMessage(ex.getMessage());
+        error.setPath(extractPath(request));
+        error.setTraceId(getTraceId());
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }

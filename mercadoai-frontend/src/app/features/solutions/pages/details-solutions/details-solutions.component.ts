@@ -16,6 +16,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { PaymentService } from '../../../../core/services/payment.service';
 import { PaymentResponseDTO } from '../../../../core/models/payment/PaymentResponseDTO';
 import { PaymentCreateDTO } from '../../../../core/models/payment/PaymentcreateDTO';
+import { ChatService } from '../../../messages/services/chat.service';
 
 @Component({
   selector: 'app-details-solutions',
@@ -56,34 +57,37 @@ export class DetailsSolutionsComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private paymentService: PaymentService,
-    private router: Router
+    private router: Router,
+    private chatService: ChatService,
   ) {}
 
   ngOnInit(): void {
     this.loadSolucion();
   }
 
-  buyNow(){
-  this.paymentService.createPendingPayment(this.SolucionDTO.id, "solucion").subscribe({
-   next: (response: PaymentResponseDTO) => {
-        // Si el backend responde con una URL de pago, redirige
-        if (response && response.initPoint) {
-          Swal.fire({
-            title: 'Redirigiendo al pago...',
-            text: 'Serás redirigido a la plataforma de pago.',
-          }).then(() => {
-            window.location.href = response.initPoint;
-          });
-        } else {
-          // Maneja el caso de éxito sin redirección
-          alert('Pago creado correctamente');
-        }
-      },
-      error: (err) => {
-        alert('No se pudo iniciar el pago');
-        console.error(err);
-      }
-    });
+  buyNow() {
+    this.paymentService
+      .createPendingPayment(this.SolucionDTO.id, 'solucion')
+      .subscribe({
+        next: (response: PaymentResponseDTO) => {
+          // Si el backend responde con una URL de pago, redirige
+          if (response && response.initPoint) {
+            Swal.fire({
+              title: 'Redirigiendo al pago...',
+              text: 'Serás redirigido a la plataforma de pago.',
+            }).then(() => {
+              window.location.href = response.initPoint;
+            });
+          } else {
+            // Maneja el caso de éxito sin redirección
+            alert('Pago creado correctamente');
+          }
+        },
+        error: (err) => {
+          alert('No se pudo iniciar el pago');
+          console.error(err);
+        },
+      });
   }
 
   private loadSolucion(): void {
@@ -143,6 +147,31 @@ export class DetailsSolutionsComponent implements OnInit {
           },
         });
       }
+    });
+  }
+
+  contactMessage(otherUserId?: number): void {
+    if (!otherUserId) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudo contactar a la compañía.',
+      });
+      return;
+    }
+
+    this.chatService.createPrivateChat(otherUserId).subscribe({
+      next: (chatRoom) => {
+        this.router.navigate(['/messages', chatRoom.id]);
+      },
+      error: (error) => {
+        console.error('Error creating chat:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.error.message || 'No se pudo iniciar el chat con la compañía.',
+        });
+      },
     });
   }
 }
