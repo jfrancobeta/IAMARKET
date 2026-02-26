@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Page } from '../../../core/models/shared/page';
 import { ChatMessageDTO } from '../../../core/models/Chat/ChatMessageDTO';
 import { ChatRoomDTO } from '../../../core/models/Chat/ChatRoomDTO';
-import { Client, IMessage } from '@stomp/stompjs';
+import { Client, IMessage, StompSubscription } from '@stomp/stompjs';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Injectable({
@@ -18,6 +18,10 @@ export class ChatService {
   private stompClient: Client | null = null;
   private messageSubject = new Subject<ChatMessageDTO>();
   public messages$ = this.messageSubject.asObservable();
+
+  // Track active subscriptions to avoid duplicate subscriptions and allow clean unsubscribe
+  private subscriptions = new Map<number, StompSubscription | any>();
+  private pendingSubscriptions: number[] = [];
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -71,6 +75,12 @@ export class ChatService {
       },
       onConnect: (frame) => {
         console.log('Connected to WebSocket:', frame);
+        // Process any subscriptions requested before the connection was active
+        if (this.pendingSubscriptions.length > 0) {
+          const pending = [...this.pendingSubscriptions];
+          this.pendingSubscriptions = [];
+          pending.forEach((id) => this.subscribeToChat(id));
+        }
       },
       onStompError: (frame) => {
         console.error('STOMP error:', frame);
@@ -86,18 +96,29 @@ export class ChatService {
   }
 
   subscribeToChat(chatRoomId: number): void {
-    if (!this.stompClient?.active) {
-      console.error('WebSocket not connected');
+    // Avoid double subscription
+    if (this.subscriptions.has(chatRoomId)) {
+      console.log('Already subscribed to chat room', chatRoomId);
       return;
     }
 
-    this.stompClient.subscribe(
+    // If not connected yet, queue the subscription
+    if (!this.stompClient?.active) {
+      if (!this.pendingSubscriptions.includes(chatRoomId)) {
+        this.pendingSubscriptions.push(chatRoomId);
+      }
+      return;
+    }
+
+    const subscription = this.stompClient.subscribe(
       `/topic/chat/${chatRoomId}`,
       (message: IMessage) => {
         const chatMessage: ChatMessageDTO = JSON.parse(message.body);
         this.messageSubject.next(chatMessage);
       }
     );
+
+    this.subscriptions.set(chatRoomId, subscription);
   }
 
   sendMessage(chatRoomId: number, content: string): void {
@@ -119,6 +140,17 @@ export class ChatService {
   }
 
   disconnect(): void {
+    // Unsubscribe all topics to avoid duplicate callbacks on reconnect
+    this.subscriptions.forEach((sub) => {
+      try {
+        sub.unsubscribe();
+      } catch (e) {
+        // ignore
+      }
+    });
+    this.subscriptions.clear();
+    this.pendingSubscriptions = [];
+
     if (this.stompClient?.active) {
       this.stompClient.deactivate();
       console.log('Disconnected from WebSocket');
