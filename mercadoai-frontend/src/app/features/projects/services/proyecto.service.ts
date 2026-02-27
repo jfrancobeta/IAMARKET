@@ -55,6 +55,10 @@ export class ProyectoService {
     );
   }
 
+  deleteHito(proyectoId: number, hitoId: number): Observable<string> {
+    return this.http.delete(`${this.apiUrl}/${proyectoId}/hitos/${hitoId}`, { responseType: 'text' });
+  }
+
   requestCancel(id: number, reason: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/${id}/cancel-request`, reason, {
       headers: { 'Content-Type': 'application/json' }
