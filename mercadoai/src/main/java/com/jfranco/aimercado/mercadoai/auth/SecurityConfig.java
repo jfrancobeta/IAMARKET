@@ -82,6 +82,7 @@ public class SecurityConfig {
         //proyectos hitos
         .requestMatchers(HttpMethod.POST, "/proyectos/{proyectoId}/hitos").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.PUT, "/proyectos/{proyectoId}/hitos/{hitoId}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        .requestMatchers(HttpMethod.DELETE, "/proyectos/{proyectoId}/hitos/{hitoId}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         //propuestas
         .requestMatchers(HttpMethod.GET, "/propuestas/sent").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/propuestas/received").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
@@ -92,6 +93,7 @@ public class SecurityConfig {
         //entregables 
         .requestMatchers(HttpMethod.POST, "/entregables/{id}/upload").hasAnyRole( "ADMIN", "DEVELOPER")
         .requestMatchers(HttpMethod.POST, "/entregables/{id}/aprobar").hasAnyRole( "COMPANY", "ADMIN")
+        .requestMatchers(HttpMethod.POST, "/api/chat/rooms/private").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .anyRequest().authenticated())
         .cors(cors -> cors.configurationSource(configurationSource())) 
         .addFilter(new JwtValidationFilter(authenticationManager(), tokenJwtConfig))

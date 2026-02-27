@@ -122,6 +122,18 @@ public class ProyectoController {
         }
     }
 
+    @DeleteMapping("/{proyectoId}/hitos/{hitoId}")
+    public ResponseEntity<?> deleteHito(@PathVariable Long proyectoId, @PathVariable Long hitoId) {
+        try {
+            proyectoService.deleteHito(proyectoId, hitoId);
+            return ResponseEntity.ok("Hito eliminado");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hito o proyecto no encontrado");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el hito");
+        }
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN','COMPANY','DEVELOPER')")
     @PostMapping("/{id}/cancel-request")
     public ResponseEntity<?> requestCancel(

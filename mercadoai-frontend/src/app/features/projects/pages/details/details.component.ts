@@ -314,6 +314,39 @@ export class DetailsComponent implements OnInit {
     ).show();
   }
 
+  confirmDeleteHito(hito: any, index: number) {
+    Swal.fire({
+      title: '¿Eliminar hito?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.proyectoService.deleteHito(this.proyecto.id, hito.id).subscribe({
+          next: () => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Hito eliminado',
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            this.loadProjectDetails(this.proyecto.id);
+          },
+          error: () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo eliminar el hito.',
+            });
+          },
+        });
+      }
+    });
+  }
+
   requestCancelation() {
     if (this.hasPendingCancelRequest) {
       Swal.fire({

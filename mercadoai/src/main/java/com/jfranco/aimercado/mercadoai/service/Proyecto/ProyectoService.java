@@ -251,6 +251,17 @@ public class ProyectoService implements IProyectoService {
     }
 
     @Override
+    public void deleteHito(Long proyectoId, Long hitoId) {
+        Proyecto proyecto = proyectoRepository.findById(proyectoId)
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+        boolean removed = proyecto.getHitos().removeIf(h -> h.getId().equals(hitoId));
+        if (!removed) {
+            throw new RuntimeException("Hito no encontrado");
+        }
+        proyectoRepository.save(proyecto);
+    }
+
+    @Override
     public void requestProjectCancel(Long proyectoId, String usuario, String reason) {
         Proyecto proyecto = proyectoRepository.findById(proyectoId)
                 .orElseThrow(() -> new ResourceNotFoundException("Proyecto", "id", proyectoId));
