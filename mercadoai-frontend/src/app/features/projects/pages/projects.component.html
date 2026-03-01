@@ -145,7 +145,7 @@
                 <a routerLink="/projects/{{proyecto.id}}" class="btn btn-outline-secondary btn-sm"
                   ><i class="bi bi-eye me-2"></i>Ver Detalles</a
                 >
-                <button class="btn btn-outline-secondary btn-sm">
+                <button class="btn btn-outline-secondary btn-sm" (click)="contactMessage(proyecto)">
                   <i class="bi bi-chat-dots me-2"></i>Mensaje
                 </button>
               </div>
@@ -225,7 +225,7 @@
                 <a routerLink="/projects/{{proyecto.id}}" class="btn btn-outline-secondary btn-sm"
                   ><i class="bi bi-eye me-2"></i>Ver Detalles</a
                 >
-                <button class="btn btn-outline-secondary btn-sm">
+                <button class="btn btn-outline-secondary btn-sm" (click)="contactMessage(proyecto)">
                   <i class="bi bi-chat-dots me-2"></i>Mensaje
                 </button>
               </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainLayoutComponent } from '../../../../shared/layout/main-layout/main-layout.component';
+import { ChatService } from '../../../messages/services/chat.service';
+import { Router } from '@angular/router';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { ProyectoService } from '../../services/proyecto.service';
 import { ProyectoDTO } from '../../../../core/models/Proyecto/ProyectoDTO';
@@ -48,7 +50,9 @@ export class DetailsComponent implements OnInit {
     private proyectoService: ProyectoService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private entregableService: EntregableService
+    private entregableService: EntregableService,
+    private chatService: ChatService,
+    private ngRouter: Router
   ) {}
 
   ngOnInit(): void {
@@ -70,6 +74,97 @@ export class DetailsComponent implements OnInit {
 
   get isCompany(): boolean {
     return this.userType?.includes('ROLE_COMPANY');
+  }
+
+  contactMessage(target: number | any): void {
+    // For project details, message the company (empresa)
+    const handleChat = (companyId?: number) => {
+      if (!companyId) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo iniciar el chat: compañía destino no disponible.',
+        });
+        return;
+      }
+      this.chatService.createPrivateChat(companyId).subscribe({
+        next: (chatRoom: any) => {
+          this.ngRouter.navigate(['/messages', chatRoom.id]);
+        },
+        error: (err: any) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: err?.error?.message || 'No se pudo iniciar el chat con la compañía.',
+          });
+        },
+      });
+    };
+
+    if (typeof target === 'number') {
+      handleChat(target as number);
+      return;
+    }
+
+    const companyId = target?.empresa?.id || this.proyecto?.empresa?.id;
+    if (companyId) {
+      handleChat(companyId);
+      return;
+    }
+
+    if (target && target.id) {
+      this.proyectoService.getById(target.id).subscribe({
+        next: (proj: any) => {
+          handleChat(proj.empresa?.id);
+        },
+        error: () => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo cargar los detalles del proyecto.',
+          });
+        },
+      });
+      return;
+    }
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'No se pudo iniciar el chat: compañía destino no disponible.',
+    });
+  }
+
+  contactClient(): void {
+    const companyId = this.proyecto?.empresa?.id;
+    if (!companyId) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'ID de la compañía no disponible.',
+      });
+      return;
+    }
+    this.chatService.createPrivateChat(companyId).subscribe({
+      next: (chatRoom: any) => this.ngRouter.navigate(['/messages', chatRoom.id]),
+      error: (err: any) => Swal.fire({ icon: 'error', title: 'Error', text: err?.error?.message || 'No se pudo contactar a la compañía.' }),
+    });
+  }
+
+  contactDeveloper(): void {
+    const developerId = this.proyecto?.desarrollador?.id;
+    if (!developerId) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'ID del desarrollador no disponible.',
+      });
+      return;
+    }
+    this.chatService.createPrivateChat(developerId).subscribe({
+      next: (chatRoom: any) => this.ngRouter.navigate(['/messages', chatRoom.id]),
+      error: (err: any) => Swal.fire({ icon: 'error', title: 'Error', text: err?.error?.message || 'No se pudo contactar al desarrollador.' }),
+    });
   }
 
   openUploadModal(entregableId: number) {

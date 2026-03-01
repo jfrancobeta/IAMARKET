@@ -65,7 +65,7 @@
                 }
               </div>
               <div class="d-flex gap-2">
-                <button class="btn btn-outline-primary btn-sm">
+                <button class="btn btn-outline-primary btn-sm" (click)="contactMessage(proyecto)">
                   <i class="bi bi-chat me-1"></i>
                   Chat Directo
                 </button>
@@ -629,7 +629,7 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-outline-primary w-100">
+            <button class="btn btn-outline-primary w-100" (click)="contactClient()">
               <i class="bi bi-chat me-1"></i>
               Contactar Cliente
             </button>
@@ -657,7 +657,7 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-outline-primary w-100">
+            <button class="btn btn-outline-primary w-100" (click)="contactDeveloper()">
               <i class="bi bi-chat me-1"></i>
               Contactar Desarrollador
             </button>
