@@ -109,7 +109,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOriginPatterns(Arrays.asList("*")); // Permitir todos los orígenes
         config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://iamarket.vercel.app"));
-        config.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE"));
+        config.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE","OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
         config.setExposedHeaders(Arrays.asList("Content-Disposition"));
         config.setAllowCredentials(true); // Permitir credenciales
