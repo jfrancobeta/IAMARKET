@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { ProyectoService } from '../../services/proyecto.service';
 import { ProyectoDTO } from '../../../../core/models/Proyecto/ProyectoDTO';
+import { ProyectoDetailStatsDTO } from '../../../../core/models/Proyecto/ProyectoDetailStatsDTO';
 import { AuthService } from '../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { EntregableService } from '../../services/entregable.service';
@@ -22,6 +23,7 @@ import { CancelRequestDTO } from '../../../../core/models/CancelRequest/CancelRe
 })
 export class DetailsComponent implements OnInit {
   proyecto!: ProyectoDTO;
+  detailStats: ProyectoDetailStatsDTO | null = null;
   userType!: any[];
   selectedEntregableId: number | null = null;
   selectedFile: File | null = null;
@@ -65,6 +67,11 @@ export class DetailsComponent implements OnInit {
     this.proyectoService.getById(id).subscribe((data) => {
       this.proyecto = data;
       console.log(this.proyecto);
+      // load detail stats
+      this.proyectoService.getDetailStats(id).subscribe({
+        next: (s: ProyectoDetailStatsDTO | null) => this.detailStats = s,
+        error: () => this.detailStats = null
+      });
     });
   }
 

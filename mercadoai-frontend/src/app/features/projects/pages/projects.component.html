@@ -18,7 +18,7 @@
             <i class="bi bi-briefcase text-muted"></i>
           </div>
           <div class="card-body">
-            <div class="fs-3 fw-bold">3</div>
+            <div class="fs-3 fw-bold">{{ stats?.activeCount ?? '-' }}</div>
             <p class="text-xs text-muted mb-0">En desarrollo</p>
           </div>
         </div>
@@ -32,7 +32,7 @@
             <i class="bi bi-check-circle text-muted"></i>
           </div>
           <div class="card-body">
-            <div class="fs-3 fw-bold">1</div>
+            <div class="fs-3 fw-bold">{{ stats?.completedCount ?? '-' }}</div>
             <p class="text-xs text-muted mb-0">Este mes</p>
           </div>
         </div>
@@ -46,7 +46,7 @@
             <i class="bi bi-currency-dollar text-muted"></i>
           </div>
           <div class="card-body">
-            <div class="fs-3 fw-bold">$20,000</div>
+            <div class="fs-3 fw-bold">{{ stats?.totalRevenue | currency }}</div>
             <p class="text-xs text-muted mb-0">Valor total</p>
           </div>
         </div>
@@ -60,7 +60,7 @@
             <i class="bi bi-clock text-muted"></i>
           </div>
           <div class="card-body">
-            <div class="fs-3 fw-bold">77%</div>
+            <div class="fs-3 fw-bold">{{ stats && stats.avgProgress != null ? (stats.avgProgress + '%') : '-' }}</div>
             <p class="text-xs text-muted mb-0">Todos los proyectos</p>
           </div>
         </div>

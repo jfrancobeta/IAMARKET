@@ -3,6 +3,7 @@ import { MainLayoutComponent } from '../../../shared/layout/main-layout/main-lay
 import { ProyectoService } from '../services/proyecto.service';
 import { ProyectoDTO } from '../../../core/models/Proyecto/ProyectoDTO';
 import { ProyectoSummaryDTO } from '../../../core/models/Proyecto/ProyectoSummaryDTO';
+import { ProyectoStatsDTO } from '../../../core/models/Proyecto/ProyectoStatsDTO';
 import { EstadoDTO } from '../../../core/models/Estado/EstadoDTO';
 import { EstadoService } from '../../../core/services/estado.service';
 import { ChatService } from '../../messages/services/chat.service';
@@ -31,6 +32,7 @@ export class ProjectsComponent implements OnInit {
   };
 
   estados: EstadoDTO[] = [];
+  stats: ProyectoStatsDTO | null = null;
 
   constructor(
     private proyectoService: ProyectoService,
@@ -42,6 +44,7 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.loadProjects();
     this.loadEstados();
+    this.loadStats();
   }
 
   loadProjects(): void {
@@ -55,6 +58,13 @@ export class ProjectsComponent implements OnInit {
   loadEstados(): void {
     this.estadoService.getAll().subscribe((data) => {
       this.estados = data;
+    });
+  }
+
+  loadStats(): void {
+    this.proyectoService.getStats().subscribe({
+      next: (s) => this.stats = s,
+      error: () => this.stats = null
     });
   }
 

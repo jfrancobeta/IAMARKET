@@ -231,7 +231,7 @@
                   <i class="bi bi-clock text-primary"></i>
                   <div>
                     <div class="fw-semibold">{{ proyecto.fechaInicio }}</div>
-                    <div class="text-muted small">Fecha inicio</div>
+                    <div class="text-muted small">Fecha inicio • Restantes: {{ detailStats?.diasRestantes ?? '-' }} días</div>
                   </div>
                 </div>
               </div>
@@ -239,8 +239,8 @@
                 <div class="d-flex align-items-center gap-2">
                   <i class="bi bi-check-circle text-success"></i>
                   <div>
-                    <div class="fw-semibold">2/4</div>
-                    <div class="text-muted small">Hitos</div>
+                    <div class="fw-semibold">{{ detailStats?.hitosCompletados ?? '-' }}/{{ detailStats?.totalHitos ?? '-' }}</div>
+                    <div class="text-muted small">Hitos • Progreso: {{ detailStats?.progreso ?? '-' }}%</div>
                   </div>
                 </div>
               </div>
@@ -248,8 +248,8 @@
                 <div class="d-flex align-items-center gap-2">
                   <i class="bi bi-file-text text-warning"></i>
                   <div>
-                    <div class="fw-semibold">3</div>
-                    <div class="text-muted small">Pendientes</div>
+                    <div class="fw-semibold">{{ detailStats?.entregablesPendientes ?? '-' }}</div>
+                    <div class="text-muted small">Pendientes • En revisión: {{ detailStats?.entregablesEnRevision ?? 0 }}</div>
                   </div>
                 </div>
               </div>
@@ -672,35 +672,35 @@
           <div class="card-body">
             <div class="d-flex justify-content-between mb-2">
               <span class="small">Hitos completados</span>
-              <span class="fw-semibold">2/4</span>
+              <span class="fw-semibold">{{ detailStats?.hitosCompletados ?? '-' }}/{{ detailStats?.totalHitos ?? '-' }}</span>
             </div>
             <div class="d-flex justify-content-between mb-2">
               <span class="small">Entregables pendientes</span>
-              <span class="fw-semibold">3</span>
+              <span class="fw-semibold">{{ detailStats?.entregablesPendientes ?? '-' }}</span>
             </div>
             <div class="d-flex justify-content-between mb-2">
               <span class="small">En revisión</span>
-              <span class="fw-semibold">1</span>
+              <span class="fw-semibold">{{ detailStats?.entregablesEnRevision ?? 0 }}</span>
             </div>
             <div class="d-flex justify-content-between mb-3">
               <span class="small">Días restantes</span>
-              <span class="fw-semibold">15</span>
+              <span class="fw-semibold">{{ detailStats?.diasRestantes ?? '-' }}</span>
             </div>
             <hr />
             <div>
               <div class="d-flex justify-content-between mb-2">
                 <span class="small">Progreso</span>
-                <span class="small">65%</span>
+                <span class="small">{{ detailStats?.progreso ?? 0 }}%</span>
               </div>
               <div class="progress progress-bar">
-                <div class="progress-bar" style="width: 65%"></div>
+                <div class="progress-bar" [ngStyle]="{ 'width': (detailStats?.progreso ?? 0) + '%' }"></div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Quick Actions -->
-        <div class="card">
+        <!-- <div class="card">
           <div class="card-header">
             <h6 class="card-title mb-0">Acciones Rápidas</h6>
           </div>
@@ -718,7 +718,7 @@
               Calificar Cliente
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 

@@ -14,9 +14,12 @@ import com.jfranco.aimercado.mercadoai.model.Solucion;
 import com.jfranco.aimercado.mercadoai.model.Usuario;
 
 public interface IProyectoService {
+
+    com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoStatsDTO getStats(String username);
     
     ProyectoDTO update(Long id, ProyectoUpdateDTO dto);
     ProyectoDTO getById(Long id);
+    com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDetailStatsDTO getDetailStats(Long proyectoId);
     Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo, Pageable pageable, String username);
     void delete(Long id);
     ProyectoDTO createFromPropuesta(Propuesta propuestaId);

@@ -10,6 +10,8 @@ import { Page } from '../../../core/models/shared/page';
 import { HitoCreateDTO } from '../../../core/models/Hito/HitoCreateDTO';
 import { HitoDTO } from '../../../core/models/Hito/HitoDTO';
 import { HitoUpdateDTO } from '../../../core/models/Hito/HitoUpdateDTO';
+import { ProyectoDetailStatsDTO } from '../../../core/models/Proyecto/ProyectoDetailStatsDTO';
+import { ProyectoStatsDTO } from '../../../core/models/Proyecto/ProyectoStatsDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -67,6 +69,14 @@ export class ProyectoService {
 
   approveCancel(id: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/${id}/cancel-accept`, {});
+  }
+
+  getDetailStats(id: number): Observable<ProyectoDetailStatsDTO> {
+    return this.http.get<ProyectoDetailStatsDTO>(`${this.apiUrl}/${id}/stats`);
+  }
+
+  getStats(): Observable<ProyectoStatsDTO> {
+    return this.http.get<ProyectoStatsDTO>(`${this.apiUrl}/stats`);
   }
 
   rejectCancel(id: number, reason: string): Observable<any> {
