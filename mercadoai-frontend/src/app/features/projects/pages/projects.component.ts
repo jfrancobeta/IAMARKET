@@ -3,8 +3,12 @@ import { MainLayoutComponent } from '../../../shared/layout/main-layout/main-lay
 import { ProyectoService } from '../services/proyecto.service';
 import { ProyectoDTO } from '../../../core/models/Proyecto/ProyectoDTO';
 import { ProyectoSummaryDTO } from '../../../core/models/Proyecto/ProyectoSummaryDTO';
+import { ProyectoStatsDTO } from '../../../core/models/Proyecto/ProyectoStatsDTO';
 import { EstadoDTO } from '../../../core/models/Estado/EstadoDTO';
 import { EstadoService } from '../../../core/services/estado.service';
+import { ChatService } from '../../messages/services/chat.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -28,15 +32,19 @@ export class ProjectsComponent implements OnInit {
   };
 
   estados: EstadoDTO[] = [];
+  stats: ProyectoStatsDTO | null = null;
 
   constructor(
     private proyectoService: ProyectoService,
-    private estadoService: EstadoService
+    private estadoService: EstadoService,
+    private chatService: ChatService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadProjects();
     this.loadEstados();
+    this.loadStats();
   }
 
   loadProjects(): void {
@@ -53,7 +61,78 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  loadStats(): void {
+    this.proyectoService.getStats().subscribe({
+      next: (s) => this.stats = s,
+      error: () => this.stats = null
+    });
+  }
+
   // ...existing code...
+
+  contactMessage(target: number | any): void {
+    // For projects, always message the company (empresa). If only summary available, load full project to get empresa.id
+    const handleChat = (companyId?: number) => {
+      if (!companyId) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo iniciar el chat: compañía destino no disponible.',
+        });
+        return;
+      }
+      this.chatService.createPrivateChat(companyId).subscribe({
+        next: (chatRoom: any) => {
+          this.router.navigate(['/messages', chatRoom.id]);
+        },
+        error: (err: any) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: err?.error?.message || 'No se pudo iniciar el chat con la compañía.',
+          });
+        },
+      });
+    };
+
+    if (typeof target === 'number') {
+      // explicit id provided
+      handleChat(target as number);
+      return;
+    }
+
+    if (target) {
+      // try direct company field
+      const companyId = target.empresa?.id || target.propuesta?.necesidad?.companiaId || target.propuesta?.necesidad?.compania?.id;
+      if (companyId) {
+        handleChat(companyId);
+        return;
+      }
+
+      if (target.id) {
+        // load full project
+        this.proyectoService.getById(target.id).subscribe({
+          next: (proj: any) => {
+            handleChat(proj.empresa?.id);
+          },
+          error: () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'No se pudo cargar los detalles del proyecto.',
+            });
+          },
+        });
+        return;
+      }
+    }
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'No se pudo iniciar el chat: compañía destino no disponible.',
+    });
+  }
 
   getDiasRestantes(item: any): string {
     // Si hay solución, calcula como antes

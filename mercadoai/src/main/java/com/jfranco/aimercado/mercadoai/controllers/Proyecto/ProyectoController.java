@@ -23,6 +23,7 @@ import com.jfranco.aimercado.mercadoai.dto.Hito.HitoUpdateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoSummaryDTO;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoUpdateDTO;
+import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoStatsDTO;
 import com.jfranco.aimercado.mercadoai.service.Proyecto.IProyectoService;
 
 import jakarta.validation.Valid;
@@ -59,6 +60,16 @@ public class ProyectoController {
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/{id}/stats")
+    public ResponseEntity<com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDetailStatsDTO> getDetailStats(@PathVariable Long id) {
+        try {
+            var stats = proyectoService.getDetailStats(id);
+            return ResponseEntity.ok(stats);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -161,5 +172,15 @@ public class ProyectoController {
             @AuthenticationPrincipal String user) {
         proyectoService.rejectProjectCancel(id, user, reason);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/stats")
+    public ResponseEntity<ProyectoStatsDTO> getStats(@AuthenticationPrincipal String username) {
+        try {
+            ProyectoStatsDTO stats = proyectoService.getStats(username);
+            return ResponseEntity.ok(stats);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

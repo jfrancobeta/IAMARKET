@@ -17,6 +17,7 @@ import com.jfranco.aimercado.mercadoai.exception.InvalidOperationException;
 import com.jfranco.aimercado.mercadoai.exception.ResourceNotFoundException;
 import com.jfranco.aimercado.mercadoai.mapper.Hito.HitoMapper;
 import com.jfranco.aimercado.mercadoai.mapper.Proyecto.ProyectoMapper;
+import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoStatsDTO;
 import com.jfranco.aimercado.mercadoai.model.Entregable;
 import com.jfranco.aimercado.mercadoai.model.Estado;
 import com.jfranco.aimercado.mercadoai.model.Hito;
@@ -93,6 +94,67 @@ public class ProyectoService implements IProyectoService {
                 .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
 
         return proyectoMapper.toDto(proyecto);
+    }
+
+    @Override
+    public com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDetailStatsDTO getDetailStats(Long proyectoId) {
+        Proyecto proyecto = proyectoRepository.findById(proyectoId)
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+
+        int totalHitos = proyecto.getHitos() == null ? 0 : proyecto.getHitos().size();
+        int hitosCompletados = 0;
+        int entregablesPendientes = 0;
+        int entregablesEnRevision = 0;
+        int entregablesAprobados = 0;
+        java.time.LocalDate today = java.time.LocalDate.now();
+        int diasRestantes = Integer.MAX_VALUE;
+
+        if (proyecto.getHitos() != null) {
+            for (Hito h : proyecto.getHitos()) {
+                boolean hitoCompletado = true;
+                if (h.getEntregables() != null) {
+                    for (Entregable e : h.getEntregables()) {
+                        String estadoNombre = e.getEstado() != null ? e.getEstado().getNombre() : "";
+                        if (estadoNombre == null) estadoNombre = "";
+                        String estLower = estadoNombre.toLowerCase();
+                        if (estLower.contains("aprob") || estLower.equals("aprobado")) {
+                            entregablesAprobados++;
+                        } else if (estLower.contains("revis")) {
+                            entregablesEnRevision++;
+                            hitoCompletado = false;
+                        } else if (estLower.contains("pend") || estLower.equals("") || estLower.contains("cread")) {
+                            entregablesPendientes++;
+                            hitoCompletado = false;
+                        } else {
+                            // any other state treat as not completed
+                            hitoCompletado = false;
+                        }
+                    }
+                } else {
+                    hitoCompletado = false;
+                }
+
+                if (hitoCompletado) hitosCompletados++;
+
+                if (h.getFechaEntrega() != null) {
+                    int diff = (int) java.time.temporal.ChronoUnit.DAYS.between(today, h.getFechaEntrega());
+                    if (diff >= 0 && diff < diasRestantes) diasRestantes = diff;
+                }
+            }
+        }
+
+        if (diasRestantes == Integer.MAX_VALUE) diasRestantes = 0;
+
+        int totalEntregables = entregablesAprobados + entregablesEnRevision + entregablesPendientes;
+        double progreso = 0.0;
+        if (totalEntregables > 0) {
+            progreso = ((double) entregablesAprobados / (double) totalEntregables) * 100.0;
+        } else if (totalHitos > 0) {
+            // fallback: progress by completed hitos
+            progreso = ((double) hitosCompletados / (double) totalHitos) * 100.0;
+        }
+
+        return new com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoDetailStatsDTO(hitosCompletados, totalHitos, entregablesPendientes, entregablesEnRevision, diasRestantes, Math.round(progreso*100.0)/100.0);
     }
 
     @Override
@@ -322,6 +384,24 @@ public class ProyectoService implements IProyectoService {
         request.setRespondedAt(java.time.LocalDateTime.now());
         request.setResponseReason(reason);
         cancelRequestRepository.save(request);
+    }
+
+    @Override
+    public ProyectoStatsDTO getStats(String username) {
+        Usuario usuario = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Long usuarioId = usuario.getId();
+
+        String completedState = "Completada";
+        long completed = proyectoRepository.countByEstadoNombreAndUsuario(completedState, usuarioId);
+        long active = proyectoRepository.countByEstadoNombreNotAndUsuario(completedState, usuarioId);
+        java.math.BigDecimal totalRevenue = proyectoRepository.sumPresupuestoByUsuario(usuarioId);
+        if (totalRevenue == null) {
+            totalRevenue = java.math.BigDecimal.ZERO;
+        }
+        double avgProgress = 0.0; // Progress not modeled; defaulting to 0.0
+
+        return new ProyectoStatsDTO(active, completed, totalRevenue, avgProgress);
     }
 
 }

@@ -10,6 +10,24 @@ import com.jfranco.aimercado.mercadoai.model.Proyecto;
 
 public interface ProyectoRepository extends JpaRepository<Proyecto, Long> {
 
+    @Query("SELECT COUNT(p) FROM Proyecto p WHERE LOWER(p.estado.nombre) = LOWER(:estado)")
+    long countByEstadoNombre(@Param("estado") String estado);
+
+    @Query("SELECT COUNT(p) FROM Proyecto p WHERE LOWER(p.estado.nombre) <> LOWER(:estado)")
+    long countByEstadoNombreNot(@Param("estado") String estado);
+
+    @Query("SELECT COALESCE(SUM(p.presupuesto), 0) FROM Proyecto p")
+    java.math.BigDecimal sumPresupuesto();
+
+    @Query("SELECT COALESCE(SUM(p.presupuesto), 0) FROM Proyecto p WHERE p.empresa.id = :usuarioId OR p.desarrollador.id = :usuarioId")
+    java.math.BigDecimal sumPresupuestoByUsuario(@Param("usuarioId") Long usuarioId);
+
+    @Query("SELECT COUNT(p) FROM Proyecto p WHERE LOWER(p.estado.nombre) = LOWER(:estado) AND (p.empresa.id = :usuarioId OR p.desarrollador.id = :usuarioId)")
+    long countByEstadoNombreAndUsuario(@Param("estado") String estado, @Param("usuarioId") Long usuarioId);
+
+    @Query("SELECT COUNT(p) FROM Proyecto p WHERE LOWER(p.estado.nombre) <> LOWER(:estado) AND (p.empresa.id = :usuarioId OR p.desarrollador.id = :usuarioId)")
+    long countByEstadoNombreNotAndUsuario(@Param("estado") String estado, @Param("usuarioId") Long usuarioId);
+
     Integer countByPropuesta_Desarrollador_id(Long propuestaId);
 
     Page<Proyecto> findByEmpresaIdOrDesarrolladorId(Long empresaId, Long desarrolladorId, Pageable pageable);
