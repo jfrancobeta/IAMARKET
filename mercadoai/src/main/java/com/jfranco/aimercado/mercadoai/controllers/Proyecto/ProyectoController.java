@@ -114,7 +114,7 @@ public class ProyectoController {
             HitoDTO nuevoHito = proyectoService.addHito(proyectoId, dto);
             return ResponseEntity.status(201).body(nuevoHito);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error al agregar el hito");
+            return ResponseEntity.status(500).body("Error al agregar el hito: " + e.getMessage());
         }
     }
 
