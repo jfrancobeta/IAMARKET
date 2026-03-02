@@ -82,7 +82,7 @@ public class PropuestaController {
             PropuestaDTO created = propuestaService.save(propuesta);
             return ResponseEntity.status(201).body(created);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error processing request");
+            return ResponseEntity.status(500).body("Error processing request: " + e.getMessage());
         }
     }
 
@@ -92,7 +92,7 @@ public class PropuestaController {
             PropuestaDTO updated = propuestaService.update(id, propuesta);
             return ResponseEntity.ok(updated);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error processing request");
+            return ResponseEntity.status(500).body("Error processing request: " + e.getMessage());
         }
     }
 
