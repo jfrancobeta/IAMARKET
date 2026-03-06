@@ -187,66 +187,6 @@ SPRING_PROFILES_ACTIVE=dev     # dev | prod
 
 ---
 
-## API — Endpoints Principales
-
-Base URL: `http://localhost:8080/api`
-
-| Método | Endpoint | Descripción | Auth |
-|---|---|---|---|
-| `POST` | `/auth/register` | Registro de usuario | ✗ |
-| `POST` | `/auth/login` | Login → devuelve JWT | ✗ |
-| `GET` | `/products` | Listar productos (paginado) | ✗ |
-| `GET` | `/products/{id}` | Detalle de producto | ✗ |
-| `POST` | `/products` | Crear producto | ✔ |
-| `PUT` | `/products/{id}` | Actualizar producto | ✔ |
-| `DELETE` | `/products/{id}` | Eliminar producto | ✔ |
-| `GET` | `/users/me` | Perfil del usuario autenticado | ✔ |
-| `PUT` | `/users/me` | Actualizar perfil | ✔ |
-| `POST` | `/payments/create` | Iniciar pago PayPal | ✔ |
-| `GET` | `/payments/success` | Callback éxito PayPal | ✔ |
-| `WS` | `/ws` | Endpoint WebSocket (STOMP) | ✔ (token) |
-| `SUB` | `/topic/products` | Novedades de productos en tiempo real | ✔ |
-
-La especificación completa (OpenAPI 3) se sirve en `/v3/api-docs` y la UI interactiva en `/swagger-ui/index.html`.
-
----
-
-## Pruebas
-
-### Backend
-
-```bash
-# Linux / macOS
-cd mercadoai && ./mvnw test
-
-# Windows
-cd mercadoai && mvnw.cmd test
-```
-
-Los reportes de Surefire se generan en `mercadoai/target/surefire-reports/`.
-
-### Frontend
-
-```bash
-cd mercadoai-frontend
-npm run test          # Karma + Jasmine (modo watch)
-npm run test -- --watch=false --browsers=ChromeHeadless   # CI (single run)
-```
-
-### Empaquetado del backend (JAR)
-
-```bash
-# Linux / macOS
-./mvnw package -DskipTests
-
-# Windows
-mvnw.cmd package -DskipTests
-```
-
-El artefacto se genera en `mercadoai/target/mercadoai-*.jar`.
-
----
-
 ## Despliegue
 
 ### Docker (backend)
@@ -364,9 +304,9 @@ npm run test -- --watch=false --browsers=ChromeHeadless
 | Vercel Deployment | https://vercel.com/docs |
 | JWT.io (debugger) | https://jwt.io |
 
-**Mantenedor principal:** [@tu-usuario](https://github.com/tu-usuario) · `tu@email.com`
+**Mantenedor principal:** [@tu-usuario](https://github.com/jfrancobeta) · `juandavid.francob@gmail.com`
 
-Para reportar vulnerabilidades de seguridad, **no** abras un issue público — contacta directamente al mantenedor.
+Para reportar vulnerabilidades de seguridad, **no** abras un issue público — contactame.
 
 ---
 
