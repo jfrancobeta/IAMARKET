@@ -304,7 +304,7 @@ npm run test -- --watch=false --browsers=ChromeHeadless
 | Vercel Deployment | https://vercel.com/docs |
 | JWT.io (debugger) | https://jwt.io |
 
-**Mantenedor principal:** [@tu-usuario](https://github.com/jfrancobeta) · `juandavid.francob@gmail.com`
+**Mantenedor principal:** [@jfrancobeta](https://github.com/jfrancobeta) · `juandavid.francob@gmail.com`
 
 Para reportar vulnerabilidades de seguridad, **no** abras un issue público — contactame.
 
