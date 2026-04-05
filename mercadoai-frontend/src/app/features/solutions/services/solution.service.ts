@@ -33,7 +33,11 @@ export class SolutionService {
     return this.http.put<SolucionDTO>(`${this.URL}/${id}`, solucion);
   }
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.URL}/eliminar/${id}`);
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.URL}/eliminar/${id}`);
+  }
+
+  getMis(params: any): Observable<Page<SolucionSummaryDTO>> {
+    return this.http.get<Page<SolucionSummaryDTO>>(`${this.URL}/mis`, { params });
   }
 }

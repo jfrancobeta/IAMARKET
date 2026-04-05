@@ -23,4 +23,6 @@ public interface INecesidadesService {
 
     boolean deleteNecesidad(Long id);
 
+    Page<NecesidadSummaryDTO> getMisNecesidades(Pageable pageable);
+
 }

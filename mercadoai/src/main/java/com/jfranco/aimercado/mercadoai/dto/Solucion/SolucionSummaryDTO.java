@@ -16,6 +16,7 @@ public class SolucionSummaryDTO {
     private List<String> habilidades;
     private int vistas;
     private LocalDate fechaCreacion;
+    private Long desarrolladorId;
 
     public SolucionSummaryDTO() {
     }
@@ -106,6 +107,14 @@ public class SolucionSummaryDTO {
 
     public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public Long getDesarrolladorId() {
+        return desarrolladorId;
+    }
+
+    public void setDesarrolladorId(Long desarrolladorId) {
+        this.desarrolladorId = desarrolladorId;
     }
 
 }

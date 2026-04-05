@@ -134,6 +134,19 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  getProgresoProyecto(item: any): number {
+    // Si tiene estado, calcular progreso basado en el estado
+    if (!item.estado) return 0;
+
+    const estado = typeof item.estado === 'string' ? item.estado : item.estado.nombre;
+    const estadoLower = estado.toLowerCase();
+
+    if (estadoLower.includes('completada')) return 100;
+    if (estadoLower.includes('proceso')) return 50;
+    if (estadoLower.includes('cancelada')) return 0;
+    return 25; // estado desconocido
+  }
+
   getDiasRestantes(item: any): string {
     // Si hay solución, calcula como antes
     if (item.solucion) {

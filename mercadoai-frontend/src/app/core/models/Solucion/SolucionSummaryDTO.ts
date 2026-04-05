@@ -10,4 +10,5 @@ export interface SolucionSummaryDTO {
   habilidades: string[];
   vistas: number;
   fechaCreacion: string;
+  desarrolladorId: number;
 }

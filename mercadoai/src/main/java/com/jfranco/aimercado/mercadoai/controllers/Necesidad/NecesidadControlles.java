@@ -50,6 +50,20 @@ public class NecesidadControlles {
         }
     }
 
+    @GetMapping("/mis")
+    public ResponseEntity<Page<NecesidadSummaryDTO>> misnecesidades(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+        try {
+            PageRequest pageable = PageRequest.of(page, size);
+            Page<NecesidadSummaryDTO> necesidades = necesidadesService.getMisNecesidades(pageable);
+            return ResponseEntity.ok(necesidades);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<NecesidadDTO> getById(@PathVariable Long id) {
         try {

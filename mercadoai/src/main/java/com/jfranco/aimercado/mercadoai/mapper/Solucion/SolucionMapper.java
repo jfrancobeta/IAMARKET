@@ -72,6 +72,7 @@ public abstract class SolucionMapper {
 
     @Mapping(target = "categoriaNombre", source = "solucion.categoria.nombre")
     @Mapping(target = "estadoNombre", source = "solucion.estado.nombre")
+    @Mapping(target = "desarrolladorId", source = "solucion.desarrollador.id")
     @Mapping(target = "habilidades", expression = "java(solucion.getHabilidades() == null ? null : solucion.getHabilidades().stream().map(h -> h.getNombre()).toList())")
     public abstract SolucionSummaryDTO toSummaryDTO(Solucion solucion);
 }

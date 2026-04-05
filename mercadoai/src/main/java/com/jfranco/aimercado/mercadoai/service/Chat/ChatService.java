@@ -56,7 +56,7 @@ public class ChatService implements IChatService {
                             .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", user2Id));
 
                     ChatRoom chatRoom = new ChatRoom();
-                    chatRoom.setName("Private Chat");
+                    chatRoom.setName(user1.getNombre() + " - " + user2.getNombre());
                     Set<Usuario> participants = new HashSet<>();
                     participants.add(user1);
                     participants.add(user2);

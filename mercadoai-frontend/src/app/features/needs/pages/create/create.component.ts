@@ -90,7 +90,7 @@ export class CreateComponent implements OnInit {
             skillsRequiredIds: data.skillsRequired?.map((s: any) => s.id) ?? [],
             requirements: data.requirements ?? [],
             hitos: data.hitos ?? [],
-            estadoId: data.estado.id ?? 0, // Ajusta según tu modelo
+            estadoId: data.estado.id ?? 0,
           };
         },
         error: (error) => {

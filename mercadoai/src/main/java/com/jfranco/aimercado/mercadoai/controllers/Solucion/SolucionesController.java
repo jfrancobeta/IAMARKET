@@ -10,6 +10,7 @@ import com.jfranco.aimercado.mercadoai.service.Soluciones.ISolucionesService;
 
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionSummaryDTO;
 
 
 
@@ -32,7 +35,7 @@ public class SolucionesController {
     private ISolucionesService solucionesService;
 
     @GetMapping("/")
-    public ResponseEntity<?> GetAll( 
+    public ResponseEntity<?> GetAll(
         @RequestParam(required = false) String search,
         @RequestParam(required = false) String categoria,
         @RequestParam(required = false) String estado,
@@ -43,6 +46,19 @@ public class SolucionesController {
             return ResponseEntity.ok(solucionesService.getAllSoluciones(search, categoria, estado, pageable));
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Error al listar soluciones: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/mis")
+    public ResponseEntity<?> misSoluciones(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size) {
+        try{
+            PageRequest pageable = PageRequest.of(page, size);
+            Page<SolucionSummaryDTO> soluciones = solucionesService.getMisSoluciones(pageable);
+            return ResponseEntity.ok(soluciones);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Error al listar mis soluciones: " + e.getMessage());
         }
     }
 

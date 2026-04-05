@@ -94,9 +94,12 @@
             </div>
           </div>
           <div class="card-body">
-            <h5 class="card-title mb-1">
-              {{ solucion.titulo }}
-            </h5>
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <h5 class="card-title mb-0">
+                {{ solucion.titulo }}
+              </h5>
+              <span *ngIf="solucion.desarrolladorId === currentUserId" class="badge bg-success">Tu solución</span>
+            </div>
             <span class="badge bg-light text-dark border mb-2">{{
               solucion.categoriaNombre
             }}</span>

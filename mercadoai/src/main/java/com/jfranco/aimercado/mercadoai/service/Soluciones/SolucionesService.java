@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionCreateDTO;
 import com.jfranco.aimercado.mercadoai.dto.Solucion.SolucionDTO;
@@ -143,6 +144,18 @@ public class SolucionesService implements ISolucionesService {
                 Solucion existingSolucion = solucionesRespository.findById(id)
                                 .orElseThrow(() -> new RuntimeException("Solución no encontrada"));
                 solucionesRespository.delete(existingSolucion);
+        }
+
+        @Override
+        @Transactional(readOnly = true)
+        public Page<SolucionSummaryDTO> getMisSoluciones(Pageable pageable) {
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                String username = authentication.getName();
+                Usuario usuario = usuarioRepository.findByUsername(username)
+                                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con username: " + username));
+
+                return solucionesRespository.findByDesarrolladorId(usuario.getId(), pageable)
+                                .map(solucionMapper::toSummaryDTO);
         }
 
 }

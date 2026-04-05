@@ -145,9 +145,6 @@
                 <a routerLink="/projects/{{proyecto.id}}" class="btn btn-outline-secondary btn-sm"
                   ><i class="bi bi-eye me-2"></i>Ver Detalles</a
                 >
-                <button class="btn btn-outline-secondary btn-sm" (click)="contactMessage(proyecto)">
-                  <i class="bi bi-chat-dots me-2"></i>Mensaje
-                </button>
               </div>
             </div>
           </div>
@@ -156,10 +153,10 @@
             <div class="mb-3">
               <div class="d-flex justify-content-between text-sm mb-2">
                 <span>Progreso del proyecto</span>
-                <span class="fw-medium">75%</span>
+                <span class="fw-medium">{{ getProgresoProyecto(proyecto) }}%</span>
               </div>
               <div class="progress" style="height: 8px">
-                <div class="progress-bar" style="width: 75%"></div>
+                <div class="progress-bar" [style.width.%]="getProgresoProyecto(proyecto)"></div>
               </div>
             </div>
             <!-- Detalles -->
@@ -225,9 +222,7 @@
                 <a routerLink="/projects/{{proyecto.id}}" class="btn btn-outline-secondary btn-sm"
                   ><i class="bi bi-eye me-2"></i>Ver Detalles</a
                 >
-                <button class="btn btn-outline-secondary btn-sm" (click)="contactMessage(proyecto)">
-                  <i class="bi bi-chat-dots me-2"></i>Mensaje
-                </button>
+               
               </div>
             </div>
           </div>
@@ -236,10 +231,10 @@
             <div class="mb-3">
               <div class="d-flex justify-content-between text-sm mb-2">
                 <span>Progreso del proyecto</span>
-                <span class="fw-medium">75%</span>
+                <span class="fw-medium">{{ getProgresoProyecto(proyecto) }}%</span>
               </div>
               <div class="progress" style="height: 8px">
-                <div class="progress-bar" style="width: 75%"></div>
+                <div class="progress-bar" [style.width.%]="getProgresoProyecto(proyecto)"></div>
               </div>
             </div>
             <!-- Detalles -->

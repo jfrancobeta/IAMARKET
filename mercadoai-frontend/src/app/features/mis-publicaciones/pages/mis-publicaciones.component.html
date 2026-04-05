@@ -1,0 +1,286 @@
+<app-main-layout>
+  <div class="container py-4">
+    <div class="mb-4">
+      <h1 class="h2 fw-bold mb-1">Mis Publicaciones</h1>
+      <p class="text-muted mb-0">Gestiona tus necesidades y soluciones publicadas</p>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          [class.active]="activeTab === 'necesidades'"
+          (click)="setTab('necesidades')"
+          type="button"
+        >
+          <i class="bi bi-list-check me-2"></i>
+          Mis Necesidades
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          [class.active]="activeTab === 'soluciones'"
+          (click)="setTab('soluciones')"
+          type="button"
+        >
+          <i class="bi bi-lightbulb me-2"></i>
+          Mis Soluciones
+        </button>
+      </li>
+    </ul>
+
+    <!-- Mis Necesidades Tab -->
+    <div *ngIf="activeTab === 'necesidades'" role="tabpanel">
+      @if (necesidades.length > 0) {
+      <div class="row g-4">
+        @for (need of necesidades; track $index) {
+        <div class="col-12">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="fw-bold fs-5">{{ need.titulo }}</span>
+                    <span class="badge bg-primary">{{ need.estadoNombre }}</span>
+                  </div>
+                  <span class="badge bg-light text-dark border">{{
+                    need.categoria.nombre
+                  }}</span>
+                </div>
+                <div class="d-flex gap-2">
+                  <a
+                    [routerLink]="['/needs', need.id, 'edit']"
+                    class="btn btn-outline-secondary btn-sm"
+                  >
+                    <i class="bi bi-pencil me-2"></i>
+                    Editar
+                  </a>
+                  <button
+                    class="btn btn-outline-danger btn-sm"
+                    (click)="deleteNecesidad(need.id)"
+                  >
+                    <i class="bi bi-trash me-2"></i>
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="mb-3">{{ need.descripcion }}</p>
+              <div class="row g-3 text-sm">
+                <div class="col-md-3 d-flex align-items-center gap-2">
+                  <i class="bi bi-currency-dollar text-success"></i>
+                  <span class="fw-medium">{{ need.presupuesto }}</span>
+                </div>
+                <div class="col-md-3 d-flex align-items-center gap-2">
+                  <i class="bi bi-clock text-primary"></i>
+                  <span>{{ need.fechaLimite }}</span>
+                </div>
+                <div class="col-md-3 d-flex align-items-center gap-2">
+                  <i class="bi bi-people text-purple"></i>
+                  <span>{{ need.propuestas }} propuestas</span>
+                </div>
+                <div class="col-md-3 text-muted">{{ need.fechaCreacion }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="card mt-5">
+        <div class="card-body text-center py-5">
+          <i class="bi bi-inbox fs-1 text-muted mb-3"></i>
+          <h3 class="mb-2">No tienes necesidades publicadas</h3>
+          <p class="text-muted mb-4">
+            Comienza publicando tu primera necesidad para conectar con
+            desarrolladores especializados.
+          </p>
+          <a routerLink="/needs/create" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i>
+            Crear Nueva Necesidad
+          </a>
+        </div>
+      </div>
+      }
+
+      <!-- Paginación Necesidades -->
+      <nav
+        *ngIf="necesidadesPaginacion.totalPages > 0"
+        aria-label="Paginación"
+        class="mt-4"
+      >
+        <ul class="pagination justify-content-center">
+          <li
+            class="page-item"
+            [class.disabled]="necesidadesPaginacion.page === 0"
+          >
+            <button
+              class="page-link"
+              (click)="changeNecesidadesPage(necesidadesPaginacion.page - 1)"
+            >
+              Anterior
+            </button>
+          </li>
+          <li
+            class="page-item"
+            *ngFor="let p of [].constructor(necesidadesPaginacion.totalPages); let i = index"
+            [class.active]="i === necesidadesPaginacion.page"
+          >
+            <button class="page-link" (click)="changeNecesidadesPage(i)">
+              {{ i + 1 }}
+            </button>
+          </li>
+          <li
+            class="page-item"
+            [class.disabled]="
+              necesidadesPaginacion.page === necesidadesPaginacion.totalPages - 1
+            "
+          >
+            <button
+              class="page-link"
+              (click)="changeNecesidadesPage(necesidadesPaginacion.page + 1)"
+            >
+              Siguiente
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Mis Soluciones Tab -->
+    <div *ngIf="activeTab === 'soluciones'" role="tabpanel">
+      @if (soluciones.length > 0) {
+      <div class="row g-4">
+        @for (solucion of soluciones; track $index) {
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 hover-shadow">
+            <div
+              class="card-header d-flex justify-content-between align-items-start"
+            >
+              <span class="badge bg-primary">{{ solucion.estadoNombre }}</span>
+              <div class="d-flex gap-1">
+                <a
+                  [routerLink]="['/solutions/edit', solucion.id]"
+                  class="btn btn-sm btn-light"
+                  ><i class="bi bi-pencil"></i
+                ></a>
+                <button
+                  class="btn btn-sm btn-light text-danger"
+                  (click)="deleteSolucion(solucion.id)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title mb-1">
+                {{ solucion.titulo }}
+              </h5>
+              <span class="badge bg-light text-dark border mb-2">{{
+                solucion.categoriaNombre
+              }}</span>
+              <p class="card-text text-muted mb-3">
+                {{ solucion.descripcion }}
+              </p>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-currency-dollar text-success"></i>
+                  <span class="fw-semibold">{{
+                    solucion.precio | currency
+                  }}</span>
+                </div>
+                <div class="d-flex align-items-center gap-2 text-muted">
+                  <i class="bi bi-clock"></i>
+                  <span>{{ solucion.tiempoEntrega }}</span>
+                </div>
+              </div>
+              <div class="mb-2">
+                @for (habilidad of solucion.habilidades; track $index) {
+                <span class="badge bg-secondary text-light me-1">{{
+                  habilidad
+                }}</span>
+                }
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center pt-2 border-top"
+              >
+                <div class="d-flex align-items-center gap-1 text-muted">
+                  <i class="bi bi-eye"></i>
+                  <span>{{ solucion.vistas }}</span>
+                </div>
+                <a
+                  [routerLink]="['/solutions', solucion.id]"
+                  class="btn btn-sm btn-primary"
+                  >Ver Detalles</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="card mt-5">
+        <div class="card-body text-center py-5">
+          <i class="bi bi-code-slash text-muted mb-3" style="font-size: 2rem"></i>
+          <h3 class="h5 fw-semibold mb-2">No tienes soluciones publicadas</h3>
+          <p class="text-muted mb-4">
+            Crea tu primera solución predefinida para ofrecer servicios
+            específicos a las empresas.
+          </p>
+          <a routerLink="/solutions/create" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i>
+            Crear Nueva Solución
+          </a>
+        </div>
+      </div>
+      }
+
+      <!-- Paginación Soluciones -->
+      <nav
+        *ngIf="solucionesPaginacion.totalPages > 0"
+        aria-label="Paginación"
+        class="mt-4"
+      >
+        <ul class="pagination justify-content-center">
+          <li
+            class="page-item"
+            [class.disabled]="solucionesPaginacion.page === 0"
+          >
+            <button
+              class="page-link"
+              (click)="changeSolucionesPage(solucionesPaginacion.page - 1)"
+            >
+              Anterior
+            </button>
+          </li>
+          <li
+            class="page-item"
+            *ngFor="let p of [].constructor(solucionesPaginacion.totalPages); let i = index"
+            [class.active]="i === solucionesPaginacion.page"
+          >
+            <button class="page-link" (click)="changeSolucionesPage(i)">
+              {{ i + 1 }}
+            </button>
+          </li>
+          <li
+            class="page-item"
+            [class.disabled]="
+              solucionesPaginacion.page === solucionesPaginacion.totalPages - 1
+            "
+          >
+            <button
+              class="page-link"
+              (click)="changeSolucionesPage(solucionesPaginacion.page + 1)"
+            >
+              Siguiente
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</app-main-layout>

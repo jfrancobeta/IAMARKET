@@ -7,6 +7,7 @@ import { EstadoDTO } from '../../../core/models/Estado/EstadoDTO';
 import { NecesidadSummaryDTO } from '../../../core/models/Necesidad/NecesidadSummaryDTO';
 import { CategoriaService } from '../../../core/services/categoria.service';
 import { EstadoService } from '../../../core/services/estado.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { MainLayoutComponent } from '../../../shared/layout/main-layout/main-layout.component';
 import { NeedService } from '../services/need.service';
 
@@ -20,10 +21,12 @@ export class NeedsComponent implements OnInit {
   constructor(
     private needsService: NeedService,
     private categoriaService: CategoriaService,
-    private estadoService: EstadoService
+    private estadoService: EstadoService,
+    private authService: AuthService
   ) {}
 
   needs: NecesidadSummaryDTO[] = [];
+  currentUserId: number | null = null;
 
   filtros = {
     search: '',
@@ -39,6 +42,7 @@ export class NeedsComponent implements OnInit {
   totalPages = 0;
 
   ngOnInit(): void {
+    this.currentUserId = this.authService.user.usuario;
     this.loadNeeds();
     this.loadCategorias();
     this.loadEstados();

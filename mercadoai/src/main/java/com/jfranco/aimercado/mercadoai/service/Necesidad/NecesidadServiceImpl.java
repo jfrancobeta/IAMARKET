@@ -218,17 +218,39 @@ public class NecesidadServiceImpl implements INecesidadesService {
     }
 
     @Override
+    @Transactional
     public boolean deleteNecesidad(Long id) {
         Necesidad necesidad = necesidadesRepostitory.findById(id)
                 .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
+
+        // Limpiar todas las relaciones en orden antes de eliminar
+        necesidadesRepostitory.deleteHitos(id);
+        necesidadesRepostitory.deleteExpectedDeliverables(id);
+        necesidadesRepostitory.deleteRequirements(id);
+        necesidadesRepostitory.deleteSkills(id);
+
         necesidadesRepostitory.delete(necesidad);
         return true;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public NecesidadDTO getNecesidadById(Long id) {
         Necesidad necesidad = necesidadesRepostitory.findById(id)
                 .orElseThrow(() -> new RuntimeException("Necesidad no encontrada con id: " + id));
         return necesidadMapper.toDTO(necesidad);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<NecesidadSummaryDTO> getMisNecesidades(Pageable pageable) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Usuario usuario = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con username: " + username));
+
+        return necesidadesRepostitory.findByCompaniaId(usuario.getId(), pageable)
+                .map(necesidad -> necesidadMapper.toSummaryDTO(necesidad,
+                        propuestaRepository.countByNecesidadId(necesidad.getId()).intValue()));
     }
 }

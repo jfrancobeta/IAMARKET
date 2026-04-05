@@ -28,14 +28,16 @@ public abstract class NecesidadMapper {
     private UsuarioMapper usuarioMapper;
 
     @Mapping(target = "compañiaNombre", source = "necesidad.compania.nombre")
+    @Mapping(target = "companiaId", source = "necesidad.compania.id")
     @Mapping(target = "estadoNombre", source = "necesidad.estado.nombre")
     @Mapping(target = "propuestas", source = "cantidadPropuestas")
     public abstract NecesidadSummaryDTO toSummaryDTO(Necesidad necesidad, Integer cantidadPropuestas);
 
 
     @Mapping(target = "compañiaNombre", source = "compania.nombre")
+    @Mapping(target = "companiaId", source = "compania.id")
     @Mapping(target = "estadoNombre", source = "estado.nombre")
-    @Mapping(target = "propuestas", ignore = true) 
+    @Mapping(target = "propuestas", ignore = true)
     public abstract NecesidadSummaryDTO toSummaryDTO(Necesidad necesidad);
     
     public NecesidadUserDetailsDTO toDetailsDTO(

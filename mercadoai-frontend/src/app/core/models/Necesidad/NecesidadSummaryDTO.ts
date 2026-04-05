@@ -4,11 +4,12 @@ export interface NecesidadSummaryDTO {
   id: number;
   titulo: string;
   categoria: CategoriaDTO;
-  presupuesto: number; 
+  presupuesto: number;
   descripcion: string;
   companiaNombre: string;
-  fechaLimite: string; 
+  companiaId: number;
+  fechaLimite: string;
   estadoNombre: string;
   propuestas: number;
-  fechaCreacion: string; 
+  fechaCreacion: string;
 }

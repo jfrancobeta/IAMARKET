@@ -189,6 +189,9 @@ public class ProyectoService implements IProyectoService {
         proyecto.setDesarrollador(propuesta.getDesarrollador());
         
         if (propuesta.getHitos() != null) {
+            Estado estadoCreado = estadoRepository.findByNombre("Creado")
+                    .orElseThrow(() -> new RuntimeException("Estado 'Creado' no encontrado"));
+
             List<Hito> hitosProyecto = propuesta.getHitos().stream().map(hitoPropuesta -> {
                 Hito hito = new Hito();
                 hito.setNombre(hitoPropuesta.getNombre());
@@ -200,6 +203,7 @@ public class ProyectoService implements IProyectoService {
                         entregable.setNombreArchivo(entregablePropuesta.getNombreArchivo());
                         entregable.setFechaEntrega(entregablePropuesta.getFechaEntrega());
                         entregable.setHito(hito);
+                        entregable.setEstado(estadoCreado);
                         return entregable;
                     }).toList();
                     hito.setEntregables(entregables);
@@ -229,6 +233,9 @@ public class ProyectoService implements IProyectoService {
         proyecto.setEmpresa(empresa);
 
         if(solucion.getHitos() != null){
+            Estado estadoCreado = estadoRepository.findByNombre("Creado")
+                    .orElseThrow(() -> new RuntimeException("Estado 'Creado' no encontrado"));
+
             List<Hito> hitosProyecto = solucion.getHitos().stream().map(hitoSolucion -> {
                 Hito hito = new Hito();
                 hito.setNombre(hitoSolucion.getNombre());
@@ -240,6 +247,7 @@ public class ProyectoService implements IProyectoService {
                         entregable.setNombreArchivo(entregableSolucion.getNombreArchivo());
                         entregable.setFechaEntrega(entregableSolucion.getFechaEntrega());
                         entregable.setHito(hito);
+                        entregable.setEstado(estadoCreado);
                         return entregable;
                     }).toList();
                     hito.setEntregables(entregables);

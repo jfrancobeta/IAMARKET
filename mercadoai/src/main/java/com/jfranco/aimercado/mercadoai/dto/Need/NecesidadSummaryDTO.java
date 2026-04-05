@@ -10,13 +10,14 @@ import com.jfranco.aimercado.mercadoai.dto.Categoria.CategoriaDTO;
  * Contiene solo información esencial para optimizar transferencia de datos
  */
 public class NecesidadSummaryDTO {
-    
+
     private Long id;
     private String titulo;
     private CategoriaDTO categoria;
     private String descripcion;
     private BigDecimal presupuesto;
     private String compañiaNombre;
+    private Long companiaId;
     private LocalDate fechaLimite;
     private String estadoNombre;
     private Integer propuestas;
@@ -102,5 +103,13 @@ public class NecesidadSummaryDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Long getCompaniaId() {
+        return companiaId;
+    }
+
+    public void setCompaniaId(Long companiaId) {
+        this.companiaId = companiaId;
     }
 }

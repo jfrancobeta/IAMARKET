@@ -23,13 +23,13 @@
                     style="color: #212529"
                   >
                     <i class="bi bi-file-text me-1"></i>
-                    @if (proyecto.solucion != null) { de Solución }@else { de
+                    @if (proyecto?.solucion != null) { de Solución }@else { de
                     Propuesta }
                   </span>
                   <span class="badge bg-secondary">{{
-                    proyecto.solucion != null
-                      ? proyecto.solucion.categoria.nombre
-                      : proyecto.propuesta.necesidad.categoria.nombre
+                    proyecto?.solucion != null
+                      ? proyecto?.solucion?.categoria?.nombre
+                      : proyecto?.propuesta?.necesidad?.categoria?.nombre
                   }}</span>
                 </div>
                 <h2 class="card-title">
@@ -424,7 +424,7 @@
                             <div class="flex-grow-1">
                               <h6 class="mb-1">
                                 {{ entregable.nombreArchivo }}
-                                {{ entregable.estado.nombre }}
+                                <span *ngIf="entregable.estado">{{ entregable.estado?.nombre }}</span>
                               </h6>
                               <div
                                 class="d-flex align-items-center gap-2 text-muted small"
@@ -439,22 +439,22 @@
                             class="badge"
                             [ngClass]="{
                               'bg-success':
-                                entregable.estado.nombre === 'Aprobado',
+                                entregable.estado?.nombre === 'Aprobado',
                               'bg-danger':
-                                entregable.estado.nombre === 'Rechazado',
+                                entregable.estado?.nombre === 'Rechazado',
                               'bg-warning text-dark':
-                                entregable.estado.nombre === 'En revisión',
+                                entregable.estado?.nombre === 'En revisión',
                               'bg-secondary':
                                 !entregable.estado ||
-                                entregable.estado.nombre === 'Pendiente'
+                                entregable.estado?.nombre === 'Pendiente'
                             }"
                           >
                             {{
-                              entregable.estado.nombre === "Aprobado"
+                              entregable.estado?.nombre === "Aprobado"
                                 ? "Aprobado"
-                                : entregable.estado.nombre === "Rechazado"
+                                : entregable.estado?.nombre === "Rechazado"
                                 ? "Rechazado"
-                                : entregable.estado.nombre === "En revisión"
+                                : entregable.estado?.nombre === "En revisión"
                                 ? "En revisión"
                                 : "Pendiente"
                             }}
@@ -478,8 +478,8 @@
                             <button
                               *ngIf="
                                 isDeveloper &&
-                                (!entregable.estado ||
-                                  entregable.estado.nombre === 'Creado')
+                                (!entregable?.estado ||
+                                  entregable?.estado?.nombre === 'Creado')
                               "
                               class="btn btn-primary btn-sm"
                               data-bs-toggle="modal"
@@ -493,7 +493,7 @@
                             <button
                               *ngIf="
                                 isCompany &&
-                                entregable.estado.nombre === 'Pendiente'
+                                entregable.estado?.nombre === 'Pendiente'
                               "
                               class="btn btn-outline-success btn-sm"
                               data-bs-toggle="modal"
@@ -505,7 +505,7 @@
                             <button
                               *ngIf="
                                 isCompany &&
-                                entregable.estado.nombre === 'Pendiente'
+                                entregable.estado?.nombre === 'Pendiente'
                               "
                               class="btn btn-outline-danger btn-sm"
                               data-bs-toggle="modal"

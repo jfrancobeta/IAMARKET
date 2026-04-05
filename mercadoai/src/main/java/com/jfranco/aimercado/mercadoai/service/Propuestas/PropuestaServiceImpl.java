@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -104,15 +106,19 @@ public class PropuestaServiceImpl implements IPropuestasService {
     @Override
     public Page<PropuestaSummaryDTO> getAllSent(String search, String estado, Pageable pageable) {
         Long desarrolladorId = getUsuarioActualId();
+        // Crear un pageable que ordene por fechaCreacion DESC
+        Pageable pageableOrdenado = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+                Sort.by(Sort.Direction.DESC, "fechaCreacion"));
+
         Page<Propuesta> propuestas;
         if (search != null && !search.isEmpty()) {
             propuestas = propuestaRepository
-                    .findByDesarrolladorIdAndNecesidadTituloContainingIgnoreCase(desarrolladorId, search, pageable);
+                    .findByDesarrolladorIdAndNecesidadTituloContainingIgnoreCase(desarrolladorId, search, pageableOrdenado);
         } else if (estado != null && !estado.isEmpty()) {
             propuestas = propuestaRepository.findByDesarrolladorIdAndEstadoNombreIgnoreCase(desarrolladorId, estado,
-                    pageable);
+                    pageableOrdenado);
         } else {
-            propuestas = propuestaRepository.findByDesarrolladorId(desarrolladorId, pageable);
+            propuestas = propuestaRepository.findByDesarrolladorId(desarrolladorId, pageableOrdenado);
         }
         return propuestas.map(propuesta -> propuestaMapper.toSummaryDto(propuesta));
     }
@@ -120,7 +126,10 @@ public class PropuestaServiceImpl implements IPropuestasService {
     @Override
     public Page<PropuestaSummaryDTO> getAllReceived(Pageable pageable) {
         Long usuarioId = getUsuarioActualId();
-        Page<Propuesta> propuestas = propuestaRepository.findByNecesidadCompaniaId(usuarioId, pageable);
+        // Crear un pageable que ordene por fechaCreacion DESC
+        Pageable pageableOrdenado = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+                Sort.by(Sort.Direction.DESC, "fechaCreacion"));
+        Page<Propuesta> propuestas = propuestaRepository.findByNecesidadCompaniaId(usuarioId, pageableOrdenado);
         return propuestas.map(propuestaMapper::toSummaryDto);
     }
 

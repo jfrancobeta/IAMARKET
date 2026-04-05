@@ -37,6 +37,10 @@ export class NeedService {
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
+  getMis(params: any): Observable<Page<NecesidadSummaryDTO>> {
+    return this.http.get<Page<NecesidadSummaryDTO>>(`${this.url}/mis`, { params });
   }
 }

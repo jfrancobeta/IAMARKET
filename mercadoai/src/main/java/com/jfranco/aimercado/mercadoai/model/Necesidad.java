@@ -49,8 +49,8 @@ public class Necesidad {
     @ElementCollection
     private List<String> requirements;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "necesidad_id") 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "necesidad_id")
     private List<Hito> hitos;
 
     @ManyToOne

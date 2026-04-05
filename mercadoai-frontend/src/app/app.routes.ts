@@ -12,6 +12,7 @@ import { poryectosRoutes } from './features/projects/proyectos.routes';
 import { proposalsRoutes } from './features/proposals/proposals.routes';
 import { ratingRoutes } from './features/rating/rating.routes';
 import { solutionsRoutes } from './features/solutions/solutions.routes';
+import { misPublicacionesRoutes } from './features/mis-publicaciones/mis-publicaciones.routes';
 
 export const routes: Routes = [
     ...adminRoutes,
@@ -26,6 +27,7 @@ export const routes: Routes = [
     ...proposalsRoutes,
     ...ratingRoutes,
     ...solutionsRoutes,
+    ...misPublicacionesRoutes.map(route => ({ ...route, path: 'mis-publicaciones' })),
     {
         path: '',
         pathMatch: 'full',

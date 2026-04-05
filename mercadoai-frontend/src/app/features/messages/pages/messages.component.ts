@@ -26,6 +26,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   messages: ChatMessageDTO[] = [];
   newMessage: string = '';
   currentUserId: number | null = null;
+  private processedMessageIds = new Set<string>();
 
   @ViewChild('messageContainer') messageContainer!: ElementRef<HTMLDivElement>;
 
@@ -43,11 +44,17 @@ export class MessagesComponent implements OnInit, OnDestroy {
     // Subscribe to new messages
     this.chatService.messages$.subscribe((message) => {
       if (this.selectedRoom && message.chatRoomId === this.selectedRoom.id) {
-        this.messages.push(message);
-        this.messages = this.messages.sort(
-          (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime()
-        );
-        setTimeout(() => this.scrollToBottom(), 100);
+        // Create unique key to avoid duplicates
+        const messageKey = `${message.senderId}_${message.content}_${Math.floor(new Date(message.sentAt).getTime() / 1000)}`;
+
+        if (!this.processedMessageIds.has(messageKey)) {
+          this.processedMessageIds.add(messageKey);
+          this.messages.push(message);
+          this.messages = this.messages.sort(
+            (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime()
+          );
+          setTimeout(() => this.scrollToBottom(), 100);
+        }
       }
     });
 
@@ -103,8 +110,32 @@ export class MessagesComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.chatService.sendMessage(this.selectedRoom.id, this.newMessage);
+    const messageContent = this.newMessage;
     this.newMessage = '';
+
+    // Add message to local list immediately for better UX
+    const now = new Date();
+    const localMessage: ChatMessageDTO = {
+      id: Date.now(), // Temporary ID until server confirms
+      content: messageContent,
+      senderId: this.currentUserId!,
+      senderName: this.authService.user.nombre || 'Usuario',
+      chatRoomId: this.selectedRoom.id,
+      sentAt: now.toISOString(),
+      read: true
+    };
+
+    // Mark message as processed to avoid duplicate when it comes from server
+    const messageKey = `${this.currentUserId}_${messageContent}_${Math.floor(now.getTime() / 1000)}`;
+    this.processedMessageIds.add(messageKey);
+
+    this.messages.push(localMessage);
+    this.messages = this.messages.sort(
+      (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime()
+    );
+    setTimeout(() => this.scrollToBottom(), 100);
+
+    this.chatService.sendMessage(this.selectedRoom.id, messageContent);
   }
 
   isMyMessage(message: ChatMessageDTO): boolean {

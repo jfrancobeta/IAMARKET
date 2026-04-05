@@ -11,7 +11,6 @@ import com.jfranco.aimercado.mercadoai.model.Entregable;
 
 @Mapper(componentModel = "spring")
 public interface EntregableMapper {
-    @Mapping(target = "estado", source = "entregable.estado")
     EntregableDTO toDTO(Entregable entregable);
 
     @Mapping(target = "fechaEntrega", ignore = true)

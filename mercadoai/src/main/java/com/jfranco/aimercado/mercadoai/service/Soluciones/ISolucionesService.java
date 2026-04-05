@@ -14,7 +14,8 @@ public interface ISolucionesService {
     Page<SolucionSummaryDTO> getAllSoluciones(String search, String categoria, String estado, Pageable pageable);
     SolucionDetailsDTO getSolucionById(Long id);
     SolucionDTO saveSolucion(SolucionCreateDTO solucion);
-    SolucionDTO updateSolucion(Long id, SolucionUpdateDTO solucionDTO);   
+    SolucionDTO updateSolucion(Long id, SolucionUpdateDTO solucionDTO);
     void eliminarSolucion(Long id);
-    
+    Page<SolucionSummaryDTO> getMisSoluciones(Pageable pageable);
+
 }

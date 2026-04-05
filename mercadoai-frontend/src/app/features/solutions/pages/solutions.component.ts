@@ -6,6 +6,7 @@ import { EstadoDTO } from '../../../core/models/Estado/EstadoDTO';
 import { CategoriaDTO } from '../../../core/models/Categoria/CategoriaDTO';
 import { EstadoService } from '../../../core/services/estado.service';
 import { CategoriaService } from '../../../core/services/categoria.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SolutionsComponent implements OnInit {
   soluciones: SolucionSummaryDTO[] = [];
+  currentUserId: number | null = null;
 
   filtros = {
     search: '',
@@ -30,7 +32,8 @@ export class SolutionsComponent implements OnInit {
   constructor(
     private solutionService: SolutionService,
     private categoriaService: CategoriaService,
-    private estadoService: EstadoService
+    private estadoService: EstadoService,
+    private authService: AuthService
   ) {}
 
   categorias: CategoriaDTO[] = [];
@@ -38,7 +41,9 @@ export class SolutionsComponent implements OnInit {
   estados: EstadoDTO[] = [];
 
   totalPages = 0;
+
   ngOnInit(): void {
+    this.currentUserId = this.authService.user.usuario;
     this.loadSoluciones();
     this.loadCategorias();
     this.loadEstados();

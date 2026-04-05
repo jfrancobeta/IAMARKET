@@ -34,13 +34,12 @@
                   (click)="selectRoom(room)"
                 >
                   <div class="position-relative">
-                    <img
-                      src="/placeholder.svg?height=40&width=40"
-                      [alt]="room.name"
-                      class="rounded-circle"
-                      width="40"
-                      height="40"
-                    />
+                    <div
+                      class="d-flex align-items-center justify-content-center rounded-circle bg-light"
+                      style="width: 40px; height: 40px"
+                    >
+                      <i class="bi bi-person-circle text-muted" style="font-size: 24px"></i>
+                    </div>
                     <span
                       class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle"
                       style="width: 12px; height: 12px"
@@ -81,13 +80,12 @@
             >
               <div class="d-flex align-items-center gap-3">
                 <div class="position-relative">
-                  <img
-                    src="/placeholder.svg?height=40&width=40"
-                    [alt]="selectedRoom.name"
-                    class="rounded-circle"
-                    width="40"
-                    height="40"
-                  />
+                  <div
+                    class="d-flex align-items-center justify-content-center rounded-circle bg-light"
+                    style="width: 40px; height: 40px"
+                  >
+                    <i class="bi bi-person-circle text-muted" style="font-size: 24px"></i>
+                  </div>
                   <span
                     class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle"
                     style="width: 12px; height: 12px"
@@ -97,17 +95,6 @@
                   <h6 class="fw-semibold mb-0">{{ selectedRoom.name }}</h6>
                   <span class="text-muted small">En línea</span>
                 </div>
-              </div>
-              <div class="d-flex gap-2">
-                <button class="btn btn-outline-secondary btn-sm">
-                  <i class="bi bi-telephone"></i>
-                </button>
-                <button class="btn btn-outline-secondary btn-sm">
-                  <i class="bi bi-camera-video"></i>
-                </button>
-                <button class="btn btn-outline-secondary btn-sm">
-                  <i class="bi bi-three-dots"></i>
-                </button>
               </div>
             </div>
             <hr class="m-0" />

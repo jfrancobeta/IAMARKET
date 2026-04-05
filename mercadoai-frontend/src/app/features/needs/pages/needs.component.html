@@ -84,6 +84,7 @@
                 <div class="d-flex align-items-center gap-2 mb-1">
                   <span class="fw-bold fs-5">{{ need.titulo }}</span>
                   <span class="badge bg-primary">Activa</span>
+                  <span *ngIf="need.companiaId === currentUserId" class="badge bg-success">Tu necesidad</span>
                 </div>
                 <span class="badge bg-light text-dark border">{{
                   need.categoria.nombre
