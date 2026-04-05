@@ -84,4 +84,33 @@ export class ProyectoService {
       headers: { 'Content-Type': 'application/json' }
     });
   }
+
+  requestFinalize(id: number, reason?: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${id}/finalize-request`, reason ?? null, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  approveFinalize(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${id}/finalize-approve`, {});
+  }
+
+  rejectFinalize(id: number, reason?: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${id}/finalize-reject`, reason ?? null, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  finalizeDirect(id: number, force: boolean, reason?: string): Observable<any> {
+    // force flag passed as query param when true
+    const url = `${this.apiUrl}/${id}/finalize-direct${force ? '?force=true' : ''}`;
+    return this.http.post(url, reason ?? null, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  getFinalizeChecklist(id: number): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/${id}/finalize-checklist`);
+  }
 }
+

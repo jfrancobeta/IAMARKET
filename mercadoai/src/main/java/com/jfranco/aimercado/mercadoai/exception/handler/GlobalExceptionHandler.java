@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.jfranco.aimercado.mercadoai.dto.Error.ErrorResponse;
 import com.jfranco.aimercado.mercadoai.exception.ResourceNotFoundException;
+import com.jfranco.aimercado.mercadoai.exception.InvalidOperationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -54,5 +55,34 @@ public class GlobalExceptionHandler {
         error.setTraceId(getTraceId());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidOperation(
+            InvalidOperationException ex,
+            WebRequest request) {
+
+        ErrorResponse error = new ErrorResponse();
+        error.setTimestamp(LocalDateTime.now().toString());
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setError("Invalid Operation");
+        error.setMessage(ex.getMessage());
+        error.setPath(extractPath(request));
+        error.setTraceId(getTraceId());
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, WebRequest request) {
+        ErrorResponse error = new ErrorResponse();
+        error.setTimestamp(LocalDateTime.now().toString());
+        error.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        error.setError("Internal Server Error");
+        error.setMessage("Internal server error");
+        error.setPath(extractPath(request));
+        error.setTraceId(getTraceId());
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

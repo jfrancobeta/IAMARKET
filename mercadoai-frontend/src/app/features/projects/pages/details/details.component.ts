@@ -39,6 +39,12 @@ export class DetailsComponent implements OnInit {
   rejectComments: string = '';
   processingCancel = false;
 
+  // Finalize flow UI state
+  processingFinalize = false;
+  forceFinalize = false;
+  finalizeIssues: string[] = [];
+  finalizeReason: string = '';
+
   nuevoHito = {
     id: null,
     nombre: '',
@@ -586,5 +592,113 @@ export class DetailsComponent implements OnInit {
     ).hide();
     this.selectedCancelRequest = null;
     this.rejectComments = '';
+  }
+
+  // Developer: request project finalization
+  confirmRequestFinalize() {
+    if (!this.isDeveloper) return;
+    Swal.fire({
+      title: 'Solicitar finalización',
+      input: 'textarea',
+      inputLabel: 'Motivo (opcional)',
+      showCancelButton: true,
+      confirmButtonText: 'Enviar solicitud'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const reason = result.value || '';
+        this.processingFinalize = true;
+        this.proyectoService.requestFinalize(this.proyecto.id, reason).subscribe({
+          next: () => {
+            this.processingFinalize = false;
+            Swal.fire({ icon: 'success', title: 'Solicitud enviada', toast: true, position: 'top-end', showConfirmButton: false, timer: 2000 });
+            this.loadProjectDetails(this.proyecto.id);
+          },
+          error: (err: any) => {
+            this.processingFinalize = false;
+            Swal.fire({ icon: 'error', title: 'Error', text: err?.error?.message || 'No se pudo enviar la solicitud.' });
+          }
+        });
+      }
+    });
+  }
+
+  // Company: finalize project (tries normal finalize, on checklist failure asks to force)
+  confirmFinalize() {
+    if (!this.isCompany) return;
+    Swal.fire({
+      title: 'Finalizar proyecto',
+      text: 'Se verificará el checklist antes de finalizar. ¿Desea continuar?',
+      showCancelButton: true,
+      confirmButtonText: 'Verificar y finalizar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.processingFinalize = true;
+        this.proyectoService.finalizeDirect(this.proyecto.id, false).subscribe({
+          next: () => {
+            this.processingFinalize = false;
+            Swal.fire({ icon: 'success', title: 'Proyecto finalizado', toast: true, position: 'top-end', showConfirmButton: false, timer: 2000 });
+            this.loadProjectDetails(this.proyecto.id);
+          },
+          error: (err: any) => {
+            this.processingFinalize = false;
+            const msg = err?.error?.message || err?.message || 'Checklist incompleto o error';
+            Swal.fire({
+              title: 'Checklist incompleto',
+              html: `<p>${msg}</p><p>¿Desea forzar la finalización de todos modos?</p>`,
+              showCancelButton: true,
+              confirmButtonText: 'Forzar finalización',
+              cancelButtonText: 'Cancelar'
+            }).then((res2) => {
+              if (res2.isConfirmed) {
+                this.processingFinalize = true;
+                this.proyectoService.finalizeDirect(this.proyecto.id, true).subscribe({
+                  next: () => {
+                    this.processingFinalize = false;
+                    Swal.fire({ icon: 'success', title: 'Proyecto finalizado (forzado)', toast: true, position: 'top-end', showConfirmButton: false, timer: 2000 });
+                    this.loadProjectDetails(this.proyecto.id);
+                  },
+                  error: (err2: any) => {
+                    this.processingFinalize = false;
+                    Swal.fire({ icon: 'error', title: 'Error', text: err2?.error?.message || 'No se pudo finalizar.' });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  openFinalizeModal() {
+    if (!this.isCompany) return;
+    this.processingFinalize = true;
+    this.proyectoService.getFinalizeChecklist(this.proyecto.id).subscribe({
+      next: (issues: string[]) => {
+        this.processingFinalize = false;
+        this.finalizeIssues = issues || [];
+        (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('finalizeModal')).show();
+      },
+      error: (err: any) => {
+        this.processingFinalize = false;
+        Swal.fire({ icon: 'error', title: 'Error', text: err?.error?.message || 'No se pudo obtener el checklist.' });
+      }
+    });
+  }
+
+  finalizeFromModal() {
+    this.processingFinalize = true;
+    this.proyectoService.finalizeDirect(this.proyecto.id, this.forceFinalize, this.finalizeReason).subscribe({
+      next: () => {
+        this.processingFinalize = false;
+        (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('finalizeModal')).hide();
+        Swal.fire({ icon: 'success', title: 'Proyecto finalizado', toast: true, position: 'top-end', showConfirmButton: false, timer: 2000 });
+        this.loadProjectDetails(this.proyecto.id);
+      },
+      error: (err: any) => {
+        this.processingFinalize = false;
+        Swal.fire({ icon: 'error', title: 'Error', text: err?.error?.message || 'No se pudo finalizar.' });
+      }
+    });
   }
 }

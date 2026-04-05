@@ -28,6 +28,11 @@ public interface IProyectoService {
     HitoDTO updateHito(Long proyectoId, Long hitoId, HitoUpdateDTO dto);
     void deleteHito(Long proyectoId, Long hitoId);
     void requestProjectCancel(Long proyectoId, String usuario, String reason);
+    void requestProjectFinalize(Long proyectoId, String usuario, String reason);
+    void approveProjectFinalize(Long proyectoId, String usuario);
+    void rejectProjectFinalize(Long proyectoId, String usuario, String reason);
+    void finalizeProjectDirect(Long proyectoId, String usuario, boolean force, String reason);
     void approveProjectCancel(Long proyectoId, String usuario);
     void rejectProjectCancel(Long proyectoId, String usuario, String reason);
+    java.util.List<String> getFinalizeChecklist(Long proyectoId, String usuario);
 }

@@ -69,6 +69,19 @@
                   <i class="bi bi-chat me-1"></i>
                   Chat Directo
                 </button>
+
+                <!-- Developer: request finalize -->
+                <button *ngIf="isDeveloper" class="btn btn-outline-success btn-sm" (click)="confirmRequestFinalize()">
+                  <i class="bi bi-flag me-1"></i>
+                  Solicitar finalización
+                </button>
+
+                <!-- Company: finalize project -->
+                <button *ngIf="isCompany" class="btn btn-success btn-sm" (click)="openFinalizeModal()">
+                  <i class="bi bi-check2 me-1"></i>
+                  Finalizar proyecto
+                </button>
+
                 <button
                   class="btn btn-outline-danger btn-sm"
                   data-bs-toggle="modal"
@@ -785,6 +798,42 @@
               class="spinner-border spinner-border-sm me-2"
             ></span>
             Enviar Solicitud
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Finalize Modal -->
+  <div class="modal fade" id="finalizeModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Finalizar Proyecto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted">Revise los puntos del checklist antes de finalizar. Puede forzar la finalización si lo desea.</p>
+          <div *ngIf="finalizeIssues.length > 0" class="mb-3">
+            <div class="alert alert-warning">Existen las siguientes incidencias:</div>
+            <ul>
+              <li *ngFor="let it of finalizeIssues">{{ it }}</li>
+            </ul>
+          </div>
+          <div class="mb-3">
+            <label for="finalizeReason" class="form-label">Motivo (opcional)</label>
+            <textarea id="finalizeReason" class="form-control" rows="3" [(ngModel)]="finalizeReason"></textarea>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="forceFinalize" [(ngModel)]="forceFinalize" />
+            <label class="form-check-label" for="forceFinalize">Forzar finalización (peligroso)</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" (click)="finalizeFromModal()" [disabled]="processingFinalize">
+            <span *ngIf="processingFinalize" class="spinner-border spinner-border-sm me-2"></span>
+            Finalizar
           </button>
         </div>
       </div>

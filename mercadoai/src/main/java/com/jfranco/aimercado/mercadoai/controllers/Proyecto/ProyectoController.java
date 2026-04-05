@@ -174,6 +174,54 @@ public class ProyectoController {
         return ResponseEntity.ok().build();
     }
 
+    // Finalize flow endpoints
+    @PreAuthorize("hasAnyRole('ADMIN','COMPANY','DEVELOPER')")
+    @PostMapping("/{id}/finalize-request")
+    public ResponseEntity<?> requestFinalize(
+            @PathVariable Long id,
+            @RequestBody(required = false) String reason,
+            @AuthenticationPrincipal String user) {
+        proyectoService.requestProjectFinalize(id, user, reason);
+        return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','COMPANY','DEVELOPER')")
+    @PostMapping("/{id}/finalize-approve")
+    public ResponseEntity<?> approveFinalize(
+            @PathVariable Long id,
+            @AuthenticationPrincipal String user) {
+        proyectoService.approveProjectFinalize(id, user);
+        return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','COMPANY','DEVELOPER')")
+    @PostMapping("/{id}/finalize-reject")
+    public ResponseEntity<?> rejectFinalize(
+            @PathVariable Long id,
+            @RequestBody(required = false) String reason,
+            @AuthenticationPrincipal String user) {
+        proyectoService.rejectProjectFinalize(id, user, reason);
+        return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','COMPANY')")
+    @PostMapping("/{id}/finalize-direct")
+    public ResponseEntity<?> finalizeDirect(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "false") boolean force,
+            @RequestBody(required = false) String reason,
+            @AuthenticationPrincipal String user) {
+        proyectoService.finalizeProjectDirect(id, user, force, reason);
+        return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','COMPANY','DEVELOPER')")
+    @GetMapping("/{id}/finalize-checklist")
+    public ResponseEntity<java.util.List<String>> getFinalizeChecklist(@PathVariable Long id, @AuthenticationPrincipal String user) {
+        java.util.List<String> checklist = proyectoService.getFinalizeChecklist(id, user);
+        return ResponseEntity.ok(checklist);
+    }
+
     @GetMapping("/stats")
     public ResponseEntity<ProyectoStatsDTO> getStats(@AuthenticationPrincipal String username) {
         try {

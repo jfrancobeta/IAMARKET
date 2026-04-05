@@ -19,12 +19,14 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import com.jfranco.aimercado.mercadoai.auth.filter.JwtAuthenticationFilter;
 import com.jfranco.aimercado.mercadoai.auth.filter.JwtValidationFilter;
 import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
 
 @Configuration
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Autowired
@@ -79,6 +81,12 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.PUT, "/proyectos/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/proyectos/").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.GET, "/proyectos/{id}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
+        // finalize endpoints
+        .requestMatchers(HttpMethod.POST, "/proyectos/*/finalize-request").hasAnyRole("ADMIN","COMPANY","DEVELOPER")
+        .requestMatchers(HttpMethod.POST, "/proyectos/*/finalize-approve").hasAnyRole("ADMIN","COMPANY","DEVELOPER")
+        .requestMatchers(HttpMethod.POST, "/proyectos/*/finalize-reject").hasAnyRole("ADMIN","COMPANY","DEVELOPER")
+        .requestMatchers(HttpMethod.GET, "/proyectos/*/finalize-checklist").hasAnyRole("ADMIN","COMPANY","DEVELOPER")
+        .requestMatchers(HttpMethod.POST, "/proyectos/*/finalize-direct").hasAnyRole("ADMIN","COMPANY")
         //proyectos hitos
         .requestMatchers(HttpMethod.POST, "/proyectos/{proyectoId}/hitos").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")
         .requestMatchers(HttpMethod.PUT, "/proyectos/{proyectoId}/hitos/{hitoId}").hasAnyRole("DEVELOPER", "ADMIN", "COMPANY")

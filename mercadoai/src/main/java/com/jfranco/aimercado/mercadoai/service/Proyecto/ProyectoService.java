@@ -20,6 +20,7 @@ import com.jfranco.aimercado.mercadoai.mapper.Proyecto.ProyectoMapper;
 import com.jfranco.aimercado.mercadoai.dto.Proyecto.ProyectoStatsDTO;
 import com.jfranco.aimercado.mercadoai.model.Entregable;
 import com.jfranco.aimercado.mercadoai.model.Estado;
+import com.jfranco.aimercado.mercadoai.model.FinalizeRequest;
 import com.jfranco.aimercado.mercadoai.model.Hito;
 import com.jfranco.aimercado.mercadoai.model.Propuesta;
 import com.jfranco.aimercado.mercadoai.model.Proyecto;
@@ -28,9 +29,12 @@ import com.jfranco.aimercado.mercadoai.model.Usuario;
 import com.jfranco.aimercado.mercadoai.model.CancelRequest.CancelRequest;
 import com.jfranco.aimercado.mercadoai.model.CancelRequest.CancelStatus;
 import com.jfranco.aimercado.mercadoai.repository.CancelRequest.CancelRequestRepository;
+import com.jfranco.aimercado.mercadoai.repository.CancelRequest.FinalizeRequestRepository;
+import com.jfranco.aimercado.mercadoai.model.FinalizeStatus;
 import com.jfranco.aimercado.mercadoai.repository.Estado.EstadoRepository;
 import com.jfranco.aimercado.mercadoai.repository.Proyecto.ProyectoRepository;
 import com.jfranco.aimercado.mercadoai.repository.Usuario.UsuarioRepository;
+import com.jfranco.aimercado.mercadoai.repository.Calificacion.CalificacionRepository;
 
 @Service
 public class ProyectoService implements IProyectoService {
@@ -48,10 +52,16 @@ public class ProyectoService implements IProyectoService {
     private CancelRequestRepository cancelRequestRepository;
 
     @Autowired
+    private FinalizeRequestRepository finalizeRequestRepository;
+
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
     private HitoMapper hitoMapper;
+
+    @Autowired
+    private CalificacionRepository calificacionRepository;
 
     @Override
     public Page<ProyectoSummaryDTO> getAll(String search, String estado, String tipo,
@@ -349,6 +359,27 @@ public class ProyectoService implements IProyectoService {
     }
 
     @Override
+    public void requestProjectFinalize(Long proyectoId, String usuario, String reason) {
+        Proyecto proyecto = proyectoRepository.findById(proyectoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Proyecto", "id", proyectoId));
+        Usuario solicitante = usuarioRepository.findByUsername(usuario)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "username", usuario));
+
+        boolean exists = finalizeRequestRepository.existsByProyectoIdAndStatus(proyectoId, FinalizeStatus.PENDING);
+        if (exists)
+            throw new InvalidOperationException("Ya existe una solicitud de finalización pendiente para este proyecto");
+
+        FinalizeRequest request = new FinalizeRequest();
+        request.setProyecto(proyecto);
+        request.setRequestedBy(solicitante);
+        request.setReason(reason);
+        request.setStatus(FinalizeStatus.PENDING);
+        request.setRequestedAt(java.time.LocalDateTime.now());
+
+        finalizeRequestRepository.save(request);
+    }
+
+    @Override
     public void approveProjectCancel(Long proyectoId, String usuario) {
         CancelRequest request = cancelRequestRepository
                 .findFirstByProyectoIdAndStatus(proyectoId, CancelStatus.PENDING)
@@ -371,6 +402,35 @@ public class ProyectoService implements IProyectoService {
     }
 
     @Override
+    public void approveProjectFinalize(Long proyectoId, String usuario) {
+        FinalizeRequest request = finalizeRequestRepository
+                .findFirstByProyectoIdAndStatus(proyectoId, FinalizeStatus.PENDING)
+                .orElseThrow(() -> new ResourceNotFoundException("FinalizeRequest", "proyectoId", proyectoId));
+
+        // The company should be the one to approve
+        Proyecto proyecto = request.getProyecto();
+        Usuario destinatario = proyecto.getEmpresa();
+        if (!destinatario.getUsername().equals(usuario)) {
+            throw new InvalidOperationException("Solo la empresa puede aprobar la solicitud de finalización");
+        }
+
+        request.setStatus(FinalizeStatus.ACCEPTED);
+        request.setRespondedAt(java.time.LocalDateTime.now());
+        finalizeRequestRepository.save(request);
+
+        // finalize the project
+        Estado estadoCompletado = estadoRepository.findByNombre("Completada")
+                .orElseThrow(() -> new ResourceNotFoundException("Estado", "nombre", "Completada"));
+
+        proyecto.setEstado(estadoCompletado);
+        proyectoRepository.save(proyecto);
+
+        // create pending ratings for both parties
+        this.createPendingRatingsForProject(proyecto);
+    }
+
+
+    @Override
     public void rejectProjectCancel(Long proyectoId, String usuario, String reason) {
         CancelRequest request = cancelRequestRepository
                 .findFirstByProyectoIdAndStatus(proyectoId, CancelStatus.PENDING)
@@ -384,6 +444,25 @@ public class ProyectoService implements IProyectoService {
         request.setRespondedAt(java.time.LocalDateTime.now());
         request.setResponseReason(reason);
         cancelRequestRepository.save(request);
+    }
+
+    @Override
+    public void rejectProjectFinalize(Long proyectoId, String usuario, String reason) {
+        FinalizeRequest request = finalizeRequestRepository
+                .findFirstByProyectoIdAndStatus(proyectoId, FinalizeStatus.PENDING)
+                .orElseThrow(() -> new InvalidOperationException("No hay solicitud pendiente para este proyecto"));
+
+        Proyecto proyecto = request.getProyecto();
+        Usuario destinatario = proyecto.getEmpresa();
+
+        if (!destinatario.getUsername().equals(usuario)) {
+            throw new InvalidOperationException("Solo la empresa puede rechazar la solicitud de finalización");
+        }
+
+        request.setStatus(FinalizeStatus.REJECTED);
+        request.setRespondedAt(java.time.LocalDateTime.now());
+        request.setResponseReason(reason);
+        finalizeRequestRepository.save(request);
     }
 
     @Override
@@ -402,6 +481,100 @@ public class ProyectoService implements IProyectoService {
         double avgProgress = 0.0; // Progress not modeled; defaulting to 0.0
 
         return new ProyectoStatsDTO(active, completed, totalRevenue, avgProgress);
+    }
+
+    // Finalize direct (company can finalize directly, force option)
+    @Override
+    public void finalizeProjectDirect(Long proyectoId, String usuario, boolean force, String reason) {
+        Proyecto proyecto = proyectoRepository.findById(proyectoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Proyecto", "id", proyectoId));
+
+        Usuario requester = usuarioRepository.findByUsername(usuario)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "username", usuario));
+
+        // Only company (project owner) can finalize directly
+        if (!proyecto.getEmpresa().getId().equals(requester.getId())) {
+            throw new InvalidOperationException("Solo la empresa puede finalizar directamente el proyecto");
+        }
+
+        // Validate checklist
+        var checklist = this.validateFinalizeChecklist(proyecto);
+        if (!checklist.isEmpty() && !force) {
+            throw new InvalidOperationException("Checklist incompleto: " + String.join(", ", checklist));
+        }
+
+        Estado estadoCompletado = estadoRepository.findByNombre("Completada")
+                .orElseThrow(() -> new ResourceNotFoundException("Estado", "nombre", "Completada"));
+
+        proyecto.setEstado(estadoCompletado);
+        proyectoRepository.save(proyecto);
+
+        // mark finalize request if exists
+        finalizeRequestRepository.findFirstByProyectoIdAndStatus(proyectoId, com.jfranco.aimercado.mercadoai.model.FinalizeStatus.PENDING).ifPresent(req -> {
+            req.setStatus(com.jfranco.aimercado.mercadoai.model.FinalizeStatus.ACCEPTED);
+            req.setRespondedAt(java.time.LocalDateTime.now());
+            req.setResponseReason(reason);
+            finalizeRequestRepository.save(req);
+        });
+
+        // create pending ratings
+        this.createPendingRatingsForProject(proyecto);
+
+        // TODO: integrate with payment service to release/mark payments if applicable
+    }
+
+    @Override
+    public java.util.List<String> getFinalizeChecklist(Long proyectoId, String usuario) {
+        Proyecto proyecto = proyectoRepository.findById(proyectoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Proyecto", "id", proyectoId));
+        return this.validateFinalizeChecklist(proyecto);
+    }
+
+    private java.util.List<String> validateFinalizeChecklist(Proyecto proyecto) {
+        java.util.List<String> issues = new java.util.ArrayList<>();
+
+        // Check hitos and entregables
+        if (proyecto.getHitos() != null) {
+            for (Hito h : proyecto.getHitos()) {
+                if (h.getEntregables() != null && !h.getEntregables().isEmpty()) {
+                    for (Entregable e : h.getEntregables()) {
+                        String estadoNombre = e.getEstado() != null ? e.getEstado().getNombre() : "";
+                        String estLower = estadoNombre.toLowerCase();
+                        if (!estLower.contains("aprob")) {
+                            issues.add("Entregable no aprobado: " + e.getNombreArchivo());
+                        }
+                    }
+                } else {
+                    issues.add("Hito sin entregables: " + h.getNombre());
+                }
+            }
+        }
+
+        // Check payments (placeholder): find unpaid payments in Payment repository (not implemented)
+        // if (hasUnpaidPayments) issues.add("Pagos pendientes");
+
+        return issues;
+    }
+
+    private void createPendingRatingsForProject(Proyecto proyecto) {
+        // Create rating entities in PENDING state for company->developer and developer->company
+        try {
+            com.jfranco.aimercado.mercadoai.model.Rating.Calificacion cal1 = new com.jfranco.aimercado.mercadoai.model.Rating.Calificacion();
+            cal1.setUsuario(proyecto.getEmpresa());
+            cal1.setUsuarioCalificado(proyecto.getDesarrollador());
+            cal1.setProyecto(proyecto);
+            cal1.setEstado(com.jfranco.aimercado.mercadoai.model.Rating.StatusRatingEnum.PENDING);
+            calificacionRepository.save(cal1);
+
+            com.jfranco.aimercado.mercadoai.model.Rating.Calificacion cal2 = new com.jfranco.aimercado.mercadoai.model.Rating.Calificacion();
+            cal2.setUsuario(proyecto.getDesarrollador());
+            cal2.setUsuarioCalificado(proyecto.getEmpresa());
+            cal2.setProyecto(proyecto);
+            cal2.setEstado(com.jfranco.aimercado.mercadoai.model.Rating.StatusRatingEnum.PENDING);
+            calificacionRepository.save(cal2);
+        } catch (Exception e) {
+            // swallow errors for now
+        }
     }
 
 }
